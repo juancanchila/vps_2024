@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "vapaesa-2faf7"
+  },
+  "targets": {
+    "vapaesa-2faf7": {
+      "hosting": {
+        "app": [
+          "vapaesa-2faf7"
+        ]
+      }
+    }
+  }
+}

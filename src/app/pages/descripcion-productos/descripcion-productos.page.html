@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+     
+    </ion-buttons>
+    <ion-title>Productos</ion-title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+    
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+ 
+
+<ion-grid >
+   
+  <ion-row>
+  <ion-card >
+    <h1 class="title"> {{product.titulo}} </h1>
+<ion-img [src]="urlBase+product.field_img_apk"></ion-img>
+
+<p> {{product.field_descripcion_del_producto}} </p>
+<br>
+<br>
+
+<ion-row>
+  
+  <h1> <b>${{precioBase}}</b>  </h1>
+  <h1> <b>Agregar </b> </h1>
+<div class="counter">
+  <ion-icon name="remove-outline" (click)="rest()" class="rest" ></ion-icon>
+
+
+  <ion-input class="input" type="text"  disabled=true > <h1 class="cont">{{cantidadDestinos}} </h1></ion-input>
+
+  <ion-icon name="add-outline" (click)="add()" class="mas" ></ion-icon>
+
+</div>
+
+ </ion-row>
+ <form [formGroup]="FormSend" >
+        
+        
+  <h1 class="obs">Observación :</h1>
+   <ion-item>
+<textarea class="observacion" type="text" formControlName="observacion"   > </textarea>
+</ion-item>
+</form>
+<ion-row>
+  <ion-button replaceUrl="true" (click)="irPageCombo1()" type="submit" color="danger" class="colorButtom" expand="block"><br><small> <b>Añadir Producto</b>   </small></ion-button>
+
+
+</ion-row>
+<ion-row>
+  
+  <ion-button replaceUrl="true" (click)="irASeguirComprando()" type="submit" color="danger"  class="colorButtom" expand="block" ><br>  <small> <b>Seguir Comprando</b> </small></ion-button>
+
+
+</ion-row>
+<ion-row>
+ 
+  <ion-button replaceUrl="true" (click)="irPageCarritoCompras()" type="submit" color="warning" expand="block"><br><small class="smallBlank"><b>Completar Orden</b> </small></ion-button>
+ 
+ 
+</ion-row>
+
+ 
+
+   
+   <br>
+   <br>
+  </ion-card>
+ 
+ 
+  </ion-row>
+
+   
+ 
+ 
+  
+
+</ion-grid>
+
+
+
+</ion-content>

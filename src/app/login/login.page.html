@@ -1,0 +1,60 @@
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
+</head>
+
+<ion-content class="background">
+  
+  <ion-card-content class="contain">
+    <img src="../../assets/botones/LOGOGRANDE.png" alt="">
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()" >
+   
+    <ion-label class="label"  > <b>Usuario</b></ion-label>
+    
+    <ion-item >
+      
+      <ion-input formControlName="name" type="text" ></ion-input>
+    </ion-item>
+    <br>
+    <ion-label class="label" > <b>¿En qué región te encuentras?</b> </ion-label>
+    <ion-item >
+      <ion-select   (ionChange)="region($event.target.value)" class="locacion">
+        <ion-select-option  *ngFor="let itemDepartamento of Departamento"   value="{{itemDepartamento.field_link}}">{{itemDepartamento.name}}</ion-select-option>
+       
+        
+      </ion-select>
+     
+  </ion-item>
+  
+    <br>
+    <ion-label class="label" > <b>¿Cuál es tu locación?</b> </ion-label>
+    <ion-item [disabled]="bloquearInput">
+      <ion-select formControlName="locacion" class="locacion">
+       <ion-select-option *ngFor="let itemDepartamentoAtl of DepartamentoAtlantico"   value="{{itemDepartamentoAtl.name}}">{{itemDepartamentoAtl.name}}</ion-select-option>
+      
+      </ion-select>
+     
+     
+       
+      
+   
+  </ion-item>
+
+ <ion-row>
+       <ion-col>
+        
+        <ion-button  type="submit" color="warning" expand="block"> <b>Ingresar</b> </ion-button>
+   
+      <br>
+        <a [routerLink]="['/forgot-password']" class="small-text"> <small>¿Has olvidado tu contraseña?</small> </a>
+        <br>
+        <br>
+        <a [routerLink]="['/register']" class="small-text">¿Eres nuevo? <span>Regístrate Aquí.</span> </a>
+
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-card-content>
+</ion-content>
+
+

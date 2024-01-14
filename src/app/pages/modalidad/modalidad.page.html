@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons  slot="start">
+          <ion-back-button ></ion-back-button>
+          <ion-title>Modalidad</ion-title>
+  </ion-buttons>
+    <!--ion-buttons (click)="iraIndex()" slot="start">
+      <ion-icon name="home-outline"></ion-icon>
+
+    </ion-buttons-->
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-grid >
+
+
+    <ion-row  (click)="selectAgil()">
+      <img class="fondo" src="../../assets/botones/2024.png" width="20%" height="20%" alt="">
+      <p>Ágil</p>
+
+
+
+    </ion-row>
+    <ion-row   class="mensajeria" (click)="selectModerada()">
+
+      <img class="fondo" src="../../assets/botones/2024Z.png" width="20%" height="20%" alt="">
+      <p>Moderada</p>
+
+
+
+    </ion-row>
+   </ion-grid>
+
+
+
+
+</ion-content>
+
+
+

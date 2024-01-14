@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button ></ion-back-button>
+     
+    </ion-buttons>
+    <ion-title>Restaurante</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="iraCarrito()">
+        <ion-icon name="cart-outline"></ion-icon>
+
+      </ion-button>
+      
+    </ion-buttons>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+    
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+   
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-grid>
+    <ion-row class="rowEmpresa">
+      <ion-col size="4" >
+        <img [src]="urlBase+allPedidos.field_imagen_apk_r" class="imgEmpresa" >
+      </ion-col>
+      <ion-col size="8">
+        <h1><b>{{allPedidos.Titulo}}  </b></h1>
+         <p>
+          
+          {{allPedidos.field_detalle_restaurtante}} 
+          <br>
+      
+         </p>
+        
+      </ion-col>
+    </ion-row>
+  
+    <ion-row *ngFor="let characte of character" (click)="irPageProductos(characte)">
+      
+      <ion-col size="4">
+       
+          <img [src]="urlBase+characte.field_img_apk" class="img" >
+        
+       
+      </ion-col>
+      <ion-col size="8">
+        
+        
+          
+        <h1 class="title"><b>{{characte.titulo}}  </b></h1>
+         <p>
+          
+          {{characte.field_descripcion_del_producto}} 
+          <br>
+          <b>${{characte.field_price_simple}} </b> 
+         </p>
+           
+        
+         
+        
+      
+      
+    </ion-col>
+       
+         
+      
+      
+   
+    
+    
+    </ion-row>
+  </ion-grid>
+  
+  
+</ion-content>

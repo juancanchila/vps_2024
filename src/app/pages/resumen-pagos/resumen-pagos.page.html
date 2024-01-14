@@ -1,0 +1,213 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button ></ion-back-button>
+    </ion-buttons>
+    <ion-title>Resumen</ion-title>
+  </ion-toolbar>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</ion-header>
+
+<ion-content>
+
+    <ion-card-content class="contain">
+      <ion-card>
+    <form  [formGroup]="FormSend" (ngSubmit)="irAPagar()">
+      <ion-label > <b>Origen*</b></ion-label>
+      <ion-item >
+        <select disabled formControlName="field_locacion_entrega" class="locacion">
+          <option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</option>
+        </select>
+        
+        <ion-buttons>
+          <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
+        </ion-buttons>
+      </ion-item>
+      <ion-item >
+        
+       
+        <textarea disabled="true" formControlName="field_direccion_entrega" type="text" siz required></textarea>
+        <ion-buttons>
+          <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
+        </ion-buttons>
+      </ion-item>
+      <ion-item>
+        <textarea disabled  formControlName="field_barrio_origen"  #input2 type="text"></textarea>
+
+        
+        <ion-buttons>
+         <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
+       </ion-buttons>
+    
+      </ion-item>
+  
+      
+      <ion-label><b>Contacto Nombre :</b> </ion-label>
+      <ion-item >
+        
+        <textarea formControlName="field_nombre_c_origen" placeholder="Nombre" type="text" required></textarea>
+      </ion-item>
+    
+     <ion-label > <b>Contacto Telefono:</b> </ion-label>
+     <ion-item >
+       
+       <textarea   [disabled]="disabledValue" formControlName="field_contacto" type="text" required></textarea >
+         <ion-buttons>
+           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
+         </ion-buttons>
+     </ion-item>
+
+
+      <div class="linea"></div>
+
+      <ion-label > <b>destino :</b></ion-label>
+      <ion-item >
+        <select disabled formControlName="field_locacion_destino" class="locacion">
+          <option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</option>
+        </select>
+        <ion-buttons>
+          <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
+        </ion-buttons>
+      </ion-item>
+      <ion-item >
+    
+        
+        <textarea  [disabled]="disabledValue" formControlName="field_direccion_destino" type="text" required></textarea >
+          <ion-buttons>
+            <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
+          </ion-buttons>
+      </ion-item>
+      <ion-item>
+         <textarea disabled id="ip" formControlName="field_barrio_destino" (input)="inputChanged2($event)" #input2 type="text">{{barrio}}</textarea>
+         <ion-buttons>
+          <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
+        </ion-buttons>
+      
+     
+       </ion-item>
+    
+   
+    
+ 
+   
+  
+      
+       <ion-label><b>Contacto Nombre :</b> </ion-label>
+       <ion-item >
+         
+         <textarea formControlName="field_nombre_c_destino" placeholder="Nombre" type="text" required></textarea>
+         <ion-buttons>
+          <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
+        </ion-buttons>
+       </ion-item>
+  
+      
+      <ion-label > <b>Contacto Telefono:</b> </ion-label>
+      <ion-item >
+        
+        <textarea   [disabled]="disabledValue" formControlName="field_contacto_destino" type="text" required></textarea >
+          <ion-buttons>
+            <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
+          </ion-buttons>
+      </ion-item>
+      
+
+      <div class="linea"></div>
+      
+<!---->
+
+<ion-label > <b>Seleccione recolección de documentos* </b> </ion-label>
+<div class="check">
+  <input disabled id="checkbox1" formControlName="field_respuesta_documentos" value="Recoger Documentos"  class="form-check-input" type="radio" checked>
+  <label class="form-check-label" for="flexRadioDefault1">
+    Recoger Documentos 
+  </label>
+
+</div>
+<div class="check2">
+  <input disabled  id="checkbox2" formControlName="field_respuesta_documentos" value="Enviar Documentos por WhatSapp" class="form-check-input" type="radio" checked>
+  <label class="form-check-label" for="flexRadioDefault2">
+    Enviar Documentos por WhatSapp
+  </label>
+</div>
+<script>
+   if(document.getElementById('field_respuesta_documentos').checked){
+  alert('field_respuesta_documentos esta seleccionado');
+ }
+</script>
+
+<!---->
+     
+      <br>
+
+      <ion-label > <b>Seleccione Envio de Comprobantes* </b> </ion-label>
+      <div class="check">
+        <input disabled  id="checkbox1" formControlName="field_regresar_por_wasap" value="Enviar comprobante por whatsapp"  class="form-check-input" type="radio" checked>
+        <label  class="form-check-label" for="flexRadioDefault1">
+          Enviar comprobante por whatsapp 
+        </label>
+    
+      </div>
+      <div class="check2">
+        <input disabled  id="checkbox2" formControlName="field_regresar_por_wasap" value="Llevar recibo de vuelta" class="form-check-input" type="radio" checked>
+        <label class="form-check-label" for="flexRadioDefault2">
+          Llevar recibo de vuelta
+        </label>
+      </div>
+      <script>
+         if(document.getElementById('field_respuesta_documentos').checked){
+        alert('field_respuesta_documentos esta seleccionado');
+       }
+      </script>
+      <ion-label> <b>Clase de Pagos</b> </ion-label>
+      <ion-item >
+        
+        <select  class="locacion" disabled="true"  formControlName="field_clase_de_pago">
+          <option value="supergiros" selected >Supergiros</option>
+          <option value="efecty">Efecty</option>
+          <option value="factura1">Factura1</option>
+          <option value="factura2">factura2</option>
+        </select>
+        <ion-buttons>
+          <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
+        </ion-buttons>
+      </ion-item>
+      <div class="linea"></div>
+      <ion-label > <b> Observaciones</b></ion-label>
+      <ion-item >
+        
+        <textarea disabled="true" formControlName="field_observaciones" class="descaera" type="text" required></textarea>
+        <ion-buttons>
+          <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
+        </ion-buttons>
+      </ion-item>
+      <ion-label class="txt">Medio de pago</ion-label>
+      <ion-item >
+        
+        <ion-input  disabled formControlName="field_metodo_de_pago"   required></ion-input>
+        <ion-buttons>
+          <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
+        </ion-buttons>
+      </ion-item>
+
+      <ion-label class="txt"> <b class="domicilio_class">Costo Domicilio </b> </ion-label>
+      <ion-item >
+        
+        <ion-input formControlName="field_precio_" [disabled]="true" type="text" required></ion-input>
+      </ion-item>
+
+
+     
+  
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" type="submit" color="warning" >!vapaesa!</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-card>
+  </ion-card-content>
+</ion-content>
+ 
+

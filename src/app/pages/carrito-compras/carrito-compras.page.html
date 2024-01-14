@@ -1,0 +1,97 @@
+<ion-header>
+<ion-toolbar>
+
+  <ion-buttons slot="start">
+    <ion-back-button ></ion-back-button>
+  </ion-buttons>
+  <ion-title class="title margin-botton-10">
+    Carrito <span class="subtitle"> producto(s) :({{data.length}})</span>
+  </ion-title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+</ion-toolbar>
+</ion-header>
+<ion-content *ngIf="data.length>0;else carritovaciotmpl">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-item *ngFor="let item of data">
+    <table class="margin-top-20">
+      <thead>
+        <tr col="3">
+         
+          <td style="width:20%"> <b>Cantidad.</b> </td>
+          <td > <b> Producto</b></td>
+          <td > <b>Valor</b> </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr >
+          
+          <td  class="has-text-centered">
+            <span>{{item.cantidad}}</span>
+          </td>
+          <td>{{item.titulo}}</td>
+          <td>${{item.originaPrice*item.cantidad}}</td>
+          <td><ion-icon name="trash" (click)="deleteProducto(item.product_id)"></ion-icon></td>
+        </tr>      
+      </tbody>
+      <tfoot>
+          <tr class="carrito-total">
+            <td colspan="2"></td>
+            <td>
+              
+            </td>
+          </tr>
+      </tfoot>
+    </table>
+  
+  </ion-item>
+  <div>
+    <b>Subtotal:</b> <div class="sub">${{subtotal}}</div>
+  </div>
+  
+ 
+  <ion-row>
+    <ion-col>
+      <ion-button replaceUrl="true" (click)="irASeguirComprando()" type="submit" color="warning" expand="block"><br><small>  <b class="button1">Seguir Comprando</b> </small></ion-button>
+    </ion-col>
+
+  </ion-row>
+  
+  <ion-row>
+    <ion-col>
+     
+      <ion-button replaceUrl="true" (click)="irPagePagar()" type="submit" color="warning" expand="block"><br><small> <b class="button1">Completar Orden</b> </small></ion-button>
+    </ion-col>
+
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+     
+      <ion-button  replaceUrl="true" (click)="limpiarCarrito()" type="submit" color="warning" expand="block"><br><small> <b class="button1">Limpiar carrito</b> </small></ion-button>
+    </ion-col>
+
+  </ion-row>
+  
+</ion-content>
+
+<ng-template color="warning" #carritovaciotmpl>
+  <ion-content class="content2">
+    <div class="margin-top-20">
+      <strong>El carrito esta vacío.</strong>
+    </div>
+  <ion-row>
+    <ion-col>
+      <ion-button replaceUrl="true" (click)="irASeguirComprando()" type="submit" color="warning" expand="block"><br><small>  <b class="button1">Regresar</b> </small></ion-button>
+    </ion-col>
+
+  </ion-row>
+
+</ion-content>
+</ng-template>

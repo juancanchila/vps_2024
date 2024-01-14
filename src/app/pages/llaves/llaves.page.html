@@ -1,0 +1,250 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button ></ion-back-button>
+      
+    </ion-buttons>
+    <ion-title>Llaves</ion-title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="contentImg">
+    <ion-img class="img-slider" [src]="urlBase+slider" alt=""></ion-img>
+
+  </div>
+    <ion-card-content class="contain">
+      <swiper #swiper [virtual]="true"  [config]="swiperConfig">
+        <ng-template swiperSlide >
+      <ion-card>
+    <form  [formGroup]="FormSend" (ngSubmit)="sendForm()">
+      <ion-label > <b>Donde te Encuentras</b></ion-label>
+      <ion-item id="locacionOrigen" [disabled]="disabledValue" >
+        <ion-select  (ionChange)="regionOrigen($event.target.value)"   formControlName="field_locacion_entrega" class="locacion">
+      
+          <ion-select-option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</ion-select-option>
+          
+         </ion-select>
+        <!---->
+        
+        
+      </ion-item>
+ 
+      <ion-item >
+       
+       
+        <textarea formControlName="field_direccion_entrega" placeholder="Dirección" class="corto" type="text" siz required></textarea>
+      </ion-item>
+
+      <ion-item id="itemOrigen"  [disabled]="bloquearInputBarrio">
+        <textarea   [hidden]="ocultarInputOrigen"  formControlName="field_barrio_origen" class="corto" placeholder="Barrio de Origen" #input (input)="inputChanged($event)" type="text">{{barrio}}</textarea>
+        
+      </ion-item>
+      <ion-list [hidden]="items.length <= 0" >
+       <ion-item (click)="selected(item, input)" *ngFor="let item of items">
+         {{item.name}}
+       </ion-item>
+     </ion-list>
+      
+ 
+
+   
+     <ion-label><b>Contacto Nombre :</b> </ion-label>
+     <ion-item >
+       
+       <textarea formControlName="field_nombre_c_origen" placeholder="Nombre" type="text" required></textarea>
+     </ion-item>
+  
+    <ion-label><b>Contacto Telefono:</b> </ion-label>
+     <ion-item >
+       
+       <textarea formControlName="field_contacto" placeholder="Número de celular" type="text" required></textarea>
+     </ion-item>
+      
+      
+     
+    
+      <ion-label> <b>¿Necesitas que me quedé?</b> </ion-label>
+      <label class="switchBtn">
+        <input formControlName="field_ida_y_vuelta" value="false" type="checkbox">
+        </label>
+      
+      <br>
+      <!--
+ <br>
+      <ion-label > <b>¿De qué quieres hablar?</b> </ion-label>
+      <ion-item >
+        <ion-select formControlName="field_tema_de_interes" class="locacion">
+          <ion-select-option>N/A</ion-select-option>
+          <ion-select-option>Vivencias</ion-select-option>
+          <ion-select-option>Educación</ion-select-option>
+          <ion-select-option>Farandula</ion-select-option>
+          <ion-select-option>Religion</ion-select-option>
+         
+        </ion-select>
+        
+        
+       
+      </ion-item>
+      <ion-label class="txt"> <b>¿Música preferida?</b> </ion-label>
+      <ion-item >
+        
+        <ion-select formControlName="field_musica_preferida" class="locacion">
+          <ion-select-option>N/A</ion-select-option>
+          <ion-select-option>Pop</ion-select-option>
+          <ion-select-option>Balada</ion-select-option>
+          <ion-select-option>Champeta</ion-select-option>
+          <ion-select-option>Vallenato</ion-select-option>
+          <ion-select-option>Urbano</ion-select-option>
+          <ion-select-option>Reggae</ion-select-option>
+          <ion-select-option>Reggaeton</ion-select-option>
+          <ion-select-option>Electrónica</ion-select-option>
+          <ion-select-option>Popular</ion-select-option>
+          
+        </ion-select>
+        
+        
+        
+    
+      </ion-item>
+
+      -->
+     
+    
+     
+  
+      <ion-row  class="rowBorder">
+        <ion-col>
+          <ion-button expand="block" (click)="slideNext()" color="danger" > <small><b>siguiente</b></small> </ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+      </ion-card>
+        </ng-template>
+
+        <ng-template swiperSlide >
+          <ion-card>
+        <form  [formGroup]="FormSend" (ngSubmit)="sendForm()">
+         
+          
+          <ion-label > <b>¿A Dónde te acompaño?</b> </ion-label>
+    
+          <ion-item  >
+            <ion-select  (ionChange)="region($event.target.value)"   formControlName="field_locacion_destino" class="locacion">
+      
+              <ion-select-option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</ion-select-option>
+              
+             </ion-select>
+            
+          </ion-item>
+          <ion-item >
+        
+            
+            <textarea formControlName="field_direccion_destino" placeholder="Dirección" class="corto" type="text" required></textarea>
+          </ion-item>
+          <ion-item [disabled]="bloquearInputBarrioDestino">
+            <textarea [hidden]="ocultarInput" formControlName="field_barrio_destino" class="corto" placeholder="Barrio de Destino" #input2 (input)="inputChanged2($event)" type="text">{{barrio}}</textarea>
+            
+          </ion-item>
+        
+          <ion-list [hidden]="items2.length <= 0" >
+            <ion-item (click)="selected2(item, input2)" *ngFor="let item of items2">
+              {{item.name}}
+            </ion-item>
+          </ion-list>
+        
+        
+       
+<ion-label> <b>Medio de pago:</b> </ion-label>
+<ion-grid>
+ <ion-row>
+  
+    <ion-col size="5">
+      <img src="../../assets/botones/PAGOSCOLOR-97.png" class="col-img" width="80%" height="80%" alt="">
+    </ion-col>
+    <ion-col size="7"> 
+     <div class="form-check">
+       <input type="radio" formControlName="field_metodo_de_pago" value="nequi"  class="form-check-input"  >
+       
+     </div>
+ 
+      
+     </ion-col>
+  </ion-row>
+  
+   <ion-row>
+    
+     <ion-col size="5">
+       <img src="../../assets/botones/PAGOSCOLOR-98.png" class="col-img"  width="80%" height="80%" alt="">
+     </ion-col>
+     <ion-col size="7"> 
+       <div class="form-check">
+         <input formControlName="field_metodo_de_pago" type="radio" value="daviplata" class="form-check-input"  >
+         
+       </div>
+       
+        
+       </ion-col>
+   </ion-row>
+   <ion-row>
+   
+     <ion-col size="5">
+       <img src="../../assets/botones/PAGOSCOLOREAZUL-99.png" class="col-img" width="80%" height="80%" alt="">
+     </ion-col>
+     <ion-col *ngIf="permitirPagoEfectivo=='On'" size="7"> 
+       <div class="form-check">
+       <input formControlName="field_metodo_de_pago" type="radio" value="efectivo" class="form-check-input" >
+       </div>
+  
+  
+      
+     </ion-col>
+   </ion-row>
+  <br>
+  <script>
+    document.getElementById("formulario").addEventListener("submit", function(event){
+    let hasError = false;
+   
+
+    // obtenemos todos los input radio del grupo horario que esten chequeados
+    // si no hay ninguno lanzamos alerta
+    if(!document.querySelector('input[name="field_medio_de_transporte"]:checked')) {
+      alert('Error, rellena el campo horario');
+      hasError = true;
+      }
+
+    
+    
+    // si hay algún error no efectuamos la acción submit del form
+    if(hasError) event.preventDefault();
+});
+  </script>
+  
+  <br>
+
+</ion-grid>
+      
+          
+      
+          
+        
+         
+      
+          <ion-row class="rowBorder">
+            <ion-col>
+              <ion-button replaceUrl="true" expand="block" type="submit" color="danger" ><small> <b>¡VaPa'Esa!</b></small> </ion-button>
+              <ion-button replaceUrl="true"  (click)="slidePrev()" color="danger" expand="block" > <small> <b>atras</b></small>  </ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+          </ion-card>
+            </ng-template>
+
+          
+      </swiper>
+  </ion-card-content>
+  
+</ion-content>

@@ -1,0 +1,216 @@
+ion-title{
+    font-family: "Montserrat", sans-serif;
+    margin-left: -14%;
+    text-transform: uppercase;
+    text-align: center;
+}
+ion-toolbar{
+    color: white;
+    --ion-background-color: #262262;
+}
+ion-content{
+    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat; 
+}
+.ion-color-warning {
+    --ion-color-base: #FFF200  !important;
+}
+.listado {
+    padding: 6%;
+    border: solid;
+    margin-top: 2%;
+}
+ion-icon{
+    font-size: 25px;
+    color: white;
+}
+.input{
+    border: none;
+    margin-top: -28px;
+    color: white;
+    height: 3px;
+    width: 67px;
+    text-align: center;
+    background-color: #262262;
+}
+.counter {
+    padding: 2px;
+    float: right;
+    /* color: #e80606; */
+    background-color: #262262 !important;
+    border-radius: 8px;
+    width: 76px;
+    height: 33px;
+    margin-top: -7px;
+    margin-right: 5%
+}
+.mas{
+       /* margin-top: 5px; */
+    /* font-size: 18px; */
+    /* color: white; */
+    margin-top: 0px;
+    /* float: right; */
+    /* color: white; */
+    margin-left: 45px;
+}
+.labelArticulos {
+    margin-top: 14px;
+    margin-bottom: 14px;
+}
+.menos{
+   /* margin-top: -6px; */
+    /* float: right; */
+    /* color: white; */
+    margin-top: -8px;
+    /* font-size: 18px; */
+    color: white;
+}
+
+
+small{
+    font-size: 15px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+.check {
+    border-bottom: 1px solid #262262;;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.contentImg{
+    padding-top: 20px;
+ text-align: center;
+ }
+
+.home{
+    font-size: 25px;
+    color: white;
+}
+ion-buttons{
+    text-align: center;
+    margin-left: 11px;
+}
+ ion-card{
+    border-radius: 5%;
+    padding: 20px 0 20px 0;
+}
+ion-col{
+    text-align: center;
+}
+
+.corto{
+    //margin-left: 29%;
+    height: 38px;
+   // position: absolute;
+    width: 100%;
+    display: block;
+    background-color: #ecf0f1;
+    color: #262262;
+    font-size: 1rem;
+    border: 1px solid #333;
+}
+select{
+    color: #262262;
+    font-family: 'Montserrat', sans-serif;
+    width: 115px;
+    height: 38px;
+    background-color: #ecf0f1;
+}
+ion-input{
+    
+    height: 38px;
+    width: 100%;
+    display: block;
+    background-color: #ecf0f1;
+    color: #262262;
+    font-size: 1rem;
+    border: 1px solid #333;
+}
+textarea{
+    color: #262262;
+    height: 38px;
+    background-color: #ecf0f1;
+    width: 100%;
+}
+.descaera{
+    height: 60px;
+    width: 100%;
+    display: block;
+    background-color: #ecf0f1;
+    color: #262262;
+    font-size: 1rem;
+    border: 1px solid #333;
+
+}
+input{
+    float: right;
+    background-color: #ecf0f1;
+    margin-right: 6%;
+}
+.form-check {
+    padding: 10px;
+}
+.rowBorder{
+    border: none !important;
+}
+ion-row{
+    border-bottom: 2px solid;
+}
+
+.locacion{
+    color: #262262;
+    background-color: #ecf0f1;
+    border: unset;
+    width:100%
+}
+ion-tab-bar{
+    --ion-background-color: #262262;
+
+}
+
+button{
+    
+    font-family: 'Poppins', sans-serif;
+    display: inline-block;
+      border-radius: none;
+      width: 120px;
+      margin: auto;
+    
+}
+h2{
+    margin: 4%;
+    color: #262262;
+    font-family: 'Montserrat', sans-serif;
+}
+
+ion-label{
+    margin: 4%;
+    color: #262262;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    
+}
+ion-item{
+    --ion-background-color: transparent !important;
+    --min-height: 0 !important;
+    --border-width: 0 0 0 0 !important;
+--inner-border-width: 0 !important;
+--show-full-highlight: 0 !important;
+--show-inset-highlight: 0 !important;
+margin-bottom: 2%;
+}
+.slide.round {
+    border-radius: 34px;
+}
+.slide.round:before {
+    border-radius: 50%;
+}
+body{
+    --ion-color-primary-contrast: #ffffff;
+  }
+  ion-button{
+    color: #262262;
+    font-family: 'Poppins', sans-serif;
+  }
+ 

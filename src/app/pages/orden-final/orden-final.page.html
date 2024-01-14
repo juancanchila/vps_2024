@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+    
+      
+    </ion-buttons>
+    <ion-title>Orden Creada</ion-title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ 
+<ion-grid >
+  <ion-row class="mensajeria">
+
+    
+    <h1><b>Orden Nro:</b>{{NumeroOrden}}</h1>
+    <br>
+    <br>
+  <br>
+  
+ 
+   
+  
+  </ion-row>
+  
+ 
+   
+    
+    
+   
+  
+  
+  <br>
+  <br>
+  <ion-row class="spacing">
+    
+   
+    <h1>En breve el mensajero se estara comunicando con usted.</h1>
+    
+   
+   
+  </ion-row>
+  <ion-row *ngIf="datosObtenido==false" class="spacing">
+    
+   
+    <h1>Estamos buscando un auxiliar para ti!....</h1>
+    
+   
+   
+  </ion-row>
+  <ion-row>
+    <ion-col>
+  <ion-button expand="block" *ngIf="datosObtenido==true" replaceUrl="true" (click)="irSiguiente()" type="submit" color="warning" >Ok</ion-button>
+</ion-col>
+</ion-row>
+
+
+</ion-grid>
+</ion-content>

@@ -1,0 +1,157 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+     
+    </ion-buttons>
+    <ion-title>Emprendedores</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="iraCarrito()">
+        <ion-icon name="cart-outline"></ion-icon>
+
+      </ion-button>
+      
+    </ion-buttons>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+
+    </ion-refresher-content>
+  </ion-refresher>
+  <swiper [config]="swiperConfig">
+
+    <ng-template swiperSlide *ngFor="let slide of slider" >
+      <div class="slider" >
+        
+         <ion-img class="img-slider" [src]="urlBase+slide.field_imagen_emprededores" alt=""></ion-img>
+          
+       
+  
+      </div>
+    </ng-template>
+  
+  </swiper>
+
+  <div class="content">
+    <ion-searchbar placeholder="Buscar" animated (ionChange)="searchEmprendedores($event)"></ion-searchbar>
+
+    <swiper [config]="swiperConfig">
+
+    <ng-template swiperSlide >
+      <div class="content-botones" >
+        
+        <div  class="boton">
+          <img (click)="iraMetodo1()" class="img-etiquetas" src="../../assets/botones/ICemprendedores_Mesa de trabajo1.png" alt="">
+          <br>
+          <h1 class="letter-center">Mascotas</h1>
+        </div>
+
+        
+        <div  class="boton">
+          <img (click)="iraMetodo2()" class="img-etiquetas" src="../../assets/botones/ICemprendedores_Mesa de trabajo2.png" alt="">
+          <br>
+          <h1 class="letter-center">Bebidas</h1>
+        </div>
+
+        
+        <div  class="boton">
+          <img (click)="iraMetodo3()" class="img-etiquetas" src="../../assets/botones/ICemprendedores_Mesa de trabajo3.png" alt="">
+          <br>
+          <h1 class="letter-center">Tiempo</h1>
+        </div>
+
+        
+        <div  class="boton">
+          <img (click)="iraMetodo4()" class="img-etiquetas" src="../../assets/botones/ICemprendedores_Mesa de trabajo4.png" alt="">
+          <br>
+          <h1 class="letter-center">Tractor</h1>
+        </div>
+          
+      
+  
+      </div>
+    </ng-template>
+    <ng-template swiperSlide >
+      <div class="content-botones" >
+        
+        <div  class="boton">
+          <img (click)="iraMetodo5()" class="img-etiquetas" src="../../assets/botones/ICemprendedores_Mesa de trabajo5.png" alt="">
+          <br>
+          <h1 class="letter-center">Zapatos</h1>
+        </div>
+
+        
+        <div  class="boton">
+          <img (click)="iraMetodo6()" class="img-etiquetas" src="../../assets/botones/ICemprendedores_Mesa de trabajo6.png" alt="">
+          <br>
+          <h1 class="letter-center">Gorras</h1>
+        </div>
+
+        
+        <div  class="boton">
+          <img (click)="iraMetodo7()" class="img-etiquetas" src="../../assets/botones/ICemprendedores_Mesa de trabajo7.png" alt="">
+          <br>
+          <h1 class="letter-center">Sueteres</h1>
+        </div>
+
+        
+        <div  class="boton">
+          <img (click)="iraMetodo8()" class="img-etiquetas" src="../../assets/botones/ICemprendedores_Mesa de trabajo8.png" alt="">
+          <br>
+          <h1 class="letter-center">Aretes</h1>
+        </div>
+          
+      
+  
+      </div>
+    </ng-template>
+  
+  </swiper>
+  
+
+
+<ion-grid >
+  
+  
+
+  <ion-row *ngFor="let characte of searched" (click)="irPageProductos(characte)">
+    
+   
+    
+
+    <ion-col class="col1" size="3" class={{characte.field_criterio}} [ngClass]="fondo" >
+       
+      <img [src]="urlBase+characte.field_imagen_apk" class="img" >
+    
+   
+  </ion-col>
+  <ion-col  class="col2" size="9" class={{characte.field_criterio}} [ngClass]="fondo">
+    
+    
+      
+    <h1 class="title"><b>{{characte.Titulo}}  </b></h1>
+     <p>
+      
+      {{characte.field_detalle_emprendedor}} 
+      <br>
+      
+     </p>
+       
+    
+     
+    
+  
+  
+</ion-col>
+    
+
+  </ion-row>
+
+
+</ion-grid>
+</div>
+</ion-content>

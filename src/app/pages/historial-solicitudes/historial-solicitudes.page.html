@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs"></ion-back-button>
+      <ion-title>Historial Solicitudes</ion-title>
+    </ion-buttons>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-grid >
+  <ion-row class="mensajeria">
+
+    
+    
+   
+    <h1>Solicitudes</h1>
+    
+   
+  
+  </ion-row>
+  
+  <ion-item *ngFor="let characte of character "  (click)="irPageProductos(characte)">
+  
+    <h2>Orden Nro: {{characte.Id}}</h2>
+  
+
+  </ion-item>
+  
+
+</ion-grid>
+
+
+
+</ion-content>

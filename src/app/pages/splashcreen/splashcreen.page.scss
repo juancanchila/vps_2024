@@ -1,0 +1,13 @@
+ion-content{
+    --background: url("/assets/botones/inicioSesion.png") 0 0/100% 100% no-repeat;
+}
+ion-card-content{
+    margin-top: 20%;
+}
+
+ion-progress-bar.md.progress-bar-determinate.hydrated {
+    width: 58%;
+    /* text-align: center; */
+    margin-left: auto;
+    margin-right: auto;
+}

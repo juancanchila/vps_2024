@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+   <ion-buttons>
+      <!--ion-icon name="home-outline"></ion-icon-->
+      <ion-back-button ></ion-back-button>
+      <ion-title>Transportes</ion-title>
+    </ion-buttons>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-grid >
+
+    <ion-row   class="mensajeria" (click)="selectMoto()">
+
+      <img class="fondo" src="../../assets/botones/ICONOMOT.png" width="20%" height="20%" alt="">
+      <p>Moto</p>
+
+
+
+    </ion-row>
+    <ion-row  (click)="selectCarro()">
+      <img class="fondo" src="../../assets/botones/ICONOCAR.png" width="20%" height="20%" alt="">
+      <p>Carro</p>
+
+
+
+    </ion-row>
+   </ion-grid>
+
+
+
+
+</ion-content>
+
+
+

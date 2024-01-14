@@ -1,0 +1,265 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button  ></ion-back-button>
+      <ion-title>Detalles de ordenes</ion-title>
+    </ion-buttons>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content>
+
+      </ion-refresher-content>
+    </ion-refresher>
+
+
+
+
+
+
+
+
+      <ion-card >
+        <ion-list *ngIf="character!='Completado' ">
+          <ion-button [disabled]="estadoButton" id="camino" replaceUrl="true" (click)="cancelarPedido()" type="submit" color="warning" >Cancelar Pedido</ion-button>
+        </ion-list>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <img class="img-slider" [src]="urlBase+character31" alt="">
+            </ion-col>
+            <ion-col *ngIf="allPedidos.titulo != 'Mensajeria Ruta padre'">
+              <img class="img-slider" [src]="urlBase+character32" alt="">
+            </ion-col>
+          </ion-row>
+          <ion-row class="rowBorder">
+            <ion-col >
+              <div class="colBoton"  color="danger" > <small>Origen</small> </div>
+            </ion-col>
+            <ion-col *ngIf="allPedidos.titulo != 'Mensajeria Ruta padre'" >
+              <div class="colBoton"  color="danger" > <small>Destino</small> </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <h1> Tipo de Orden :  </h1>
+        <h1><b>{{allPedidos.titulo}} </b>  </h1>
+        <h1> Nro de Orden :  </h1>
+        <h1><b>{{allPedidos.nid}} </b>  </h1>
+        <div *ngIf="character13 != undefined" class="linea"></div>
+
+          <h1 *ngIf="character13 != undefined"> <b>Datos de origen </b>  </h1>
+
+         <h1 *ngIf="character13 != undefined"> <b>Dirección</b>  </h1>
+          <h1 *ngIf="character13 != undefined">{{character13}} </h1>
+
+
+
+          <h1 *ngIf="character29 != undefined"> <b>Barrio:</b>  </h1>
+          <h1 *ngIf="character29 != undefined"> {{character29}}  </h1>
+
+          <h1 *ngIf="character43 != undefined"> <b>Nombre del Establecimiento:</b>  </h1>
+          <h1 *ngIf="character43 != undefined"> {{character43}}  </h1>
+
+        <h1 *ngIf="character2 != undefined"><b> Locacion: </b> </h1>
+        <h1 *ngIf="character2 != undefined"> {{character2}}  </h1>
+        <h1 *ngIf="character34 != undefined"><b>Nombre de contacto: </b>  </h1>
+        <h1 *ngIf="character34 != undefined">{{character34}}   </h1>
+
+       <h1 *ngIf="character25 != undefined && character45 ==''"><b>Numero de contacto: </b>  </h1>
+       <h1 *ngIf="character25 != undefined && character45 ==''">{{character25}}  </h1>
+       <div *ngIf="character4 != undefined" class="linea"></div>
+
+
+
+          <h1 *ngIf="character4 != undefined"> <b>Datos de destino </b>  </h1>
+
+          <h1 *ngIf="character4 != undefined"> <b>Dirección</b>  </h1>
+        <h1 *ngIf="character4 != undefined">  {{character4}}   </h1 >
+
+
+          <h1 *ngIf="character30 != undefined"> <b>Barrio:</b>  </h1>
+          <h1 *ngIf="character30 != undefined"> {{character30}}  </h1>
+
+        <h1 *ngIf="character6 != undefined"><b> Locacion: </b> </h1>
+        <h1 *ngIf="character6 != undefined"> {{character6}}  </h1>
+        <h1 *ngIf="character35 != undefined"><b>Nombre de contacto: </b>  </h1>
+        <h1 *ngIf="character35 != undefined">{{character35}} </h1>
+
+        <h1 *ngIf="character5 != undefined"><b> Contacto:</b> </h1>
+        <h1 *ngIf="character5 != undefined">{{character5}}  </h1>
+        <div class="linea"></div>
+
+
+        <h1 *ngIf="character14 != undefined"><b>Observaciones: </b> </h1>
+        <h1 *ngIf="character14 != undefined"> {{character14}}  </h1>
+       <!-- <textarea *ngIf="character14 != undefined" disabled="true" name="" id="" cols="30" rows="10">{{character14}} </textarea>-->
+
+        <h1 *ngIf="character15 != undefined"><b>Observaciones:  </b> </h1>
+        <h1 *ngIf="character15 != undefined"> {{character15}}</h1>
+       <!-- <textarea *ngIf="character15 != undefined" disabled="true" name="" id="" cols="30" rows="10">{{character15}} </textarea>-->
+
+
+
+       <h1 *ngIf="character27 != undefined" ><b>Clase de pago:</b>  </h1>
+        <h1 *ngIf="character27 != undefined" > {{character27}}   </h1>
+
+        <h1 *ngIf="character7 != undefined"><b>Observaciones:</b>   </h1>
+       <h1 class="h1Observ" *ngIf="character7 != undefined"> {{character7}}  </h1>
+        <!--<textarea *ngIf="character7 != undefined" disabled="true" name="" id="" cols="30" rows="10">{{character7}} </textarea>-->
+
+
+          <h1 *ngIf="character4 != undefined"> <b>Detalles </b>  </h1>
+
+          <h1 *ngIf="character44 != undefined"><b>Estado del servicio:  </b>   </h1>
+          <h1 *ngIf="character44 != undefined"> {{character44}}  </h1>
+
+          <h1 *ngIf="character != undefined"><b>Estado del servicio:  </b>   </h1>
+          <h1 *ngIf="character != undefined"> {{character}}  </h1>
+
+          <h1 *ngIf="character16 != undefined" ><b>Que quieres comprar:</b>  </h1>
+          <h1 *ngIf="character16 != undefined" > {{character16}}  </h1>
+
+          <h1 *ngIf="character1 != undefined"> <b>Mensajero Asignado: </b></h1>
+          <h1 *ngIf="character1 != undefined">{{character1}}  </h1>
+
+          <h1 *ngIf="character28 != undefined && character!='Completado' "> <b>Numero de Mensajero Asignado:</b> </h1>
+          <h1 *ngIf="character28 != undefined && character!='Completado'">{{character28}} <ion-icon name="copy-outline" (click)="copy(character28)" id="copytxt3"></ion-icon> </h1>
+
+          <h1 *ngIf="character36 != undefined && character!='Completado'"> <b>Numero de Bancolombia Mensajero:</b> </h1>
+          <h1 *ngIf="character36!= undefined && character!='Completado'">{{character36}}  <ion-icon name="copy-outline" (click)="copy(character36)" id="copytxt2"></ion-icon> </h1>
+
+          <h1 *ngIf="character37 != undefined && character!='Completado'"> <b>Numero de Nequi Mensajero:</b> </h1>
+          <h1 *ngIf="character37!= undefined && character!='Completado'">{{character37}} <ion-icon name="copy-outline" (click)="copy(character37)" id="copytxt1"></ion-icon>  </h1>
+
+          <h1 *ngIf="character39 != undefined"> <b>Foto de Mensajero:</b> </h1>
+          <img class="img-slider" *ngIf="character39!= undefined" [src]="urlBase+character39" alt="">
+
+          <h1 *ngIf="character40 != undefined"> <b>Mensajero Acepta terminos y condiciones:</b> </h1>
+          <h1 *ngIf="character40!= undefined">{{character40}}  </h1>
+
+          <h1 *ngIf="character41 != undefined"> <b>Cliente Acepta terminos y condiciones:</b> </h1>
+          <h1 *ngIf="character41!= undefined">{{character41}}  </h1>
+
+          <h1 *ngIf="character42 != undefined"> <b>Quien decide pagar:</b> </h1>
+          <h1 *ngIf="character42!= undefined">{{character42}}  </h1>
+
+
+
+
+          <h1 *ngIf="character11 != undefined" >  <b>Respuesta Documentos:</b> </h1>
+          <h1 *ngIf="character11 != undefined" >{{character11}}  </h1>
+
+          <h1 *ngIf="character38 != undefined" >  <b>Resgresar documentos:</b> </h1>
+          <h1 *ngIf="character38 != undefined" >{{character38}}  </h1>
+
+
+          <h1 *ngIf="character9 != undefined" ><b> Ida Y Vuelta: </b> </h1>
+          <h1 *ngIf="character9 != undefined" >{{character9}} </h1>
+          <div class="linea"></div>
+
+
+          <h1 *ngIf="character8 != undefined" > <b> Metodo de pago:</b> </h1>
+          <h1 *ngIf="character8 != undefined" > {{character8}}   </h1>
+
+
+          <h1 *ngIf="character12 != undefined" > <b>fecha creación orden: </b> </h1>
+          <h1 *ngIf="character12 != undefined" > {{character12}}  </h1>
+
+
+          <h1 *ngIf="character17 != undefined" > <b>Farmacia: </b></h1>
+          <h1 *ngIf="character17 != undefined" >{{character17}} </h1>
+
+          <h1 *ngIf="character19 != undefined" ><b> Tema de interes:</b> </h1>
+          <h1 *ngIf="character19 != undefined" >{{character19}}   </h1>
+
+          <h1 *ngIf="character18 != undefined" ><b> Musica preferida: </b></h1>
+          <h1 *ngIf="character18 != undefined" >{{character18}}  </h1>
+
+          <h1 *ngIf="character22 != undefined" > <b>Medio de transporte: </b></h1>
+          <h1 *ngIf="character22 != undefined" > {{character22}}  </h1>
+
+
+          <h1 *ngIf="character23 != undefined" ><b> Respuesta de documentos:</b> </h1>
+          <h1 *ngIf="character23 != undefined" > {{character23}}  </h1>
+
+
+          <h1 *ngIf="character26 != undefined" ><b>Valor declarado: </b> </h1>
+          <h1 *ngIf="character26 != undefined" > {{character26}}  </h1>
+
+          <h1 *ngIf="character33 != undefined" ><b class="domicilio_class">Costo Domicilio : </b> </h1>
+          <h1 *ngIf="character33 != undefined" > {{character33}}  </h1>
+          <div class="linea"></div>
+<a (click)="presentAlert()">Terminos y Condiciones del Contrato</a>
+<div class="linea"></div>
+
+          <img src="assets/botones/cdgBarra.PNG" alt="">
+
+
+
+
+       <!--
+   <ion-button id="open-modal" expand="block">Open Modal</ion-button>
+
+       -->
+
+       <ion-modal #modal [isOpen]="isModalOpen">
+        <ng-template>
+          <div>
+
+            <form>
+
+                <h1 class="titleComent">¿Como calificarias el servicio brindado? </h1>
+
+
+
+
+              <p class="clasificacion">
+                <input id="radio1" type="radio" name="estrellas"  (click)="clickStar('5')"  value="5"><!--
+                --><label for="radio1">★</label><!--
+                --><input id="radio2" type="radio" name="estrellas" (click)="clickStar('4')" value="4"><!--
+                --><label for="radio2">★</label><!--
+                --><input id="radio3" type="radio" name="estrellas" (click)="clickStar('3')" value="3"><!--
+                --><label for="radio3">★</label><!--
+                --><input id="radio4" type="radio" name="estrellas" (click)="clickStar('2')" value="2"><!--
+                --><label for="radio4">★</label><!--
+                --><input id="radio5" type="radio" name="estrellas" (click)="clickStar('1')" value="1"><!--
+                --><label for="radio5">★</label>
+              </p>
+              <textarea maxlength="250" id="comentario" type="text" [(ngModel)]="name" name="ok" placeholder="Escriba su comentario"  value=""></textarea>
+
+
+            </form>
+
+              <ion-button class="boton" expand="block" color="danger" (click)="confirm()">Enviar</ion-button>
+
+
+
+          </div>
+        </ng-template>
+      </ion-modal>
+
+
+
+
+      </ion-card>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ion-content>

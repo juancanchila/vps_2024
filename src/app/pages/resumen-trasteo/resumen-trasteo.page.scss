@@ -1,0 +1,186 @@
+
+input, label {
+    opacity: 1 !important;
+}
+
+.native-input .sc-ion-input-ios {
+    opacity: 1 !important;
+}
+
+ion-title{
+    margin-left: 58px;
+    text-transform: uppercase;
+}
+.ion-color-warning {
+    --ion-color-base: #FFF200  !important;
+}
+.check {
+    border-bottom: 1px solid #262262;;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+ion-label{
+    margin: 4%;
+    color: #262262;
+    font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
+    
+}
+ion-icon{
+    float: right;
+    color: #262262;
+    font-size: 20px;
+}
+
+input{
+
+    
+    background-color: #ecf0f1;
+   
+
+    margin-right: 9%;
+    float: right;
+    color: #262262;
+    height: 20px;
+}
+ion-card{
+   
+    padding: 20px 0 20px 0;
+}
+.linea {
+    border-top: 1px solid #262262;
+    height: 2px;
+    max-width: 100%;
+    padding: 0;
+    margin: 20px auto 0 auto;
+    
+  }
+textarea{
+    color: #262262;
+  height: 38px;
+  width: 100%;
+  background-color: #ecf0f1;
+}
+
+ion-toolbar{
+    color: white;
+    --ion-background-color: #262262;
+}
+ion-button{
+    font-family: 'Poppins', sans-serif;
+}
+ion-col{
+    text-align: center;
+}
+
+.corto{
+    //margin-left: 29%;
+    height: 38px;
+    //position: absolute;
+    width: 65%;
+    display: block;
+    background-color: #ecf0f1;
+    color: #262262;
+    font-size: 22px;
+    border: 1px solid #333;
+}
+select{
+    font-family: 'Montserrat', sans-serif;
+    color: #262262;
+    background-color: #ecf0f1;
+    height: 38px;
+   
+    
+    
+}
+
+ion-input{
+    
+    height: 38px;
+    width: 100%;
+    display: block;
+    background-color: #ecf0f1;
+    color: #262262;
+    font-size: 18px;
+    border: 1px solid #333;
+}
+textarea{
+    background-color: #ecf0f1;
+    height: 38px;
+    width: 100%;
+}
+.input{
+    color: #262262;
+    float: right;
+    height: 20px;
+    width: 20px;
+}
+.descaera{
+    height: 60px;
+    width: 100%;
+    display: block;
+    background-color: #ecf0f1;
+    color: #262262;
+    font-size: 1rem;
+    border: 1px solid #333;
+
+}
+.locacion{
+    width: 100%;
+}
+ion-tab-bar{
+    --ion-background-color: #262262;
+
+}
+ion-icon{
+    color: #262262;
+    
+    
+    
+}
+button{
+    display: inline-block;
+      border-radius: none;
+      width: 120px;
+      margin: auto;
+    
+}
+
+ion-label{
+    text-transform: uppercase;
+    
+}
+ion-item{
+    --min-height: 0 !important;
+    --border-width: 0 0 0 0 !important;
+--inner-border-width: 0 !important;
+--show-full-highlight: 0 !important;
+--show-inset-highlight: 0 !important;
+margin-bottom: 5%;
+}
+.slide.round {
+    border-radius: 34px;
+}
+.slide.round:before {
+    border-radius: 50%;
+}
+body{
+    --ion-color-primary-contrast: #ffffff;
+}
+ion-content{
+    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat; 
+}
+h2{
+    color: #262262;
+    font-family: 'Montserrat', sans-serif;
+}
+label {
+    margin-left: 4%;
+    color: #262262;
+    font-family: "Montserrat", sans-serif;
+}
+b{
+    color: #262262;
+    font-family: 'Montserrat', sans-serif;
+}
+ 

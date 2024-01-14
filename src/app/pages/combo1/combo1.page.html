@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="index"></ion-back-button>
+      <ion-title>Combo 1</ion-title>
+    </ion-buttons>
+    
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+   <ion-card *ngFor="let producto of productos" >
+     <ion-card-header>
+       <ion-card-title>{{producto.titulo}}</ion-card-title>
+     </ion-card-header>
+     {{producto.descripcion}}
+       <ion-row>
+         <ion-col size="8" > <ion-label color="secondary" > <b>{{producto.precio|currency:'$'}}</b> </ion-label> </ion-col>
+         <ion-col size="4" class="ion-text-right" > <ion-fab-button><ion-icon  name="add-outline" fill="clear" (click)="addProducto(producto)"  ></ion-icon></ion-fab-button> </ion-col>
+       </ion-row>
+       
+       
+   </ion-card>
+</ion-list>
+
+<ion-grid >
+  
+  
+ 
+  <ion-row>
+   
+    <ion-button replaceUrl="true" (click)="irPageCarritoCompras()" type="submit" color="succes" expand="block"><br><small>Ver Carrito de Compra</small></ion-button>
+   
+   
+  </ion-row>
+
+ 
+  
+
+</ion-grid>
+
+
+
+</ion-content>

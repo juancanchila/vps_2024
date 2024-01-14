@@ -1,0 +1,116 @@
+ion-title{
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    margin-left: -10%;
+}
+ion-toolbar{
+    color: white;
+    --ion-background-color: #262262;
+}
+.title{
+    text-align: center;
+    font-family: 'Poppins', sans-serif
+}
+p{
+    padding: 10px;
+    color: #262262;  
+    font-family: 'Poppins', sans-serif 
+}
+small{
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    
+}
+.smallBlank{
+    color: #262262;  
+}
+.ion-color-warning {
+    --ion-color-base: #FFF200  !important;
+}
+ion-button{
+    font-family: 'Poppins', sans-serif;
+    display: inline-block;
+    --ion-background-color: #fff0;
+    color: #262262;
+    width: 100%;
+}
+.colorButtom{
+color: #ffffff;
+font-family: 'Poppins', sans-serif;
+}
+ion-card{
+    width: 95%;
+}
+.observacion{
+   
+        width: 100%; 
+        height: 100px;
+        
+    
+}
+textarea{
+    background-color: white;
+}
+body{
+    --ion-color-primary-contrast: #ffffff;
+  }
+ 
+ion-tab-bar{
+    --ion-background-color: #262262;
+
+}
+ion-icon,ion-label{
+
+    color: yellow;
+}
+h1{
+    color: #262262;
+    font-family: 'Montserrat', sans-serif;
+    margin: auto;
+    
+}
+ion-row{
+    
+    height: auto;
+    width: auto;
+}
+ion-icon{
+    font-size: 60px;
+}
+ion-icon{
+    float: left;
+    color: black;
+    font-size: 20px;
+}
+.mas{
+    color: #ffffff;
+}
+.rest{
+    padding-right: 9px;
+    color: #ffffff;
+}
+.cont{
+    color: #ffffff;
+}
+
+.input{
+    color: black;
+    float: left;
+    height: 20px;
+    width: 20px;
+}
+.counter{
+    height: 46px;
+    padding: 10px;
+    margin-right: 4%;
+    border-radius: 5px;
+    background-color: #262262;
+    
+}
+.price{
+    margin-left: -46%;
+}
+.obs{
+    padding: 10px;
+}

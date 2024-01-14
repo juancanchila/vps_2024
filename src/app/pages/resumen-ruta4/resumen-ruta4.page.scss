@@ -1,0 +1,143 @@
+ion-title{
+    text-align: center;
+    text-transform: uppercase;
+}
+ion-toolbar{
+    color: white;
+    --ion-background-color: #262262;
+}
+
+body{
+    --ion-color-primary-contrast: #ffffff;
+  }
+  .ion-color-warning {
+    --ion-color-base: #FFF200  !important;
+}
+
+ion-content{
+    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat; 
+}
+ion-card{
+   
+    padding: 20px 0 20px 0;
+}
+.linea {
+    border-top: 1px solid #262262;
+    height: 2px;
+    max-width: 100%;
+    padding: 0;
+    margin: 20px auto 0 auto;
+    
+  }
+ion-col{
+    text-align: center;
+}
+.corto{
+    //margin-left: 29%;
+    height: 38px;
+   // position: absolute;
+    width: 100%;
+    display: block;
+    background-color: #ecf0f1;
+    color: #262262;
+    font-size:18px;
+    border: 1px solid #333;
+}
+select{
+    background-color: #ecf0f1;
+    height: 38px;
+}
+ion-input{
+    
+    height: 38px;
+    width: 100%;
+    display: block;
+    background-color: #ecf0f1;
+    color: #262262;
+    font-size: 18px;
+    border: 1px solid #333;
+}
+textarea{
+    color: #262262;
+    height: 38px;
+    width: 100%;
+    background-color: #ecf0f1;
+}
+.locacion{
+    width: 100%;
+}
+.descaera{
+    height: 60px;
+    width: 100%;
+    display: block;
+    background-color: #ecf0f1;
+    color: #262262;
+    font-size: 1rem;
+    border: 1px solid #333;
+
+}
+.locacion{
+    width: 100%;
+}
+ion-tab-bar{
+    --ion-background-color: #262262;
+
+}
+ion-icon{
+    color: yellow;
+    
+    
+    
+}
+button{
+    display: inline-block;
+      border-radius: none;
+      width: 120px;
+      margin: auto;
+    
+}
+
+ion-label{
+    margin: 4%;
+    color: #262262;
+    font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
+    
+}
+ion-item{
+    --min-height: 0 !important;
+    --border-width: 0 0 0 0 !important;
+--inner-border-width: 0 !important;
+--show-full-highlight: 0 !important;
+--show-inset-highlight: 0 !important;
+margin-bottom: 5%;
+}
+.slide.round {
+    border-radius: 34px;
+}
+.slide.round:before {
+    border-radius: 50%;
+}
+
+ion-icon{
+    float: right;
+    color: #262262;
+    font-size: 20px;
+}
+
+.input{
+    color: #262262;
+    float: right;
+    height: 20px;
+    width: 20px;
+}
+
+.item-interactive-disabled.sc-ion-label-md-h:not(.item-multiple-inputs), .item-interactive-disabled:not(.item-multiple-inputs) .sc-ion-label-md-h {
+    cursor: default;
+    opacity: unset !important;
+    pointer-events: none;
+}
+ion-input.ng-untouched.ng-pristine.ng-valid.sc-ion-input-md-h.sc-ion-input-md-s.md.has-value.hydrated.ion-untouched.ion-pristine.ion-valid 
+.native-input[disabled].sc-ion-input-md {
+    opacity: unset;
+}

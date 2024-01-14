@@ -1,0 +1,106 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button ></ion-back-button>
+      
+    </ion-buttons>
+    <ion-title>Resumen</ion-title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-card-content class="contain">
+    <form  [formGroup]="FormSend" (ngSubmit)="irAPagar()">
+      <ion-label > <b>¿Dónde te encuentras ?*</b></ion-label>
+
+
+
+      
+      <ion-item >
+        
+        <select disabled="true" formControlName="field_prefijo_origen">
+          <option value="cra" selected >CRA</option>
+          <option value="cll">Cll</option>
+          <option value="diagonal">DIAGONAL</option>
+          <option value="transversal">TRANSVERSAL</option>
+        </select>
+          
+        <textarea   disabled="true" formControlName="field_direccion_entrega" class="corto" type="text" siz required></textarea >
+      </ion-item>
+      <ion-label > <b>Contacto</b> </ion-label>
+      <ion-item >
+        
+        <textarea   disabled="true" formControlName="field_contacto" type="text" required></textarea >
+      </ion-item>
+      <ion-label > <b>Locación</b> </ion-label>
+      <ion-item >
+        <select disabled="true"  formControlName="field_locacion_entrega" class="locacion">
+          <option>Barranquilla</option>
+          <option>Soledad</option>
+          <option>Puerto Colombia</option>
+          <option>Villa campestre</option>
+          <option>La playa</option>
+          <option>Galapa</option>
+          <option>Tubara</option>
+          <option>Baranoa</option>
+          <option>Sabanalarga</option>
+        </select>
+        
+        
+      </ion-item>
+      
+       
+     
+      <ion-label > <b>Tamaño </b> </ion-label>
+      <ion-item >
+        <select disabled="true" formControlName="field_locacion_destino" class="locacion">
+          <option value="Pequeño" >Pequeño</option>
+          <option value="Mediano">Mediano</option>
+          <option value="Grande">Grande</option>
+          
+          
+          
+        </select>
+        
+      </ion-item>
+      <ion-label > <b>Raza</b> </ion-label>
+      <ion-item >
+        <select disabled="true" formControlName="field_contacto_destino" class="locacion">
+          <option value="Pitbull">Pitbull</option>
+          <option value="Bulldog">Bulldog</option>
+          <option value="Boxer">Boxer</option>
+          <option value="chihuahua">chihuahua</option>
+
+          <option value="Beagle">Beagle</option>
+          <option alue="pastor alemán">pastor alemán</option>
+          
+          
+          
+          
+        </select>
+        
+      </ion-item>
+
+      <ion-label > <b>Observaciones</b></ion-label>
+      <ion-item >
+        
+        <textarea disabled="true" formControlName="field_observaciones" class="descaera" type="text" rows="10" cols="50" required></textarea>
+      </ion-item>
+  
+      
+      
+     
+  
+      <ion-row>
+        <ion-col>
+          <ion-button   replaceUrl="true"  type="submit" color="warning" >Ir a Pagar</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-card-content>
+  
+</ion-content>
+

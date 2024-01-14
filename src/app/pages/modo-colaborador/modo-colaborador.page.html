@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      
+      <ion-menu-button class="main-menu"></ion-menu-button> 
+    </ion-buttons>
+    <img class="imgtoolbar" src="../../assets/LOGOPEQUEÑO.png" width="40%" alt="">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+   
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>
+
+    </ion-refresher-content>
+  </ion-refresher>  
+    
+   
+   
+    
+   
+  
+ 
+
+<ion-list>
+  
+  <ion-button id="camino" replaceUrl="true" (click)="irAPedidosEnCurso()" type="submit" color="succes" expand="block">PEDIDO EN CURSO</ion-button>
+  <ion-button id="completado" replaceUrl="true" (click)="iraHistorialPedidos()" type="submit" color="succes" expand="block">HISTORIAL DE PEDIDOS</ion-button>
+
+</ion-list>
+<ion-item>
+  <ion-label class="labelColor">{{estadoAuxiliar}}</ion-label>
+  <ion-toggle [(ngModel)]="value" (ionChange)="checkcButon($event)"  id="check" slot="start" name="kiwi" color="success" ></ion-toggle>
+</ion-item>
+    
+</ion-content>
+   
+    
+   

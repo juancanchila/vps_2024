@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="index"></ion-back-button>
+      
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    </ion-buttons>
+    <ion-title>Compras</ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <swiper [config]="swiperConfig">
+
+    <ng-template swiperSlide *ngFor="let slide of slider" >
+      <div class="slider" >
+        
+         <ion-img class="img-slider" [src]="urlBase+slide.field_imagen_compras" alt=""></ion-img>
+          
+       
+  
+      </div>
+    </ng-template>
+  
+  </swiper>
+<ion-grid >
+  
+  <ion-row class="mensajeria" (click)="irPageFruver()">
+    
+    <img class="fondo" src="../../assets/botones/compra.png" width="25%" height="25%" alt="">
+    <p>Fruver</p>
+    
+   
+  
+  </ion-row>
+  <ion-row (click)="irPageTecnologia()">
+    <img class="fondo" src="../../assets/botones/tecnologi.png" width="25%" height="25%" alt="">
+    <p>Tecnología</p>
+    
+   
+   
+  </ion-row>
+   <ion-row (click)="irPageTextiles()">
+    <img class="fondo" src="../../assets/botones/textiles.png" width="25%" height="25%" alt="">
+    <p>Textiles</p>
+    
+    
+  </ion-row>
+  <ion-row (click)="irPageAlmacen()">
+    <img class="fondo" src="../../assets/botones/almacen.png" width="25%" height="25%" alt="">
+    <p>Almacen</p>
+   
+    
+  </ion-row>
+
+</ion-grid>
+</ion-content>

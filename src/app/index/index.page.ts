@@ -1,0 +1,417 @@
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import Swiper, { Autoplay, EffectFade, Pagination } from 'swiper';
+
+import { AuthService } from '../services/auth.service';
+import { CarritoService } from '../services/CarritoService';
+import {
+  ActionPerformed,
+  PushNotificationSchema,
+  PushNotifications,
+  Token,
+  PushNotification,
+  PushNotificationActionPerformed,
+} from '@capacitor/push-notifications';
+import { AlertController } from '@ionic/angular';
+
+
+@Component({
+  selector: 'app-index',
+  templateUrl: './index.page.html',
+  styleUrls: ['./index.page.scss'],
+})
+export class IndexPage implements OnInit {
+  //ifAuxiliar: any;
+  urlBase:any;
+  token:string;
+  expireIn:string;
+  name:string;
+  id:number;
+  character:any=[];
+  slider:any=[];
+  tienda:'';
+  ifAuxiliar: any;
+  AuxCarrosDisponibles: any;
+  AuxMotosDisponibles: any;
+  AuxDisponiblesMunicipios: any;
+
+  constructor(private auth: AuthService , private router:Router,private cs: CarritoService,private alertCtrl: AlertController) { 
+
+    this.urlBase=environment.urlBase;
+  }
+
+  public swiperConfig={
+    pagination:false,
+    autoplay:{delay: 10000},
+    EffectFade:true
+    
+  };
+ 
+  ngOnInit() {
+   
+    this.auth.isTokenError=null;
+    this.auth.getUser().subscribe(res =>{
+      console.log(res);
+      console.log(res[0]['field_pago_efectivo'],'variable boolean para pago efectivo');
+      localStorage.setItem('permitirPagoefectivo',res[0]['field_pago_efectivo']);
+     
+      //this.ifAuxiliar=localStorage.getItem('rol');
+    
+    });
+    
+    localStorage.setItem('tienda',this.tienda);
+    Swiper.use([Pagination,Autoplay,EffectFade]);
+    this.auth.seleccionarSlider().subscribe(res =>{
+      console.log(res, ' aqui slider');
+     // this.slider=res[0]['field_img_banner'];
+      this.slider=res;
+      
+     
+      
+      
+    });
+
+    
+    
+    this.auth.seleccionarFooter().subscribe(res =>{
+      console.log(res[0]['field_footer_img']);
+      this.character=res[0]['field_footer_img'];
+      
+     
+      
+      
+    });
+
+    this.auth.obtenerRoleUsuario().subscribe(res =>{
+      console.log(res);
+      localStorage.setItem('rol',res);
+      //this.ifAuxiliar=localStorage.getItem('rol');
+    
+    });
+    
+    this.auth.getAuxiliaresDisponiblesCarros().subscribe(res =>{
+      let vpda=[];
+      console.log(res, ' aqui carro');
+      this.AuxCarrosDisponibles=res;
+     
+     
+ 
+    });
+    this.auth.getAuxiliaresDisponiblesMotos().subscribe(res =>{
+      console.log(res, ' aqui motos');
+      this.AuxMotosDisponibles=res;
+    
+    });
+
+    this.auth.getAuxiliaresDisponiblesMunicipio().subscribe(res =>{
+      console.log(res, ' aqui aux municiipio');
+      this.AuxDisponiblesMunicipios=res;
+    
+    });
+    
+  }
+
+  reload(){
+    this.auth.getAuxiliaresDisponiblesCarros().subscribe(res =>{
+      let vpda=[];
+      console.log(res, ' aqui carro');
+      this.AuxCarrosDisponibles=res;
+     
+     
+ 
+    });
+    this.auth.getAuxiliaresDisponiblesMotos().subscribe(res =>{
+      console.log(res, ' aqui motos');
+      this.AuxMotosDisponibles=res;
+    
+    });
+
+    this.auth.getAuxiliaresDisponiblesMunicipio().subscribe(res =>{
+      console.log(res, ' aqui aux municiipio');
+      this.AuxDisponiblesMunicipios=res;
+    
+    });
+
+
+
+  }
+  temporizador(){
+    //setInterval(this.geo.watchPosition(), 2000);
+    //this.geo.watchPosition();
+    
+    //let timer = setInterval(() => this.watchPosition(), 30000);
+  }
+  
+  ngOnDestroy() {
+   
+    console.log("Index - OnDestroy")
+  }
+  irPageMensajeria(){
+    /** */
+  
+      this.router.navigate(['/mensajeria']);
+   
+    
+    
+  
+
+   
+    
+
+  }
+ 
+  async irPageLlaves(){
+   
+    this.auth.getAuxiliaresDisponiblesCarros().subscribe(async res =>{
+      let vpda=[];
+      console.log(res, ' aqui carro');
+      this.AuxCarrosDisponibles=res;
+     
+     
+      console.log(this.AuxCarrosDisponibles['length'],'lengt de vector carros');
+      if(this.AuxCarrosDisponibles.length==0){
+        const alert = await this.alertCtrl.create({
+          
+          header: 'Advertencia',
+         
+          message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
+          // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+          buttons: [
+         
+          {
+            text:'aceptar',
+            handler:()=>{
+          
+         this.reload();
+              
+            }
+          }
+        ]
+        });
+        
+        await alert.present();
+
+      
+
+      }else{
+  
+     
+       
+         
+          this.router.navigate(['/llaves']);
+        
+     
+
+      }
+    });
+   
+    
+  
+
+   
+   
+   
+
+  }
+  async irPageRestaurantes(){
+    //consuktar restaurantes
+    this.auth.seleccionarRestaurantes();
+
+
+
+   
+    this.auth.getAuxiliaresDisponiblesMotos().subscribe(async res =>{
+      console.log(res, ' aqui motos');
+      this.AuxMotosDisponibles=res;
+
+      console.log(this.AuxMotosDisponibles['length'],'lengt de vector motos');
+      if(this.AuxMotosDisponibles.length==0){
+
+        this.auth.getAuxiliaresDisponiblesCarros().subscribe(async res =>{
+          let vpda=[];
+          console.log(res, ' aqui carro');
+          this.AuxCarrosDisponibles=res;
+         
+          if(this.AuxCarrosDisponibles.length==0){
+            const alert = await this.alertCtrl.create({
+              
+              header: 'Advertencia',
+             
+              message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
+              // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+              buttons: [
+             
+              {
+                text:'aceptar',
+                handler:()=>{
+              
+              this.ngOnInit();
+                  
+                }
+              }
+            ]
+            });
+            
+            await alert.present();
+    
+          
+    
+          }else{
+            this.auth.seleccionarServicioCarro();
+          
+           
+        
+              this.router.navigate(['/restaurantes']);
+         
+    
+          }
+         
+     
+        });
+      
+  
+      }else{
+        this.auth.seleccionarServicioMoto();
+      
+        
+      
+          this.router.navigate(['/restaurantes']);
+           
+     
+      }
+    
+    });
+
+    
+    
+    
+  
+   
+  
+ 
+
+   
+    
+
+  }
+  irPageCompras(){
+    
+      this.router.navigate(['/compras']);
+   
+   
+
+  }
+
+  ionViewWillEnter(){
+    this.auth.obtenerRoleUsuario().subscribe(res =>{
+      console.log(res);
+     
+      this.ifAuxiliar=res;
+      console.log(this.ifAuxiliar);
+      if(this.ifAuxiliar=='Auxiliar'){
+       // this.geo.watchPosition();
+       // console.log('locacion',this.geo.watchCoordinate);
+        
+      }else{
+       
+       
+      }
+    
+    });
+   
+  
+   
+   this.reload();
+
+  }
+  async irPageEmprendedores(){
+
+
+
+    this.auth.getAuxiliaresDisponiblesMotos().subscribe(async res =>{
+      console.log(res, ' aqui motos');
+      this.AuxMotosDisponibles=res;
+
+
+      console.log(this.AuxMotosDisponibles['length'],'lengt de vector motos');
+      if(this.AuxMotosDisponibles.length==0){
+
+        
+    this.auth.getAuxiliaresDisponiblesCarros().subscribe(async res =>{
+      let vpda=[];
+      console.log(res, ' aqui carro');
+      this.AuxCarrosDisponibles=res;
+     
+      if(this.AuxCarrosDisponibles.length==0){
+        const alert = await this.alertCtrl.create({
+          
+          header: 'Advertencia',
+         
+          message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
+          // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+          buttons: [
+         
+          {
+            text:'aceptar',
+            handler:()=>{
+          
+          this.ngOnInit();
+              
+            }
+          }
+        ]
+        });
+        
+        await alert.present();
+
+      
+
+      }else{
+        this.auth.seleccionarServicioCarro();
+     
+       
+ 
+          this.router.navigate(['/emprendedores']);
+        
+
+
+      }
+ 
+    });
+       
+  
+      }else{
+        this.auth.seleccionarServicioMoto();
+   
+        
+  
+          this.router.navigate(['/emprendedores']);
+           
+          
+       
+      }
+    
+    });
+
+     
+     
+     
+    
+ 
+     
+   
+    
+
+  }
+  irPageTelotengo(){
+   
+      this.router.navigate(['/telotengo']);
+   
+    
+
+  }
+  
+
+}

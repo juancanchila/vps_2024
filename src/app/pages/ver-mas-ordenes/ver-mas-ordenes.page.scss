@@ -1,0 +1,156 @@
+
+ion-title{
+    
+    text-align: center;
+    text-transform: uppercase;
+}
+ion-toolbar{
+    color: white;
+    --ion-background-color: #262262;
+}
+ion-button{
+    display: inherit;
+    --ion-background-color: #fff0;
+    color: black;
+    margin-left: auto;
+    margin-right: auto;
+}
+ion-card{
+   
+    text-align: center;
+  
+    margin: 6%;
+}
+.ion-color-warning {
+    --ion-color-base: #FFF200  !important;
+}
+ion-grid{
+    padding: 0;
+    margin: 0;
+}
+.linea {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-top: 1px solid #262262;
+   
+    
+  }
+body{
+    --ion-color-primary-contrast: #ffffff;
+  }
+ion-tab-bar{
+    --ion-background-color: #262262;
+
+}
+ion-content{
+    --background:#ecf0f1 url("/assets/botones/FONDOTIPOFACTURA-97-85.png") 0 0/100% 100% repeat; 
+}
+ion-icon,ion-label{
+
+    color: #262262;
+}
+h1{
+    user-select: text;
+    font-size: 14px;
+    color: #262262;
+    font-family: 'Montserrat', sans-serif;
+    margin: auto;
+    
+}
+
+small{
+    font-size: 15px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+img{
+    max-height: 100px;
+}
+.rowBorder{
+    height: 34px;
+    padding: 0;
+    margin: 0;
+    text-align: center
+}
+.colBoton {
+    padding: 2px;
+    width: 90%;
+    height: 100%;
+    background-color: #262262;
+    /* text-align: center; */
+    margin: auto;
+    border-radius: 10px;
+}
+
+#form {
+    width: 250px;
+    margin: 0 auto;
+    height: 50px;
+  }
+  
+  #form p {
+    text-align: center;
+  }
+  
+  #form label {
+    font-size: 20px;
+  }
+  
+  input[type="radio"] {
+    display: none;
+  }
+  
+  label {
+    color: grey;
+    font-size: 45px;
+  }
+  
+  .clasificacion {
+    direction: rtl;
+    unicode-bidi: bidi-override;
+  }
+  h1.h1Observ {
+    padding-left: 10%;
+    padding-right: 10%;
+    /* padding: 57px; */
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+  ion-modal {
+    border: solid gray;
+    height: 48%;
+    width: 80%;
+    /* text-align: center; */
+    margin: auto;
+    border-radius: 28px;
+  }
+  textarea#comentario {
+    background-color: #fff;
+    height: 100px;
+    color: #262262;
+}
+ion-button.boton.md.button.button-block.button-solid.ion-activatable.ion-focusable.hydrated {
+  width: 38%;
+  margin-top: 20px;
+}
+.titleComent{
+  margin-top: 20px;
+}
+  form.ng-untouched.ng-pristine.ng-valid {
+    text-align: center;
+}
+  label:hover,
+  label:hover ~ label {
+    color: orange;
+  }
+  form, input, optgroup, select {
+    text-align: center;
+    /* margin: 0; */
+    /* font: inherit; */
+    /* color: inherit; */
+}
+  input[type="radio"]:checked ~ label {
+    color: orange;
+  }

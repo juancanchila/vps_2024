@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button ></ion-back-button>
+      
+    </ion-buttons>
+    <ion-title>Zona gamer</ion-title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-card-content class="contain">
+    <form  [formGroup]="FormSend" (ngSubmit)="sendForm()">
+      <ion-label > <b>Clase de juego*</b></ion-label>
+
+
+
+      
+      <ion-item >
+        
+        <select formControlName="field_prefijo_origen" class="locacion">
+          <option value="cra" selected >CRA</option>
+          <option value="cll">Cll</option>
+          <option value="diagonal">DIAGONAL</option>
+          <option value="transversal">TRANSVERSAL</option>
+        </select>
+          
+        <textarea formControlName="field_direccion_entrega" class="corto" type="text" siz required></textarea>
+      </ion-item>
+      <ion-label > <b>¿Que juego es ?*</b> </ion-label>
+      <ion-item >
+        
+        <textarea formControlName="field_contacto" type="text" required></textarea>
+      </ion-item>
+      <ion-label > <b>Consola*</b> </ion-label>
+      <ion-item >
+        <select formControlName="field_locacion_entrega" class="locacion">
+          <option>PlayStation</option>
+          <option>Xbox</option>
+          <option>item3</option>
+          <option>item4</option>
+         
+        </select>
+        
+        
+      </ion-item>
+      
+      
+      
+     
+      <ion-label > <b>Fecha* </b> </ion-label>
+      <ion-item >
+       
+        
+        <ion-input  formControlName="field_direccion_destino" type="date" id="start" name="trip-start"
+        value="2018-07-22"
+        min="2018-01-01" max="2030-12-31" required></ion-input>
+      </ion-item>
+     
+      
+      <ion-label > <b>Hora*</b> </ion-label>
+      <ion-item >
+        
+        <ion-input formControlName="field_contacto_destino"  type="time" name="hora" value="11:45:00" max="22:30:00" min="10:00:00" step="1" required></ion-input>
+      </ion-item>
+     
+   
+
+     
+  
+      <ion-row>
+        <ion-col>
+          <ion-button replaceUrl="true"  type="submit" color="warning" > <b>¡VaPa'Esa!</b> </ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-card-content>
+  
+</ion-content>

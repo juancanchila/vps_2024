@@ -1,0 +1,7 @@
+{
+  "name": "vapaesa",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

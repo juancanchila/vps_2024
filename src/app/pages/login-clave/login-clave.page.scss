@@ -1,0 +1,216 @@
+ion-toolbar{
+    color: white;
+    --ion-background-color: #262262;
+    text-align: center;
+}
+ion-title{
+    font-family: 'Montserrat', sans-serif;
+    margin-left: -13%;
+}
+ion-content{
+    --ion-background-color: #262262;
+   margin-top: 0%;
+}
+.small-text{
+    color: white;
+}
+small{
+    font-family: 'Montserrat', sans-serif;
+
+}
+p{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.contain {
+ 
+    text-align: center;
+  
+    position: center;
+    height: 300px;
+    width: 300px;
+    border-radius: 20px;
+    top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #262262;
+  }
+  ion-label{
+    display: block;
+text-align: left;
+   color: white;
+   margin-left: 10%;
+
+  }
+  ion-input{
+      color: black;
+      height: 25px;
+      background-color: white;
+  }
+  ion-item{
+      --min-height: 0 !important;
+      --border-width: 0 0 0 0 !important;
+--inner-border-width: 0 !important;
+--show-full-highlight: 0 !important;
+--show-inset-highlight: 0 !important;
+  }
+  a{
+      text-decoration: none;
+  }
+  ion-button{
+      text-transform: capitalize;
+    font-family: 'Poppins', sans-serif;
+      display: inline-block;
+      margin-top: 15%;
+     // border-radius: none;
+  }
+  ion-menu-button{
+    color: white;
+    
+}
+ion-icon{
+    width: 43px;
+    height: 35px;
+    border-radius: 50%;
+    color: white;
+    font-size: 2px;
+    margin-right: 6px;
+    margin-top: -5%;
+}
+.stilecon{
+    color: white;
+}
+ion-icon:hover{
+    width: 45px;
+    height: 45px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    //background: white;
+    color: #fff;
+    font-size: 2rem;
+}
+input{
+
+     width: 100px;
+     height: 100px;
+     -moz-border-radius: 50%;
+     -webkit-border-radius: 50%;
+     border-radius: 50%;
+     background: #5cb85c;
+   
+    margin-right: 20px;
+    margin-left: 15px;
+    margin-bottom: 9px;
+   border: none !important;
+    background-color: #262262;
+    color: white;
+}
+input:hover{
+  
+    width: 100px;
+    height: 100px;
+    -moz-border-radius: 50% !important;
+    -webkit-border-radius: 50% !important;
+    border-radius: 50%;
+   
+     background: #5cb85c;
+   margin-right: 20px;
+    margin-left: 15px;
+   // border: none !important;
+   background-color: rgb(255 255 255 / 31%);
+    color: black;
+}
+
+input[type="button"] {
+    color: white !important;
+
+}
+
+ion-input{
+    font-size: 20px;
+   
+    width: 20px;
+    height: 20px;
+
+    display: inline-block;
+    margin-left: 20px;
+
+   
+     
+     border: 3px solid #fff; 
+     background: #262262;
+     -webkit-transform: rotate(45deg);
+     -moz-transform: rotate(45deg);
+     -ms-transform: rotate(45deg);
+     -o-transform: rotate(45deg);
+     transform: rotate(45deg);
+}
+ion-input:hover{
+   
+   
+    width: 30px;
+    height: 30px;
+
+    display: inline-block;
+    margin-left: 20px;
+
+    margin-bottom: 40%;
+     
+     border: 3px solid #fff; 
+     background: #262262;
+     -webkit-transform: rotate(45deg);
+     -moz-transform: rotate(45deg);
+     -ms-transform: rotate(45deg);
+     -o-transform: rotate(45deg);
+     transform: rotate(45deg);
+}
+
+
+    
+_ngcontent-dja-c141{
+         height: 0 !important; 
+        color: white !important;
+         border-width: 0 !important; 
+        box-sizing: content-box !important;
+    }
+
+  .dinput{
+      border-bottom: 5px red;
+      margin-left: -5.5%;
+      }
+
+
+      .linea {
+        border-top: 1px solid white;
+        height: 2px;
+        max-width: 100%;
+        padding: 0;
+        margin: 20px auto 0 auto;
+        
+      }
+
+      p{
+          color: white;
+        margin-bottom: 40%;
+      }
+
+
+      .dark{
+        width: 15px;
+        height: 15px;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        background-color: #fff200;
+        --background: url(/src/assets/botones/aster.jpg) 0 0/100% 100% no-repeat;
+      }
+
+      .ion-color-warning {
+        --ion-color-base: #FFF200  !important;
+    }
+
+
+    tr {
+        vertical-align: middle;
+    }

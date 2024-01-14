@@ -1,0 +1,56 @@
+ion-content{
+    --background:#ecf0f1 url("/assets/botones/FONDOESPECIAL2.png.jpg") 0 0/100% 100% repeat; 
+}
+
+ion-title{
+    font-family: 'Montserrat', sans-serif;
+    margin-left: 40%;
+    text-transform: uppercase;
+}
+ion-toolbar{
+    color: white;
+    --ion-background-color: #262262;
+}
+ion-grid{
+    padding-top: 6%;
+}
+.contentImg{
+    padding-top: 20px;
+    text-align: center;
+}
+a{
+    text-decoration: none;
+}
+.rowEmpresa{
+    height: 100px;
+    padding-top: 15px;
+    margin: auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px -3px #333;
+    margin-bottom: 3%;
+
+}
+body{
+    --ion-color-primary-contrast: #ffffff;
+  }
+img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+h1{
+    font-family: 'Montserrat', sans-serif;
+    color: #262262;
+    font-size: 18px;
+   
+}
+div{
+    text-align: center;
+
+}
+small{
+    color: #262262;
+    font-family: 'Montserrat', sans-serif;
+    
+}

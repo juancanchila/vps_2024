@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="irALogin()" ></ion-back-button>
+      
+    </ion-buttons>
+    <ion-title>Pon tu clave</ion-title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
+    
+  </ion-toolbar>
+</ion-header>
+<ion-content class="background">
+  <ion-card-content class="contain">
+  
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="background" >
+   
+      
+    <script>
+      save_input = document.querySelector(".input");
+
+      save_input.onclick = function(){
+        this.innerHtml=" <div class='loader'></div>";
+      }
+    </script>
+    
+   
+<div class="dinput">
+      <ion-input class="input" disabled="true" [(ngModel)]="pass1" [ngModelOptions]="{standalone: true}" [ngClass]="fondo"  type="password" maxlength="1"></ion-input>
+      <ion-input    class="input" disabled="true" [(ngModel)]="pass2" [ngModelOptions]="{standalone: true}" [ngClass]="fondo1"  type="password" maxlength="1"></ion-input>
+      <ion-input   class="input" disabled="true" [(ngModel)]="pass3" [ngModelOptions]="{standalone: true}" [ngClass]="fondo2" type="password" maxlength="1"></ion-input>
+      <ion-input    class="input" disabled="true" [(ngModel)]="pass4" [ngModelOptions]="{standalone: true}" [ngClass]="fondo3" type="password" maxlength="1"></ion-input>
+      <ion-input  class="input" disabled="true" [(ngModel)]="pass5" [ngModelOptions]="{standalone: true}" [ngClass]="fondo4" type="password" maxlength="1"></ion-input>
+    </div>
+      <div class="linea"></div>
+      <div  >
+      <p >No dudamos que seas tu! , pero igual ingresa tu clave</p>
+    </div>
+  
+  
+    <ion-row>
+      
+      <ion-col>
+       
+        <tr >
+          <td> <input value=" 1 " (click)="addNumber(1)" (click)="fondo" type="button"  style='width:50px; height:50px;font-size: 200%;color:blue'></td>
+          <td> <input value=" 2 " (click)="addNumber(2)" (click)="fondo" type="button" style='width:50px; height:50px;font-size: 200%;color:blue'></td>
+          <td> <input value=" 3 " (click)="addNumber(3)" (click)="fondo" type="button" style='width:50px; height:50px;font-size: 200%;color:blue'></td>
+          </tr>
+        
+        <tr>
+        <td> <input value=" 4 " (click)="addNumber(4)" (click)="fondo" type="button" style='width:50px; height:50px;font-size: 200%;color:blue'></td>
+        <td> <input value=" 5 " (click)="addNumber(5)" (click)="fondo" type="button" style='width:50px; height:50px;font-size: 200%;color:blue'></td>
+        <td> <input value=" 6 " (click)="addNumber(6)" (click)="fondo" type="button" style='width:50px; height:50px;font-size: 200%;color:blue'></td>
+        </tr>
+        <tr>
+          <td> <input value=" 7 " (click)="addNumber(7)" (click)="fondo" type="button" style='width:50px; height:50px;font-size: 200%;color:blue'></td>
+          <td> <input value=" 8 " (click)="addNumber(8)" (click)="fondo" type="button" style='width:50px; height:50px;font-size: 200%;color:blue'></td>
+          <td> <input value=" 9 " (click)="addNumber(9)" (click)="fondo" type="button" style='width:50px; height:50px;font-size: 200%;color:blue'></td>
+          </tr>
+          <tr> 
+
+
+            <td><input value=" 0 " (click)="addNumber(0)" (click)="fondo" type="button" style='width:50px; height:50px;font-size: 200%;color:blue'></td>
+       
+      
+            <td></td>
+            
+            <td> <div  class="stilecon"><ion-icon  name="backspace-outline" (click)="deleteNUm()" >  </ion-icon></div>  </td>
+           
+
+          </tr>
+        
+      
+        </ion-col>
+    </ion-row>
+    <ion-row>
+       <ion-col>
+        
+        <ion-button  type="submit" color="warning" expand="block"> <b>Ingresar</b> </ion-button>
+        <br>
+        <a [routerLink]="['/forgot-password']" class="small-text"> <small>¿Has olvidado tu contraseña?</small> </a>
+      
+      
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-card-content>
+</ion-content>
+
+

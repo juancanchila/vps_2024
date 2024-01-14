@@ -1,0 +1,115 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button ></ion-back-button>
+      
+    </ion-buttons>
+    <ion-title>Datos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-card-content class="contain">
+    <form  [formGroup]="FormSend" (ngSubmit)="sendForm()">
+      <ion-label > <b>Origen*</b></ion-label>
+
+
+
+      
+      <ion-item >
+        
+        <select formControlName="field_prefijo_origen">
+          <option>Cra</option>
+          <option>Cll</option>
+        </select>
+          
+        <ion-input formControlName="field_direccion_entrega" class="corto" type="text" siz required></ion-input>
+      </ion-item>
+      <ion-label > <b>Contacto Origen</b> </ion-label>
+      <ion-item >
+        
+        <ion-input formControlName="field_contacto" type="text" required></ion-input>
+      </ion-item>
+      <ion-label > <b>Locación Origen</b> </ion-label>
+      <ion-item >
+        <select formControlName="field_locacion_entrega" class="locacion">
+          <option>Barranquilla</option>
+          <option>Cartagena</option>
+        </select>
+        
+        
+      </ion-item>
+      
+      
+      
+      <ion-label > <b>Destino*</b> </ion-label>
+      <ion-label > <b>Dirección </b> </ion-label>
+      <ion-item >
+        <select formControlName="field_prefijo_destino">
+          <option value="cra" selected >CRA</option>
+          <option value="cll">Cll</option>
+        </select>
+        
+        <ion-input formControlName="field_direccion_destino" type="text" required></ion-input>
+      </ion-item>
+      <ion-label > <b>Locación Destino</b> </ion-label>
+      <ion-item >
+        <select formControlName="field_locacion_destino" class="locacion">
+          <option>Barranquilla</option>
+          <option>Cartagena</option>
+        </select>
+        
+      </ion-item>
+  
+      
+      <ion-label > <b>Contacto</b> </ion-label>
+      <ion-item >
+        
+        <ion-input formControlName="field_contacto_destino" type="text" required></ion-input>
+      </ion-item>
+     
+      <ion-label>ida y vuelta</ion-label>
+     <label class="switchBtn">
+      <input formControlName="field_ida_y_vuelta" value="true" type="checkbox">
+      </label>
+    <script>
+      if (document.getElementById('field_ida_y_vuelta').checked)
+{
+alert('checkbox1 esta seleccionado');
+}
+var checkbox = document.getElementById('field_ida_y_vuelta');
+checkbox.addEventListener("change", validaCheckbox, false);
+function validaCheckbox()
+{
+  var checked = checkbox.checked;
+  if(checked){
+    alert('checkbox1 esta seleccionado');
+  }
+}
+if( $('#checkbox1').prop('checked') ) {
+    alert('checkbox1 esta Seleccionado');
+}
+    </script>
+      <br>
+      <ion-item >
+        <h2 class="txt">Valor declarado</h2>
+        <ion-input  formControlName="field_valor_declarado" class="corto" type="number" required></ion-input>
+      </ion-item>
+      <ion-label > <b> Descripción</b></ion-label>
+      <ion-item >
+        
+        <ion-input formControlName="field_observaciones" class="descaera" type="text" required></ion-input>
+      </ion-item>
+
+     
+  
+      <ion-row>
+        <ion-col>
+          <ion-button replaceUrl="true"  type="submit" color="warning" expand="block">¡Va Pa' Esa!</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-card-content>
+  
+</ion-content>

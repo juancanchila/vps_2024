@@ -1,0 +1,48 @@
+ion-title{
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+}
+ion-toolbar{
+    color: white;
+    --ion-background-color: #262262;
+}
+.ion-color-warning {
+    --ion-color-base: #FFF200  !important;
+}
+ion-button{
+    font-family: 'Poppins', sans-serif;
+ 
+    
+    color: #262262;
+    margin-left: auto;
+    margin-right: auto;
+}
+body{
+    --ion-color-primary-contrast: #ffffff;
+  }
+ion-tab-bar{
+    --ion-background-color: #262262;
+
+}
+ion-icon,ion-label{
+
+    color: yellow;
+}
+h1{
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    margin: auto;
+    font-size: 20px;
+    
+}
+ion-row{
+    height: auto;
+    width: auto;
+    
+}
+.spacing{
+    margin-bottom: 40%;
+
+}
+

@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs"></ion-back-button>
+      <img class="imgtoolbar" src="../../assets/botones/LOGOUPERIOR-92.png"  alt="">
+    </ion-buttons>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+<ion-grid >
+  <ion-row class="mensajeria">
+
+
+
+
+ <ion-card  *ngFor=" let characte of character" >
+   <br>
+   <div class="box-img-perfil">
+
+    <img rounded-corners [src]="urlBase+characte.user_picture" >
+    <h1 class="txtperfil" color="warning"> <b >Mi perfil</b> </h1>
+   </div>
+
+  <div class="box2">
+  <h1><b>Nombre:</b></h1>
+  <h1 class=".boxh1">{{characte.name}} </h1>
+   <h1><b>Rol:  </b></h1>
+  <h1 class=".boxh1">{{characte.Role}}</h1>
+   <h1><b>Teléfono: </b>  </h1>
+   <h1 class=".boxh1"> {{characte.field_telefono_auxuliar}}</h1>
+   <h1><b>Cuenta Nequi: </b> </h1>
+   <h1 class=".boxh1">{{characte.field_cuenta_nequi}}</h1>
+   <h1><b>Cuenta Daviplata: </b> </h1>
+   <h1 class=".boxh1">{{characte.field_cuenta_daviplata}}</h1>
+  </div>
+
+ </ion-card>
+
+
+
+
+
+  </ion-row>
+
+
+
+  <ion-row class="mensajeria">
+
+
+
+    <ion-button
+    replaceUrl="true"
+    type="submit"
+    color="danger_red"
+    expand="block"
+    (click)="confirmDeletion()"
+  >
+
+      <small><b>Eliminar Cuenta</b></small>  </ion-button>
+
+
+
+  </ion-row>
+
+
+
+</ion-grid>
+
+</ion-content>

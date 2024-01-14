@@ -1,0 +1,53 @@
+ion-title{
+    margin-left: -19%;
+    font-family: 'Montserrat', sans-serif;
+   
+    text-transform: uppercase;
+}
+ion-toolbar{
+    text-align: center;
+    color: white;
+    --ion-background-color: #262262;
+}
+ion-button{
+    display: inline-block;
+    --ion-background-color: #fff0;
+    color: black;
+    margin-left: auto;
+    margin-right: auto;
+}
+ion-tab-bar{
+    --ion-background-color: #262262;
+
+}
+ion-icon,ion-label{
+
+    color: yellow;
+}
+body{
+    --ion-color-primary-contrast: #ffffff;
+  }
+ 
+ion-row{
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px -3px #333;
+    margin-bottom: 3%;
+    text-align: center;
+    }
+
+    p {
+        font-family: 'Montserrat', sans-serif;
+        color: #262262;
+        z-index: 5;
+        margin-left: 17%;
+        margin-top: 10%;
+        font-size: 130%;
+    }
+ion-grid{
+    --background-color: white;
+    --background: url(/src/assets/botones/fondoblanco1.png) 0 0/100% 100% repeat;
+}
+.slider {
+    padding-top: 20px;
+    text-align: center;
+}

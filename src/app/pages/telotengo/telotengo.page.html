@@ -1,0 +1,68 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Te lo tengo</ion-title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="contentImg" >
+        
+    <ion-img class="img-slider" [src]="urlBase+slider" alt=""></ion-img>
+     
+  
+
+ </div>
+
+
+<ion-grid >
+  
+  <ion-row class="mensajeria" (click)="irPageCarrotaller()">
+    
+    <img class="fondo" src="../../assets/botones/carrotaller.png" width="25%" height="25%" alt="">
+   <p>Carro taller</p>
+    
+   
+  
+  </ion-row>
+  <ion-row (click)="irPageTrasteo()">
+    <img class="fondo" src="../../assets/botones/viaje.png" width="25%" height="25%" alt="">
+    <p>Trasteo</p>
+    
+   
+   
+  </ion-row>
+   <ion-row class="fondogris" >
+    
+    <img class="fondo" src="../../assets/botones/armaequipo.png" width="25%" height="25%" alt="">
+    <p>Arma tu equipo</p> 
+   
+    <p class="subtitle">Proximamente</p> 
+    
+    
+  </ion-row>
+   <ion-row class="fondogris" >
+    <img class="fondo" src="../../assets/botones/gamer.png" width="25%" height="25%" alt="">
+   <p>Zona gamer</p>
+  
+   <p class="subtitle">Proximamente</p> 
+    
+    
+   </ion-row>
+   <ion-row class="fondogris" >
+    <img class="fondo" src="../../assets/botones/iconomascota.png" width="25%" height="25%" alt="">
+   <p>Recoger mascotas</p>
+   
+   <p class="subtitle">Proximamente</p> 
+    
+    
+   </ion-row>
+  
+</ion-grid>
+
+</ion-content>
+

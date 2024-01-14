@@ -1,0 +1,100 @@
+ion-title{
+    font-size: 17px;
+    text-align: center;
+    text-transform: uppercase;
+}
+ion-toolbar{
+    color: white;
+    --ion-background-color: #262262;
+}
+ion-button{
+    display: inline-block;
+    --ion-background-color: #fff0;
+    color: black;
+    margin-left: auto;
+    margin-right: auto;
+}
+ion-card{
+   
+    text-align: center;
+  
+    margin: 6%;
+}
+h1.h1Observ {
+    padding-left: 10%;
+    padding-right: 10%;
+    /* padding: 57px; */
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+p.clasificacion {
+    padding: 0;
+    margin: 0;
+}
+label{
+    font-size: 30px;
+}
+.clasificacion {
+    direction: rtl;
+    unicode-bidi: bidi-override;
+  }
+  .start5{ color:orange;}
+  .startGray{color: gray;}
+  input[type = "radio"]{ display:none;}
+ion-grid{
+    padding: 0;
+    margin: 0;
+}
+.linea {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-top: 1px solid #262262;
+   
+    
+  }
+body{
+    --ion-color-primary-contrast: #ffffff;
+  }
+ion-tab-bar{
+    --ion-background-color: #262262;
+
+}
+ion-content{
+    --background:#ecf0f1 url("/assets/botones/FONDOTIPOFACTURA-97-85.png") 0 0/100% 100% repeat; 
+}
+ion-icon,ion-label{
+
+    color: yellow;
+}
+h1{
+    font-size: 14px;
+    color: #262262;
+    font-family: 'Montserrat', sans-serif;
+    margin: auto;
+    
+}
+img{
+    max-height: 100px;
+}
+small{
+    font-size: 15px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    
+}
+.rowBorder{
+    height: 34px;
+    padding: 0;
+    margin: 0;
+    text-align: center
+}
+
+.colBoton {
+    padding: 2px;
+    width: 90%;
+    height: 100%;
+    background-color: #262262;
+    /* text-align: center; */
+    margin: auto;
+    border-radius: 10px;
+}

@@ -1,0 +1,172 @@
+
+ion-title{
+    text-transform: uppercase;
+    margin-right: 18%;
+    font-family: 'Montserrat', sans-serif;
+}
+.slider {
+    padding-top: 20px;
+}
+ion-content{
+    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat; 
+}
+ion-toolbar{
+    color: white;
+    text-align: center;
+    --ion-background-color: #262262;
+}
+.ion-color-warning {
+    --ion-color-base: #FFF200  !important;
+}
+b{
+    
+    font-family: 'Montserrat', sans-serif;
+}
+ion-card{
+    border-radius: 5%;
+    padding: 20px 0 20px 0;
+}
+
+.precio{
+    
+    float: right;
+}
+
+.locacion{
+    color: #262262;
+    background-color: #ecf0f1;
+    border: unset;
+    width:100%
+}
+ion-card-content{
+    margin-top: 0;
+    
+    /* border: 1px solid gray; */
+}
+ion-row{
+    border-bottom: 2px solid;
+}
+.form-check {
+  
+    margin-left: 70%;
+}
+.rowBorder{
+    border: none !important;
+}
+small{
+    font-size: 15px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+.corto{
+    //margin-left: 29%;
+    height: 38px;
+   // position: absolute;
+   width: 100%;
+    display: block;
+    background-color: #ecf0f1;
+    color: #262262;
+    font-size:18px;
+    border: 1px solid #333;
+}
+ion-label{
+    margin: 4%;
+   color: #262262;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    
+}
+.item-interactive-disabled.sc-ion-label-md-h:not(.item-multiple-inputs), .item-interactive-disabled:not(.item-multiple-inputs) .sc-ion-label-md-h {
+    cursor: default;
+    opacity: unset !important;
+    pointer-events: none;
+}
+ion-input.ng-untouched.ng-pristine.ng-valid.sc-ion-input-md-h.sc-ion-input-md-s.md.has-value.hydrated.ion-untouched.ion-pristine.ion-valid 
+.native-input[disabled].sc-ion-input-md {
+    opacity: unset;
+}
+.descaera{
+    color: #262262;
+    width: 100%;
+    background-color: #ecf0f1;
+    height: 100px;
+}
+
+select{
+    color: #262262;
+    font-family: 'Montserrat', sans-serif;
+    width: 100px;
+    height: 38px;
+    background-color: #ecf0f1;
+}
+ion-item{
+    --ion-background-color: transparent !important;
+
+}
+ion-button{
+    color: #262262;
+    font-family: 'Poppins', sans-serif;
+
+}
+ion-col{
+    text-align: center;
+}
+
+
+td{
+    color: #262262;
+    font-family: 'Montserrat', sans-serif;
+}
+.title{
+    text-align: center;
+    background-color: #262262;
+
+}
+h2{
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+.button1{
+    color: #262262 !important;
+    font-family: 'Poppins', sans-serif !important;
+
+}
+.bearer{
+    margin-left: 4%;
+}
+b{
+    line-height: 2.5;
+    color: #262262;
+    font-family: 'Montserrat', sans-serif;
+}
+.botonSig{
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+td, th {
+    padding-right: 13px;
+    border: none;
+}
+.sub{
+    color: #262262;
+    margin-left: 44% !important;
+    text-align: justify ;
+    margin-top: -10% !important;
+    margin-right: 4%;
+    border: 1px solid;
+    text-align: right;
+    height: 29px;
+    padding: 6px;
+
+
+}
+strong{
+    margin-left: -11%;
+}
+.div1{
+    margin-top: 20px;
+}

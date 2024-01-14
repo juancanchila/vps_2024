@@ -1,0 +1,54 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>mensajeria</ion-title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-grid >
+  
+  
+  <ion-row class="mensajeria" (click)="irPageSencilla()">
+    
+    <img class="fondo" src="../../assets/botones/mess1.png" width="25%" height="25%" alt="">
+   <p>Sencilla</p>
+   <ion-icon class="iconS" (click)="irAlertaSencilla()" name="information-circle-outline"></ion-icon>
+   
+  
+  </ion-row>
+  <ion-row (click)="irPageRutas()">
+    <img class="fondo" src="../../assets/botones/mess2.png" width="25%" height="25%" alt="">
+    <p>Rutas</p>
+    <ion-icon class="iconR" (click)="irAlertaRutas()"  name="information-circle-outline"></ion-icon>
+   
+   
+  </ion-row>
+   <ion-row (click)="irPageEspecial()">
+    
+    <img class="fondo" src="../../assets/botones/mess3.png" width="25%" height="25%" alt="">
+    <p>Especial</p>
+    <ion-icon class="iconE" (click)="irAlertaEspecial()" name="information-circle-outline"></ion-icon>
+    
+  </ion-row>
+   <ion-row (click)="irPageMedicamentos()">
+    <img class="fondo" src="../../assets/botones/mess4.png" width="25%" height="25%" alt="">
+   <p>Medicamentos</p>
+   <ion-icon class="iconM" (click)="irAlertaMedicamentos()" name="information-circle-outline"></ion-icon>
+    
+   </ion-row>
+  <ion-row (click)="irPagePagos()">
+    <img class="fondo" src="../../assets/botones/mess5.png" width="25%" height="25%" alt="">
+   <p>Pagos</p>
+   
+   <ion-icon class="iconP" (click)="irAlertaPagos()" name="information-circle-outline"></ion-icon>
+
+  </ion-row>
+</ion-grid>
+
+
+

@@ -1,0 +1,124 @@
+ion-title{
+    text-align: center;
+    text-transform: uppercase;
+}
+ion-toolbar{
+    color: white;
+    --ion-background-color: #262262;
+}
+.imgtoolbar{
+
+    display: block;
+    margin-left:20% ;
+   
+    align-items: center;
+        width: 50%;
+        height: 50%;
+        text-align: center;
+    }
+    .botonGp{
+      background: #d7d8da;
+      color: white;
+      border-radius: 10px;
+      button{
+        background: #d7d8da;
+        color: white;
+        border-radius: 10px;
+    }
+    }
+ion-button{
+   
+    display: block;
+    background-color: #fff;
+    color: black;
+    
+    //margin: auto;
+}
+.labelColor{
+    color: white;
+}
+.toggleUno {
+    height: 20px;
+    width: 31%;
+    --background: rgb(0, 255, 21);
+    --background-checked: rgb(0, 255, 21);
+    --handle-width: 25px;
+    --handle-height: 30px;
+    --handle-background: rgb(0, 255, 21);
+    --handle-background-checked: #000;
+  }
+  #noDisponible{
+    height: 20px;
+    width: 31%;
+    --background: #7c1313;
+    --background-checked: red;
+    --handle-width: 25px;
+    --handle-height: 30px;
+    --handle-background: red;
+    --handle-background-checked: #000;
+  }
+
+  .togleDos{
+
+        height: 20px;
+    width: 31%;
+    --background: #7c1313;
+    --background-checked: red;
+    --handle-width: 25px;
+    --handle-height: 30px;
+    --handle-background: red;
+    --handle-background-checked: #000;
+
+  }
+/*
+  ion-toggle::before {
+    position: absolute;
+  
+    top: 16px;
+    left: 10px;
+  
+    content: "ON";
+  
+    color: white;
+    font-size: 8px;
+  
+    z-index: 1;
+  }
+  ion-toggle::after {
+    position: absolute;
+  
+    top: 16px;
+    left: 10px;
+  
+    content: "OFF";
+  
+    color: white;
+    font-size: 8px;
+  
+    z-index: 1;
+  }*/
+
+body{
+    --ion-color-primarycontrast: #ffffff;
+  }
+ion-tab-bar{
+    --ion-background-color: #262262;
+
+}
+ion-icon,ion-label{
+
+    color: yellow;
+}
+h1{
+    margin: auto;
+    
+}
+ion-row{
+    --ion-color-primarycontrast: #ffffff;
+    height: auto;
+    width: auto;
+}
+
+ion-content{
+    --ion-background-color: #262262;
+}

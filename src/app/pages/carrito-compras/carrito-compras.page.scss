@@ -1,0 +1,103 @@
+ion-title{
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    
+}
+ion-button{
+    font-family: 'Poppins', sans-serif;
+}
+ion-toolbar{
+    color: white;
+    --ion-background-color: #262262;
+}
+.ion-color-warning {
+    --ion-color-base: #FFF200  !important;
+}
+td{
+    color: #262262;
+    font-family: 'Montserrat', sans-serif;
+}
+.button1{
+    color: #262262 !important;
+    font-family: 'Poppins', sans-serif !important;
+
+}
+b{
+    color: #262262;
+    font-family: 'Montserrat', sans-serif;
+}
+small{
+    color: #262262;
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+body{
+    --ion-color-primary-contrast: #ffffff;
+  }
+ 
+ion-tab-bar{
+    --ion-background-color: #262262;
+
+}
+ion-icon,ion-label{
+
+    color: yellow;
+}
+h1{
+    margin: auto;
+    
+}
+ion-row{
+    height: auto;
+    width: auto;
+}
+td, th {
+    padding-right: 13px;
+    border: none;
+}
+ion-icon{
+    font-size: 30px;
+    color: red;
+}
+
+ion-item{
+    padding: 10px;
+   border: 1px solid;
+}
+div{
+    margin-left: 38%;;
+    text-align: justify;
+    
+    margin-top: 3%
+    
+}
+
+.div1{
+    margin-bottom: 30%;
+}
+ion-row{
+    
+   
+    text-align: center;
+}
+strong{
+    margin-left: -11%;
+}
+
+.sub{
+    color: #262262;
+    margin-left: 44% !important;
+    text-align: justify ;
+    margin-top: -10% !important;
+    margin-right: 4%;
+    border: 1px solid;
+    text-align: right;
+    height: 29px;
+    padding: 6px;
+
+
+}
+ion-content{
+    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat; 
+}
