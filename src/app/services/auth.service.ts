@@ -1388,7 +1388,7 @@ sendFormularioRuta(user: FormularioI){
 
        const headers = new HttpHeaders({'Content-Type': 'application/json','Authorization':'Basic '+this.b64,
        'X-CSRF-Token': this.tokencsrf});
-       let url = 'http://164.92.106.39/node/'+localStorage.getItem('nodeDisponibilidad')+'?_format=json';
+       let url = 'http://164.92.106.39/node/'+localStorage.getItem('ordenPosicion')+'?_format=json';
        console.log(url,'patch act poscion')
        this.http.patch(url,converSencilla,{headers:headers}).subscribe(async data2=>{
         const alert = await this.alertControl.create({
@@ -1484,7 +1484,7 @@ sendFormularioRuta(user: FormularioI){
 
        const headers = new HttpHeaders({'Content-Type': 'application/json','Authorization':'Basic '+this.b64,
        'X-CSRF-Token': this.tokencsrf});
-       let url = 'http://164.92.106.39/node/'+localStorage.getItem('nodeDisponibilidad')+'?_format=json';
+       let url = 'http://164.92.106.39/node/'+localStorage.getItem('ordenPosicion')+'?_format=json';
        console.log(url,'patch act poscion')
        this.http.patch(url,converSencilla,{headers:headers}).subscribe(async data2=>{
         const alert = await this.alertControl.create({

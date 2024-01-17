@@ -220,77 +220,7 @@ export class IndexPage implements OnInit {
     this.auth.seleccionarRestaurantes();
 
 
-
-   
-    this.auth.getAuxiliaresDisponiblesMotos().subscribe(async res =>{
-      console.log(res, ' aqui motos');
-      this.AuxMotosDisponibles=res;
-
-      console.log(this.AuxMotosDisponibles['length'],'lengt de vector motos');
-      if(this.AuxMotosDisponibles.length==0){
-
-        this.auth.getAuxiliaresDisponiblesCarros().subscribe(async res =>{
-          let vpda=[];
-          console.log(res, ' aqui carro');
-          this.AuxCarrosDisponibles=res;
-         
-          if(this.AuxCarrosDisponibles.length==0){
-            const alert = await this.alertCtrl.create({
-              
-              header: 'Advertencia',
-             
-              message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-              // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-              buttons: [
-             
-              {
-                text:'aceptar',
-                handler:()=>{
-              
-              this.ngOnInit();
-                  
-                }
-              }
-            ]
-            });
-            
-            await alert.present();
-    
-          
-    
-          }else{
-            this.auth.seleccionarServicioCarro();
-          
-           
-        
-              this.router.navigate(['/restaurantes']);
-         
-    
-          }
-         
-     
-        });
-      
-  
-      }else{
-        this.auth.seleccionarServicioMoto();
-      
-        
-      
-          this.router.navigate(['/restaurantes']);
-           
-     
-      }
-    
-    });
-
-    
-    
-    
-  
-   
-  
- 
+    this.router.navigate(['/restaurantes']);
 
    
     
@@ -329,76 +259,7 @@ export class IndexPage implements OnInit {
   async irPageEmprendedores(){
 
 
-
-    this.auth.getAuxiliaresDisponiblesMotos().subscribe(async res =>{
-      console.log(res, ' aqui motos');
-      this.AuxMotosDisponibles=res;
-
-
-      console.log(this.AuxMotosDisponibles['length'],'lengt de vector motos');
-      if(this.AuxMotosDisponibles.length==0){
-
-        
-    this.auth.getAuxiliaresDisponiblesCarros().subscribe(async res =>{
-      let vpda=[];
-      console.log(res, ' aqui carro');
-      this.AuxCarrosDisponibles=res;
-     
-      if(this.AuxCarrosDisponibles.length==0){
-        const alert = await this.alertCtrl.create({
-          
-          header: 'Advertencia',
-         
-          message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-          // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-          buttons: [
-         
-          {
-            text:'aceptar',
-            handler:()=>{
-          
-          this.ngOnInit();
-              
-            }
-          }
-        ]
-        });
-        
-        await alert.present();
-
-      
-
-      }else{
-        this.auth.seleccionarServicioCarro();
-     
-       
- 
-          this.router.navigate(['/emprendedores']);
-        
-
-
-      }
- 
-    });
-       
-  
-      }else{
-        this.auth.seleccionarServicioMoto();
-   
-        
-  
-          this.router.navigate(['/emprendedores']);
-           
-          
-       
-      }
-    
-    });
-
-     
-     
-     
-    
+    this.router.navigate(['/emprendedores']);
  
      
    

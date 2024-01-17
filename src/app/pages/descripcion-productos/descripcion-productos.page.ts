@@ -37,6 +37,9 @@ validador:any;
   public cantidades = 0;
   public precios :any;
   observacion: any;
+  AuxCarrosDisponibles: any;
+  AuxMotosDisponibles: any;
+  AuxDisponiblesMunicipios: any;
   constructor(
     private router: Router,
     private auth: AuthService,
@@ -69,6 +72,26 @@ validador:any;
 
   ngOnInit() {
 
+    this.auth.getAuxiliaresDisponiblesCarros().subscribe(res =>{
+      let vpda=[];
+      console.log(res, ' aqui carro');
+      this.AuxCarrosDisponibles=res;
+     
+     
+ 
+    });
+    this.auth.getAuxiliaresDisponiblesMotos().subscribe(res =>{
+      console.log(res, ' aqui motos');
+      this.AuxMotosDisponibles=res;
+    
+    });
+
+    this.auth.getAuxiliaresDisponiblesMunicipio().subscribe(res =>{
+      console.log(res, ' aqui aux municiipio');
+      this.AuxDisponiblesMunicipios=res;
+    
+    });
+    
 
 
 
@@ -148,8 +171,56 @@ validador:any;
    }
   
  
-   irPageCombo1(){
+   irAgregarCarrito(){
      
+  
+
+/// codigo validar disponibilidad
+
+
+this.auth.getAuxiliaresDisponiblesMotos().subscribe(async res =>{
+  console.log(res, ' aqui motos');
+  this.AuxMotosDisponibles=res;
+
+  console.log(this.AuxMotosDisponibles['length'],'lengt de vector motos');
+  if(this.AuxMotosDisponibles.length==0){
+
+    this.auth.getAuxiliaresDisponiblesCarros().subscribe(async res =>{
+      let vpda=[];
+      console.log(res, ' aqui carro');
+      this.AuxCarrosDisponibles=res;
+     
+      if(this.AuxCarrosDisponibles.length==0){
+        const alert = await this.alertCtrl.create({
+          
+          header: 'Advertencia',
+         
+          message: 'En este momento no tenemos auxiliar disponible, no podemos agregar productos',
+          // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+          buttons: [
+         
+          {
+            text:'aceptar',
+            handler:()=>{
+          
+          this.ngOnInit();
+              
+            }
+          }
+        ]
+        });
+        
+        await alert.present();
+
+      
+
+      }else{
+        this.auth.seleccionarServicioCarro();
+      
+       
+    
+          
+    // codigo agregar carrito
     console.log(this.FormSend.value);
     this.product.observaciones =this.FormSend.value;
    
@@ -254,6 +325,125 @@ console.log(this.cs,'aqui res');
 
 }
 
+      }
+     
+ 
+    });
+  
+
+  }else{
+    this.auth.seleccionarServicioMoto();
+  
+    // codigo agregar carrito
+    console.log(this.FormSend.value);
+    this.product.observaciones =this.FormSend.value;
+   
+//1. tener una variable local inicializada en 0 q es la tienda actual
+// es hacer un if, si la tienda esta en 0, es la primera vez que entra entonces le asigno
+// la tieenda del producto seeccionado a la variable local
+// else -> comparar la tienda del producto seleccionado con la tienda actualmete definida
+// si son iguales lo deja agregar si no , mostrar una alerta con el mesaje , regresar a la tienda del primer producto
+
+console.log(this.product.stores_target_id,'target id');
+//crear una variable con la url de la eid
+if(localStorage.getItem('tienda')=='undefined'){
+  /*
+  this.cantidades +=  this.cantidadDestinos;
+  this.originaPrice = this.originaPrice *this.cantidadDestinos;*/
+  this.auth.sendFormObservacion(this.FormSend.value);
+  
+  this.tienda =this.product.stores_target_id;
+// acctuaizar lavariable tienda en el local storage
+localStorage.setItem('tienda',this.tienda);
+//this.product.cantidad = this.cantidades;
+//this.product.field_price_simple =this.originaPrice;
+this.product.cantidad = this.cantidadDestinos;
+console.log(this.product.cantidad,'aqui cantidad')
+this.cs.set_cart(this.product).then((res)=>{
+  console.log(res);
+  this.product.observaciones =this.FormSend.value;
+  //this.router.navigate(['/carrito-compras']);
+});
+this.presentAlert();
+
+//this.validador=this.tienda;
+// datos de fruver
+
+
+
+//datos de restaurantes
+
+
+     
+
+
+//datos emprendedore
+
+}else{
+  if(localStorage.getItem('tienda')==this.product.stores_target_id){
+
+    console.log(this.product,'imprimiendo producto');
+/*
+
+    this.cantidades =  this.cantidades + this.cantidadDestinos;
+    this.originaPrice= this.originaPrice * this.cantidades;
+
+    this.product.cantidad =   this.cantidades;
+    this.product.field_price_simple =this.originaPrice;*/
+
+    this.product.cantidad = this.cantidadDestinos;
+// get cart by id
+// si exites cuantos hay
+
+
+console.log(this.cs,'aqui res');
+
+      this.cs.set_cart(this.product).then((res)=>{
+        console.log(res,'aqui res');
+        if(res==true){
+
+        }
+
+
+        this.auth.sendFormObservacion(this.FormSend.value);//Reload
+        //this.router.navigate(['/carrito-compras']);
+      });
+      this.presentAlert();
+
+      localStorage.setItem('tarifaOrigenRestaurante',this.product.field_tarifa);
+
+      localStorage.setItem('imgBarrioOrigenRestaurante',this.product.field_imagen_barrio);
+      localStorage.setItem('longitudOrigenRestaurante',this.product.field_longitud);
+      localStorage.setItem('latitudOrigenRestaurante',this.product.field_latitud);
+      
+      localStorage.setItem('BarrioRestaurante',this.product.field_barrio_online);
+      localStorage.setItem('DireccionRestaurante',this.product.field_dir_online);
+      localStorage.setItem('locacionTiendas',this.product.field_location_online);
+      
+      
+      localStorage.setItem('locacionOrigenSeleccionada',this.product.field_location_online);
+      localStorage.setItem('tarifaOrigen',this.product.field_tarifa);
+      localStorage.setItem('tarifaExternaOrigen',this.product.field_tarifa_externa);
+
+
+    }else{
+      this.BackAlert();
+
+      this.tienda=localStorage.getItem('idTienda');
+
+
+  }
+
+
+
+
+}
+      
+       
+ 
+  }
+
+});
 
 
   }

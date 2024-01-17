@@ -109,7 +109,7 @@ export class ModoColaboradorPage implements OnInit {
 */
   ngOnInit() {
 
-    // this.getGpsPermision();
+     this.getGpsPermision();
 
     this.auth.consultarIdAuxiliar().subscribe(res => {
       console.log(res);
@@ -131,11 +131,11 @@ export class ModoColaboradorPage implements OnInit {
       if (res.length > 0) {
 
         if (res['0']['field_estado'] == 'On') {
-
+          this.getLocation();
           this.estadoAuxiliar = 'Auxiliar Disponible';
           this.value = true;
           //
-          this.getLocation();
+          
           this.auth.estadoPedido = true;
           this.auth.actualizarPosicionEnviadaAuxiliar();
 
@@ -144,6 +144,7 @@ export class ModoColaboradorPage implements OnInit {
           localStorage.setItem('nodeDisponibilidad_estado', res['0']['field_estado']);
           localStorage.setItem('nodeDisponibilidad', res['0']['nid']);
         } else {
+          this.getLocation();
           this.estadoAuxiliar = 'Auxiliar Ocupado';
 
           this.value = false;
@@ -161,6 +162,7 @@ export class ModoColaboradorPage implements OnInit {
         this.posicionActivaAuxiliar = res.length;
 
       } else {
+        this.getLocation();
         this.auth.EnviarPosicionAuxiliar();
         this.auth.actualizarDisponibleAuxiliar(true);
         this.estadoAuxiliar = 'Auxiliar Disponible';
@@ -175,7 +177,7 @@ export class ModoColaboradorPage implements OnInit {
     });
 
     // this.estadoAuxiliar=localStorage.getItem('estadoAuxiliar');
-    this.getGpsPermision();
+    //this.getGpsPermision();
 
   }
   iraHistorialPedidos() {
@@ -200,17 +202,18 @@ export class ModoColaboradorPage implements OnInit {
       this.auth.getContenidoAsignado().subscribe(async res => {
         console.log(res, ' respuesta');
         if (res.length == 0) {
+          this.getLocation();
           this.estadoAuxiliar = 'Auxiliar Disponible';
           this.value = true;
 
 
-          this.getLocation();
+          
           this.auth.estadoPedido = true;
           this.auth.actualizarPosicionEnviadaAuxiliar();
 
           this.auth.actualizarDisponibleAuxiliar(true);
 
-          this.ngOnInit();
+          //this.ngOnInit();
 
 
           //document.getElementById('check').dis
