@@ -164,6 +164,7 @@ export class ModoColaboradorPage implements OnInit {
       } else {
         this.getLocation();
         this.auth.EnviarPosicionAuxiliar();
+        this.auth.estadoPedido=true;
         this.auth.actualizarDisponibleAuxiliar(true);
         this.estadoAuxiliar = 'Auxiliar Disponible';
         this.posicionActivaAuxiliar = '0';
