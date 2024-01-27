@@ -265,13 +265,13 @@ field_barrio_origen:[""],
   }
 
    //imprimir por consola file precio si es vehiculo le sumo el porcentaje
-   console.log(this.FormSend.controls.field_precio_.value, 'precio costo domicilio');
+   console.log(Number(this.FormSend.controls.field_precio_.value), 'precio costo domicilio');
 
    
    var valorAgregado = parseFloat(localStorage.getItem('valorAgregado'));  // Ejemplo de valor agregado
    
    // Calcula el resultado total
-   var resultadoTotalCosto = this.FormSend.controls.field_precio_.value;
+   var resultadoTotalCosto = Number(this.FormSend.controls.field_precio_.value);
    
    // Calcula el porcentaje
    var porcentaje = ( resultadoTotalCosto * valorAgregado) / 100;
