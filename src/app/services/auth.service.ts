@@ -1831,6 +1831,7 @@ asignacionRutas(){
   let sencilla = {
     "cantidadDisponiblesEsperados": localStorage.getItem('cantidadDestinosRutas'),
     "tipoDeRuta":this.medioTransporte,
+    "field_modalidad":[{"value":this.medioTransporte_modalidad}],
    "rutaPadre":localStorage.getItem('sencillaCreadaPadre'),
     "destino1":localStorage.getItem('sencillaCreadaDes1'),
     "destino2":localStorage.getItem('sencillaCreadaDes2'),
@@ -2786,8 +2787,7 @@ CrearSencillaPadre(user: FormularioI){
   "field_latitud_origen_":[{"value": localStorage.getItem('latitudOrigen')}],
   "field_nombre_c_origen":[{"value": user.field_nombre_c_origen}],
   "field_aceptado_cliente":[{"value": true}],
-  "field_precio_total":[{"value":localStorage.getItem('precioTarifaTotalRuta')}],
-  "field_modalidad":[{"value": localStorage.getItem('modalidad')}],
+  "field_precio_total":[{"value":localStorage.getItem('precioTarifaTotalRuta')}]
 //"field_nombre_c_destino":[{"value": user.field_nombre_c_destino}]
   //"field_precio_":[{"value": localStorage.getItem('precioTarifa')}]
 
