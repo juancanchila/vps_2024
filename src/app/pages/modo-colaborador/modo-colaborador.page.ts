@@ -148,6 +148,9 @@ export class ModoColaboradorPage implements OnInit {
           this.estadoAuxiliar = 'Auxiliar Ocupado';
 
           this.value = false;
+          this.auth.estadoPedido = false;
+          this.auth.actualizarDisponibleAuxiliar(false);
+          this.auth.actualizarPosicionEnviadaAuxiliarOcupado();
           localStorage.setItem('nodeDisponibilidad_estado', res['0']['field_estado']);
           localStorage.setItem('nodeDisponibilidad', res['0']['nid']);
 
@@ -198,6 +201,7 @@ export class ModoColaboradorPage implements OnInit {
 
 
     if (this.value) {
+      
       console.log(this.value);
 
       this.auth.getContenidoAsignado().subscribe(async res => {
@@ -363,20 +367,30 @@ this.value = false;
   }
 
   async getLocation() {
-    console.log('ok');
-
-    Geolocation.getCurrentPosition().then(data => {
-      console.log('ok');
-
-      this.auth.latitud = data.coords.latitude;
-      this.auth.longitud = data.coords.longitude;
-
-      //llamar metodo que hace la actualizacion
-
-
-    }).catch(err => {
-      console.error(err);
-    });
+    try {
+      const permisionStatus = Geolocation.checkPermissions();
+      console.log('Permsios statuus: ', (await permisionStatus).location)
+      if((await permisionStatus)?.location != 'granted'){
+        const requesStatus = await Geolocation.requestPermissions();
+        if( requesStatus.location != 'granted'){
+//go to setting
+return ;
+        }
+          
+      }
+      let options: PositionOptions={
+        maximumAge: 3000,
+        timeout: 10000,
+        enableHighAccuracy:true
+      };
+      const position =Geolocation.getCurrentPosition(options);
+      this.auth.latitud=(await position).coords.latitude;
+      this.auth.longitud=(await position).coords.longitude;
+      console.log((await position).coords.latitude,'poss lat',(await position).coords.longitude,'poss long');
+    } catch (e) {
+      console.log(e);
+      throw(e);
+    }
   }
 
   watchPosition() {

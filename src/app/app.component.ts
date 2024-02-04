@@ -31,6 +31,7 @@ public nombre:string;
       this.auth.init();
       this.auth.initwo();
       this.router.navigate(['/splashcreen']);
+      this.geolocacion.getCurrentLocacion();
     }
     );
    

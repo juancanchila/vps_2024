@@ -1388,7 +1388,7 @@ sendFormularioRuta(user: FormularioI){
 
        const headers = new HttpHeaders({'Content-Type': 'application/json','Authorization':'Basic '+this.b64,
        'X-CSRF-Token': this.tokencsrf});
-       let url = 'http://164.92.106.39/node/'+localStorage.getItem('ordenPosicion')+'?_format=json';
+       let url = 'http://164.92.106.39/node/'+localStorage.getItem('nodeDisponibilidad')+'?_format=json';
        console.log(url,'patch act poscion')
        this.http.patch(url,converSencilla,{headers:headers}).subscribe(async data2=>{
         const alert = await this.alertControl.create({
@@ -1445,20 +1445,30 @@ sendFormularioRuta(user: FormularioI){
   }
   //metodo para mandar posicion lat y long
   async getLocation(){
-    console.log('ok');
-
-    Geolocation.getCurrentPosition().then(data => {
-      console.log('ok');
-
-        this.latitud = data.coords.latitude;
-        this.longitud = data.coords.longitude;
-
-        //llamar metodo que hace la actualizacion
-
-
-    }).catch(err => {
-      console.error(err);
-    });
+    try {
+      const permisionStatus = Geolocation.checkPermissions();
+      console.log('Permsios statuus: ', (await permisionStatus).location)
+      if((await permisionStatus)?.location != 'granted'){
+        const requesStatus = await Geolocation.requestPermissions();
+        if( requesStatus.location != 'granted'){
+//go to setting
+return ;
+        }
+          
+      }
+      let options: PositionOptions={
+        maximumAge: 3000,
+        timeout: 10000,
+        enableHighAccuracy:true
+      };
+      const position =Geolocation.getCurrentPosition(options);
+      this.latitud=(await position).coords.latitude;
+      this.longitud=(await position).coords.longitude;
+      console.log((await position).coords.latitude,'poss lat',(await position).coords.longitude,'poss long');
+    } catch (e) {
+      console.log(e);
+      throw(e);
+    }
   }
   //metodo para actualizar  la posicion a ocupado
   actualizarPosicionEnviadaAuxiliarOcupado(){
@@ -1484,7 +1494,7 @@ sendFormularioRuta(user: FormularioI){
 
        const headers = new HttpHeaders({'Content-Type': 'application/json','Authorization':'Basic '+this.b64,
        'X-CSRF-Token': this.tokencsrf});
-       let url = 'http://164.92.106.39/node/'+localStorage.getItem('ordenPosicion')+'?_format=json';
+       let url = 'http://164.92.106.39/node/'+localStorage.getItem('nodeDisponibilidad')+'?_format=json';
        console.log(url,'patch act poscion')
        this.http.patch(url,converSencilla,{headers:headers}).subscribe(async data2=>{
         const alert = await this.alertControl.create({
