@@ -17,6 +17,14 @@ export class EmprendedoresPage implements OnInit {
   slider: any;
   criterio: string;
   searched: any;
+  sombra ="";
+  sombra2 ="";
+  sombra3 ="";
+  sombra4 ="";
+  sombra5 ="";
+  sombra6 ="";
+  sombra7 ="";
+  sombra8 ="";
   constructor(private router: Router, private auth: AuthService) {
     this.urlBase=environment.urlBase;
    }
@@ -93,13 +101,26 @@ this.searched = this.character;
 
     this.criterio='1'
    
-    this.auth.seleccionarEmprendedores().subscribe(res =>{
-      console.log(res);
-      
-     
-     this.character=res.filter(character => character.field_criterio ==this.criterio);
-     
-    });
+    if(this.sombra!="dark"){
+      this.sombra="dark";
+      this.sombra2="";
+      this.sombra3="";
+      this.sombra4="";
+      this.sombra5="";
+      this.sombra6="";
+      this.sombra7="";
+      this.sombra8="";
+      this.auth.seleccionarEmprendedores().subscribe(res =>{
+        console.log(res);
+        
+       
+        this.searched=res.filter(character => character.field_creiterio ==this.criterio);
+       
+      });
+    }else{
+      this.sombra="";
+      this.ngOnInit();
+    }
    
    
   //a la clase saludable asignar block ya  laos otras asignar none
@@ -108,14 +129,26 @@ this.searched = this.character;
   }
   iraMetodo2(){
     this.criterio='2'
-    this.auth.seleccionarEmprendedores().subscribe(res =>{
-      console.log(res);
-      
-     
-      this.searched=res.filter(character => character.field_criterio ==this.criterio);
-     
-     
-    });
+    if(this.sombra2!="dark"){
+      this.sombra2="dark";
+      this.sombra="";
+      this.sombra3="";
+      this.sombra4="";
+      this.sombra5="";
+      this.sombra6="";
+      this.sombra7="";
+      this.sombra8="";
+      this.auth.seleccionarEmprendedores().subscribe(res =>{
+        console.log(res);
+        
+       
+        this.searched=res.filter(character => character.field_creiterio ==this.criterio);
+       
+      });
+    }else{
+      this.sombra2="";
+      this.ngOnInit();
+    }
     
   
    
@@ -124,38 +157,75 @@ this.searched = this.character;
   }
   iraMetodo3(){
     this.criterio='3'
-    this.auth.seleccionarEmprendedores().subscribe(res =>{
-      console.log(res);
+    if(this.sombra3!="dark"){
+      this.sombra3="dark";
       
-     
-      this.searched=res.filter(character => character.field_criterio ==this.criterio);
-     
-    });
-   
+      this.sombra2="";
+      this.sombra="";
+      this.sombra4="";
+      this.sombra5="";
+      this.sombra6="";
+      this.sombra7="";
+      this.sombra8="";
+      this.auth.seleccionarEmprendedores().subscribe(res =>{
+        console.log(res);
+        
+       
+        this.searched=res.filter(character => character.field_creiterio ==this.criterio);
+       
+      });
+    }else{
+      this.sombra3="";
+      this.ngOnInit();
+    }   
     
   }
   iraMetodo4(){
     this.criterio='4'
-    this.auth.seleccionarEmprendedores().subscribe(res =>{
-      console.log(res);
-      
-     
-      this.searched=res.filter(character => character.field_criterio ==this.criterio);
-     
-    });
+    if(this.sombra4!="dark"){
+      this.sombra4="dark";
+      this.sombra="";
+      this.sombra3="";
+      this.sombra2="";
+      this.sombra5="";
+      this.sombra6="";
+      this.sombra7="";
+      this.sombra8="";
+      this.auth.seleccionarEmprendedores().subscribe(res =>{
+        console.log(res);
+        
+       
+        this.searched=res.filter(character => character.field_criterio ==this.criterio);
+       
+      });
+    }else{
+      this.sombra4="";
+      this.ngOnInit();
+    }
    
   }
   iraMetodo5(){
     this.criterio='5'
-    this.auth.seleccionarEmprendedores().subscribe(res =>{
-      console.log(res);
-      
-     
-      this.searched=res.filter(character => character.field_criterio ==this.criterio);
-     
-     
-    });
-    
+    if(this.sombra5!="dark"){
+      this.sombra5="dark";
+      this.sombra="";
+      this.sombra3="";
+      this.sombra2="";
+      this.sombra4="";
+      this.sombra6="";
+      this.sombra7="";
+      this.sombra8="";
+      this.auth.seleccionarEmprendedores().subscribe(res =>{
+        console.log(res);
+        
+       
+        this.searched=res.filter(character => character.field_criterio ==this.criterio);
+       
+      });
+    }else{
+      this.sombra5="";
+      this.ngOnInit();
+    }
   
    
     
@@ -163,36 +233,76 @@ this.searched = this.character;
   }
   iraMetodo6(){
     this.criterio='6'
-    this.auth.seleccionarEmprendedores().subscribe(res =>{
-      console.log(res);
-      
-     
-      this.searched=res.filter(character => character.field_criterio ==this.criterio);
-     
-    });
+  
+    if(this.sombra6!="dark"){
+      this.sombra6="dark";
+      this.sombra="";
+      this.sombra3="";
+      this.sombra2="";
+      this.sombra4="";
+    this.sombra5="";
+      this.sombra7="";
+      this.sombra8="";
+      this.auth.seleccionarEmprendedores().subscribe(res =>{
+        console.log(res);
+        
+       
+        this.searched=res.filter(character => character.field_criterio ==this.criterio);
+       
+      });
+    }else{
+      this.sombra6="";
+      this.ngOnInit();
+    }
    
     
   }
   iraMetodo7(){
     this.criterio='7'
-    this.auth.seleccionarEmprendedores().subscribe(res =>{
-      console.log(res);
-      
-     
-      this.searched=res.filter(character => character.field_criterio ==this.criterio);
-     
-    });
+    if(this.sombra7!="dark"){
+      this.sombra7="dark";
+      this.sombra="";
+      this.sombra3="";
+      this.sombra2="";
+      this.sombra4="";
+      this.sombra6="";
+      this.sombra5="";
+      this.sombra8="";
+      this.auth.seleccionarEmprendedores().subscribe(res =>{
+        console.log(res);
+        
+       
+        this.searched=res.filter(character => character.field_criterio ==this.criterio);
+       
+      });
+    }else{
+      this.sombra7="";
+      this.ngOnInit();
+    }
    
   }
   iraMetodo8(){
     this.criterio='8'
-    this.auth.seleccionarEmprendedores().subscribe(res =>{
-      console.log(res);
-      
-     
-      this.searched=res.filter(character => character.field_criterio ==this.criterio);
-     
-    });
+    if(this.sombra8!="dark"){
+      this.sombra8="dark";
+      this.sombra="";
+      this.sombra3="";
+      this.sombra2="";
+      this.sombra4="";
+      this.sombra6="";
+      this.sombra7="";
+      this.sombra5="";
+      this.auth.seleccionarEmprendedores().subscribe(res =>{
+        console.log(res);
+        
+       
+        this.searched=res.filter(character => character.field_criterio ==this.criterio);
+       
+      });
+    }else{
+      this.sombra8="";
+      this.ngOnInit();
+    }
    
   }
 

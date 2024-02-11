@@ -166,8 +166,16 @@ ion-button.botonRestaurante.md.button.button-solid.ion-activatable.ion-focusable
     --box-shadow: none;
 }
 span {
-    font-size: 11px;
+    color: #262262;
+    
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
 }
+.dark{
+  
+    background-color: #fff200;
+ 
+  }
 .img{
     border-radius: 10%;
     margin-left: 20%;

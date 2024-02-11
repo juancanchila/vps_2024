@@ -21,6 +21,10 @@ criterio:any;
   slider: any;
   urlBase: string;
   searched: any;
+  sombra ="";
+  sombra2 ="";
+  sombra3 ="";
+  sombra4 ="";
   
 
   constructor(private http: HttpClient,private router: Router, private auth: AuthService,public alertController:AlertController) {
@@ -116,10 +120,22 @@ criterio:any;
         }
       }
   iraSaludable(){
-   
+  
 
     this.criterio='saludable'
    
+    
+   
+   
+  //a la clase saludable asignar block ya  laos otras asignar none
+  console.log(this.criterio);  
+  
+  // si dark esta en blanco
+  if(this.sombra!="dark"){
+    this.sombra="dark";
+    this.sombra2="";
+    this.sombra3="";
+    this.sombra4="";
     this.auth.seleccionarRestaurantes().subscribe(res =>{
       console.log(res);
       
@@ -127,49 +143,80 @@ criterio:any;
       this.searched=res.filter(character => character.field_creiteria ==this.criterio);
      
     });
-   
-   
-  //a la clase saludable asignar block ya  laos otras asignar none
-  console.log(this.criterio);   
+  }else{
+    this.sombra="";
+    this.ngOnInit();
+  }
   
   }
   iraDesayuno(){
     this.criterio='desayuno'
-    this.auth.seleccionarRestaurantes().subscribe(res =>{
-      console.log(res);
-      
-     
-      this.searched=res.filter(character => character.field_creiteria ==this.criterio);
-     
-     
-    });
+    if(this.sombra2!="dark"){
+      this.sombra2="dark";
+      this.sombra="";
+      this.sombra3="";
+      this.sombra4="";
+      this.auth.seleccionarRestaurantes().subscribe(res =>{
+        console.log(res);
+        
+       
+        this.searched=res.filter(character => character.field_creiteria ==this.criterio);
+       
+      });
+    }else{
+      this.sombra2="";
+      this.ngOnInit();
+    }
     
   
+   //
+
+
    
+
+   //
     
     console.log(this.criterio);
   }
   iraPizza(){
     this.criterio='pizza'
-    this.auth.seleccionarRestaurantes().subscribe(res =>{
-      console.log(res);
+    if(this.sombra3!="dark"){
+      this.sombra3="dark";
       
-     
-      this.searched=res.filter(character => character.field_creiteria ==this.criterio);
-     
-    });
-   
+      this.sombra2="";
+      this.sombra="";
+      this.sombra4="";
+      this.auth.seleccionarRestaurantes().subscribe(res =>{
+        console.log(res);
+        
+       
+        this.searched=res.filter(character => character.field_creiteria ==this.criterio);
+       
+      });
+    }else{
+      this.sombra3="";
+      this.ngOnInit();
+    }
     
   }
   iraTipica(){
     this.criterio='tipica'
-    this.auth.seleccionarRestaurantes().subscribe(res =>{
-      console.log(res);
-      
-     
-      this.searched=res.filter(character => character.field_creiteria ==this.criterio);
-     
-    });
+    if(this.sombra4!="dark"){
+      this.sombra4="dark";
+      this.sombra="";
+      this.sombra3="";
+      this.sombra2="";
+      this.auth.seleccionarRestaurantes().subscribe(res =>{
+        console.log(res);
+        
+       
+        this.searched=res.filter(character => character.field_creiteria ==this.criterio);
+       
+      });
+    }else{
+      this.sombra4="";
+      this.ngOnInit();
+    }
    
   }
   // metodo para mostra popu en otros restaurantes

@@ -1,6 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
 import { Geolocation } from '@capacitor/geolocation';
+import { NativeSettings, AndroidSettings, IOSSettings } from 'capacitor-native-settings';
 @Injectable({
   providedIn: 'root'
 })
@@ -26,6 +27,7 @@ export class GeolocationsService {
         const requesStatus = await Geolocation.requestPermissions();
         if( requesStatus.location != 'granted'){
 //go to setting
+await this.openSetting();
 return ;
         }
           
@@ -38,10 +40,21 @@ return ;
       const position =Geolocation.getCurrentPosition(options);
       console.log((await position).coords)
       console.log((await position).coords.latitude,'poss lat',(await position).coords.longitude,'poss long');
-    } catch (e) {
+    } catch (e: any) {
       console.log(e);
-      throw(e);
+      if(e?.message == 'Location services are not enabled'){
+        await this.openSetting();
+
+      }
     }
+  }
+  openSetting(app = false){
+    console.log('abriendo setting....');
+    return NativeSettings.open({
+      optionAndroid: app ? AndroidSettings.ApplicationDetails : AndroidSettings.Location, 
+  optionIOS: app ? IOSSettings.App : IOSSettings.LocationServices
+    });
+
   }
   getCurrentCoordinate() {
     if (!Capacitor.isPluginAvailable('Geolocation')) {

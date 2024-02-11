@@ -754,7 +754,7 @@ WillEnterOrigen(){
           
   }
     
-  region(event){  
+  regionDestino(event){  
     this.locacion= event;
     console.log(event);
     if(event!=''){

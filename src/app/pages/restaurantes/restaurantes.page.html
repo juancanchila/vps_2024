@@ -42,26 +42,26 @@
     <ion-button expand="large" class="botonRestaurante" (click)="buscarRestaurante()"> <span>¿No encuentras tu Restaurante?</span> </ion-button> 
     <ion-searchbar  placeholder="Buscar" animated (ionChange)="searchRestaurantes($event)"></ion-searchbar>
   <div class="content-botones">
-<div class="boton" >
+<div class="boton"    [ngClass]="sombra" >
   <img (click)="iraSaludable()" class="img-etiquetas" src="../../assets/botones/ICONOCOLORS-91.png" alt="">
   <br>
   <h1  class="letter-center">Saludable</h1>
 </div>
 
 
-<div class="boton" >
+<div class="boton"   [ngClass]="sombra2">
   <img (click)="iraDesayuno()" class="img-etiquetas" src="../../assets/botones/ICONOOLORS-92.png" alt="">
   <br>
   <h1  class="letter-center">Desayuno</h1>
 </div>
 
-<div class="boton" >
+<div class="boton"   [ngClass]="sombra3">
   <img (click)="iraPizza()" class="img-etiquetas" src="../../assets/botones/ICONOCOLORS-93.png" alt="">
   <br>
   <h1  class="letter-center">Pizza</h1>
 </div>
 
-<div class="boton" >
+<div class="boton"   [ngClass]="sombra4">
   <img  (click)="iraTipica()" class="img-etiquetas" src="../../assets/botones/ICONOCOLORS-94.png" alt="">
   <br>
   <h1 class="letter-center">Tipica</h1>

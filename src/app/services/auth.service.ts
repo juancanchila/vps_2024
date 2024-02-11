@@ -45,6 +45,7 @@ export class AuthService {
   ponderacion: any;
   validarQuitarSecilla: boolean = false;
   resumenOtherRestaurantes: { title: { value: string; }[]; type: { target_id: string; }[]; field_donde_comprar: { value: [{ value: ""; }]; }[]; field_quieres_comprar: { value: [{ value: ""; }]; }[]; field_direccion_entrega: { value: [{ value: ""; }]; }[]; field_nombre_del_establecimiento: { value: [{ value: ""; }]; }[]; field_contacto: { value: [{ value: ""; }]; }[]; field_contacto_destino: { value: [{ value: ""; }]; }[]; field_direccion_destino: { value: [{ value: ""; }]; }[]; field_ida_y_vuelta: { value: boolean; }[]; field_locacion_destino: { value: [{ value: ""; }]; }[]; field_locacion_entrega: { value: [{ value: ""; }]; }[]; field_valor_declarado: { value: [{ value: ""; }]; }[]; field_medio_de_transporte: { value: number; }[]; field_observaciones: { value: [{ value: ""; }]; }[]; field_prefijo_origen: { value: [{ value: ""; }]; }[]; field_prefijo_destino: { value: [{ "": ""; }]; }[]; field_metodo_de_pago: { value: [{ value: ""; }]; }[]; field_barrio_origen: { value: [{ value: ""; }]; }[]; field_barrio_destino: { value: [{ value: ""; }]; }[]; field_nombre_c_origen: { value: [{ value: ""; }]; }[]; field_nombre_c_destino: { value: [{ value: ""; }]; }[]; };
+  messajeErr: any;
 
   init() {
     this.platform.backButton.subscribeWithPriority(10,async () => {
@@ -192,12 +193,13 @@ private itemsCarrito: ProductosI[] = [];
     private router: Router, private menucontrol: MenuController,
      private alertControl: AlertController, private navctrl: NavController,
      private http6: HttpClient,private http7: HttpClient,private http8: HttpClient,
-     private http10: HttpClient,private http9: HttpClient,private http4: HttpClient ) {
+     private http10: HttpClient,private http9: HttpClient,private http4: HttpClient 
+     ) {
 
      // this.geo.watchCoordinate();
     this.subject.subscribe(data => this.itemsCarrito = data);
     this.localStorageService = localStorage;
-
+this.getMensajeError();
 }
 
  getAllToken(){
@@ -1779,6 +1781,13 @@ asignacion(nodo){
 
 
           },async error2=>{
+            this.validarQuitarSecilla=true;
+            if(this.validarQuitarSecilla==true){
+              this.router.navigate(['/tabs']);
+              this.quitarSencillaLista();
+              this.isTokenError=null;
+
+            }
             console.log(error2);
             if(error2['status']==0 || error2['status']==500){
 
@@ -1786,7 +1795,7 @@ asignacion(nodo){
 
               header: 'Notificacion Vapaesa',
 
-              message: 'Por motivos de logística no se pudo crear orden, para completarla comunicate con nosotros a través de mensajería especial',
+              message: this.messajeErr,
               // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
               buttons: [
 
@@ -1915,11 +1924,19 @@ asignacionRutas(){
 
           }, async error2=>{
             console.log(error2);
+            
+            this.validarQuitarSecilla=true;
+            if(this.validarQuitarSecilla==true){
+              this.router.navigate(['/tabs']);
+              this.quitarSencillaLista();
+              this.isTokenError=null;
+
+            }
             const alert = await this.alertControl.create({
 
               header: 'Notificacion Vapaesa',
 
-              message: 'Por motivos de logística no se pudo crear orden, para completarla comunicate con nosotros a través de mensajería especial',
+              message: this.messajeErr,
               // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
               buttons: [
 
@@ -5484,7 +5501,7 @@ this.medioTransporte_modalidad='moderada';
 
 
 
-     let url = 'http://164.92.106.39//slider_tiendas?_format=hal_json';
+     let url = 'http://164.92.106.39/slider_tiendas?_format=hal_json';
      console.log(url);
      return this.http
      .get(url)
@@ -5622,6 +5639,32 @@ this.medioTransporte_modalidad='moderada';
 
     //this.router.navigate(['/rutas']);
 
+   }
+
+
+   //Obtener mensaje de error servidor
+   getMensajeError(){
+    console.log('estamos aqui confirmado');
+    
+
+
+    
+
+     return this.http.get('http://164.92.106.39/aux_no_disponible',{}).subscribe(async data=>{
+      this.messajeErr= await data[0].body;
+      console.log(data[0].body);
+          },error=>{
+            this.anonimustoken=error.error.text;
+            console.log (this.anonimustoken);
+
+
+
+
+          });
+  
+
+
+    //this.router.navigate(['/
    }
 
    seleccionarSliderEspecial(){

@@ -85,13 +85,13 @@ export class TelotengoPage implements OnInit {
       
 
       }else{
-        this.auth.seleccionarServicioCarro();
-        setTimeout(async () => {
+        
+
        
           
           this.router.navigate(['/carro-taller']);
         
-        },2000)
+      
 
       }
 
@@ -100,8 +100,40 @@ export class TelotengoPage implements OnInit {
 
   }
   async irPageTrasteo(){
-      
+this.auth.getMensajeError();
     //
+    console.log(this.AuxCarrosGrandesDisponibles['length'],'carros grandes');
+    if(this.AuxCarrosGrandesDisponibles['length']==0){
+    
+        const alert = await this.alertCtrl.create({
+          
+          header: 'Advertencia',
+         
+          message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
+          // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+          buttons: [
+         
+          {
+            text:'aceptar',
+            handler:()=>{
+          
+          this.ngOnInit();
+              
+            }
+          }
+        ]
+        });
+        
+        await alert.present();
+
+      
+
+      
+
+      
+
+    }else{
+      //
     console.log(this.AuxCarrosGrandesDisponibles['length'],'carros grandes');
     if(this.AuxCarrosGrandesDisponibles['length']==0){
     
@@ -141,6 +173,10 @@ export class TelotengoPage implements OnInit {
          
         
       },2000)
+    }
+         
+        
+    
     }
    
   }
