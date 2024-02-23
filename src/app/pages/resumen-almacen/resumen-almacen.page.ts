@@ -274,7 +274,7 @@ field_nombre_c_destino:[""]
  var valorAgregado = parseFloat(localStorage.getItem('valorAgregado'));  // Ejemplo de valor agregado
  
  // Calcula el resultado total
- var resultadoTotalCosto = this.FormSend.controls.field_precio_.value;
+ var resultadoTotalCosto = Number(this.FormSend.controls.field_precio_.value);
  
  // Calcula el porcentaje
  var porcentaje = ( resultadoTotalCosto * valorAgregado) / 100;
@@ -291,7 +291,7 @@ field_nombre_c_destino:[""]
  
  if(this.auth.medioTransporte==2){
    this.FormSend.controls.  field_precio_.setValue(TotalDefinitivoParaVehiculos);
-   localStorage.setItem('precioTarifa',TotalDefinitivoParaVehiculos);
+   localStorage.setItem('precioTarifa',TotalDefinitivoParaVehiculos.toString());
  }
  
  

@@ -16,6 +16,7 @@ export class TelotengoPage implements OnInit {
   AuxMotosDisponibles: any;
   AuxDisponiblesMunicipios: any;
   AuxCarrosGrandesDisponibles: any;
+  AuxCarrosTallerDisponibles: any;
   constructor(private router: Router,private auth:AuthService,private alertCtrl: AlertController) {
     this.urlBase=environment.urlBase;
    }
@@ -54,13 +55,19 @@ export class TelotengoPage implements OnInit {
       this.AuxCarrosGrandesDisponibles=res;
  
     });
+
+    this.auth.getAuxiliaresDisponiblesParaCarroTaller().subscribe(res =>{
+      console.log(res, ' aqui carro taller');
+      this.AuxCarrosTallerDisponibles=res;
+ 
+    });
   }
 
 
   async irPageCarrotaller(){
    
 
-      if(this.AuxCarrosDisponibles.length==0){
+      if(this.AuxCarrosTallerDisponibles.length==0){
         const alert = await this.alertCtrl.create({
           
           header: 'Advertencia',

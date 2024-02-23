@@ -2717,7 +2717,7 @@ CrearSencillaLlaves(user: FormularioI){
   "field_barrio_origen":[{"value": user.field_barrio_origen}],
   "field_barrio_destino":[{"value": user.field_barrio_destino}],
   "field_metodo_de_pago":[{"value": user.field_metodo_de_pago}],
-  "field_medio_de_transporte":[{"value": 5}],
+  "field_medio_de_transporte":[{"value": 2}],
   "field_push_token":[{"value": localStorage.getItem('tokenFire')}],
   "field_contacto_destino":[{"value": user.field_contacto_destino}],
   "field_url_imagen_destino":[{"value": localStorage.getItem('imgBarrioDestino')}],
@@ -3825,7 +3825,8 @@ CrearMedicamentos(user: FormularioI){
 "field_precio_":[{"value": localStorage.getItem('precioTarifa')}],
 "field_nombre_c_origen":[{"value": user.field_nombre_c_origen}],
 "field_nombre_c_destino":[{"value": user.field_nombre_c_destino}],
-"field_aceptado_cliente":[{"value": true}]
+"field_aceptado_cliente":[{"value": true}],
+"field_tipo_solicitud":[{"value":'Medicamentos'}]
 
      }
 
@@ -3915,7 +3916,8 @@ CrearMedicamentos(user: FormularioI){
 "field_precio_":[{"value": localStorage.getItem('precioTarifa')}],
 "field_nombre_c_origen":[{"value": user.field_nombre_c_origen}],
 "field_nombre_c_destino":[{"value": user.field_nombre_c_destino}],
-"field_aceptado_cliente":[{"value": true}]
+"field_aceptado_cliente":[{"value": true}],
+"field_tipo_solicitud":[{"value":'Pagos'}]
        }
 
        this.resumenPagos = pagos;
@@ -4005,7 +4007,8 @@ CrearMedicamentos(user: FormularioI){
    "field_precio_":[{"value": localStorage.getItem('precioTarifa')}],
    "field_nombre_c_origen":[{"value": user.field_nombre_c_origen}],
    "field_nombre_c_destino":[{"value": user.field_nombre_c_destino}],
-   "field_aceptado_cliente":[{"value": true}]
+   "field_aceptado_cliente":[{"value": true}],
+   "field_tipo_solicitud":[{"value":'Tecnologias'}]
          }
 
          this.resumenTecnologias = tecnologias;
@@ -4096,7 +4099,8 @@ CrearMedicamentos(user: FormularioI){
     "field_precio_":[{"value": localStorage.getItem('precioTarifa')}],
     "field_nombre_c_origen":[{"value": user.field_nombre_c_origen}],
     "field_nombre_c_destino":[{"value": user.field_nombre_c_destino}],
-    "field_aceptado_cliente":[{"value": true}]
+    "field_aceptado_cliente":[{"value": true}],
+    "field_tipo_solicitud":[{"value":'Almacen'}]
 
            }
 
@@ -4190,7 +4194,8 @@ CrearMedicamentos(user: FormularioI){
    "field_precio_":[{"value": localStorage.getItem('precioTarifa')}],
    "field_nombre_c_origen":[{"value": user.field_nombre_c_origen}],
    "field_nombre_c_destino":[{"value": user.field_nombre_c_destino}],
-   "field_aceptado_cliente":[{"value": true}]
+   "field_aceptado_cliente":[{"value": true}],
+   "field_tipo_solicitud":[{"value":'Textiles'}]
 
 
            }
@@ -4490,7 +4495,8 @@ logout2(){
              localStorage.removeItem('locacion');
              localStorage.removeItem('store-id');
             // localStorage.removeItem('Tienda');
-             localStorage.removeItem('validadorCompras');
+             localStorage.removeItem('validadorCompras'); 
+             localStorage.removeItem('nodeDisponibilidad');
              //localStorage.removeItem('tienda');
              //localStorage.removeItem('Tienda');
   
@@ -4911,6 +4917,25 @@ const headers = new HttpHeaders({'Content-Type': 'application/json','Authorizati
 });
 console.log(headers);
  this.urlAuxName = 'http://164.92.106.39/auxiliares_disponibles_carro_grande';
+
+   return this.http.get(this.urlAuxName, {headers:headers})
+   .pipe(
+     map((res :any)=>{
+       return res;
+      // console.log(res['0']['Role'],'estoy en data');
+     })
+   )
+
+}
+
+//get disponibles carro taller
+getAuxiliaresDisponiblesParaCarroTaller(){
+  let auxB64 =localStorage.getItem('base64');
+
+const headers = new HttpHeaders({'Content-Type': 'application/json','Authorization':'Basic '+auxB64,
+});
+console.log(headers);
+ this.urlAuxName = 'http://164.92.106.39/auxiliares_disponibles_carro_taller';
 
    return this.http.get(this.urlAuxName, {headers:headers})
    .pipe(
