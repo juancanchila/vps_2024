@@ -354,7 +354,7 @@ this.value = $event.target.value as string;
    
    async sendForm(){
 
-  
+  console.log('hatsa qui mediotranporte', this.auth.medioTransporte)
     if(this.FormSend.invalid || this.FormSend.value['field_metodo_de_pago']=='' || this.FormSend.value[' field_quien_paga_']==''){
       const alert = await this.alertController.create({
        
@@ -380,36 +380,57 @@ this.value = $event.target.value as string;
           console.log(this.AuxMotosDisponibles);
           console.log(this.AuxMotosDisponibles['length'],'lengt de vector motos');
           if(this.AuxMotosDisponibles.length==0){
-            if(this.AuxCarrosDisponibles.length==0){
-            
-
-              const alert = await this.alertController.create({
+            const alert = await this.alertController.create({
                 
-                header: 'Advertencia',
-               
-                message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-                // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-                buttons: [
-               
+              header: 'Advertencia',
+             
+              message: 'En este momento no tenemos auxiliar disponible en moto, ¿desea medio de transporte carro?',
+              // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+              buttons: [
                 {
-                  text:'aceptar',
-                  handler:()=>{
-                
+                text:'cancel',
+                role:'cancel',
+                handler:async ()=>{
                 this.router.navigate(['/tabs']);
-                    
-                  }
                 }
-              ]
-              });
-              
-              await alert.present();
-
-            }else{
-              this.auth.seleccionarCarro();
-                this.auth.sendFormulario(this.FormSend.value);
+                
+              },
+              {
+                text:'aceptar',
+                handler:async ()=>{
+                  if(this.AuxCarrosDisponibles.length!=0){
+                    this.auth.seleccionarCarro();
+                   this.auth.sendFormulario(this.FormSend.value);
                 this.router.navigate(['/resumen']);
 
-            }
+                  }else{
+                    const alert = await this.alertController.create({
+                
+                      header: 'Oops!',
+                     
+                      message: '¡En este momento no tenemos auxiliar disponible para otro medio de transporte, reduce tu valor declarado!',
+                      // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+                      buttons: [
+                     
+                      {
+                        text:'aceptar',
+                        handler:()=>{
+                      
+                          this.router.navigate(['/tabs']);
+                          
+                        }
+                      }
+                    ]
+                    });
+                    
+                    await alert.present();
+                  }
+                 
+                  
+                }
+              }
+            ]
+            });
 
           }else{
             //
@@ -625,7 +646,7 @@ getValoresDeterminantesAuxiliar(){
    
   }
   ionViewWillEnter(){
-    this.auth.medioTransporte=1;
+    //this.auth.medioTransporte=1;
   }
   regionOrigen(event){  
     console.log('regionOrigen');

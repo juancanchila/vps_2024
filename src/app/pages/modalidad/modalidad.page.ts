@@ -84,7 +84,7 @@ export class ModalidadPage implements OnInit {
     console.log(this.AuxMotosDisponibles.length,'cantidad motos');
     console.log(this.AuxCarrosDisponibles.length,'cantidad carros');
 
-    if(this.AuxMotosDisponibles.length<10 || this.AuxCarroDisponibles<10){
+    if(this.AuxMotosDisponibles.length<3 || this.AuxCarroDisponibles<3){
 
 
       const alert = await this.alertController.create({

@@ -79,42 +79,56 @@ export class ComprasPage implements OnInit {
     })
     console.log(this.AuxMotosDisponibles['length'],'lengt de vector motos');
     if(this.AuxMotosDisponibles.length==0){
-      if(this.AuxCarrosDisponibles.length==0){
-        const alert = await this.alertCtrl.create({
-          
-          header: 'Advertencia',
-         
-          message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-          // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-          buttons: [
-         
-          {
-            text:'aceptar',
-            handler:()=>{
-          
-          this.ngOnInit();
-              
-            }
-          }
-        ]
-        });
-        
-        await alert.present();
-
-      
-
-      }else{
-        this.auth.seleccionarServicioCarro();
-      
+      const alert = await this.alertCtrl.create({
+                
+        header: 'Advertencia',
        
+        message: 'En este momento no tenemos auxiliar disponible en moto, ¿desea medio de transporte carro?',
+        // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+        buttons: [
+          {
+          text:'cancel',
+          role:'cancel',
+          handler:async ()=>{
+          this.router.navigate(['/tabs']);
+          }
           
-        
-          this.router.navigate(['/fruver']);
-         
-        
-     
+        },
+        {
+          text:'aceptar',
+          handler:async ()=>{
+            if(this.AuxCarrosDisponibles.length!=0){
+              this.auth.seleccionarServicioCarro();
+        this.router.navigate(['/fruver']);
 
-      }
+            }else{
+              const alert = await this.alertCtrl.create({
+          
+                header: 'Oops!',
+               
+                message: '¡En este momento no tenemos auxiliar disponible para otro medio de transporte, reduce tu valor declarado!',
+                // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+                buttons: [
+               
+                {
+                  text:'aceptar',
+                  handler:()=>{
+                
+                    this.router.navigate(['/tabs']);
+                    
+                  }
+                }
+              ]
+              });
+              
+              await alert.present();
+            }
+           
+            
+          }
+        }
+      ]
+      });
 
     }else{
       this.auth.seleccionarServicioMoto();

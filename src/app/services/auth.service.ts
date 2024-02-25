@@ -1846,11 +1846,12 @@ asignacionRutas(){
   console.log(localStorage.getItem('sencillaCreadaDes9'));
   console.log(localStorage.getItem('sencillaCreadaDes10'));
   console.log(this.medioTransporte);
+  console.log(localStorage.getItem('modalidad'));
 
   let sencilla = {
     "cantidadDisponiblesEsperados": localStorage.getItem('cantidadDestinosRutas'),
     "tipoDeRuta":this.medioTransporte,
-    "field_modalidad":[{"value":this.medioTransporte_modalidad}],
+    "field_modalidad":localStorage.getItem('modalidad'),
    "rutaPadre":localStorage.getItem('sencillaCreadaPadre'),
     "destino1":localStorage.getItem('sencillaCreadaDes1'),
     "destino2":localStorage.getItem('sencillaCreadaDes2'),
@@ -2814,7 +2815,8 @@ CrearSencillaPadre(user: FormularioI){
   "field_latitud_origen_":[{"value": localStorage.getItem('latitudOrigen')}],
   "field_nombre_c_origen":[{"value": user.field_nombre_c_origen}],
   "field_aceptado_cliente":[{"value": true}],
-  "field_precio_total":[{"value":localStorage.getItem('precioTarifaTotalRuta')}]
+  "field_precio_total":[{"value":localStorage.getItem('precioTarifaTotalRuta')}],
+  "field_tipo_solicitud":[{"value":localStorage.getItem('modalidad')}]
 //"field_nombre_c_destino":[{"value": user.field_nombre_c_destino}]
   //"field_precio_":[{"value": localStorage.getItem('precioTarifa')}]
 
@@ -4899,7 +4901,7 @@ getAuxiliaresDisponiblesMunicipio(){
 const headers = new HttpHeaders({'Content-Type': 'application/json','Authorization':'Basic '+auxB64,
 });
 console.log(headers);
- this.urlAuxName = 'http://164.92.106.39//auxiliares_disponibles_municipios';
+ this.urlAuxName = 'http://164.92.106.39/auxiliares_disponibles_municipios';
 
    return this.http.get(this.urlAuxName, {headers:headers})
    .pipe(
@@ -5230,7 +5232,7 @@ actualizarEstadoPedidoEnCamino(){
    seleccionarMotoRuta(){
 
     this.medioTransporte=1;
-    this.medioTransporte_modalidad='agil';
+    this.medioTransporte_modalidad=localStorage.getItem('modalidad');
     console.log(this.medioTransporte);
     console.log(this.medioTransporte_modalidad);
 
@@ -5252,7 +5254,7 @@ this.medioTransporte_modalidad='moderada';
    }
    seleccionarCarroRuta(){
     this.medioTransporte=2;
-    this.medioTransporte_modalidad='moderada';
+    this.medioTransporte_modalidad=localStorage.getItem('modalidad');
     console.log(this.medioTransporte);
     console.log(this.medioTransporte_modalidad);
 
