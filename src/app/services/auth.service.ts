@@ -1266,7 +1266,8 @@ sendFormularioRuta(user: FormularioI){
       {
         text:'aceptar',
         handler:()=>{
-          this.EnviarPosicionAuxiliar();
+         this.getLocation();
+         this.EnviarPosicionAuxiliar();
         }
 
       }]
@@ -1314,7 +1315,7 @@ sendFormularioRuta(user: FormularioI){
         await alert.present();
        console.log(data2);
 
-       localStorage.setItem('ordenPosicion',data2['nid']['0'].value);
+       localStorage.setItem('nodeDisponibilidad',data2['nid']['0'].value);
 
             },error2=>{
               console.log(error2);
