@@ -193,7 +193,7 @@ private itemsCarrito: ProductosI[] = [];
     private router: Router, private menucontrol: MenuController,
      private alertControl: AlertController, private navctrl: NavController,
      private http6: HttpClient,private http7: HttpClient,private http8: HttpClient,
-     private http10: HttpClient,private http9: HttpClient,private http4: HttpClient 
+     private http10: HttpClient,private http9: HttpClient,private http4: HttpClient
      ) {
 
      // this.geo.watchCoordinate();
@@ -1456,16 +1456,22 @@ sendFormularioRuta(user: FormularioI){
 //go to setting
 return ;
         }
-          
+
       }
       let options: PositionOptions={
         maximumAge: 3000,
         timeout: 10000,
         enableHighAccuracy:true
       };
-      const position =Geolocation.getCurrentPosition(options);
+      const position = Geolocation.getCurrentPosition(options);
+
+
+      // obtner estado de gps y si esta activo  y a la apciaion se le consediaron los permisos de gps eneonces lazar
+
+
       this.latitud=(await position).coords.latitude;
-      this.longitud=(await position).coords.longitude;
+      this.longitud = (await position).coords.longitude;
+
       console.log((await position).coords.latitude,'poss lat',(await position).coords.longitude,'poss long');
     } catch (e) {
       console.log(e);
@@ -1925,7 +1931,7 @@ asignacionRutas(){
 
           }, async error2=>{
             console.log(error2);
-            
+
             this.validarQuitarSecilla=true;
             if(this.validarQuitarSecilla==true){
               this.router.navigate(['/tabs']);
@@ -2732,7 +2738,7 @@ CrearSencillaLlaves(user: FormularioI){
 "field_tipo_solicitud":[{"value":'Llaves'}]
   //"field_observaciones":[{"value": user.field_observaciones}]
 
-  
+
 
      }
 
@@ -4445,21 +4451,21 @@ CrearMedicamentos(user: FormularioI){
   */
 logout2(){
   //Eliminar ususario
-  
+
       let data = {
         "iduser":this.id
-  
+
          }
-  
-  
-  
+
+
+
          const converData = JSON.stringify(data);
          console.log(converData);
-  
+
          const headers = new HttpHeaders({'Content-Type': 'application/json','Authorization':'Basic '+this.b64,
          'X-CSRF-Token': this.tokencsrf});
-  
-  
+
+
       this.router.navigateByUrl('/login');
       this.menucontrol.close();
       var exit=this.urlexit+localStorage.getItem("EXPIRES_IN");
@@ -4473,7 +4479,7 @@ logout2(){
                //console.log(error);
                console.log(error55);
                console.log(error55.status);
-  
+
                if(error55.status==404){
                  alert('ha ocurrido un error, consulta al administrador!')
                }
@@ -4497,17 +4503,17 @@ logout2(){
              localStorage.removeItem('locacion');
              localStorage.removeItem('store-id');
             // localStorage.removeItem('Tienda');
-             localStorage.removeItem('validadorCompras'); 
+             localStorage.removeItem('validadorCompras');
              localStorage.removeItem('nodeDisponibilidad');
              //localStorage.removeItem('tienda');
              //localStorage.removeItem('Tienda');
-  
-  
-  
+
+
+
             // this.lgclave.fondo.slice();
-  
-  
-  
+
+
+
      }
   public saveToken(token:string,csrftoken:string, logout_token:string,name:string):void{
 
@@ -5196,7 +5202,7 @@ actualizarEstadoPedidoEnCamino(){
     this.medioTransporte=1;
     console.log(this.medioTransporte);
     this.medioTransporte_modalidad='agil';
-   
+
     console.log(this.medioTransporte_modalidad);
 
 
@@ -5207,7 +5213,7 @@ actualizarEstadoPedidoEnCamino(){
     this.medioTransporte=2;
     console.log(this.medioTransporte);
     this.medioTransporte_modalidad='moderada';
-   
+
     console.log(this.medioTransporte_modalidad);
 
 
@@ -5672,10 +5678,10 @@ this.medioTransporte_modalidad='moderada';
    //Obtener mensaje de error servidor
    getMensajeError(){
     console.log('estamos aqui confirmado');
-    
 
 
-    
+
+
 
      return this.http.get('http://164.92.106.39/aux_no_disponible',{}).subscribe(async data=>{
       this.messajeErr= await data[0].body;
@@ -5688,7 +5694,7 @@ this.medioTransporte_modalidad='moderada';
 
 
           });
-  
+
 
 
     //this.router.navigate(['/
@@ -6108,14 +6114,14 @@ this.medioTransporte_modalidad='moderada';
   //consultar valor descuento moderada
 getValorDescuento(){
 
- 
+
   let auxB64 =localStorage.getItem('base64');
 
   const headers = new HttpHeaders({'Content-Type': 'application/json','Authorization':'Basic '+auxB64,
   });
   console.log(headers);
    this.urlAuxName = 'http://164.92.106.39/descuento_moderado';
-  
+
      return this.http.get(this.urlAuxName, {headers:headers})
      .pipe(
        map((res :any)=>{
@@ -6129,20 +6135,20 @@ getValorDescuento(){
 
 getValorAgregadoTaller(){
 
- 
+
   let auxB64 =localStorage.getItem('base64');
 
   const headers = new HttpHeaders({'Content-Type': 'application/json','Authorization':'Basic '+auxB64,
   });
   console.log(headers);
    this.urlAuxName = 'http://164.92.106.39/incremento_taller';
-  
+
      return this.http.get(this.urlAuxName, {headers:headers})
      .pipe(
        map((res :any)=>{
          return res;
         // console.log(res);
-        
+
        })
      )
 }
@@ -6150,20 +6156,20 @@ getValorAgregadoTaller(){
 //valor agregado para servicio trasteo
 getValorAgregadoTrasteo(){
 
- 
+
   let auxB64 =localStorage.getItem('base64');
 
   const headers = new HttpHeaders({'Content-Type': 'application/json','Authorization':'Basic '+auxB64,
   });
   console.log(headers);
    this.urlAuxName = 'http://164.92.106.39/incremento_trasteo';
-  
+
      return this.http.get(this.urlAuxName, {headers:headers})
      .pipe(
        map((res :any)=>{
          return res;
         // console.log(res);
-        
+
        })
      )
 }
@@ -6171,20 +6177,20 @@ getValorAgregadoTrasteo(){
 //valor agregado para servicio llaves
 getValorAgregadoLlaves(){
 
- 
+
   let auxB64 =localStorage.getItem('base64');
 
   const headers = new HttpHeaders({'Content-Type': 'application/json','Authorization':'Basic '+auxB64,
   });
   console.log(headers);
    this.urlAuxName = 'http://164.92.106.39/incremento_llaves';
-  
+
      return this.http.get(this.urlAuxName, {headers:headers})
      .pipe(
        map((res :any)=>{
          return res;
         // console.log(res);
-        
+
        })
      )
 }
@@ -6192,20 +6198,20 @@ getValorAgregadoLlaves(){
 //valor agregado para servicio con carro
 getValorAgregadoVehiculo(){
 
- 
+
   let auxB64 =localStorage.getItem('base64');
 
   const headers = new HttpHeaders({'Content-Type': 'application/json','Authorization':'Basic '+auxB64,
   });
   console.log(headers);
    this.urlAuxName = 'http://164.92.106.39/incremento_vehiculo';
-  
+
      return this.http.get(this.urlAuxName, {headers:headers})
      .pipe(
        map((res :any)=>{
          return res;
         // console.log(res);
-        
+
        })
      )
 }
