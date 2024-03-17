@@ -110,7 +110,7 @@ export class ModoColaboradorPage implements OnInit {
   ngOnInit() {
 
      this.getGpsPermision();
-
+     this.getLocation();
     this.auth.consultarIdAuxiliar().subscribe(res => {
       console.log(res);
       console.log(res['0']['roles_target_id']);
@@ -205,7 +205,7 @@ export class ModoColaboradorPage implements OnInit {
       console.log(this.value);
 
       this.auth.getContenidoAsignado().subscribe(async res => {
-        console.log(res, ' respuesta');
+        console.log(res, ' respuesta contenido asignado');
         if (res.length == 0) {
           this.getLocation();
           this.estadoAuxiliar = 'Auxiliar Disponible';
