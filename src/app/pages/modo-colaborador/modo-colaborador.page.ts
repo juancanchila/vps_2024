@@ -267,7 +267,7 @@ export class ModoColaboradorPage implements OnInit {
 
 
           //document.getElementById('check').dis
-          this.ngOnInit();
+       
 
 
         } else {
@@ -374,6 +374,7 @@ this.value = false;
         const requesStatus = await Geolocation.requestPermissions();
         if( requesStatus.location != 'granted'){
 //go to setting
+this.geo.openSetting();
 return ;
         }
           

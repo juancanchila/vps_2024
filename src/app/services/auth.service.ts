@@ -1255,27 +1255,9 @@ sendFormularioRuta(user: FormularioI){
 
   async EnviarPosicionAuxiliar(){
 
-  if(this.longitud == undefined || this.latitud == undefined){
-    const alert = await this.alertControl.create({
+  
 
-      header: 'Notificación Vapaesa',
-
-      message: 'Presione aceptar para volver a enviar su Posición ',
-      // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-      buttons: [
-      {
-        text:'aceptar',
-        handler:()=>{
-         this.getLocation();
-         this.EnviarPosicionAuxiliar();
-        }
-
-      }]
-    });
-
-    await alert.present();
-
-  }else{
+  
     let sencilla = {
       "title":[{"value":'Posicion auxiliar'}],
 
@@ -1334,7 +1316,7 @@ sendFormularioRuta(user: FormularioI){
 
 
 
-  }
+  
 
 
 
@@ -1344,29 +1326,6 @@ sendFormularioRuta(user: FormularioI){
 //metodo para actualizar posicion
   async actualizarPosicionEnviadaAuxiliar(){
 
-    if(this.longitud == undefined || this.latitud == undefined){
-      const alert = await this.alertControl.create({
-
-        header: 'Notificación Vapaesa',
-
-        message: 'Presione aceptar para volver a enviar su Posición ',
-        // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-        buttons: [
-        {
-          text:'aceptar',
-          handler:()=>{
-            this.getLocation();
-            this.estadoPedido=true;
-            this.actualizarPosicionEnviadaAuxiliar();
-            this.actualizarDisponibleAuxiliar(true);
-          }
-
-        }]
-      });
-
-      await alert.present();
-
-    }else{
 
 
     let sencilla = {
@@ -1415,31 +1374,12 @@ sendFormularioRuta(user: FormularioI){
             },async error2=>{
               console.log(error2);
              this.errorPosicion =error2;
-             const alert = await this.alertControl.create({
-
-              header: 'Notificación Vapaesa',
-
-              message: 'Presione aceptar para volver a enviar su Posición ',
-              // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-              buttons: [
-              {
-                text:'aceptar',
-                handler:()=>{
-                  this.getLocation();
-                  this.estadoPedido=true;
-                  this.actualizarPosicionEnviadaAuxiliar();
-                  this.actualizarDisponibleAuxiliar(true);
-                }
-
-              }]
-            });
-
-            await alert.present();
+         
 
 
             });
 
-    }
+    
 
 
 
@@ -1455,6 +1395,7 @@ sendFormularioRuta(user: FormularioI){
         const requesStatus = await Geolocation.requestPermissions();
         if( requesStatus.location != 'granted'){
 //go to setting
+this.geolocation.openSetting();
 return ;
         }
 
