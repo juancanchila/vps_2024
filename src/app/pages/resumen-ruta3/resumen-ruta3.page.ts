@@ -85,11 +85,31 @@ export class ResumenRuta3Page implements OnInit {
     }
   }
    async irAPagar(){
-    if(this.aux=='false'){
-      this.presentAlert();
-      
-     }else{
-
+    
+  
+    if(1>2 ){
+      const alertElement= await this.alertController.create({
+           
+        header: '¡Su solicitud es mayor a 100000$ debe ser transportada en carro!',
+        message: '¿Desea ir a medio de transporte carro?',
+        
+        buttons: [
+          {
+          text:'cancel',
+          role:'this.auth.CrearSencilla(this.FormSend.value);'
+          
+        },
+        {
+          text:'aceptar',
+          handler:()=>{
+            this.router.navigate(['/transportes']);
+          }
+        }
+      ]
+      });
+    
+      await alertElement.present();
+    }else{
       if(this.estadoButton==true){
         this.estadoButton=false;
         setTimeout(() => {
@@ -110,9 +130,11 @@ export class ResumenRuta3Page implements OnInit {
           }, 15000);
      
       }
-     }
-  
-   
+
+     
+
+       
+    }
    
     
    

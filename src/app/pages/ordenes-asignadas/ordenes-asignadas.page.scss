@@ -1,4 +1,6 @@
 ion-title{
+    font-family: 'Montserrat', sans-serif;
+    margin-left: 10%;
     font-size: 17px;
     text-align: center;
     text-transform: uppercase;
@@ -31,6 +33,13 @@ ion-grid{
    
     
   }
+  .img-slider {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    
+  }
+  
 body{
     --ion-color-primary-contrast: #ffffff;
   }
@@ -59,9 +68,8 @@ h1.h1Observ {
     padding-top: 2%;
     padding-bottom: 2%;
 }
-img{
-    max-height: 100px;
-}
+
+
 small{
     font-size: 15px;
     color: white;

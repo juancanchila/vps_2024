@@ -68,6 +68,7 @@ PushNotifications.addListener('registration',
           this.guadarToken(token.value);
           localStorage.setItem('tokenFire',token.value);
   console.log('Push registration success, token: ' + token.value);
+ 
 }
 );
 

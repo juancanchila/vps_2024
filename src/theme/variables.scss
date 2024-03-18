@@ -112,23 +112,34 @@
 }
 
 .alertBreak{
+  .alert-button-inner.sc-ion-alert-md {
+    display: inline-block;
+  }
   .alert-button-group.sc-ion-alert-md {
     width: 100%;
 }
   button.botonBreak {
-    background: #d7d8da;
-    color: white;
+    background: #fff200;
+
     border-radius: 10px;
     text-align: center;
     width: 46%;
-    height: 45px;
+    color: black;
+    font-size: 11px;
+ 
+
 }
 
 button.botonPath{
-  background: #fff200;
-  color: white;
+
+  background: green;
+  fill: black; stroke: white; stroke-width: 3px; 
   border-radius: 10px;
+  text-align: center;
   width: 46%;
+ color: white;
+  font-size: 11px;
+ 
 }
 
 button.botonGp {

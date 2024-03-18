@@ -8,13 +8,13 @@ plugins {
 
 android {
     namespace "io.ionic.starter"
-    compileSdk 34
+    compileSdk 33
     defaultConfig {
 
         applicationId "com.vapaesa"
-        minSdkVersion 33
+        minSdkVersion 31
         //noinspection EditedTargetSdkVersion
-        targetSdkVersion 34
+        targetSdkVersion 33
         versionCode 10
         versionName "2.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

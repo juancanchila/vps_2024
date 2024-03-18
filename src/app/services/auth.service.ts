@@ -443,7 +443,7 @@ const headers = new HttpHeaders;
           this.getLocation();
           this.geolocation.requestPermissions();
          }
-
+this.enviarPushNotificacionAuxiliar();
         }else{
           alert('usuario ya esta logeado, debe cerrar sesion en el otro dispositivo');
         }
@@ -1281,20 +1281,9 @@ sendFormularioRuta(user: FormularioI){
        'X-CSRF-Token': this.tokencsrf});
 
        this.http.post('http://164.92.106.39/node?_format=hal_json',converSencilla,{headers:headers}).subscribe(async data2=>{
-        const alert = await this.alertControl.create({
+       
 
-          header: 'Notificación Vapaesa',
-
-          message: 'Posicion de auxiliar enviada ',
-          // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-          buttons: [
-          {
-            text:'aceptar',
-
-          }]
-        });
-
-        await alert.present();
+       
        console.log(data2);
 
        localStorage.setItem('nodeDisponibilidad',data2['nid']['0'].value);
@@ -1519,8 +1508,8 @@ return ;
   let body ={
 
 
-    "field_disponible":[{"value": estadoAuxiliar}],
-    "field_push_user":[{"value": localStorage.getItem('tokenFire')}]
+    "field_disponible":[{"value": estadoAuxiliar}]
+ 
 
 };
    console.log(this.tokencsrf,'aqui csrf');
@@ -1550,6 +1539,52 @@ return ;
 
 
 }
+
+//metodo para enviar id notificacion push
+
+  //metodo para actualizar disponibilidad
+  enviarPushNotificacionAuxiliar(){
+
+    //localStorage.getItem('sencillaCreada');
+    console.log('estamos aqui confirmado');
+  
+  
+    this.tokencsrf = localStorage.getItem("csrf_token");
+  
+  
+    let body ={
+  
+  
+      "field_push_user":[{"value": localStorage.getItem('tokenFire')}]
+  
+  };
+     console.log(this.tokencsrf,'aqui csrf');
+  
+     this.b64 = localStorage.getItem("base64").toString();
+     console.log(this.b64,'aqui b64');
+  
+  
+     const headers = new HttpHeaders({'Content-Type': 'application/json','Authorization':'Basic '+this.b64,
+     'X-CSRF-Token': this.tokencsrf});
+     console.log(headers,'aqui header en act met pago');
+     let url = 'http://164.92.106.39/user/'+localStorage.getItem('idAuxiliar')+'?_format=json';
+     console.log(url,'antes de patch');
+  
+  
+     this.http.patch(url,body,{headers:headers}).subscribe(data2=>{
+      console.log(data2);
+     // localStorage.setItem('sencillaCreada',data2['nid']['0']);
+          },error2=>{
+            console.log(error2);
+            if(error2.status==0){
+              alert('Error revise su conexion');
+              this.logout2();
+  
+            }
+          });
+  
+  
+  }
 
 //metodo para enviar la calificacion
 
@@ -4448,7 +4483,7 @@ logout2(){
              localStorage.removeItem('validadorCompras');
              localStorage.removeItem('nodeDisponibilidad');
              //localStorage.removeItem('tienda');
-             //localStorage.removeItem('Tienda');
+             localStorage.removeItem('modoAuxiliar');
 
 
 

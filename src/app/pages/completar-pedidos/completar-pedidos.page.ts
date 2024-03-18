@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Geolocation } from '@capacitor/geolocation';
 import { AlertController } from '@ionic/angular';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
+import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-completar-pedidos',
   templateUrl: './completar-pedidos.page.html',
@@ -62,7 +63,7 @@ export class CompletarPedidosPage implements OnInit {
   aux: string;
   character41: any;
   character42: any;
-  constructor(private clipboard: Clipboard,private alertControl: AlertController,private geo: GeolocationsService,private auth: AuthService,private router: Router,private _route: ActivatedRoute) { 
+  constructor(private navCtrl: NavController,private clipboard: Clipboard,private alertControl: AlertController,private geo: GeolocationsService,private auth: AuthService,private router: Router,private _route: ActivatedRoute) { 
 //this.geo.watchPosition();
 this.urlBase=environment.urlBase;
     this._route.paramMap.subscribe((params: ParamMap) =>  {
@@ -316,21 +317,21 @@ localStorage.setItem('colorButton', this.colorButton);
                   
         header: 'Notificación Vapaesa',
         
-        message: '¿Deseas colocarte disponible? O ¿Deseas Tomar Un Break',
+        message: '¿Deseas colocarte disponible o tomar un descanso?',
         cssClass: 'alertBreak',
         // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
         buttons: [
         {
           cssClass:'botonBreak',
-          text:'Tomar Break',
+          text:'Tomar Descanso',
           handler:()=>{
 
             setTimeout(() => {
             this.auth.actualizarEstadoPedidoCompletado();
           },4000)
             setTimeout(() => {
-              this.router.navigate(['/animacion']);
-            },10000)
+              this.navCtrl.navigateRoot('/animacion');
+            },5000)
           
           }
          
@@ -350,9 +351,9 @@ localStorage.setItem('colorButton', this.colorButton);
             this.auth.actualizarDisponibleAuxiliar(true);
             },4000),
             setTimeout(() => {
-       
-              this.router.navigate(['/animacion']);
-    },10000)
+              this.navCtrl.navigateRoot('/animacion');
+             
+    },5000)
            
             localStorage.setItem('estadoAuxiliar','Auxiliar Disponible');
             localStorage.removeItem('orden');

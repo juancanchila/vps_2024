@@ -1,7 +1,9 @@
 ion-title{
+    font-family: 'Montserrat', sans-serif;
     font-size: 17px;
     text-align: center;
     text-transform: uppercase;
+    margin-left: 10%;
 }
 ion-toolbar{
     color: white;
@@ -73,9 +75,13 @@ h1{
     margin: auto;
     
 }
-img{
-    max-height: 100px;
-}
+.img-slider {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+  }
+
+
 small{
     font-size: 15px;
     color: white;

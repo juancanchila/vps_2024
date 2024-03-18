@@ -1,6 +1,8 @@
 
 ion-title{
-    
+  font-family: 'Montserrat', sans-serif;
+
+    margin-left: 10%;
     text-align: center;
     text-transform: uppercase;
 }
@@ -21,8 +23,16 @@ ion-card{
   
     margin: 6%;
 }
+ion-col{
+  border-radius: 30%;
+}
 .ion-color-warning {
     --ion-color-base: #FFF200  !important;
+}
+.img-slider {
+  border-radius: 50%;
+  height: 100px;
+    width: 100px;
 }
 ion-grid{
     padding: 0;
@@ -65,9 +75,7 @@ small{
     
 }
 
-img{
-    max-height: 100px;
-}
+
 .rowBorder{
     height: 34px;
     padding: 0;

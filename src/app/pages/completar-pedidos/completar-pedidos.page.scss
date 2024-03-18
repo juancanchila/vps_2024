@@ -1,4 +1,5 @@
 ion-title{
+    font-family: 'Montserrat', sans-serif;
     text-align: center;
     text-transform: uppercase;
 }
@@ -41,9 +42,13 @@ ion-tab-bar{
     --ion-background-color: #262262;
 
 }
-img{
-    max-height: 100px;
-}
+.img-slider {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+  }
+
+
 ion-content{
     --background:#ecf0f1 url("/assets/botones/FONDOTIPOFACTURA-97-85.png") 0 0/100% 100% repeat; 
 }
@@ -90,21 +95,25 @@ small{
 }
 
 .botonBreak{
-    background: #d7d8da;
-    color: white;
-    border-radius: 10px;
-    button{
-      background: #d7d8da;
-      color: white;
-      border-radius: 10px;
-  }
-  }
-  .botonPath{
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
     background: #fff200;
     color: white;
     border-radius: 10px;
     button.alert-button.ion-focusable.ion-activatable.botonPath.sc-ion-alert-md {
       background: #fff200;
+      color: white;
+      border-radius: 10px;
+  }
+  }
+  .botonPath{
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    background: green;
+    color: white;
+    border-radius: 10px;
+    button.alert-button.ion-focusable.ion-activatable.botonPath.sc-ion-alert-md {
+      background: green;
       color: white;
       border-radius: 10px;
   }

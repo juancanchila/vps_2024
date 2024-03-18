@@ -165,13 +165,16 @@ export class ModoColaboradorPage implements OnInit {
         this.posicionActivaAuxiliar = res.length;
 
       } else {
+        
+        this.auth.estadoPedido=false;
         this.getLocation();
         this.auth.EnviarPosicionAuxiliar();
-        this.auth.estadoPedido=true;
-        this.auth.actualizarDisponibleAuxiliar(true);
-        this.estadoAuxiliar = 'Auxiliar Disponible';
+        
+        
+        this.estadoAuxiliar = 'Auxiliar Ocupado';
         this.posicionActivaAuxiliar = '0';
-        this.value = true;
+        this.value = false;
+        this.auth.actualizarDisponibleAuxiliar(false);
       }
 
 

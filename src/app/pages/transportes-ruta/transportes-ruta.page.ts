@@ -84,7 +84,7 @@ export class TransportesRutaPage implements OnInit {
   async selectMoto(){
     console.log(this.AuxMotosDisponibles.length);
 
-    if(this.AuxMotosDisponibles.length<=2){
+    if(this.AuxMotosDisponibles.length<1){
            
 
       const alert = await this.alertController.create({
@@ -119,7 +119,7 @@ export class TransportesRutaPage implements OnInit {
   }
   async selectCarro(){
     console.log(this.AuxCarrosDisponibles.length);
-    if(this.AuxCarrosDisponibles.length<=2){
+    if(this.AuxCarrosDisponibles.length<1){
             
 
       const alert = await this.alertController.create({
