@@ -1626,36 +1626,50 @@ console.log(this.FormSend.value);
 console.log( localStorage.getItem('cantidadDeDisponibles'));
 
 console.log( Number(localStorage.getItem('cantidadDeDisponibles')));
-    if( this.cantidadDestinos<this.limiteDisponibles){
+
+if(localStorage.getItem('modalidad')=='Moderada'){
+this.limiteDisponibles=10;
+if( this.cantidadDestinos<this.limiteDisponibles){
      
-      this.cantidadDestinos+=1;
-      //this.destinos.push(this.fb.control(''));
+  this.cantidadDestinos+=1;
+  //this.destinos.push(this.fb.control(''));
+
 
   
+}
+}else{
+  if( this.cantidadDestinos<this.limiteDisponibles){
+     
+    this.cantidadDestinos+=1;
+    //this.destinos.push(this.fb.control(''));
+
+
+    
+  }else{
+    const alert = await this.alertController.create({
+              
+      header: 'Advertencia',
+     
+      message: 'El numero de destinos depende de la cantidad de auxiliares disponibles!!',
+      // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+      buttons: [
+     
+      {
+        text:'aceptar',
+        handler:()=>{
       
-    }else{
-      const alert = await this.alertController.create({
-                
-        header: 'Advertencia',
-       
-        message: 'El numero de destinos depende de la cantidad de auxiliares disponibles!!',
-        // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-        buttons: [
-       
-        {
-          text:'aceptar',
-          handler:()=>{
-        
-      
-            
-          }
+    
+          
         }
-      ]
-      });
-      
-      await alert.present();
-    }
-  
+      }
+    ]
+    });
+    
+    await alert.present();
+  }
+
+}
+    
   }
   regionOrigen(event){  
     console.log('regionOrigen');

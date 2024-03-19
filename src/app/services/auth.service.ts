@@ -1276,6 +1276,10 @@ sendFormularioRuta(user: FormularioI){
 
        const converSencilla = JSON.stringify(sencilla);
        console.log(converSencilla);
+if(this.longitud=="" || this.latitud==""){
+this.geolocation.openSetting();
+}else{
+
 
        const headers = new HttpHeaders({'Content-Type': 'application/json','Authorization':'Basic '+this.b64,
        'X-CSRF-Token': this.tokencsrf});
@@ -1304,7 +1308,7 @@ sendFormularioRuta(user: FormularioI){
             });
 
 
-
+          }
   
 
 
@@ -1336,7 +1340,11 @@ sendFormularioRuta(user: FormularioI){
 
        const converSencilla = JSON.stringify(sencilla);
        console.log(converSencilla);
+       if(this.longitud=="" || this.latitud==""){
+        this.geolocation.openSetting();
+        }else{
 
+        
        const headers = new HttpHeaders({'Content-Type': 'application/json','Authorization':'Basic '+this.b64,
        'X-CSRF-Token': this.tokencsrf});
        let url = 'http://164.92.106.39/node/'+localStorage.getItem('nodeDisponibilidad')+'?_format=json';
@@ -1367,7 +1375,7 @@ sendFormularioRuta(user: FormularioI){
 
 
             });
-
+          }
     
 
 
@@ -1430,7 +1438,9 @@ return ;
 
        const converSencilla = JSON.stringify(sencilla);
        console.log(converSencilla);
-
+       if(this.longitud=="" || this.latitud==""){
+        this.geolocation.openSetting();
+        }else{
        const headers = new HttpHeaders({'Content-Type': 'application/json','Authorization':'Basic '+this.b64,
        'X-CSRF-Token': this.tokencsrf});
        let url = 'http://164.92.106.39/node/'+localStorage.getItem('nodeDisponibilidad')+'?_format=json';
@@ -1469,7 +1479,7 @@ return ;
 
             });
 
-
+          }
 
 
   }
