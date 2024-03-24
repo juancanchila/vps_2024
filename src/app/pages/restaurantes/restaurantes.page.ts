@@ -62,6 +62,10 @@ criterio:any;
      
     });
     this.auth.getSesion();
+
+    this.auth.filtroRestaurantes().subscribe(res =>{
+      console.log(res,'res filtro');
+    });
   }
   
   cargarTiendas(){

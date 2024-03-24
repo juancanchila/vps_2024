@@ -930,10 +930,10 @@ if( localStorage.getItem('locacionDestinoSeleccionada9') != localStorage.getItem
     //calculo total definitivo
     // Calcula el resultado total
     
-    console.log(resultadoTotalCostoDestino1 + resultadoTotalCostoDestino2 + resultadoTotalCostoDestino3 + resultadoTotalCostoDestino4 + resultadoTotalCostoDestino5 + resultadoTotalCostoDestino6 + resultadoTotalCostoDestino7 + TotalDefinitivoParaVehiculosDestino8 + resultadoTotalCostoDestino9, ' res total domicilio')
+    console.log(resultadoTotalCostoDestino1 + resultadoTotalCostoDestino2 + resultadoTotalCostoDestino3 + resultadoTotalCostoDestino4 + resultadoTotalCostoDestino5 + resultadoTotalCostoDestino6 + resultadoTotalCostoDestino7 + resultadoTotalCostoDestino8 + resultadoTotalCostoDestino9, ' res total domicilio')
     
     
-    var TotalDefinitivoParaVehiculos = resultadoTotalCostoDestino1 + resultadoTotalCostoDestino2 + resultadoTotalCostoDestino3  + resultadoTotalCostoDestino4 + resultadoTotalCostoDestino5 + resultadoTotalCostoDestino6 + resultadoTotalCostoDestino7 + TotalDefinitivoParaVehiculosDestino8 + resultadoTotalCostoDestino9;
+    var TotalDefinitivoParaVehiculos = resultadoTotalCostoDestino1 + resultadoTotalCostoDestino2 + resultadoTotalCostoDestino3  + resultadoTotalCostoDestino4 + resultadoTotalCostoDestino5 + resultadoTotalCostoDestino6 + resultadoTotalCostoDestino7 + resultadoTotalCostoDestino8 + resultadoTotalCostoDestino9;
     this.FormSend.controls.  field_precio_10.setValue(TotalDefinitivoParaVehiculos);
     localStorage.setItem('precioTarifaTotalRuta',TotalDefinitivoParaVehiculos.toString());
     }

@@ -592,7 +592,7 @@ WillEnterOrigen(){
  
         this.auth.getListBarriosSeleccion().subscribe(async data=>{
           console.log(data);
-          this.bloquearInputBarrio=false;
+         
           this.direccion= await data;
               },async error=>{
                
@@ -623,7 +623,7 @@ WillEnterOrigen(){
     console.log(this.direccion,'direccion');
 
     console.log(this.direccion.length);
-   
+    this.bloquearInputBarrio=false;
     //si barrios es 1 agregar por defecto y ocultar input barrio origen
     
     if(this.direccion.length==1 &&this.direccion[0]['name']!='San Andrés' ){
@@ -692,7 +692,7 @@ WillEnterOrigen(){
     
 
     
-   },4000)
+   },3000)
           
   }
   region(event){  

@@ -667,7 +667,7 @@ WillEnterOrigen(){
  
         this.auth.getListBarriosSeleccion().subscribe(async data=>{
           console.log(data);
-          this.bloquearInputBarrio=false;
+         
           this.direccion=await data;
               },async error=>{
                
@@ -695,6 +695,7 @@ WillEnterOrigen(){
   
  
   setTimeout(() => {
+    this.bloquearInputBarrio=false;
     console.log(this.direccion,'direccion');
 
     console.log(this.direccion.length);
@@ -771,7 +772,7 @@ WillEnterOrigen(){
     
 
     
-   },4000)
+   },3000)
           
   }
     

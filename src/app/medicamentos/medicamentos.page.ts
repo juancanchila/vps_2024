@@ -481,7 +481,7 @@ WillEnterOrigen(){
  
         this.auth.getListBarriosSeleccion().subscribe(async data=>{
           console.log(data);
-          this.bloquearInputBarrio=false;
+         
           this.direccion=await data;
               },async error=>{
                
@@ -510,7 +510,7 @@ WillEnterOrigen(){
  
   setTimeout(() => {
     console.log(this.direccion,'direccion');
-
+    this.bloquearInputBarrio=false;
     console.log(this.direccion.length);
    
     //si barrios es 1 agregar por defecto y ocultar input barrio origen
@@ -581,7 +581,7 @@ WillEnterOrigen(){
     
 
     
-   },4000)
+   },3000)
           
   }
   region(event){  

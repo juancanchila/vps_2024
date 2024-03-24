@@ -49,7 +49,8 @@ export class RutasPage implements OnInit {
    $respuesta_barrio_existe8:any;
    $respuesta_barrio_existe9:any;
    $respuesta_barrio_existe10:any;
-  public cantidadDestinos:number =2;
+   
+  public cantidadDestinos:number ;
   public num : 1;
   public aux:string;
   public sencilla:any;
@@ -208,19 +209,28 @@ field_nombre_c_destino2:[''],
    }
    ngOnInit() {
 
-    console.log( Number(localStorage.getItem('cantidadDeDisponibles')));
-    if( Number(localStorage.getItem('cantidadDeDisponibles')) >10){
-      this.limiteDisponibles=10;
-      
-      //this.destinos.push(this.fb.control(''));
 
-  
-      
+    if(localStorage.getItem('modalidad')=='Moderada'){
+      this.cantidadDestinos=8;
     }else{
-     
-        this.limiteDisponibles=Number(localStorage.getItem('cantidadDeDisponibles'))-1;
-      
+      this.cantidadDestinos=2;
+
+      console.log( Number(localStorage.getItem('cantidadDeDisponibles')));
+      if( Number(localStorage.getItem('cantidadDeDisponibles')) >10){
+        this.limiteDisponibles=10;
+        
+        //this.destinos.push(this.fb.control(''));
+  
+    
+        
+      }else{
+       
+          this.limiteDisponibles=Number(localStorage.getItem('cantidadDeDisponibles'))-1;
+        
+      }
     }
+
+   
     this.permitirPagoEfectivo=localStorage.getItem('permitirPagoefectivo');
     this.auth.getCiudad().subscribe(res =>{
       console.log(res, ' ciudad');
@@ -1422,196 +1432,398 @@ const alert = await this.alertController.create({
 console.log(this.FormSend.value);
 
 
-    if(this.FormSend.value['field_metodo_de_pago']==""){
-      const alert = await this.alertController.create({
-       
-        header: 'Datos incompletos ',
-       
-        message: 'llenar todos los datos.',
-        buttons: ['Aceptar']
-      });
-  
-      await alert.present();
-      return;
-    }else{
+//validar cuando sea moderada se necesita minimo un aux
 
-      
-      for(let i=0;i<this.ciudades.length;i++){
-        if(this.ciudades[i]['name']==localStorage.getItem('locacion')){
-          console.log(this.auth.medioTransporte,'estoy en ciudad');
 
-          console.log(this.FormSend.value['field_valor_declarado'], 'valor declarado');
-          console.log(this.AuxCarrosDisponibles, 'this.AuxCarrosDisponibles');
-          console.log('city');
-          if(this.auth.medioTransporte == 2 && this.AuxCarrosDisponibles>this.cantidadDestinos.toString()){
-            console.log('carro');
-            this.auth.sendFormularioRuta(this.FormSend.value);
-     localStorage.setItem('cantidadDestinosRutas',this.cantidadDestinos.toString());
-            if(this.cantidadDestinos==3){
-             this.router.navigate(['/resumen-ruta3']);
-            }else if(this.cantidadDestinos==4){
-             this.router.navigate(['/resumen-ruta4']);
-            } else
-            if(this.cantidadDestinos==5){
-             this.router.navigate(['/resumen-ruta5']);
-            }else
-            if(this.cantidadDestinos==6){
-             this.router.navigate(['/resumen-ruta6']);
-            }else
-            if(this.cantidadDestinos==7){
-             this.router.navigate(['/resumen-ruta7']);
-            }else
-            if(this.cantidadDestinos==8){
-             this.router.navigate(['/resumen-ruta8']);
-            }else
-            if(this.cantidadDestinos==9){
-             this.router.navigate(['/resumen-ruta9']);
-            }else
-            if(this.cantidadDestinos==10){
-             this.router.navigate(['/resumen-ruta10']);
-            }
-            else{
-             this.router.navigate(['/resumen-ruta']);
-            }
+if(localStorage.getItem('modalidad')=='Moderada'){
 
-          
-        
+  if(this.FormSend.value['field_metodo_de_pago']==""){
+    const alert = await this.alertController.create({
      
-            }else 
-              if( this.auth.medioTransporte == 1 &&  this.AuxMotosDisponibles['length']>this.cantidadDestinos){
-                localStorage.setItem('cantidadDestinosRutas',this.cantidadDestinos.toString());
-                this.auth.sendFormularioRuta(this.FormSend.value);
-       
-                if(this.cantidadDestinos==3){
-                 this.router.navigate(['/resumen-ruta3']);
-                }else if(this.cantidadDestinos==4){
-                 this.router.navigate(['/resumen-ruta4']);
-                } else
-                if(this.cantidadDestinos==5){
-                 this.router.navigate(['/resumen-ruta5']);
-                }else
-                if(this.cantidadDestinos==6){
-                 this.router.navigate(['/resumen-ruta6']);
-                }else
-                if(this.cantidadDestinos==7){
-                 this.router.navigate(['/resumen-ruta7']);
-                }else
-                if(this.cantidadDestinos==8){
-                 this.router.navigate(['/resumen-ruta8']);
-                }else
-                if(this.cantidadDestinos==9){
-                 this.router.navigate(['/resumen-ruta9']);
-                }else
-                if(this.cantidadDestinos==10){
-                 this.router.navigate(['/resumen-ruta10']);
-                }
-                else{
-                 this.router.navigate(['/resumen-ruta']);
-                }
-              
-              }else{
-                const alert = await this.alertController.create({
-                
-                  header: 'Advertencia',
-                 
-                  message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-                  // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-                  buttons: [
-                 
-                  {
-                    text:'aceptar',
-                    handler:()=>{
-                  
-                  this.router.navigate(['/tabs']);
-                      
-                    }
-                  }
-                ]
-                });
-                
-                await alert.present();
-  
-            }
-            
-
-              
-            
-            break;
-        }else{
-        
-          //pueblo
-          console.log('publo');
-
-          if(this.AuxDisponiblesMunicipios['length']==0){
-          
-            const alert = await this.alertController.create({
-                
-              header: 'Advertencia',
-             
-              message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-              // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-              buttons: [
-             
-              {
-                text:'aceptar',
-                handler:()=>{
-              
-              this.router.navigate(['/tabs']);
-                  
-                }
-              }
-            ]
-            });
-            
-            await alert.present();
-
-            
-
-           
-
-          }else if(this.AuxDisponiblesMunicipios>this.cantidadDestinos){
-            //
-            localStorage.setItem('cantidadDestinosRutas',this.cantidadDestinos.toString());
-            this.AuxDisponiblesMunicipios();
-            this.auth.sendFormularioRuta(this.FormSend.value);
+      header: 'Datos incompletos ',
      
-            if(this.cantidadDestinos==3){
-             this.router.navigate(['/resumen-ruta3']);
-            }else if(this.cantidadDestinos==4){
-             this.router.navigate(['/resumen-ruta4']);
-            } else
-            if(this.cantidadDestinos==5){
-             this.router.navigate(['/resumen-ruta5']);
-            }else
-            if(this.cantidadDestinos==6){
-             this.router.navigate(['/resumen-ruta6']);
-            }else
-            if(this.cantidadDestinos==7){
-             this.router.navigate(['/resumen-ruta7']);
-            }else
-            if(this.cantidadDestinos==8){
-             this.router.navigate(['/resumen-ruta8']);
-            }else
-            if(this.cantidadDestinos==9){
-             this.router.navigate(['/resumen-ruta9']);
-            }else
-            if(this.cantidadDestinos==10){
-             this.router.navigate(['/resumen-ruta10']);
-            }
-            else{
-             this.router.navigate(['/resumen-ruta']);
-            }
-            break;
+      message: 'llenar todos los datos.',
+      buttons: ['Aceptar']
+    });
+
+    await alert.present();
+    return;
+  }else{
+
+    
+    for(let i=0;i<this.ciudades.length;i++){
+      if(this.ciudades[i]['name']==localStorage.getItem('locacion')){
+        console.log(this.auth.medioTransporte,'estoy en ciudad');
+
+        console.log(this.FormSend.value['field_valor_declarado'], 'valor declarado');
+        console.log(this.AuxCarrosDisponibles, 'this.AuxCarrosDisponibles');
+        console.log('city');
+        if(this.auth.medioTransporte == 2 && this.AuxCarrosDisponibles['length']>=1){
+          console.log('carro');
+          this.auth.sendFormularioRuta(this.FormSend.value);
+   localStorage.setItem('cantidadDestinosRutas',this.cantidadDestinos.toString());
+          if(this.cantidadDestinos==3){
+           this.router.navigate(['/resumen-ruta3']);
+          }else if(this.cantidadDestinos==4){
+           this.router.navigate(['/resumen-ruta4']);
+          } else
+          if(this.cantidadDestinos==5){
+           this.router.navigate(['/resumen-ruta5']);
+          }else
+          if(this.cantidadDestinos==6){
+           this.router.navigate(['/resumen-ruta6']);
+          }else
+          if(this.cantidadDestinos==7){
+           this.router.navigate(['/resumen-ruta7']);
+          }else
+          if(this.cantidadDestinos==8){
+           this.router.navigate(['/resumen-ruta8']);
+          }else
+          if(this.cantidadDestinos==9){
+           this.router.navigate(['/resumen-ruta9']);
+          }else
+          if(this.cantidadDestinos==10){
+           this.router.navigate(['/resumen-ruta10']);
+          }
+          else{
+           this.router.navigate(['/resumen-ruta']);
           }
 
         
+      
+   
+          }else 
+            if( this.auth.medioTransporte == 1 &&  this.AuxMotosDisponibles['length']>=1){
+              localStorage.setItem('cantidadDestinosRutas',this.cantidadDestinos.toString());
+              this.auth.sendFormularioRuta(this.FormSend.value);
+     
+              if(this.cantidadDestinos==3){
+               this.router.navigate(['/resumen-ruta3']);
+              }else if(this.cantidadDestinos==4){
+               this.router.navigate(['/resumen-ruta4']);
+              } else
+              if(this.cantidadDestinos==5){
+               this.router.navigate(['/resumen-ruta5']);
+              }else
+              if(this.cantidadDestinos==6){
+               this.router.navigate(['/resumen-ruta6']);
+              }else
+              if(this.cantidadDestinos==7){
+               this.router.navigate(['/resumen-ruta7']);
+              }else
+              if(this.cantidadDestinos==8){
+               this.router.navigate(['/resumen-ruta8']);
+              }else
+              if(this.cantidadDestinos==9){
+               this.router.navigate(['/resumen-ruta9']);
+              }else
+              if(this.cantidadDestinos==10){
+               this.router.navigate(['/resumen-ruta10']);
+              }
+              else{
+               this.router.navigate(['/resumen-ruta']);
+              }
+            
+            }else{
+              const alert = await this.alertController.create({
+              
+                header: 'Advertencia',
+               
+                message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
+                // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+                buttons: [
+               
+                {
+                  text:'aceptar',
+                  handler:()=>{
+                
+                this.router.navigate(['/tabs']);
+                    
+                  }
+                }
+              ]
+              });
+              
+              await alert.present();
+
+          }
+          
+
+            
+          
+          break;
+      }else{
+      
+        //pueblo
+        console.log('publo');
+
+        if(this.AuxDisponiblesMunicipios['length']==0){
+        
+          const alert = await this.alertController.create({
+              
+            header: 'Advertencia',
+           
+            message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
+            // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+            buttons: [
+           
+            {
+              text:'aceptar',
+              handler:()=>{
+            
+            this.router.navigate(['/tabs']);
+                
+              }
+            }
+          ]
+          });
+          
+          await alert.present();
+
+          
+
+         
+
+        }else if(this.AuxDisponiblesMunicipios['length']>=1){
+          //
+          localStorage.setItem('cantidadDestinosRutas',this.cantidadDestinos.toString());
+          this.AuxDisponiblesMunicipios();
+          this.auth.sendFormularioRuta(this.FormSend.value);
+   
+          if(this.cantidadDestinos==3){
+           this.router.navigate(['/resumen-ruta3']);
+          }else if(this.cantidadDestinos==4){
+           this.router.navigate(['/resumen-ruta4']);
+          } else
+          if(this.cantidadDestinos==5){
+           this.router.navigate(['/resumen-ruta5']);
+          }else
+          if(this.cantidadDestinos==6){
+           this.router.navigate(['/resumen-ruta6']);
+          }else
+          if(this.cantidadDestinos==7){
+           this.router.navigate(['/resumen-ruta7']);
+          }else
+          if(this.cantidadDestinos==8){
+           this.router.navigate(['/resumen-ruta8']);
+          }else
+          if(this.cantidadDestinos==9){
+           this.router.navigate(['/resumen-ruta9']);
+          }else
+          if(this.cantidadDestinos==10){
+           this.router.navigate(['/resumen-ruta10']);
+          }
+          else{
+           this.router.navigate(['/resumen-ruta']);
+          }
+          break;
         }
-  
-       };
+
       
+      }
+
+     };
     
+  
+    
+  }
+  
+}else{
+  if(this.FormSend.value['field_metodo_de_pago']==""){
+    const alert = await this.alertController.create({
+     
+      header: 'Datos incompletos ',
+     
+      message: 'llenar todos los datos.',
+      buttons: ['Aceptar']
+    });
+
+    await alert.present();
+    return;
+  }else{
+
+    
+    for(let i=0;i<this.ciudades.length;i++){
+      if(this.ciudades[i]['name']==localStorage.getItem('locacion')){
+        console.log(this.auth.medioTransporte,'estoy en ciudad');
+
+        console.log(this.FormSend.value['field_valor_declarado'], 'valor declarado');
+        console.log(this.AuxCarrosDisponibles, 'this.AuxCarrosDisponibles');
+        console.log('city');
+        if(this.auth.medioTransporte == 2 && this.AuxCarrosDisponibles>this.cantidadDestinos.toString()){
+          console.log('carro');
+          this.auth.sendFormularioRuta(this.FormSend.value);
+   localStorage.setItem('cantidadDestinosRutas',this.cantidadDestinos.toString());
+          if(this.cantidadDestinos==3){
+           this.router.navigate(['/resumen-ruta3']);
+          }else if(this.cantidadDestinos==4){
+           this.router.navigate(['/resumen-ruta4']);
+          } else
+          if(this.cantidadDestinos==5){
+           this.router.navigate(['/resumen-ruta5']);
+          }else
+          if(this.cantidadDestinos==6){
+           this.router.navigate(['/resumen-ruta6']);
+          }else
+          if(this.cantidadDestinos==7){
+           this.router.navigate(['/resumen-ruta7']);
+          }else
+          if(this.cantidadDestinos==8){
+           this.router.navigate(['/resumen-ruta8']);
+          }else
+          if(this.cantidadDestinos==9){
+           this.router.navigate(['/resumen-ruta9']);
+          }else
+          if(this.cantidadDestinos==10){
+           this.router.navigate(['/resumen-ruta10']);
+          }
+          else{
+           this.router.navigate(['/resumen-ruta']);
+          }
+
+        
       
-    }
+   
+          }else 
+            if( this.auth.medioTransporte == 1 &&  this.AuxMotosDisponibles['length']>this.cantidadDestinos){
+              localStorage.setItem('cantidadDestinosRutas',this.cantidadDestinos.toString());
+              this.auth.sendFormularioRuta(this.FormSend.value);
+     
+              if(this.cantidadDestinos==3){
+               this.router.navigate(['/resumen-ruta3']);
+              }else if(this.cantidadDestinos==4){
+               this.router.navigate(['/resumen-ruta4']);
+              } else
+              if(this.cantidadDestinos==5){
+               this.router.navigate(['/resumen-ruta5']);
+              }else
+              if(this.cantidadDestinos==6){
+               this.router.navigate(['/resumen-ruta6']);
+              }else
+              if(this.cantidadDestinos==7){
+               this.router.navigate(['/resumen-ruta7']);
+              }else
+              if(this.cantidadDestinos==8){
+               this.router.navigate(['/resumen-ruta8']);
+              }else
+              if(this.cantidadDestinos==9){
+               this.router.navigate(['/resumen-ruta9']);
+              }else
+              if(this.cantidadDestinos==10){
+               this.router.navigate(['/resumen-ruta10']);
+              }
+              else{
+               this.router.navigate(['/resumen-ruta']);
+              }
+            
+            }else{
+              const alert = await this.alertController.create({
+              
+                header: 'Advertencia',
+               
+                message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
+                // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+                buttons: [
+               
+                {
+                  text:'aceptar',
+                  handler:()=>{
+                
+                this.router.navigate(['/tabs']);
+                    
+                  }
+                }
+              ]
+              });
+              
+              await alert.present();
+
+          }
+          
+
+            
+          
+          break;
+      }else{
+      
+        //pueblo
+        console.log('publo');
+
+        if(this.AuxDisponiblesMunicipios['length']==0){
+        
+          const alert = await this.alertController.create({
+              
+            header: 'Advertencia',
+           
+            message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
+            // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+            buttons: [
+           
+            {
+              text:'aceptar',
+              handler:()=>{
+            
+            this.router.navigate(['/tabs']);
+                
+              }
+            }
+          ]
+          });
+          
+          await alert.present();
+
+          
+
+         
+
+        }else if(this.AuxDisponiblesMunicipios>this.cantidadDestinos){
+          //
+          localStorage.setItem('cantidadDestinosRutas',this.cantidadDestinos.toString());
+          this.AuxDisponiblesMunicipios();
+          this.auth.sendFormularioRuta(this.FormSend.value);
+   
+          if(this.cantidadDestinos==3){
+           this.router.navigate(['/resumen-ruta3']);
+          }else if(this.cantidadDestinos==4){
+           this.router.navigate(['/resumen-ruta4']);
+          } else
+          if(this.cantidadDestinos==5){
+           this.router.navigate(['/resumen-ruta5']);
+          }else
+          if(this.cantidadDestinos==6){
+           this.router.navigate(['/resumen-ruta6']);
+          }else
+          if(this.cantidadDestinos==7){
+           this.router.navigate(['/resumen-ruta7']);
+          }else
+          if(this.cantidadDestinos==8){
+           this.router.navigate(['/resumen-ruta8']);
+          }else
+          if(this.cantidadDestinos==9){
+           this.router.navigate(['/resumen-ruta9']);
+          }else
+          if(this.cantidadDestinos==10){
+           this.router.navigate(['/resumen-ruta10']);
+          }
+          else{
+           this.router.navigate(['/resumen-ruta']);
+          }
+          break;
+        }
+
+      
+      }
+
+     };
+    
+  
+    
+  }
+}
+
+
+
+    
     
    
 
@@ -1628,6 +1840,7 @@ console.log( localStorage.getItem('cantidadDeDisponibles'));
 console.log( Number(localStorage.getItem('cantidadDeDisponibles')));
 
 if(localStorage.getItem('modalidad')=='Moderada'){
+
 this.limiteDisponibles=10;
 if( this.cantidadDestinos<this.limiteDisponibles){
      
@@ -1690,7 +1903,7 @@ WillEnterOrigen(){
  
         this.auth.getListBarriosSeleccion().subscribe(async data=>{
           console.log(data);
-          this.bloquearInputBarrio=false;
+       
           this.direccion=await data;
               },async error=>{
                
@@ -1721,7 +1934,7 @@ WillEnterOrigen(){
     console.log(this.direccion,'direccion');
 
     console.log(this.direccion.length);
-   
+    this.bloquearInputBarrio=false;
     //si barrios es 1 agregar por defecto y ocultar input barrio origen
     
     if(this.direccion.length==1 &&this.direccion[0]['name']!='San Andrés' ){
@@ -1790,7 +2003,7 @@ WillEnterOrigen(){
     
 
     
-   },4000)
+   },3000)
           
   }
   
@@ -2725,13 +2938,24 @@ console.log(this.cantidadDestinos);
 
 this.aux =""+this.cantidadDestinos;
      console.log(this.aux);
- 
-    if(this.cantidadDestinos>2){
-      cantidadDestinos = this.cantidadDestinos= this.cantidadDestinos- 1;
-     
-     //document.getElementById(this.aux).remove();
-  
+     if(localStorage.getItem('modalidad')=='Moderada'){
+      
+
+      if(this.cantidadDestinos>8){
+        cantidadDestinos = this.cantidadDestinos= this.cantidadDestinos- 1;
+       
+       //document.getElementById(this.aux).remove();
+    
+      }
+    }else{
+      if(this.cantidadDestinos>2){
+        cantidadDestinos = this.cantidadDestinos= this.cantidadDestinos- 1;
+       
+       //document.getElementById(this.aux).remove();
+    
+      }
     }
+    
    
      
   }
