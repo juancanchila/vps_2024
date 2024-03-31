@@ -12,7 +12,10 @@ import Swiper, { Autoplay, EffectFade, Pagination } from 'swiper';
   styleUrls: ['./restaurantes.page.scss'],
 })
 export class RestaurantesPage implements OnInit {
-  
+  filtroRestaurantes: any[] = [];
+  iconos: any[] = [];
+  filtroSeleccionado: string = '';
+
   fondo= "";
   
   store_id:any;
@@ -35,6 +38,17 @@ criterio:any;
     pagination:false,
     autoplay:{delay: 10000},
     EffectFade:true
+    
+  };
+
+  
+  public swiperConfig2={
+    slidesPerView: 4,
+    spaceBetween: 10,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false
+    }
     
   };
 
@@ -64,9 +78,42 @@ criterio:any;
     this.auth.getSesion();
 
     this.auth.filtroRestaurantes().subscribe(res =>{
+      this.filtroRestaurantes = res;
       console.log(res,'res filtro');
     });
   }
+
+  aplicarFiltro(filtro: string) {
+    console.log(filtro,'tofil');
+   
+    this.iconos.forEach(icono => {
+      icono.seleccionado = icono.filtro === filtro;
+  });
+    if (this.filtroSeleccionado === filtro) {
+     
+      this.ngOnInit();
+      this.filtroSeleccionado = "";
+         // Volver a cargar todos los restaurantes
+        
+    } else {
+        // Establecer el nuevo filtro seleccionado
+        this.filtroSeleccionado = filtro;
+        // Actualizar el estado de selección de cada ícono
+        this.iconos.forEach(icono => {
+            icono.seleccionado = icono.filtro === filtro;
+        });
+        // Resto del código...
+        this.auth.seleccionarRestaurantes().subscribe(res => {
+          this.character = res.filter(character => character.field_creiteria === filtro);
+          this.searched = this.character;
+          this.filtroSeleccionado = filtro;
+          
+      });
+    }
+    // Lógica para aplicar el filtro, por ejemplo, filtrar los restaurantes por el criterio seleccionado
+ 
+}
+
   
   cargarTiendas(){
     
@@ -123,106 +170,7 @@ criterio:any;
           })
         }
       }
-  iraSaludable(){
   
-
-    this.criterio='saludable'
-   
-    
-   
-   
-  //a la clase saludable asignar block ya  laos otras asignar none
-  console.log(this.criterio);  
-  
-  // si dark esta en blanco
-  if(this.sombra!="dark"){
-    this.sombra="dark";
-    this.sombra2="";
-    this.sombra3="";
-    this.sombra4="";
-    this.auth.seleccionarRestaurantes().subscribe(res =>{
-      console.log(res);
-      
-     
-      this.searched=res.filter(character => character.field_creiteria ==this.criterio);
-     
-    });
-  }else{
-    this.sombra="";
-    this.ngOnInit();
-  }
-  
-  }
-  iraDesayuno(){
-    this.criterio='desayuno'
-    if(this.sombra2!="dark"){
-      this.sombra2="dark";
-      this.sombra="";
-      this.sombra3="";
-      this.sombra4="";
-      this.auth.seleccionarRestaurantes().subscribe(res =>{
-        console.log(res);
-        
-       
-        this.searched=res.filter(character => character.field_creiteria ==this.criterio);
-       
-      });
-    }else{
-      this.sombra2="";
-      this.ngOnInit();
-    }
-    
-  
-   //
-
-
-   
-
-   //
-    
-    console.log(this.criterio);
-  }
-  iraPizza(){
-    this.criterio='pizza'
-    if(this.sombra3!="dark"){
-      this.sombra3="dark";
-      
-      this.sombra2="";
-      this.sombra="";
-      this.sombra4="";
-      this.auth.seleccionarRestaurantes().subscribe(res =>{
-        console.log(res);
-        
-       
-        this.searched=res.filter(character => character.field_creiteria ==this.criterio);
-       
-      });
-    }else{
-      this.sombra3="";
-      this.ngOnInit();
-    }
-    
-  }
-  iraTipica(){
-    this.criterio='tipica'
-    if(this.sombra4!="dark"){
-      this.sombra4="dark";
-      this.sombra="";
-      this.sombra3="";
-      this.sombra2="";
-      this.auth.seleccionarRestaurantes().subscribe(res =>{
-        console.log(res);
-        
-       
-        this.searched=res.filter(character => character.field_creiteria ==this.criterio);
-       
-      });
-    }else{
-      this.sombra4="";
-      this.ngOnInit();
-    }
-   
-  }
   // metodo para mostra popu en otros restaurantes
 
     async presentAlert() {

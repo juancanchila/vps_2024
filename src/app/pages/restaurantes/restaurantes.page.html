@@ -41,32 +41,19 @@
   <div class="content">
     <ion-button expand="large" class="botonRestaurante" (click)="buscarRestaurante()"> <span>¿No encuentras tu Restaurante?</span> </ion-button> 
     <ion-searchbar  placeholder="Buscar" animated (ionChange)="searchRestaurantes($event)"></ion-searchbar>
+    <swiper [config]="swiperConfig2">
+      <ng-template swiperSlide *ngFor="let filtro of filtroRestaurantes">
   <div class="content-botones">
-<div class="boton"    [ngClass]="sombra" >
-  <img (click)="iraSaludable()" class="img-etiquetas" src="../../assets/botones/ICONOCOLORS-91.png" alt="">
+<div class="boton"    [ngClass]="{'sombra': filtroSeleccionado  === filtro.field_filtro_restaurante}" (click)="aplicarFiltro(filtro.field_filtro_restaurante)">
+  <img class="img-etiquetas" [src]="urlBase + filtro.field_img_restaruante" alt="{{filtro.info}}" alt="">
   <br>
-  <h1  class="letter-center">Saludable</h1>
+  <h1  class="letter-center">{{filtro.info}}</h1>
 </div>
 
 
-<div class="boton"   [ngClass]="sombra2">
-  <img (click)="iraDesayuno()" class="img-etiquetas" src="../../assets/botones/ICONOOLORS-92.png" alt="">
-  <br>
-  <h1  class="letter-center">Desayuno</h1>
 </div>
-
-<div class="boton"   [ngClass]="sombra3">
-  <img (click)="iraPizza()" class="img-etiquetas" src="../../assets/botones/ICONOCOLORS-93.png" alt="">
-  <br>
-  <h1  class="letter-center">Pizza</h1>
-</div>
-
-<div class="boton"   [ngClass]="sombra4">
-  <img  (click)="iraTipica()" class="img-etiquetas" src="../../assets/botones/ICONOCOLORS-94.png" alt="">
-  <br>
-  <h1 class="letter-center">Tipica</h1>
-</div>
-</div>
+</ng-template>
+</swiper>
  
  
   

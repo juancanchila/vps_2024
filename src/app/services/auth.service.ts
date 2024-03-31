@@ -5543,7 +5543,7 @@ export class AuthService {
     console.log(headers, 'aqui header en act tiendas');
 
     return this.http
-      .get("http://164.92.106.39/filtro_restaurantes", { headers: headers })
+      .get("http://164.92.106.39/filtro_restaurantes?_format=json", { headers: headers })
       .pipe(
         map((res: any) => {
           return res;
@@ -5552,6 +5552,44 @@ export class AuthService {
     //this.router.navigate(['/rutas']);
 
   }
+
+  //filtro emprendedores
+  filtroEmprendedores() {
+
+    console.log('tiendas restaurantes');
+    //localStorage.getItem('sencillaCreada');
+    console.log('estamos aqui confirmado');
+    this.nodoCreado = localStorage.getItem('sencillaCreada');
+    console.log(localStorage.getItem('sencillaCreada'), 'aqui con tostring tiendas');
+
+    this.getToken();
+    //console.log(sencilla);
+    this.tokencsrf = localStorage.getItem("csrf_token");
+
+
+    console.log(this.newXscrf, 'aqui new csrf');
+
+    this.b64 = localStorage.getItem("base64").toString();
+    console.log(this.b64, 'aqui b64');
+
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json', 'Authorization': 'Basic ' + this.b64,
+      'X-CSRF-Token': this.tokencsrf
+    });
+    console.log(headers, 'aqui header en act tiendas');
+
+    return this.http
+      .get("http://164.92.106.39//fiiltro_emprendedores?_format=json", { headers: headers })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      )
+    //this.router.navigate(['/rutas']);
+
+  }
+
 
   seleccionarProductosTiendas() {
 

@@ -10,6 +10,7 @@ import Swiper, { Autoplay, EffectFade, Pagination } from 'swiper';
   styleUrls: ['./emprendedores.page.scss'],
 })
 export class EmprendedoresPage implements OnInit {
+  filtroEmprededores: any[] = [];
   store_id:any;
 
   character: any =[];
@@ -55,6 +56,11 @@ export class EmprendedoresPage implements OnInit {
     }),error2=>{
       console.log(error2,'error emprendedroes');
     };
+
+    this.auth.filtroEmprendedores().subscribe(res =>{
+      this.filtroEmprededores = res;
+      console.log(res,'res filtro');
+    });
   }
   doRefresh(event) {
     this.ngOnInit();
