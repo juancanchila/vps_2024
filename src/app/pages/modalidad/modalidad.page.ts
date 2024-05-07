@@ -84,74 +84,26 @@ export class ModalidadPage implements OnInit {
     console.log(this.AuxMotosDisponibles.length,'cantidad motos');
     console.log(this.AuxCarrosDisponibles.length,'cantidad carros');
 
-    if(this.AuxMotosDisponibles.length>=3 || this.AuxCarrosDisponibles.length>=3){
-
-
-      const alert = await this.alertController.create({
-
-        header: 'Advertencia',
-
-        message: 'En este momento no tenemos auxiliar disponible',
-        // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-        buttons: [
-
-        {
-          text:'aceptar',
-          handler:()=>{
-        this.ngOnInit();
-        //this.router.navigate(['/tabs']);
-
-          }
-        }
-      ]
-      });
-
-      await alert.present();
-
-    }else{
+    
 
         localStorage.setItem('modalidad','Agil');
         this.router.navigate(['/transportes-ruta']);
 
 
-    }
+    
 
   }
   async selectModerada(){
  
     console.log(this.AuxMotosDisponibles.length,'cantidad motos');
     console.log(this.AuxCarrosDisponibles.length,'cantidad carros');
-    if(this.AuxMotosDisponibles.length==0 && this.AuxCarrosDisponibles.length==0){
 
-
-      const alert = await this.alertController.create({
-
-        header: 'Advertencia',
-
-        message: 'En este momento no tenemos auxiliar disponible',
-        // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-        buttons: [
-
-        {
-          text:'aceptar',
-          handler:()=>{
-        this.ngOnInit();
-       
-
-          }
-        }
-      ]
-      });
-
-      await alert.present();
-
-    }else{
 
         localStorage.setItem('modalidad','Moderada');
         this.router.navigate(['/transportes-ruta']);
 
 
-    }
+
 
 
 

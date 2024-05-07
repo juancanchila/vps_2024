@@ -132,27 +132,43 @@ export class ModoColaboradorPage implements OnInit {
 
         if (res['0']['field_estado'] == 'On') {
           this.getLocation();
-          this.estadoAuxiliar = 'Auxiliar Disponible';
-          this.value = true;
-          //
-          
-          this.auth.estadoPedido = true;
-          this.auth.actualizarPosicionEnviadaAuxiliar();
 
-          this.auth.actualizarDisponibleAuxiliar(true);
+          if (this.auth.longitud === "" || this.auth.latitud === "") {
+            this.geo.openSetting();
+         
+          }else{
 
-          localStorage.setItem('nodeDisponibilidad_estado', res['0']['field_estado']);
-          localStorage.setItem('nodeDisponibilidad', res['0']['nid']);
+            this.estadoAuxiliar = 'Auxiliar Disponible';
+            this.value = true;
+            //
+            
+            this.auth.estadoPedido = true;
+            this.auth.actualizarPosicionEnviadaAuxiliar();
+  
+            this.auth.actualizarDisponibleAuxiliar(true);
+  
+            localStorage.setItem('nodeDisponibilidad_estado', res['0']['field_estado']);
+            localStorage.setItem('nodeDisponibilidad', res['0']['nid']);
+          }
+         
         } else {
           this.getLocation();
-          this.estadoAuxiliar = 'Auxiliar Ocupado';
 
-          this.value = false;
-          this.auth.estadoPedido = false;
-          this.auth.actualizarDisponibleAuxiliar(false);
-          this.auth.actualizarPosicionEnviadaAuxiliarOcupado();
-          localStorage.setItem('nodeDisponibilidad_estado', res['0']['field_estado']);
-          localStorage.setItem('nodeDisponibilidad', res['0']['nid']);
+          if (this.auth.longitud === "" || this.auth.latitud === "") {
+            this.geo.openSetting();
+         
+          }else{
+
+            this.estadoAuxiliar = 'Auxiliar Ocupado';
+
+            this.value = false;
+            this.auth.estadoPedido = false;
+            this.auth.actualizarDisponibleAuxiliar(false);
+            this.auth.actualizarPosicionEnviadaAuxiliarOcupado();
+            localStorage.setItem('nodeDisponibilidad_estado', res['0']['field_estado']);
+            localStorage.setItem('nodeDisponibilidad', res['0']['nid']);
+          }
+         
 
           //
 
@@ -168,13 +184,20 @@ export class ModoColaboradorPage implements OnInit {
         
         this.auth.estadoPedido=false;
         this.getLocation();
-        this.auth.EnviarPosicionAuxiliar();
+        if (this.auth.longitud === "" || this.auth.latitud === "") {
+          this.geo.openSetting();
+       
+        }else{
+
+          this.auth.EnviarPosicionAuxiliar();
         
         
-        this.estadoAuxiliar = 'Auxiliar Ocupado';
-        this.posicionActivaAuxiliar = '0';
-        this.value = false;
-        this.auth.actualizarDisponibleAuxiliar(false);
+          this.estadoAuxiliar = 'Auxiliar Ocupado';
+          this.posicionActivaAuxiliar = '0';
+          this.value = false;
+          this.auth.actualizarDisponibleAuxiliar(false);
+        }
+       
       }
 
 
@@ -211,21 +234,30 @@ export class ModoColaboradorPage implements OnInit {
         console.log(res, ' respuesta contenido asignado');
         if (res.length == 0) {
           this.getLocation();
-          this.estadoAuxiliar = 'Auxiliar Disponible';
-          this.value = true;
 
+          //validar que no envie posicion en blanco
+          if (this.auth.longitud === "" || this.auth.latitud === "") {
+            this.geo.openSetting();
+         
+          }else{
 
-          
-          this.auth.estadoPedido = true;
-          this.auth.actualizarPosicionEnviadaAuxiliar();
-
-          this.auth.actualizarDisponibleAuxiliar(true);
-
-          //this.ngOnInit();
-
-
-          //document.getElementById('check').dis
-
+            this.estadoAuxiliar = 'Auxiliar Disponible';
+            this.value = true;
+  
+  
+            
+            this.auth.estadoPedido = true;
+            this.auth.actualizarPosicionEnviadaAuxiliar();
+  
+            this.auth.actualizarDisponibleAuxiliar(true);
+  
+            //this.ngOnInit();
+  
+  
+            //document.getElementById('check').dis
+  
+          }
+         
 
 
         } else {
@@ -261,14 +293,24 @@ export class ModoColaboradorPage implements OnInit {
 
 
           this.getLocation();
-          this.auth.estadoPedido = false;
-          this.auth.actualizarPosicionEnviadaAuxiliarOcupado();
 
-          this.auth.actualizarDisponibleAuxiliar(false);
-          
+           //validar que no envie posicion en blanco
+           if (this.auth.longitud === "" || this.auth.latitud === "") {
+            this.geo.openSetting();
+         
+          }else{
 
+            this.auth.estadoPedido = false;
+            this.auth.actualizarPosicionEnviadaAuxiliarOcupado();
+  
+            this.auth.actualizarDisponibleAuxiliar(false);
+            
+  
+  
+  
 
-
+          }
+         
           //document.getElementById('check').dis
        
 

@@ -1283,12 +1283,13 @@ export class AuthService {
 
     this.resumen = sencilla;
 
+
     const converSencilla = JSON.stringify(sencilla);
     console.log(converSencilla);
-    if (this.longitud == "" || this.latitud == "") {
+    if (sencilla.field_longitud_actual[0].value == undefined||sencilla.field_latitud_actual[0].value == undefined) {
       this.geolocation.openSetting();
+   
     } else {
-
 
       const headers = new HttpHeaders({
         'Content-Type': 'application/json', 'Authorization': 'Basic ' + this.b64,
@@ -1351,7 +1352,7 @@ export class AuthService {
 
     const converSencilla = JSON.stringify(sencilla);
     console.log(converSencilla);
-    if (this.longitud == "" || this.latitud == "") {
+    if (sencilla.field_longitud_actual[0].value == undefined||sencilla.field_latitud_actual[0].value == undefined) {
       this.geolocation.openSetting();
     } else {
 
@@ -1451,8 +1452,10 @@ export class AuthService {
 
     const converSencilla = JSON.stringify(sencilla);
     console.log(converSencilla);
-    if (this.longitud == "" || this.latitud == "") {
+    console.log('lengnt',sencilla.field_longitud_actual.length,'sin lenght',sencilla.field_longitud_actual[0].value , 'aver lengt' ,sencilla.field_latitud_actual.length,'sin lengt',sencilla.field_latitud_actual[0].value);
+    if (sencilla.field_longitud_actual[0].value == undefined||sencilla.field_latitud_actual[0].value == undefined) {
       this.geolocation.openSetting();
+   
     } else {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json', 'Authorization': 'Basic ' + this.b64,
