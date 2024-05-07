@@ -133,7 +133,7 @@
           <ion-label > <b>¿A Dónde te acompaño?</b> </ion-label>
     
           <ion-item  >
-            <ion-select  (ionChange)="region($event.target.value)"   formControlName="field_locacion_destino" class="locacion">
+            <ion-select  (ionChange)="regionDestino($event.target.value)"   formControlName="field_locacion_destino" class="locacion">
       
               <ion-select-option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</ion-select-option>
               

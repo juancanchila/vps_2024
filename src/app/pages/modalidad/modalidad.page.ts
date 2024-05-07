@@ -84,7 +84,7 @@ export class ModalidadPage implements OnInit {
     console.log(this.AuxMotosDisponibles.length,'cantidad motos');
     console.log(this.AuxCarrosDisponibles.length,'cantidad carros');
 
-    if(this.AuxMotosDisponibles.length<3 || this.AuxCarroDisponibles<3){
+    if(this.AuxMotosDisponibles.length>=3 || this.AuxCarrosDisponibles.length>=3){
 
 
       const alert = await this.alertController.create({
@@ -121,7 +121,7 @@ export class ModalidadPage implements OnInit {
  
     console.log(this.AuxMotosDisponibles.length,'cantidad motos');
     console.log(this.AuxCarrosDisponibles.length,'cantidad carros');
-    if(this.AuxMotosDisponibles.length==0 && this.AuxCarroDisponibles==0){
+    if(this.AuxMotosDisponibles.length==0 && this.AuxCarrosDisponibles.length==0){
 
 
       const alert = await this.alertController.create({

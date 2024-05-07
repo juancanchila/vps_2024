@@ -81,66 +81,137 @@ locacion:any;
     console.log("Trasnportes- OnDestroy")
   }
   async selectMoto(){
-    if(this.AuxMotosDisponibles.length==0){
+
+    if(localStorage.getItem('mensajeria')=='sencilla'){
+      if(this.AuxMotosDisponibles.length==0){
             
 
-      const alert = await this.alertController.create({
-        
-        header: 'Advertencia',
-       
-        message: 'En este momento no tenemos auxiliar disponible en moto',
-        // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-        buttons: [
-       
-        {
-          text:'aceptar',
-          handler:()=>{
-            this.ionViewWillEnter();
-        //this.router.navigate(['/tabs']);
-            
+        const alert = await this.alertController.create({
+          
+          header: 'Advertencia',
+         
+          message: 'En este momento no tenemos auxiliar disponible en moto',
+          // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+          buttons: [
+         
+          {
+            text:'aceptar',
+            handler:()=>{
+              this.ionViewWillEnter();
+          //this.router.navigate(['/tabs']);
+              
+            }
           }
-        }
-      ]
-      });
+        ]
+        });
+        
+        await alert.present();
+  
+      }else{
       
-      await alert.present();
+        this.auth.seleccionarMoto();
+      }
+     
+     
 
-    }else{
-    
-      this.auth.seleccionarMoto();
+    }else  if(localStorage.getItem('mensajeria')=='llaves'){
+
+      if(this.AuxMotosDisponibles.length==0){
+            
+
+        const alert = await this.alertController.create({
+          
+          header: 'Advertencia',
+         
+          message: 'En este momento no tenemos auxiliar disponible en moto',
+          // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+          buttons: [
+         
+          {
+            text:'aceptar',
+            handler:()=>{
+              this.ionViewWillEnter();
+          //this.router.navigate(['/tabs']);
+              
+            }
+          }
+        ]
+        });
+        
+        await alert.present();
+  
+      }else{
+      
+        this.auth.seleccionarMotollaves();
+      }
+     
     }
-   
    
   }
   async selectCarro(){
-    if(this.AuxCarrosDisponibles.length==0){
+    if(localStorage.getItem('mensajeria')=='sencilla'){
+      if(this.AuxCarrosDisponibles.length==0){
             
 
-      const alert = await this.alertController.create({
-        
-        header: 'Advertencia',
-       
-        message: 'En este momento no tenemos auxiliar disponible en carro',
-        // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-        buttons: [
-       
-        {
-          text:'aceptar',
-          handler:()=>{
-            this.ionViewWillEnter();
-        //this.router.navigate(['/tabs']);
-            
+        const alert = await this.alertController.create({
+          
+          header: 'Advertencia',
+         
+          message: 'En este momento no tenemos auxiliar disponible en carro',
+          // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+          buttons: [
+         
+          {
+            text:'aceptar',
+            handler:()=>{
+              this.ionViewWillEnter();
+          //this.router.navigate(['/tabs']);
+              
+            }
           }
-        }
-      ]
-      });
+        ]
+        });
+        
+        await alert.present();
+  
+      }else{
       
-      await alert.present();
+        this.auth.seleccionarCarro();
+      }
+    }else if(localStorage.getItem('mensajeria')=='llaves'){
+      
+   
+      if(this.AuxCarrosDisponibles.length==0){
+            
 
-    }else{
-    
-      this.auth.seleccionarCarro();
+        const alert = await this.alertController.create({
+          
+          header: 'Advertencia',
+         
+          message: 'En este momento no tenemos auxiliar disponible en carro',
+          // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+          buttons: [
+         
+          {
+            text:'aceptar',
+            handler:()=>{
+              this.ionViewWillEnter();
+          //this.router.navigate(['/tabs']);
+              
+            }
+          }
+        ]
+        });
+        
+        await alert.present();
+  
+      }else{
+      
+        this.auth.seleccionarCarroLlaves();
+      }
     }
+    
+  
   
   }
 }

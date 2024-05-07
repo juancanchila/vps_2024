@@ -207,7 +207,7 @@ field_barrio_origen:[""],
 
   this.FormSend.controls.field_contacto.setValue(this.auth.resumen.field_contacto['0']['value']);
  // this.FormSend.controls.field_observaciones.setValue(this.auth.resumen.field_observaciones['0']['value']);
-  this.FormSend.controls.field_tema_de_interes.setValue(this.auth.resumen.field_tema_de_interes['0']['value']);
+  //this.FormSend.controls.field_tema_de_interes.setValue(this.auth.resumen.field_tema_de_interes['0']['value']);
 
   this.FormSend.controls.field_direccion_entrega.setValue(this.auth.resumen.field_direccion_entrega['0']['value']);
   this.FormSend.controls.field_direccion_destino.setValue(this.auth.resumen.field_direccion_destino['0']['value']);
@@ -216,7 +216,7 @@ field_barrio_origen:[""],
   this.FormSend.controls.field_locacion_destino.setValue(this.auth.resumen.field_locacion_destino['0']['value']);
 
   this.FormSend.controls.field_ida_y_vuelta.setValue(this.auth.resumen.field_ida_y_vuelta['0']['value']);
-  this.FormSend.controls.field_musica_preferida.setValue(this.auth.resumen.field_musica_preferida['0']['value']);
+  //this.FormSend.controls.field_musica_preferida.setValue(this.auth.resumen.field_musica_preferida['0']['value']);
  
   this.FormSend.controls.field_medio_de_transporte.setValue(this.auth.medioTransporte);
   this.FormSend.controls.field_prefijo_destino.setValue(this.auth.resumen.field_prefijo_destino['0']['value']);
@@ -265,6 +265,8 @@ field_barrio_origen:[""],
   }
 
    //imprimir por consola file precio si es vehiculo le sumo el porcentaje
+
+ 
    console.log(Number(this.FormSend.controls.field_precio_.value), 'precio costo domicilio');
 
    
@@ -283,9 +285,17 @@ field_barrio_origen:[""],
    console.log("Porcentaje de Valor Agregado:", porcentaje)
    console.log("Resultado Total de Costo + porcentaje:", resultadoTotalCosto + porcentaje);
    var TotalDefinitivoParaVehiculos = resultadoTotalCosto + porcentaje;
-   this.FormSend.controls.  field_precio_.setValue(TotalDefinitivoParaVehiculos);
-   localStorage.setItem('precioTarifa',this.FormSend.controls.field_precio_.value);
-   
+ 
+ 
+   if(this.auth.medioTransporte==2){
+ 
+    this.FormSend.controls.  field_precio_.setValue(TotalDefinitivoParaVehiculos);
+    localStorage.setItem('precioTarifa',this.FormSend.controls.field_precio_.value);
+    
+   }else{
+    this.FormSend.controls.  field_precio_.setValue(resultadoTotalCosto);
+    localStorage.setItem('precioTarifa',this.FormSend.controls.field_precio_.value);
+   }
 
 
   

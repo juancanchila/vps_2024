@@ -39,71 +39,17 @@
   <div class="content">
     <ion-searchbar placeholder="Buscar" animated (ionChange)="searchEmprendedores($event)"></ion-searchbar>
 
-    <swiper [config]="swiperConfig">
+    <swiper [config]="swiperConfig2">
 
-    <ng-template swiperSlide >
+    <ng-template swiperSlide *ngFor="let filtro of filtroEmprendedores" >
       <div class="content-botones" >
         
-        <div  class="boton" [ngClass]="sombra" >
-          <img (click)="iraMetodo1()" class="img-etiquetas" src="../../assets/botones/ICemprendedores_Mesa de trabajo1.png" alt="">
+        <div  class="boton"  [ngClass]="{'sombra': filtroSeleccionado  === filtro.field_criterio}" (click)="aplicarFiltro(filtro.field_criterio)" >
+          <img  class="img-etiquetas" [src]="urlBase + filtro.field_img_emprendedor" alt="{{filtro.info}}" alt="">
           <br>
-          <h1 class="letter-center">Mascotas</h1>
+          <h1 class="letter-center">{{filtro.info}}</h1>
         </div>
 
-        
-        <div  class="boton" [ngClass]="sombra2" >
-          <img (click)="iraMetodo2()" class="img-etiquetas" src="../../assets/botones/ICemprendedores_Mesa de trabajo2.png" alt="">
-          <br>
-          <h1 class="letter-center">Bebidas</h1>
-        </div>
-
-        
-        <div  class="boton" [ngClass]="sombra3" >
-          <img (click)="iraMetodo3()" class="img-etiquetas" src="../../assets/botones/ICemprendedores_Mesa de trabajo3.png" alt="">
-          <br>
-          <h1 class="letter-center">Tiempo</h1>
-        </div>
-
-        
-        <div  class="boton" [ngClass]="sombra4" >
-          <img (click)="iraMetodo4()" class="img-etiquetas" src="../../assets/botones/ICemprendedores_Mesa de trabajo4.png" alt="">
-          <br>
-          <h1 class="letter-center">Tractor</h1>
-        </div>
-          
-      
-  
-      </div>
-    </ng-template>
-    <ng-template swiperSlide >
-      <div class="content-botones" >
-        
-        <div  class="boton" [ngClass]="sombra5">
-          <img (click)="iraMetodo5()" class="img-etiquetas" src="../../assets/botones/ICemprendedores_Mesa de trabajo5.png" alt="">
-          <br>
-          <h1 class="letter-center">Zapatos</h1>
-        </div>
-
-        
-        <div  class="boton" [ngClass]="sombra6">
-          <img (click)="iraMetodo6()" class="img-etiquetas" src="../../assets/botones/ICemprendedores_Mesa de trabajo6.png" alt="">
-          <br>
-          <h1 class="letter-center">Gorras</h1>
-        </div>
-
-        
-        <div  class="boton" [ngClass]="sombra7">
-          <img (click)="iraMetodo7()" class="img-etiquetas" src="../../assets/botones/ICemprendedores_Mesa de trabajo7.png" alt="">
-          <br>
-          <h1 class="letter-center">Sueteres</h1>
-        </div>
-
-        
-        <div  class="boton" [ngClass]="sombra8">
-          <img (click)="iraMetodo8()" class="img-etiquetas" src="../../assets/botones/ICemprendedores_Mesa de trabajo8.png" alt="">
-          <br>
-          <h1 class="letter-center">Aretes</h1>
-        </div>
           
       
   

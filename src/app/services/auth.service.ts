@@ -5415,6 +5415,29 @@ export class AuthService {
 
   }
 
+  //moto llaves
+  seleccionarMotollaves() {
+    this.medioTransporte = 1;
+  
+    console.log(this.medioTransporte);
+
+
+
+    this.router.navigate(['/llaves']);
+
+  }
+
+  //carro llaves
+  seleccionarCarroLlaves() {
+    this.medioTransporte = 2;
+
+    console.log(this.medioTransporte);
+  
+
+
+    this.router.navigate(['/llaves']);
+
+  }
 
   consultarIdAuxiliar() {
 

@@ -643,7 +643,11 @@ break;
           console.log('Barrios ok');
           
           this.swiper.swiperRef.slideNext(1000);
-          document.getElementById('myAnchor').scrollIntoView();
+          const anchorElement = document.getElementById("myAnchor");
+  if (anchorElement) {
+    // Desplazar la ventana de visualización hasta el elemento "myAnchor" con una animación suave
+    anchorElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
          
         }else{
 const alert = await this.alertController.create({
@@ -678,7 +682,11 @@ const alert = await this.alertController.create({
      if( this.$respuesta_barrio_existe1['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe2['__zone_symbol__value'] == true  &&  this.$respuesta_barrio_existe3['__zone_symbol__value'] == true ){
        console.log('Barrios ok');
        this.swiper.swiperRef.slideNext(1000);
-       document.getElementById('myAnchor').scrollIntoView();
+       const anchorElement = document.getElementById("myAnchor");
+  if (anchorElement) {
+    // Desplazar la ventana de visualización hasta el elemento "myAnchor" con una animación suave
+    anchorElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
      }else{
 const alert = await this.alertController.create({
              
@@ -711,7 +719,11 @@ const alert = await this.alertController.create({
         if( this.$respuesta_barrio_existe1['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe2['__zone_symbol__value'] == true  &&  this.$respuesta_barrio_existe3['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe4['__zone_symbol__value'] == true ){
           console.log('Barrios ok');
           this.swiper.swiperRef.slideNext(1000);
-          document.getElementById('myAnchor').scrollIntoView();
+          const anchorElement = document.getElementById("myAnchor");
+  if (anchorElement) {
+    // Desplazar la ventana de visualización hasta el elemento "myAnchor" con una animación suave
+    anchorElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
         }else{
 const alert = await this.alertController.create({
                 
@@ -745,7 +757,11 @@ const alert = await this.alertController.create({
         if( this.$respuesta_barrio_existe1['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe2['__zone_symbol__value'] == true  &&  this.$respuesta_barrio_existe3['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe4['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe5['__zone_symbol__value'] == true){
           console.log('Barrios ok');
           this.swiper.swiperRef.slideNext(1000);
-          document.getElementById('myAnchor').scrollIntoView();
+          const anchorElement = document.getElementById("myAnchor");
+  if (anchorElement) {
+    // Desplazar la ventana de visualización hasta el elemento "myAnchor" con una animación suave
+    anchorElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
         }else{
 const alert = await this.alertController.create({
                 
@@ -780,7 +796,11 @@ const alert = await this.alertController.create({
         if( this.$respuesta_barrio_existe1['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe2['__zone_symbol__value'] == true  &&  this.$respuesta_barrio_existe3['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe4['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe5['__zone_symbol__value'] == true  &&  this.$respuesta_barrio_existe6['__zone_symbol__value'] == true){
           console.log('Barrios ok');
           this.swiper.swiperRef.slideNext(1000);
-          document.getElementById('myAnchor').scrollIntoView();
+          const anchorElement = document.getElementById("myAnchor");
+  if (anchorElement) {
+    // Desplazar la ventana de visualización hasta el elemento "myAnchor" con una animación suave
+    anchorElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
         }else{
 const alert = await this.alertController.create({
                 
@@ -815,7 +835,11 @@ const alert = await this.alertController.create({
         if( this.$respuesta_barrio_existe1['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe2['__zone_symbol__value'] == true  &&  this.$respuesta_barrio_existe3['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe4['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe5['__zone_symbol__value'] == true  &&  this.$respuesta_barrio_existe6['__zone_symbol__value'] == true  &&  this.$respuesta_barrio_existe7['__zone_symbol__value'] == true){
           console.log('Barrios ok');
           this.swiper.swiperRef.slideNext(1000);
-          document.getElementById('myAnchor').scrollIntoView();
+          const anchorElement = document.getElementById("myAnchor");
+  if (anchorElement) {
+    // Desplazar la ventana de visualización hasta el elemento "myAnchor" con una animación suave
+    anchorElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
         }else{
 const alert = await this.alertController.create({
                 
@@ -852,7 +876,11 @@ const alert = await this.alertController.create({
         if( this.$respuesta_barrio_existe1['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe2['__zone_symbol__value'] == true  &&  this.$respuesta_barrio_existe3['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe4['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe5['__zone_symbol__value'] == true  &&  this.$respuesta_barrio_existe6['__zone_symbol__value'] == true  &&  this.$respuesta_barrio_existe7['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe8['__zone_symbol__value'] == true){
           console.log('Barrios ok');
           this.swiper.swiperRef.slideNext(1000);
-          document.getElementById('myAnchor').scrollIntoView();
+          const anchorElement = document.getElementById("myAnchor");
+  if (anchorElement) {
+    // Desplazar la ventana de visualización hasta el elemento "myAnchor" con una animación suave
+    anchorElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
         }else{
 const alert = await this.alertController.create({
                 
@@ -889,7 +917,11 @@ const alert = await this.alertController.create({
         if( this.$respuesta_barrio_existe1['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe2['__zone_symbol__value'] == true  &&  this.$respuesta_barrio_existe3['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe4['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe5['__zone_symbol__value'] == true  &&  this.$respuesta_barrio_existe6['__zone_symbol__value'] == true  &&  this.$respuesta_barrio_existe7['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe8['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe9['__zone_symbol__value'] == true){
           console.log('Barrios ok');
           this.swiper.swiperRef.slideNext(1000);
-          document.getElementById('myAnchor').scrollIntoView();
+          const anchorElement = document.getElementById("myAnchor");
+  if (anchorElement) {
+    // Desplazar la ventana de visualización hasta el elemento "myAnchor" con una animación suave
+    anchorElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
         }else{
 const alert = await this.alertController.create({
                 
@@ -928,7 +960,11 @@ const alert = await this.alertController.create({
         if( this.$respuesta_barrio_existe1['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe2['__zone_symbol__value'] == true  &&  this.$respuesta_barrio_existe3['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe4['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe5['__zone_symbol__value'] == true  &&  this.$respuesta_barrio_existe6['__zone_symbol__value'] == true  &&  this.$respuesta_barrio_existe7['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe8['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe9['__zone_symbol__value'] == true &&  this.$respuesta_barrio_existe10['__zone_symbol__value'] == true){
           console.log('Barrios ok');
           this.swiper.swiperRef.slideNext(1000);
-          document.getElementById('myAnchor').scrollIntoView();
+          const anchorElement = document.getElementById("myAnchor");
+  if (anchorElement) {
+    // Desplazar la ventana de visualización hasta el elemento "myAnchor" con una animación suave
+    anchorElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
         }else{
 const alert = await this.alertController.create({
                 
@@ -1496,7 +1532,9 @@ if(localStorage.getItem('modalidad')=='Moderada'){
             if( this.auth.medioTransporte == 1 &&  this.AuxMotosDisponibles['length']>=1){
               localStorage.setItem('cantidadDestinosRutas',this.cantidadDestinos.toString());
               this.auth.sendFormularioRuta(this.FormSend.value);
-     
+              if(this.cantidadDestinos==2){
+                this.router.navigate(['/resumen-ruta']);
+               }
               if(this.cantidadDestinos==3){
                this.router.navigate(['/resumen-ruta3']);
               }else if(this.cantidadDestinos==4){
@@ -1520,9 +1558,7 @@ if(localStorage.getItem('modalidad')=='Moderada'){
               if(this.cantidadDestinos==10){
                this.router.navigate(['/resumen-ruta10']);
               }
-              else{
-               this.router.navigate(['/resumen-ruta']);
-              }
+              
             
             }else{
               const alert = await this.alertController.create({

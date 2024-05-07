@@ -17,6 +17,7 @@ export class MensajeriaPage implements OnInit {
   constructor(private router: Router,private alertCtrl: AlertController,private auth: AuthService) { }
   irPageSencilla(){
     this.router.navigate(['/transportes']);
+    localStorage.setItem('mensajeria','sencilla');
   }
   irPageFormSencilla(){
     this.router.navigate(['/form-sencilla']);

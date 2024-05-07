@@ -46,7 +46,7 @@ public nombre:string;
       localStorage.setItem('idAuxiliar',res['0']['uid']);
       localStorage.setItem('tipoVehiculo',res['0']['field_tipo_de_vehiculo']);
      
-      if( res['0']['roles_target_id']=='Auxiliar' && localStorage.getItem('modoAuxiliar')=='modoColaborador'){
+      if( res['0']['roles_target_id'].includes('Auxiliar') && localStorage.getItem('modoAuxiliar')=='modoColaborador'){
         this.textoPerfil= ' IR A MODO CLIENTE';
         this.router.navigate(['/modo-colaborador']);
       }else{
@@ -113,7 +113,7 @@ public nombre:string;
      
       this.ifAuxiliar=res;
       console.log(this.ifAuxiliar);
-      if(this.ifAuxiliar=='Auxiliar' && this.textoPerfil== ' IR A MODO CLIENTE'){
+      if(this.ifAuxiliar.includes('Auxiliar') && this.textoPerfil== ' IR A MODO CLIENTE'){
         this.router.navigate(['/index-auxiliares']);
         this.menucontrol.close();
         
@@ -141,7 +141,7 @@ public nombre:string;
        
         this.ifAuxiliar= res;
         console.log(this.ifAuxiliar);
-       if(this.ifAuxiliar=='Auxiliar'){
+       if(this.ifAuxiliar.includes('Auxiliar')){
         localStorage.setItem('modoAuxiliar','modoColaborador');
         this.auth.consultarIdAuxiliar().subscribe(res =>{
           console.log(res['0']['roles_target_id']);
@@ -159,7 +159,7 @@ public nombre:string;
         this.textoPerfil=' IR A MODO CLIENTE';
         this.router.navigate(['/modo-colaborador']);
         this.menucontrol.close();
-       }else if( res['0']['roles_target_id']=='Auxiliar' && localStorage.getItem('modoAuxiliar')=='modoColaborador'){
+       }else if( res['0']['roles_target_id'].includes('Auxiliar') && localStorage.getItem('modoAuxiliar')=='modoColaborador'){
         this.textoPerfil= ' IR A MODO COLABORADOR';
         this.router.navigate(['/tabs']);
        

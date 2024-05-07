@@ -163,49 +163,10 @@ export class IndexPage implements OnInit {
   }
  
   async irPageLlaves(){
+    localStorage.setItem('mensajeria','llaves');
+
+    this.router.navigate(['/transportes']);
    
-    this.auth.getAuxiliaresDisponiblesCarros().subscribe(async res =>{
-      let vpda=[];
-      console.log(res, ' aqui carro');
-      this.AuxCarrosDisponibles=res;
-     
-     
-      console.log(this.AuxCarrosDisponibles['length'],'lengt de vector carros');
-      if(this.AuxCarrosDisponibles.length==0){
-        const alert = await this.alertCtrl.create({
-          
-          header: 'Advertencia',
-         
-          message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-          // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-          buttons: [
-         
-          {
-            text:'aceptar',
-            handler:()=>{
-          
-         this.reload();
-              
-            }
-          }
-        ]
-        });
-        
-        await alert.present();
-
-      
-
-      }else{
-  
-     
-       
-         
-          this.router.navigate(['/llaves']);
-        
-     
-
-      }
-    });
    
     
   
