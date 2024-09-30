@@ -1,8 +1,16 @@
+
 ion-title{
-    margin-left: -14%;
+    margin-left: -17%;
     text-align: center;
-    font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+}
+
+form{
+	margin: auto;
+	width: 95%;
 }
 ion-toolbar{
     color: white;
@@ -13,20 +21,20 @@ ion-toolbar{
 }
 ion-content{
    // --background:#ecf0f1 url(../../assets/botones/FONDO) 0 0/100% 100% repeat;
-    //--background:#ecf0f1 url(../../assets/botones/FONDOENVIO2.png.jpg) 0 0/100% 100% repeat; 
-    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat; 
+    //--background:#ecf0f1 url(../../assets/botones/FONDOENVIO2.png.jpg) 0 0/100% 100% repeat;
+    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat;
 }
 small{
     font-size: 15px;
     color: white;
     font-family: 'Poppins', sans-serif;
-    
+
 }
 .form-check {
     padding: 10px;
 }
 .contentImg{
-    padding-top: 20px;
+    /*padding-top: 20px;*/
  text-align: center;
  }
  ion-icon{
@@ -38,7 +46,7 @@ ion-buttons{
     margin-left: 11px;
 }
  ion-card{
-    border-radius: 5%;
+    border-radius: 20px;
     padding: 20px 0 20px 0;
 }
 input{
@@ -49,8 +57,9 @@ input{
 label{
     margin-left: 5%;
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
-    
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+
 }
 .rowBorder{
     border: none !important;
@@ -60,7 +69,8 @@ ion-row{
 }
 h2{
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 
 }
 .corto{
@@ -76,7 +86,8 @@ h2{
 }
 select{
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     width: 115px;
     height: 38px;
     background-color: #ecf0f1;
@@ -96,7 +107,7 @@ textarea{
 }
 
 ion-input{
-    
+
     height: 38px;
     width: 100%;
     display: block;
@@ -131,19 +142,22 @@ button{
       border-radius: none;
       width: 120px;
       margin: auto;
-    
+
 }
 
 ion-label{
-    margin: 4%;
+    display: flex;
+    margin-left: 15.5px;
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     text-transform: uppercase;
-    
+
 }
 label{
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 }
 ion-item{
     --ion-background-color: transparent !important;
@@ -169,4 +183,3 @@ ion-button{
     color: #262262;
     font-family: 'Poppins', sans-serif;
 }
- 

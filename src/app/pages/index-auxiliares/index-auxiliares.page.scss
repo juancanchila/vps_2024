@@ -1,7 +1,16 @@
+
 ion-title{
-    font-family: 'Montserrat', sans-serif;
-    margin-left: 20%;
+    margin-left: -17%;
+    text-align: center;
     text-transform: uppercase;
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+}
+
+form{
+	margin: auto;
+	width: 95%;
 }
 ion-toolbar{
     color: white;
@@ -25,10 +34,12 @@ ion-tab-bar{
 
 }
 ion-icon,ion-label{
-
+    display: flex;
+    margin-left: 15.5px;
     color: yellow;
 }
 ion-label{
+    display: flex;
     color: #262262;
 }
 small{
@@ -36,7 +47,7 @@ small{
 }
 h1{
     margin: auto;
-    
+
 }
 ion-row{
     height: auto;

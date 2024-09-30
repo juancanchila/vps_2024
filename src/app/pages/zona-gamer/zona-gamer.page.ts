@@ -12,9 +12,10 @@ import { AuthService } from 'src/app/services/auth.service';
 export class ZonaGamerPage implements OnInit {
 
   FormSend: FormGroup;
-  constructor(private router: Router, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {
+  constructor(private router: Router, private auth: AuthService, public fb: FormBuilder, public alertController: AlertController) {
+    localStorage.setItem('servicioEvaluado','gamer');
     this.FormSend= this.fb.group({
-      field_prefijo_origen:[ ""],    
+      field_prefijo_origen:[ ""],
  field_direccion_entrega:[""],
  field_direccion_destino:[""],
 field_contacto:[""],
@@ -27,19 +28,19 @@ field_locacion_entrega:[""],
 
 
      });
-    
+
    }
-  
+
    async sendForm(){
     if(this.FormSend.invalid){
       const alert = await this.alertController.create({
-       
+
         header: 'Datos incompletos ',
-       
+
         message: 'llenar todos los datos.',
         buttons: ['Aceptar']
       });
-  
+
       await alert.present();
       return;
     }else{
@@ -47,16 +48,20 @@ field_locacion_entrega:[""],
       this.router.navigate(['/resumen-zonagamer']);
 
     }
-    
-   
-     
-    
+
+
+
+
    }
 
   ngOnInit() {
+
+ // Mostrar una alerta cuando se inicialice el componente
+
+
   }
   ngOnDestroy() {
-   
+
     console.log("Sencilla- OnDestroy")
   }
 

@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button ></ion-back-button>
-      
+
     </ion-buttons>
     <ion-title>Fruver</ion-title>
     <ion-buttons slot="end">
@@ -10,13 +10,13 @@
         <ion-icon name="cart-outline"></ion-icon>
 
       </ion-button>
-      
+
     </ion-buttons>
-    
+
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <!--ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content>
 
     </ion-refresher-content>
@@ -24,46 +24,52 @@
   <div class="contentImg">
     <ion-img class="img-slider" [src]="urlBase+slider" alt=""></ion-img>
 
+  </div--->
+
+  <div class="contentImg">
+    <ion-img class="img-slider" src="../../assets/banners/fruver.gif" alt=""></ion-img>
   </div>
+
   <div class="content">
     <ion-searchbar  placeholder="Buscar" animated (ionChange)="searchFruver($event)"></ion-searchbar>
   </div>
- 
+
+
   <ion-grid>
-  
+
     <ion-row *ngFor="let characte of searched" (click)="irPageProductos(characte)">
-      
+
       <ion-col size="4">
-       
+
           <img [src]="urlBase+characte.field_img_apk" class="img" >
-        
-       
+
+
       </ion-col>
       <ion-col size="8">
-        
-        
-          
+
+
+
         <h1><b>{{characte.titulo}}  </b></h1>
          <p>
-          
-          {{characte.field_descripcion_del_producto}} 
+
+          {{characte.field_descripcion_del_producto}}
           <br>
-          <b>${{characte.field_price_simple}} </b> 
+          <b>${{characte.field_price_simple}} </b>
          </p>
-           
-        
-         
-        
-      
-      
+
+
+
+
+
+
     </ion-col>
-       
-         
-      
-      
-   
-    
-    
+
+
+
+
+
+
+
     </ion-row>
   </ion-grid>
 </ion-content>

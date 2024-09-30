@@ -15,8 +15,8 @@ export const environment = {
     measurementId: 'G-5X77ZVR0CE',
   },
   production: false,
-  urlBase: "http://164.92.106.39/",
-  
+  urlBase: "http://147.182.203.91/",
+
     apiKey: "AIzaSyAh6hwtbEwpxiawPQo0Aa1YoGbQmNxCplc",
     authDomain: "vapaesa-2faf7.firebaseapp.com",
     databaseURL: "https://vapaesa-2faf7-default-rtdb.firebaseio.com",
@@ -25,7 +25,7 @@ export const environment = {
     messagingSenderId: "332561864460",
     appId: "1:332561864460:web:ea3d5dd4b7372416fe5b29",
     measurementId: "G-5X77ZVR0CE"
-  
+
 };
 
 /*

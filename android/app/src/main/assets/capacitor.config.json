@@ -1,5 +1,5 @@
 {
-	"appId": "com.vapaesa",
+	"appId": "io.ionic.starter",
 	"appName": "vapaesa",
 	"webDir": "www",
 	"bundledWebRuntime": false,

@@ -1,7 +1,16 @@
+
 ion-title{
-    font-family: 'Montserrat', sans-serif;
-    margin-left: 23%;
+    margin-left: -17%;
+    text-align: center;
     text-transform: uppercase;
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+}
+
+form{
+	margin: auto;
+	width: 95%;
 }
 ion-toolbar{
     color: white;
@@ -16,17 +25,17 @@ textarea{
 }
 .check{
     padding-top: 5px;
-  
+
     padding-bottom: 5px;
     border-bottom: 1px solid #262262;
 }
 .check2{
     padding-top: 5px;
-  
-   
+
+
 }
 ion-card{
-   
+    border-radius: 20px;
     padding: 20px 0 20px 0;
 }
 .linea {
@@ -35,7 +44,7 @@ ion-card{
     max-width: 100%;
     padding: 0;
     margin: 20px auto 0 auto;
-    
+
   }
 ion-col{
     text-align: center;
@@ -59,14 +68,15 @@ ion-button{
     border: 1px solid #333;
 }
 select{
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     color: #262262;
     height: 38px;
     background-color: #ecf0f1;
 
 }
 ion-input{
-    
+
     height: 38px;
     width: 100%;
     display: block;
@@ -76,7 +86,8 @@ ion-input{
     border: 1px solid #333;
 }
 b{
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     color: #262262;
 }
 input{
@@ -104,9 +115,9 @@ ion-tab-bar{
 }
 ion-icon{
     color: #262262;
-    
-    
-    
+
+
+
 }
 
 .form-check{
@@ -114,7 +125,7 @@ ion-icon{
     color: #262262;
     border-bottom: 1px solid;
     height: 34px;
-   
+
 }
 .check{
     padding-top: 5px;
@@ -124,22 +135,26 @@ button{
       border-radius: none;
       width: 120px;
       margin: auto;
-    
+
 }
 
 ion-label{
-    margin: 4%;
+    display: flex;
+    margin: auto;
+    max-width: 95%;
     color: #262262;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat Light ", sans-serif;
     text-transform: uppercase;
-    
+    margin-left: 15.5px;
+
 }
 
 label{
     margin-left: 5%;
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
-    
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+
 }
 ion-item{
     --min-height: 0 !important;
@@ -159,6 +174,13 @@ body{
     --ion-color-primary-contrast: #ffffff;
   }
   ion-content{
-    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat; 
+    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat;
 }
- 
+
+
+form{
+	margin: auto;
+	font: inherit;
+	color: inherit;
+	width: 95%;
+}

@@ -11,14 +11,14 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./tabs.page.scss'],
 })
 export class TabsPage implements OnInit {
-  
+
 tab1= IndexPage;
 tab3=PerfilPage;
   AuxCarrosDisponibles: any;
   AuxMotosDisponibles: any;
   AuxDisponiblesMunicipios: any;
   constructor(private auth:AuthService,private router: Router) {
-   
+
    }
 
   ngOnInit() {
@@ -32,13 +32,13 @@ tab3=PerfilPage;
       localStorage.setItem('rol',res);
       localStorage.setItem('RolesUsers',res);
       //this.ifAuxiliar=localStorage.getItem('rol');
-    
+
     });
     this.auth.getUser().subscribe(res =>{
       console.log(res[0]['field_pago_efectivo'],'variable boolean para pago efectivo');
       localStorage.setItem('permitirPagoefectivo',res[0]['field_pago_efectivo']);
       //this.ifAuxiliar=localStorage.getItem('rol');
-    
+
     });
   }
 
@@ -47,20 +47,20 @@ tab3=PerfilPage;
       let vpda=[];
       console.log(res, ' aqui carro');
       this.AuxCarrosDisponibles=res;
-     
-     
- 
+
+
+
     });
     this.auth.getAuxiliaresDisponiblesMotos().subscribe(res =>{
       console.log(res, ' aqui motos');
       this.AuxMotosDisponibles=res;
-    
+
     });
 
     this.auth.getAuxiliaresDisponiblesMunicipio().subscribe(res =>{
       console.log(res, ' aqui aux municiipio');
       this.AuxDisponiblesMunicipios=res;
-    
+
     });
 
   }

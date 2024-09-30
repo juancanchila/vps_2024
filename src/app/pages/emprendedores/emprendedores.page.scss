@@ -1,8 +1,9 @@
 ion-title{
-   
-    font-family: 'Montserrat', sans-serif;
     text-align: center;
     text-transform: uppercase;
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 }
 ion-toolbar{
     color: white;
@@ -10,13 +11,13 @@ ion-toolbar{
 }
 ion-content{
     // --background:#ecf0f1 url(../../assets/botones/FONDO) 0 0/100% 100% repeat;
-     //--background:#ecf0f1 url(../../assets/botones/FONDOENVIO2.png.jpg) 0 0/100% 100% repeat; 
-     --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat; 
+     //--background:#ecf0f1 url(../../assets/botones/FONDOENVIO2.png.jpg) 0 0/100% 100% repeat;
+     --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat;
  }
  .dark{
-  
+
     background-color: #fff200;
- 
+
   }
   .sombra{
     background-color: rgb(251, 255, 0);
@@ -41,7 +42,7 @@ ion-content{
     /* align-items: center; */
     /* justify-content: center; */
     display: inline;
-   
+
     /* margin-top: 6%; */
     font-size: 80%;
 }
@@ -52,8 +53,9 @@ ion-content{
 }
 h1 {
     color: #262262;
-    
-    font-family: 'Montserrat', sans-serif;
+
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     text-align: left;
     /* float: left; */
     margin-top: 0 !important;
@@ -62,7 +64,8 @@ h1 {
 }
 h2{
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 }
 ion-icon{
     font-size: 25px;
@@ -77,13 +80,14 @@ ion-button{
 body{
     --ion-color-primary-contrast: #ffffff;
   }
- 
+
 ion-tab-bar{
     --ion-background-color: #262262;
 
 }
 ion-icon,ion-label{
-
+    display: flex;
+    margin-left: 15.5px;
     color: yellow;
 }
 ion-row{
@@ -97,7 +101,8 @@ ion-row{
 h2{
     color: #262262;
 
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 }
 ion-grid{
     --background-color: white;
@@ -127,8 +132,9 @@ div{
 p{
     margin-top: 0;
     color: #262262;
-    
-    font-family: 'Montserrat', sans-serif;
+
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     text-align: left;
 
 }

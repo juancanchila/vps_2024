@@ -3,10 +3,10 @@
    <ion-buttons slot="start">
       <ion-back-button ></ion-back-button>
       <!--ion-icon name="home-outline"></ion-icon-->
-      <ion-title>Medicamentos</ion-title>
-    </ion-buttons>
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    </ion-buttons>
+    <ion-title>Medicamentos</ion-title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat Light &display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
   </ion-toolbar>
 </ion-header>
@@ -14,9 +14,10 @@
 
 <ion-content>
   <div class="contentImg">
-    <ion-img class="img-slider" [src]="urlBase+slider" alt=""></ion-img>
+    <ion-img class="img-slider" src="../../assets/banners/medicamentos.gif" alt=""></ion-img>
 
   </div>
+
     <ion-card-content class="contain">
       <swiper #swiper [virtual]="true"  [config]="swiperConfig">
         <ng-template swiperSlide >
@@ -50,7 +51,7 @@
             <textarea formControlName="field_nombre_c_origen" class="corto" placeholder="Nombre" type="text" required></textarea>
           </ion-item>
 
-         <ion-label><b>Contacto Telefono:</b> </ion-label>
+         <ion-label><b>Contacto Teléfono:</b> </ion-label>
           <ion-item >
 
             <textarea formControlName="field_contacto" class="corto" placeholder="Número de celular" type="text" required></textarea>
@@ -62,7 +63,7 @@
 
 
 
-      <ion-label > <b>Escribir Farmacia*</b> </ion-label>
+      <ion-label > <b>Farmacia*</b> </ion-label>
 
       <ion-item >
         <textarea formControlName="field_farmacia" class="corto" type="text" required></textarea>
@@ -156,7 +157,7 @@
 
 
 
-      <ion-label > <b>Contacto Telefono:</b> </ion-label>
+      <ion-label > <b>Contacto Teléfono:</b> </ion-label>
       <ion-item >
 
         <textarea formControlName="field_contacto_destino" class="corto" placeholder="Número de celular" type="text" required></textarea>
@@ -215,11 +216,12 @@
 
        </ion-col>
    </ion-row>
-   <ion-row>
+   <!--ion-row>
 
      <ion-col size="5">
        <img src="../../assets/botones/PAGOSCOLOREAZUL-99.png" class="col-img" width="80%" height="80%" alt="">
      </ion-col>
+
      <ion-col *ngIf="permitirPagoEfectivo=='On'"  size="7">
        <div class="form-check">
        <input formControlName="field_metodo_de_pago" type="radio" value="efectivo" class="form-check-input" >
@@ -228,7 +230,7 @@
 
 
      </ion-col>
-   </ion-row>
+   </ion-row-->
 
   <script>
     document.getElementById("formulario").addEventListener("submit", function(event){

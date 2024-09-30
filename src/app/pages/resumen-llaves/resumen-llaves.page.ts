@@ -20,7 +20,7 @@ export class ResumenLlavesPage implements OnInit {
   constructor(private menucontrol:MenuController,private router: Router, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {
     this.menucontrol.enable(false);
     this.FormSend= this.fb.group({
-     
+
 field_locacion_entrega:[""],
 field_locacion_destino:[""],
 field_contacto:[""],
@@ -43,14 +43,14 @@ field_barrio_origen:[""],
       field_nombre_c_origen:[""],
       field_nombre_c_destino:[""]
      });
-    
+
    }
 
    status="completed";
   disabledValue= true;
 
   enableInput(){
-    
+
     if(this.status==="completed"){
       this.disabledValue=false;
       console.log('disabled');
@@ -59,29 +59,29 @@ field_barrio_origen:[""],
       this.disabledValue = true;
     }
   }
-  
+
    async irAPagar(){
     if(this.aux=='false'){
       this.presentAlert();
-      
+
      }else{
 
     if(this.auth.medioTransporte==1 &&this.auth.resumen.field_valor_declarado['0']['value']>100000 ){
       const alertElement= await this.alertController.create({
-           
+
         header: '¡Su Valor declarado es mayor a $100000 debe ser transportada en carro!',
         message: 'Cambiaremos el metodo de transporte a carro ¿Desea continuar?',
-        
+
         buttons: [
           {
           text:'cancel',
           handler:()=>{
             //La la orden  no se crea
 
-          
+
           }
-          
-          
+
+
         },
         {
           text:'aceptar',
@@ -96,30 +96,30 @@ field_barrio_origen:[""],
         }
       ]
       });
-    
+
       await alertElement.present();
     }else{
       console.log('aqui en is close metodo')
       if(this.estadoButton==true){
         this.estadoButton=false;
         this.auth.CrearSencillaLlaves(this.FormSend.value);
-       
+
       }
 
-   
+
      // this.router.navigate(['/formadepag']);
     }
-   
-    
-    
+
+
+
      //this.auth.sendFormulario(this.FormSend.value);
    }
   }
    async presentAlert() {
     const alert = await this.alertController.create({
-       
+
       header: 'Contrato por prestación de servicios  :',
-     
+
       message: '1.Objeto. El Prestador de Servicios se obliga a ponerse a disposición del Usuario/consumidor brindándole la compañía de un amigo, cómplice y/o acompañante, para ir a los sitios donde quiera, disfrute, necesite o requiera cuando él lo solicite a través de la aplicación.'
       +'Lo anterior de manera voluntaria, sin perjuicio de la supervisión y observaciones que pueda realizar el usuario durante la ejecución del contrato.'+ '<br>'
       +'2. Lugar de la Prestación del Servicio. Los servicios mencionados en la primera cláusula de este contrato serán llevados a cabo en la                                  '+ '<br>'
@@ -140,18 +140,18 @@ field_barrio_origen:[""],
         text:'cancel',
         role:'cancel',
 
-        /** 
+        /**
         handler:()=>{
           this.router.navigate(['/tabs']);
         }*/
-        
+
       },
       {
         text:'aceptar',
         handler:()=>{
           this.aux = (document.getElementById("aut_contrato") as HTMLInputElement).ariaChecked;
           console.log(this.aux, 'estado');
-        
+
           if(this.aux=='false'){
             // le muestra que no marcho (primero)
             let estado='false';
@@ -168,33 +168,46 @@ field_barrio_origen:[""],
     });
 
     await alert.present();
-    
-   
+
+
 
    }
-  
 
-  ngOnInit() {
+
+   async ngOnInit() {
+    try {
+
+    console.log(localStorage.getItem('zona_origen'), 'zona_origen');
+    console.log(localStorage.getItem('zona_destino'), 'zona_destino');
+    console.log(localStorage.getItem('servicioEvaluado'), 'servicioEvaluado');
+
+    let resultadoTotalCosto = await this.auth.calcularPrecioTarifa(
+      localStorage.getItem('servicioEvaluado'),
+      localStorage.getItem('zona_origen'),
+      localStorage.getItem('zona_destino'),
+      this.auth.medioTransporte
+    );
+
     this.estadoButton=true;
     this.aux='false';
     this.auth.getListLocaciones().subscribe(data=>{
       console.log(data);
       this.locaciones=data;
           },error=>{
-           
+
             console.log(error);
-           
+
           });
     this.precio_origen = Number(localStorage.getItem('tarifaOrigen'));
     this.precio_destino = Number(localStorage.getItem('tarifaDestino'));
     this.presentAlert();
     this.auth.getSesion();
-   
-  
+
+
 
     //obtener valor agregado por porcentaje
   this.auth.getValorAgregadoLlaves().subscribe(res =>{
-      
+
     /** */
     console.log(res[0].field_valor_descuento, ' aqui valor agregado +');
  localStorage.setItem('valorAgregado',res[0].field_valor_descuento);
@@ -203,7 +216,7 @@ field_barrio_origen:[""],
 
   });
   console.log(this.auth.resumen);
-  
+
 
   this.FormSend.controls.field_contacto.setValue(this.auth.resumen.field_contacto['0']['value']);
  // this.FormSend.controls.field_observaciones.setValue(this.auth.resumen.field_observaciones['0']['value']);
@@ -217,93 +230,32 @@ field_barrio_origen:[""],
 
   this.FormSend.controls.field_ida_y_vuelta.setValue(this.auth.resumen.field_ida_y_vuelta['0']['value']);
   //this.FormSend.controls.field_musica_preferida.setValue(this.auth.resumen.field_musica_preferida['0']['value']);
- 
+
   this.FormSend.controls.field_medio_de_transporte.setValue(this.auth.medioTransporte);
   this.FormSend.controls.field_prefijo_destino.setValue(this.auth.resumen.field_prefijo_destino['0']['value']);
   this.FormSend.controls.field_prefijo_origen.setValue(this.auth.resumen.field_prefijo_origen['0']['value']);
 
   this.FormSend.controls.field_prefijo_origen.setValue(this.auth.resumen.field_prefijo_origen['0']['value']);
-  
- 
+
+
   this.FormSend.controls.field_barrio_origen.setValue(this.auth.resumen.field_barrio_origen['0']['value']);
   this.FormSend.controls.field_barrio_destino.setValue(this.auth.resumen.field_barrio_destino['0']['value']);
-  
+
   this.FormSend.controls.field_metodo_de_pago.setValue(this.auth.resumen.field_metodo_de_pago['0']['value']);
 
   this.FormSend.controls.field_nombre_c_origen.setValue(this.auth.resumen.field_nombre_c_origen['0']['value']);
 
-  
-  if( localStorage.getItem('locacionDestinoSeleccionada') != localStorage.getItem('locacionOrigenSeleccionada') ){
-    if( localStorage.getItem('tarifaExternaOrigen')>localStorage.getItem('tarifaExternaDestino')){
-      this.FormSend.controls.  field_precio_.setValue(localStorage.getItem('tarifaExternaOrigen'));
-      localStorage.setItem('precioTarifa',localStorage.getItem('tarifaExternaOrigen'));
-      //
+  this.FormSend.controls.field_precio_.setValue(resultadoTotalCosto);
 
-    }else  if(localStorage.getItem('tarifaExternaDestino') >localStorage.getItem('tarifaExternaOrigen')){
-      this.FormSend.controls.  field_precio_.setValue(localStorage.getItem('tarifaExternaDestino'));
-      localStorage.setItem('precioTarifa',localStorage.getItem('tarifaExternaDestino'));
-      //
-   
-    }else if(localStorage.getItem('tarifaExternaDestino') ==localStorage.getItem('tarifaExternaOrigen')){
-      this.FormSend.controls.  field_precio_.setValue(localStorage.getItem('tarifaExternaDestino'));
-      localStorage.setItem('precioTarifa',localStorage.getItem('tarifaExternaDestino'));
-      //
-      
-    }
-  }else{
-    if(this.precio_origen>this.precio_destino){
-      this.FormSend.controls.  field_precio_.setValue(this.precio_origen);
-      localStorage.setItem('precioTarifa',this.precio_origen);
-    }else if(this.precio_destino>this.precio_origen){
-      this.FormSend.controls.  field_precio_.setValue(this.precio_destino);
-      localStorage.setItem('precioTarifa',this.precio_destino);
-    }else{
-      this.FormSend.controls.  field_precio_.setValue(localStorage.getItem('tarifaOrigen'));
-      localStorage.setItem('precioTarifa',this.precio_destino);
-    }
-  
+
+  } catch (error) {
+    console.error(error);
   }
-
-   //imprimir por consola file precio si es vehiculo le sumo el porcentaje
-
- 
-   console.log(Number(this.FormSend.controls.field_precio_.value), 'precio costo domicilio');
-
-   
-   var valorAgregado = parseFloat(localStorage.getItem('valorAgregado'));  // Ejemplo de valor agregado
-   
-   // Calcula el resultado total
-   var resultadoTotalCosto = Number(this.FormSend.controls.field_precio_.value);
-   
-   // Calcula el porcentaje
-   var porcentaje = ( resultadoTotalCosto * valorAgregado) / 100;
-   
-   // Imprime los resultados en la consola
-   
-   console.log("Resultado Total de Costo:", resultadoTotalCosto);
-   console.log("Valor Agregado:", valorAgregado);
-   console.log("Porcentaje de Valor Agregado:", porcentaje)
-   console.log("Resultado Total de Costo + porcentaje:", resultadoTotalCosto + porcentaje);
-   var TotalDefinitivoParaVehiculos = resultadoTotalCosto + porcentaje;
- 
- 
-   if(this.auth.medioTransporte==2){
- 
-    this.FormSend.controls.  field_precio_.setValue(TotalDefinitivoParaVehiculos);
-    localStorage.setItem('precioTarifa',this.FormSend.controls.field_precio_.value);
-    
-   }else{
-    this.FormSend.controls.  field_precio_.setValue(resultadoTotalCosto);
-    localStorage.setItem('precioTarifa',this.FormSend.controls.field_precio_.value);
-   }
+}
 
 
-  
-  }
-
-  
   ngOnDestroy() {
-   
+
     console.log("Resumen- OnDestroy")
   }
 

@@ -1,5 +1,6 @@
 ion-title{
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     text-align: center;
     text-transform: uppercase;
     margin-left: -10%;
@@ -9,21 +10,32 @@ ion-toolbar{
     --ion-background-color: #262262;
 }
 .title{
+    font-family: "Montserrat Light ", sans-serif;
     text-align: center;
-    font-family: 'Poppins', sans-serif
+    text-transform: uppercase;
+    font-size: 20px;
 }
+.title_blue{
+    text-align: left;
+    color: #262262;
+    font-family: 'Poppins', sans-serif;
+    padding: 0 !important;
+    margin-left: 10px;
+}
+
 p{
     padding: 10px;
-    color: #262262;  
-    font-family: 'Poppins', sans-serif 
+    color: #262262;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+   /* font-family: 'Poppins', sans-serif */
 }
 small{
     color: white;
-    font-family: 'Poppins', sans-serif;
-    
+
 }
 .smallBlank{
-    color: #262262;  
+    color: #262262;
 }
 .ion-color-warning {
     --ion-color-base: #FFF200  !important;
@@ -37,41 +49,44 @@ ion-button{
 }
 .colorButtom{
 color: #ffffff;
-font-family: 'Poppins', sans-serif;
+
 }
 ion-card{
     width: 95%;
 }
 .observacion{
-   
-        width: 100%; 
+
+        width: 100%;
         height: 100px;
-        
-    
+        border: none;
+
 }
 textarea{
-    background-color: white;
+    background-color: #f2f1f5
+
 }
 body{
     --ion-color-primary-contrast: #ffffff;
   }
- 
+
 ion-tab-bar{
     --ion-background-color: #262262;
 
 }
 ion-icon,ion-label{
-
+    display: flex;
+    margin-left: 15.5px;
     color: yellow;
 }
 h1{
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     margin: auto;
-    
+
 }
 ion-row{
-    
+
     height: auto;
     width: auto;
 }
@@ -82,6 +97,7 @@ ion-icon{
     float: left;
     color: black;
     font-size: 20px;
+    padding-top: 5px;
 }
 .mas{
     color: #ffffff;
@@ -91,7 +107,7 @@ ion-icon{
     color: #ffffff;
 }
 .cont{
-   
+
     color: #ffffff;
 }
 
@@ -100,15 +116,16 @@ ion-icon{
     color: black;
     float: left;
     height: 20px;
-    width: 38px;
+    width: 20px;
 }
 .counter{
-    height: 46px;
-    padding: 10px;
+    height: 35px;
+    padding: 5px;
     margin-right: 4%;
     border-radius: 5px;
     background-color: #262262;
-    
+    margin: auto;
+
 }
 .price{
     margin-left: -46%;
@@ -116,3 +133,23 @@ ion-icon{
 .obs{
     padding: 10px;
 }
+.gray-line {
+    width: 100%;  /* Asegura que la línea cubra todo el ancho del contenedor */
+    height: 2px;  /* Ajusta la altura de la línea */
+    background-color: #f2f1f5;  /* Color gris */
+    margin: 10px 0;  /* Ajusta el margen según lo necesites */
+  }
+  .agregar{
+
+    margin-left: 25%;
+}
+.detalle_producto{
+
+    padding: 5px;
+}
+
+@media (max-width: 350px) {
+    .agregar{
+      margin-left: 4%;
+    }
+  }

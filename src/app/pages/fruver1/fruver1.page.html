@@ -2,19 +2,19 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button ></ion-back-button>
-      <ion-title>Fruver</ion-title>
+
     </ion-buttons>
-    
+    <ion-title>Fruver</ion-title>
   </ion-toolbar>
 </ion-header>
 
   <ion-row class="mensajeria">
 
 
- 
+
   </ion-row>
-  
-  
+
+
   <ion-row>
     <ion-card *ngFor="let characte of character" (click)="irPageProductos(characte)">
       <ion-item>
@@ -28,10 +28,10 @@
      <ion-label>
         <h2>{{characte.field_price_simple}} </h2>
     </ion-label>
-    
+
     </ion-item>
     </ion-card>
-  
+
   </ion-row>
-  
+
 

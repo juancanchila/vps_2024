@@ -1,7 +1,7 @@
 ion-title{
     text-align: center;
     text-transform: uppercase;
-   
+
 }
 
 ion-toolbar{
@@ -27,10 +27,12 @@ ion-tab-bar{
 
 }
 ion-icon,ion-label{
-
+    display: flex;
+    margin-left: 15.5px;
     color: yellow;
 }
 ion-label{
+    display: flex;
     color: #262262;
 }
 small{
@@ -38,7 +40,7 @@ small{
 }
 h1{
     margin: auto;
-    
+
 }
 ion-row{
     height: auto;

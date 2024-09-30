@@ -14,31 +14,35 @@ export class TransportesRutaPage implements OnInit {
   locacion:any;
   AuxCarrosDisponibles: any;
   AuxMotosDisponibles: any;
+  modalidad_seleccionada : string;
 
   constructor(private alertController:AlertController,private auth: AuthService,private router: Router) { }
 
 
 
   ngOnInit() {
-       
+
+
+    this.modalidad_seleccionada = localStorage.getItem('modalidad');
+
     this.auth.getAuxiliaresDisponiblesCarros().subscribe(res =>{
       let vpda=[];
       console.log(res, ' aqui carro');
       this.AuxCarrosDisponibles=res;
-     
-     
- 
+
+
+
     });
     this.auth.getAuxiliaresDisponiblesMotos().subscribe(res =>{
       console.log(res, ' aqui motos');
       this.AuxMotosDisponibles=res;
-    
+
     });
 
     this.auth.getAuxiliaresDisponiblesMunicipio().subscribe(res =>{
       console.log(res, ' aqui aux municiipio');
       this.AuxDisponiblesMunicipios=res;
-    
+
     });
     this.locacion=localStorage.getItem('locacion');
   }
@@ -52,106 +56,87 @@ export class TransportesRutaPage implements OnInit {
     }, 2000);
   }
   ionViewWillEnter(){
-    
+
     this.auth.getAuxiliaresDisponiblesCarros().subscribe(res =>{
       let vpda=[];
       console.log(res, ' aqui carro');
       this.AuxCarrosDisponibles=res;
-     
-     
- 
+
+
+
     });
     this.auth.getAuxiliaresDisponiblesMotos().subscribe(res =>{
       console.log(res, ' aqui motos');
       this.AuxMotosDisponibles=res;
-    
+
     });
 
     this.auth.getAuxiliaresDisponiblesMunicipio().subscribe(res =>{
       console.log(res, ' aqui aux municiipio');
       this.AuxDisponiblesMunicipios=res;
-    
+
     });
-  
+
 }
   iraIndex(){
     this.router.navigate(['/tabs']);
   }
   ngOnDestroy() {
-   
+
     console.log("Trasnportes- OnDestroy")
   }
-  async selectMoto(){
+
+  async selectMoto() {
+    const minimumMotoDisponibles = this.modalidad_seleccionada === 'Agil' ? 8 : 1;
+
     console.log(this.AuxMotosDisponibles.length);
 
-    if(this.AuxMotosDisponibles.length<1){
-           
-
+    if (this.AuxMotosDisponibles.length < minimumMotoDisponibles) {
       const alert = await this.alertController.create({
-        
         header: 'Advertencia',
-       
         message: 'En este momento no tenemos auxiliar disponible en moto',
-        // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
         buttons: [
-       
-        {
-          text:'aceptar',
-          handler:()=>{
-        this.ngOnInit();
-        //this.router.navigate(['/tabs']);
-            
-          }
-        }
-      ]
+          {
+            text: 'aceptar',
+            handler: () => {
+              this.ngOnInit();
+            },
+          },
+        ],
       });
-      
-      await alert.present();
 
-    }else{
-    
-        localStorage.setItem('cantidadDeDisponibles',this.AuxMotosDisponibles.length);
-        this.auth.seleccionarMotoRuta();
-   
-      
+      await alert.present();
+    } else {
+      localStorage.setItem('cantidadDeDisponibles', this.AuxMotosDisponibles.length);
+      this.auth.seleccionarMotoRuta();
     }
-  
   }
-  async selectCarro(){
+
+  async selectCarro() {
+    const minimumCarroDisponibles = this.modalidad_seleccionada === 'Agil' ? 8 : 1;
+
     console.log(this.AuxCarrosDisponibles.length);
-    if(this.AuxCarrosDisponibles.length<1){
-            
 
+    if (this.AuxCarrosDisponibles.length < minimumCarroDisponibles) {
       const alert = await this.alertController.create({
-        
         header: 'Advertencia',
-       
         message: 'En este momento no tenemos auxiliar disponible en carro',
-        // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
         buttons: [
-       
-        {
-          text:'aceptar',
-          handler:()=>{
-         this.ngOnInit();
-       // this.router.navigate(['/tabs']);
-            
-          }
-        }
-      ]
+          {
+            text: 'aceptar',
+            handler: () => {
+              this.ngOnInit();
+            },
+          },
+        ],
       });
-      
+
       await alert.present();
-
-    }else{
-     
-        localStorage.setItem('cantidadDeDisponibles',this.AuxCarrosDisponibles.length);
+    } else {
+      localStorage.setItem('cantidadDeDisponibles', this.AuxCarrosDisponibles.length);
       this.auth.seleccionarCarroRuta();
-    
-      
     }
-    
-    
   }
-
 }
+
+

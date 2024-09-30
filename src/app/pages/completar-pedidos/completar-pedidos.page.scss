@@ -1,7 +1,16 @@
+
 ion-title{
-    font-family: 'Montserrat', sans-serif;
+    margin-left: -17%;
     text-align: center;
     text-transform: uppercase;
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+}
+ 
+form{
+	margin: auto;
+	width: 95%;
 }
 ion-toolbar{
     color: white;
@@ -15,9 +24,9 @@ ion-button{
     margin-right: auto;
 }
 ion-card{
-   
+
     text-align: center;
-  
+
     margin: 6%;
 }
 ion-grid{
@@ -32,8 +41,8 @@ ion-grid{
     margin-top: 5px;
     margin-bottom: 5px;
     border-top: 1px solid #262262;
-   
-    
+
+
   }
 body{
     --ion-color-primary-contrast: #ffffff;
@@ -50,9 +59,10 @@ ion-tab-bar{
 
 
 ion-content{
-    --background:#ecf0f1 url("/assets/botones/FONDOTIPOFACTURA-97-85.png") 0 0/100% 100% repeat; 
+    --background:#ecf0f1 url("/assets/botones/FONDOTIPOFACTURA-97-85.png") 0 0/100% 100% repeat;
 }
 ion-icon,ion-label{
+    display: flex;
 
     color: #262262;
 }
@@ -67,16 +77,17 @@ h1{
     text-align: center;
     font-size: 14px;
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     margin: auto;
-    
+
 }
 
 small{
     font-size: 15px;
     color: white;
     font-family: 'Poppins', sans-serif;
-    
+
 }
 .rowBorder{
     height: 34px;
@@ -96,7 +107,8 @@ small{
 
 .botonBreak{
     text-align: center;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     background: #fff200;
     color: white;
     border-radius: 10px;
@@ -108,7 +120,8 @@ small{
   }
   .botonPath{
     text-align: center;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     background: green;
     color: white;
     border-radius: 10px;

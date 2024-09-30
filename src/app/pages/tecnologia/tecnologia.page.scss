@@ -1,7 +1,16 @@
+
 ion-title{
-    font-family: 'Montserrat', sans-serif;
-    margin-left: 15%;
+    margin-left: -17%;
+    text-align: center;
     text-transform: uppercase;
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+}
+
+form{
+	margin: auto;
+	width: 95%;
 }
 ion-toolbar{
     color: white;
@@ -12,7 +21,7 @@ ion-toolbar{
 }
 .listado {
     padding: 6%;
-    border: solid;
+    border: solid 1px;
     margin-top: 2%;
     border-radius: 30px;
     margin-bottom: 25px;
@@ -71,13 +80,14 @@ ion-toolbar{
 }
 select{
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     width: 115px;
     height: 38px;
     background-color: #ecf0f1;
 }
 ion-input{
-    
+
     height: 38px;
     width: 100%;
     display: block;
@@ -125,7 +135,7 @@ button{
       border-radius: none;
       width: 120px;
       margin: auto;
-    
+
 }
 ion-col{
     text-align: center;
@@ -133,15 +143,18 @@ ion-col{
 h2{
     margin: 4%;
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 }
 
 ion-label{
-    margin: 4%;
+    display: flex;
+    margin-left: 15.5px;
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     text-transform: uppercase;
-    
+
 }
 ion-item{
     --ion-background-color: transparent !important;
@@ -166,33 +179,38 @@ body{
     font-family: 'Poppins', sans-serif;
   }
   ion-content{
-    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat; 
+    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat;
   }
 
- 
+
  small{
      font-size: 15px;
      color: white;
      font-family: 'Poppins', sans-serif;
-     
+
  }
  .form-check {
     padding: 10px;
 }
  .check {
-     border-bottom: 1px solid #262262;;
+     border-bottom: 1px solid #262262;
      padding-top: 5px;
      padding-bottom: 5px;
  }
  .contentImg{
-    padding-top: 20px;
+   /* padding-top: 20px;*/
   text-align: center;
   }
- 
+
   ion-card{
-     border-radius: 5%;
+     border-radius: 20px;
      padding: 20px 0 20px 0;
  }
+ .form-group {
+    display: flex;
+    align-items: center; /* Alinea verticalmente en el centro */
+    gap: 10px; /* Ajusta el espacio entre el label y el input */
+  }
  input{
      float: right;
      background-color: #ecf0f1;
@@ -201,8 +219,9 @@ body{
  label{
      margin-left: 5%;
      color: #262262;
-     font-family: 'Montserrat', sans-serif;
-     
+      font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+
  }
  .rowBorder{
      border: none !important;
@@ -210,4 +229,9 @@ body{
  ion-row{
      border-bottom: 2px solid;
  }
- 
+
+ @media (max-width: 400px) {
+    .n_articulos {
+      margin-bottom: 6%;
+    }
+  }

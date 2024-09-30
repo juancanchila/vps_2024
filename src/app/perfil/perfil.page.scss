@@ -37,6 +37,7 @@ ion-tab-bar{
 
 }
 ion-icon,ion-label{
+    display: flex;
 
     color: #fff200;
 }
@@ -47,7 +48,8 @@ h1.\.boxh1{
     color: #262262 !important;
 }
 h1{
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     color: white;
     text-align: justify;
     margin: 1%

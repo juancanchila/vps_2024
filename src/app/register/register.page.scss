@@ -1,5 +1,5 @@
 ion-header{
-  
+
     border: none;
 
 }
@@ -9,16 +9,20 @@ ion-toolbar{
  // --background: url(../../assets/botones/inicioSesion.png) 0 0/100% 100% no-repeat;
 }
 b{
-  font-family: 'Montserrat', sans-serif;
+   font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 }
 ion-label{
-  font-family: 'Montserrat', sans-serif;
+    display: flex;
+   font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+  margin-left: 15.5px;
 }
 ion-back-button{
     color: white;
 }
 .title{
-  
+
   margin-left: 24%;
   --background: url(../../assets/botones/inicioSesion.png) 0 0/100% 100% no-repeat;
     color: white;
@@ -31,8 +35,8 @@ ion-back-button{
 }
 .imgtoolbar {
   margin-left: 21%;
-  
- 
+
+
   max-width: 60%
 }
 label{
@@ -41,17 +45,17 @@ label{
 
 ion-content{
   --background: url(../../assets/botones/inicioSesion.png) 0 0/100% 100% no-repeat;
-    
+
 }
 .contain {
      top: 7%;
-    
+
      --background: url(../../assets/botones/inicioSesion.png) 0 0/100% 100% no-repeat;
   }
 ion-item{
   color: white;
   //--background: url(../../assets/botones/inicioSesion.png) 0 0/100% 100% no-repeat;
-  --ion-background-color: transparent; 
+  --ion-background-color: transparent;
       font-size: 1rem;
       --min-height: 0 !important;
       --border-width: 0 0 0 0 !important;
@@ -60,7 +64,7 @@ ion-item{
 --show-inset-highlight: 0 !important;
 margin-bottom: 4%;
   }
- 
+
   .corto{
     border: unset;
     //margin-left: 29%;
@@ -82,25 +86,26 @@ margin-bottom: 4%;
       position: absolute;
       width: 70%;
       display: block;
-      background-color: red; 
+      background-color: red;
       color: black;
       text-align: left;
-      
+
   }
   body{
     --ion-color-primary-contrast: #ffffff;
   }
-  
+
   ion-input,ion-label{
+    display: flex;
 	color: black;
 	font-size: 20px;
 }
- 
+
   img{
 
     display: block;
     margin-left:24% ;
-   
+
     align-items: center;
         width: 50%;
         height: 50%;
@@ -114,7 +119,8 @@ margin-bottom: 4%;
 }
 
 small{
-  font-family: 'Montserrat', sans-serif;
+   font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
   color: white;
   text-align: center;
   width: 10%;

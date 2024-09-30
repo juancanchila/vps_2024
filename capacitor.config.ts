@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.vapaesa',
+  appId: 'io.ionic.starter',
   appName: 'vapaesa',
   webDir: 'www',
   bundledWebRuntime: false,

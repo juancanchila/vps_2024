@@ -22,13 +22,14 @@ export class EmprendedoresPage implements OnInit {
   searched: any;
   sombra: string[] = new Array(8).fill('');
   constructor(private router: Router, private auth: AuthService) {
-    this.urlBase=environment.urlBase;
+    this.urlBase = environment.urlBase;
+    localStorage.setItem('servicioEvaluado','emprendedores');
    }
    public swiperConfig={
     pagination:false,
     autoplay:{delay: 10000},
     EffectFade:true
-    
+
   }
   public swiperConfig2={
     slidesPerView: 4,
@@ -37,7 +38,7 @@ export class EmprendedoresPage implements OnInit {
       delay: 5000,
       disableOnInteraction: false
     }
-    
+
   };
   ngOnInit() {
     Swiper.use([Pagination,Autoplay,EffectFade]);
@@ -59,16 +60,16 @@ export class EmprendedoresPage implements OnInit {
 
   aplicarFiltro(filtro: string) {
     console.log(filtro,'tofil');
-   
+
     this.iconos.forEach(icono => {
       icono.seleccionado = icono.filtro === filtro;
   });
     if (this.filtroSeleccionado === filtro) {
-     
+
       this.ngOnInit();
       this.filtroSeleccionado = 0;
          // Volver a cargar todos los restaurantes
-        
+
     } else {
         // Establecer el nuevo filtro seleccionado
         this.filtroSeleccionado = filtro;
@@ -81,11 +82,11 @@ export class EmprendedoresPage implements OnInit {
           this.character = res.filter(character => character.field_criterio === filtro);
           this.searched = this.character;
           this.filtroSeleccionado = filtro;
-          
+
       });
     }
     // Lógica para aplicar el filtro, por ejemplo, filtrar los restaurantes por el criterio seleccionado
- 
+
 }
   doRefresh(event) {
     this.ngOnInit();
@@ -103,7 +104,7 @@ export class EmprendedoresPage implements OnInit {
   iraCarrito(){
     this.router.navigate(['/carrito-compras']);
   }
-  
+
   irPageProductos(allPedidos:any){
     localStorage.setItem('idTienda',allPedidos.store_id);
     this.router.navigate(['/emprendedores1',JSON.stringify(allPedidos)]);

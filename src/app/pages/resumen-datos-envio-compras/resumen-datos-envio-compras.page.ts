@@ -26,9 +26,9 @@ export class ResumenDatosEnvioComprasPage implements OnInit {
     navigation: true,
     allowTouchMove: false,
     //pagination: { type:'fraction'},
- 
+
     EffectFade:true
-    
+
   };
   urlBase:any;
   ciudades:any[];
@@ -52,7 +52,7 @@ export class ResumenDatosEnvioComprasPage implements OnInit {
   constructor(private cs: CarritoService,private router: Router, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {
     this.urlBase=environment.urlBase;
     this.FormSend= this.fb.group({
-   
+
 
 field_locacion_destino:[""],
 field_contacto:[""],
@@ -70,31 +70,31 @@ field_metodo_de_pago:[''],
 field_nombre_c_origen:[""],
 
      });
-    
+
    }
    async slideNext(){
-    
-   
+
+
     if(this.AuxCarrosDisponibles['length']==0 && this.AuxMotosDisponibles['length']==0){
       const alert = await this.alertController.create({
-        
+
         header: 'Advertencia',
-       
+
         message: 'En este momento no tenemos auxiliar disponible',
         // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
         buttons: [
-       
+
         {
           text:'aceptar',
           handler:()=>{
-        
-           
-            
+
+
+
           }
         }
       ]
       });
-      
+
       await alert.present();
     }else{
       console.log(this.FormSend.value['field_barrio_destino']);
@@ -102,49 +102,49 @@ field_nombre_c_origen:[""],
       // console.log(this.direccion)
       var barrioExiste= new Boolean();
        for (var i = 0; i <this.direccionDestino.length; i++) {
-         
-         
+
+
          if(this.FormSend.value['field_barrio_destino']==this.direccionDestino[i].name){
            barrioExiste=true;
            let n = i;
            this.swiper.swiperRef.slideNext(1000);
                 this.calcularDomicilio();
-     
+
    return
-   
+
          }else{
           barrioExiste=false;
-          
+
          }
-   
-         
-        
-         
-        
-       }  
+
+
+
+
+
+       }
    console.log(barrioExiste);
-   
+
    if(barrioExiste==false){
    const alert = await this.alertController.create({
-                   
+
      header: 'Error de barrios',
-    
+
      message: 'Barrio(s) no identificado, Debes seleccionar tu barrio de la lista',
      // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
      buttons: [
      {
        text:'aceptar',
-      
+
      }]
    });
-   
+
    await alert.present();
-   
+
    }
 
     }
 
-    
+
 
 
   }
@@ -175,7 +175,7 @@ field_nombre_c_origen:[""],
   }
 
   selected2(item, input2): void {
-   
+
     console.log('selected---->',item.name);
     localStorage.setItem('imgBarrioDestino',item.field_imagen_barrio);
     localStorage.setItem('tarifaDestino',item.field_tarifa);
@@ -185,27 +185,27 @@ field_nombre_c_origen:[""],
     // cacher la liste d'items en vidant la liste
     this.items2 = [];
    // console.log('selected---->',this.FormSend.value['barrioOrigen']);
-   
+
    input2.value = item.name;
    this.FormSend.controls.field_barrio_destino.setValue(item.name);
   }
    async irAPagar(){
 
-  
+
      console.log('resumen aqui');
      if(this.aux=='false'){
       this.presentAlert();
-      
+
      }else{
       if(this.FormSend.invalid || this.FormSend.value['field_metodo_de_pago']==''){
         const alert = await this.alertController.create({
-         
+
           header: 'Datos incompletos ',
-         
+
           message: 'llenar todos los datos.',
           buttons: ['Aceptar']
         });
-    
+
         await alert.present();
         return;
       }
@@ -220,27 +220,27 @@ field_nombre_c_origen:[""],
           if(this.AuxMotosDisponibles.length==0){
             if(this.AuxCarrosDisponibles.length==0){
               const alert = await this.alertController.create({
-                
+
                 header: 'Advertencia',
-               
+
                 message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
                 // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
                 buttons: [
-               
+
                 {
                   text:'aceptar',
                   handler:()=>{
-                
+
                 this.router.navigate(['/tabs']);
-                    
+
                   }
                 }
               ]
               });
-              
+
               await alert.present();
 
-            
+
 
             }else{
               this.auth.seleccionarServicioCarro();
@@ -248,10 +248,10 @@ field_nombre_c_origen:[""],
                 if(this.estadoButton==true){
                   this.estadoButton=false;
                   this.auth.CrearOrdenCompra(this.FormSend.value);
-                 
+
                 }
-          
-              
+
+
               },2000)
 
             }
@@ -262,7 +262,7 @@ field_nombre_c_origen:[""],
               if(this.estadoButton==true){
                 this.estadoButton=false;
                 this.auth.CrearOrdenCompra(this.FormSend.value);
-               
+
               }
             },2000)
           }
@@ -271,26 +271,26 @@ field_nombre_c_origen:[""],
           console.log('publo');
 
           if(this.AuxDisponiblesMunicipios['length']==0){
-          
+
             const alert = await this.alertController.create({
-                
+
               header: 'Advertencia',
-             
+
               message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
               // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
               buttons: [
-             
+
               {
                 text:'aceptar',
                 handler:()=>{
-              
+
               this.router.navigate(['/tabs']);
-                  
+
                 }
               }
             ]
             });
-            
+
             await alert.present();
           }else{
             this.auth.seleccionarServicioMotoYcarroMunicipio();
@@ -298,12 +298,12 @@ field_nombre_c_origen:[""],
             if(this.estadoButton==true){
               this.estadoButton=false;
               this.auth.CrearOrdenCompra(this.FormSend.value);
-              
+
               break;
-             
+
             }
           }
-         
+
         }
       }
       this.cs.delete_cart();
@@ -319,26 +319,26 @@ field_nombre_c_origen:[""],
 
   //metodo que calcula precio domicilio
   calcularDomicilio(){
-    
+
     if( localStorage.getItem('locacionDestinoSeleccionada') != localStorage.getItem('locacionOrigenSeleccionada') ){
       if( localStorage.getItem('tarifaExternaOrigen')>localStorage.getItem('tarifaExternaDestino')){
         this.domicilioValor=Number(localStorage.getItem('tarifaExternaOrigen'));
         this.auth.domicilioRestaurante=localStorage.getItem('tarifaExternaOrigen');
         localStorage.setItem('precioTarifa',localStorage.getItem('tarifaExternaOrigen'));
         //
-  
+
       }else  if(localStorage.getItem('tarifaExternaDestino') >localStorage.getItem('tarifaExternaOrigen')){
         this.domicilioValor=Number(localStorage.getItem('tarifaExternaDestino'));
         this.auth.domicilioRestaurante=localStorage.getItem('tarifaExternaDestino');
         localStorage.setItem('precioTarifa',localStorage.getItem('tarifaExternaDestino'));
         //
-     
+
       }else if(localStorage.getItem('tarifaExternaDestino') ==localStorage.getItem('tarifaExternaOrigen')){
         this.domicilioValor=Number(localStorage.getItem('tarifaExternaDestino'));
         this.auth.domicilioRestaurante=localStorage.getItem('tarifaExternaDestino');
         localStorage.setItem('precioTarifa',localStorage.getItem('tarifaExternaDestino'));
         //
-        
+
       }
     }else{
       if(Number(localStorage.getItem('tarifaOrigen')) > Number(localStorage.getItem('tarifaDestino')) ){
@@ -362,9 +362,9 @@ field_nombre_c_origen:[""],
     this.total = this.subtotal+ this.domicilioValor;
 
      //imprimir por consola file precio si es vehiculo le sumo el porcentaje
- 
 
-   
+
+
 var valorAgregado = parseFloat(localStorage.getItem('valorAgregado'));  // Ejemplo de valor agregado
 
 // Calcula el resultado total
@@ -394,9 +394,9 @@ if(this.auth.medioTransporte==2){
   }
    async presentAlert() {
     const alert = await this.alertController.create({
-       
+
       header: 'Contrato por prestación de servicios  :',
-     
+
       message: '1.Objeto. El Prestador de Servicios se obliga a ponerse a disposición del Usuario/consumidor brindándole la compañía de un amigo, cómplice y/o acompañante, para ir a los sitios donde quiera, disfrute, necesite o requiera cuando él lo solicite a través de la aplicación.'
       +'Lo anterior de manera voluntaria, sin perjuicio de la supervisión y observaciones que pueda realizar el usuario durante la ejecución del contrato.'+ '<br>'
       +'2. Lugar de la Prestación del Servicio. Los servicios mencionados en la primera cláusula de este contrato serán llevados a cabo en la                                  '+ '<br>'
@@ -417,7 +417,7 @@ if(this.auth.medioTransporte==2){
         {
         text:'Cancel',
         role:'cancel',
-        /** 
+        /**
         handler:()=>{
           this.router.navigate(['/tabs']);
         }
@@ -427,14 +427,14 @@ if(this.auth.medioTransporte==2){
         text:'aceptar',
         role:'confirm',
         handler:()=>{
-        
-         
+
+
      this.aux = (document.getElementById("aut_contrato") as HTMLInputElement).ariaChecked;
      console.log(this.aux, 'estado');
 
      //si es igua igual a on, lpasas para la otra pagina
 
-    
+
 if(this.aux=='false'){
 // le muestra que no marcho (primero)
 let estado='false';
@@ -452,92 +452,109 @@ localStorage.setItem('actualizarContrato',estado);
     });
 
     await alert.present();
-    
-   
+
+
 
    }
-  
- 
-
-  ngOnInit() {
-
-    this.estadoButton=true;
-    this.auth.seleccionarSliderTiendas().subscribe(res =>{
-      console.log(res, ' aqui slider');
-     this.slider=res[0]['field_imagen_resumen_tiendas'];
-     
-     console.log(this.slider);
-      
-     
-      
-      
-    });
-    this.auth.getCiudad().subscribe(res =>{
-      console.log(res, ' ciudad');
-
-      this.ciudades=res;
- 
-    });
-    this.permitirPagoEfectivo=localStorage.getItem('permitirPagoefectivo');
-    this.auth.getAuxiliaresDisponiblesCarros().subscribe(res =>{
-      let vpda=[];
-      console.log(res, ' aqui carro');
-      this.AuxCarrosDisponibles=res;
-     
-     
- 
-    });
-    this.auth.getAuxiliaresDisponiblesMotos().subscribe(res =>{
-      console.log(res, ' aqui motos');
-      this.AuxMotosDisponibles=res;
-    
-    });
-
-    this.auth.getAuxiliaresDisponiblesMunicipio().subscribe(res =>{
-      console.log(res, ' aqui aux municiipio');
-      this.AuxDisponiblesMunicipios=res;
-    
-    });
-    this.aux='false';
-    this.permitirPagoEfectivo=localStorage.getItem('permitirPagoefectivo');
-    Swiper.use([Pagination,Navigation,EffectFade,Virtual]);
-   
-    this.auth.getListLocaciones().subscribe(data=>{
-      console.log(data);
-      this.locaciones=data;
-          },error=>{
-           
-            console.log(error);
-           
-          });
-          
-   
-  this.presentAlert();
-
-  //obtener valor agregado por porcentaje
-  this.auth.getValorAgregadoVehiculo().subscribe(res =>{
-      
-    /** */
-    console.log(res[0].field_valor_descuento, ' aqui valor agregado +');
- localStorage.setItem('valorAgregado',res[0].field_valor_descuento);
 
 
 
-  });
-  console.log(this.auth.resumen);
-  console.log(this.auth.resumenObservacion,'obser ');
-  this.FormSend.controls.field_observaciones.setValue(localStorage.getItem('enviarProductos'));
-  
-  //this.FormSend.controls.field_contacto.setValue(this.auth.resumen.field_direccion_entrega['0']['value']);
+  async ngOnInit() {
+    try {
 
-  this.FormSend.controls.field_medio_de_transporte.setValue(this.auth.medioTransporte);
+      console.log(localStorage.getItem('zona_origen'), 'zona_origen');
+      console.log(localStorage.getItem('zona_destino'), 'zona_destino');
+      console.log(localStorage.getItem('servicioEvaluado'), 'servicioEvaluado');
 
-  //this.FormSend.controls.field_prefijo_origen.setValue(this.auth.resumen.field_prefijo_origen['0']['value']);
-  
+      let resultadoTotalCosto = await this.auth.calcularPrecioTarifa(
+        localStorage.getItem('servicioEvaluado'),
+        localStorage.getItem('zona_origen'),
+        localStorage.getItem('zona_destino'),
+        2
+      );
+      resultadoTotalCosto = Number(resultadoTotalCosto);
+      console.log(resultadoTotalCosto, 'resultadoTotalCosto');
+
+      this.estadoButton = true;
+      this.auth.seleccionarSliderTiendas().subscribe(res => {
+        console.log(res, ' aqui slider');
+        this.slider = res[0]['field_imagen_resumen_tiendas'];
+
+        console.log(this.slider);
+
+
+
+
+      });
+      this.auth.getCiudad().subscribe(res => {
+        console.log(res, ' ciudad');
+
+        this.ciudades = res;
+
+      });
+      this.permitirPagoEfectivo = localStorage.getItem('permitirPagoefectivo');
+      this.auth.getAuxiliaresDisponiblesCarros().subscribe(res => {
+        let vpda = [];
+        console.log(res, ' aqui carro');
+        this.AuxCarrosDisponibles = res;
+
+
+
+      });
+      this.auth.getAuxiliaresDisponiblesMotos().subscribe(res => {
+        console.log(res, ' aqui motos');
+        this.AuxMotosDisponibles = res;
+
+      });
+
+      this.auth.getAuxiliaresDisponiblesMunicipio().subscribe(res => {
+        console.log(res, ' aqui aux municiipio');
+        this.AuxDisponiblesMunicipios = res;
+
+      });
+      this.aux = 'false';
+      this.permitirPagoEfectivo = localStorage.getItem('permitirPagoefectivo');
+      Swiper.use([Pagination, Navigation, EffectFade, Virtual]);
+
+      this.auth.getListLocaciones().subscribe(data => {
+        console.log(data);
+        this.locaciones = data;
+      }, error => {
+
+        console.log(error);
+
+      });
+
+
+      this.presentAlert();
+
+      //obtener valor agregado por porcentaje
+      this.auth.getValorAgregadoVehiculo().subscribe(res => {
+
+        /** */
+        console.log(res[0].field_valor_descuento, ' aqui valor agregado +');
+        localStorage.setItem('valorAgregado', res[0].field_valor_descuento);
+
+
+
+      });
+      console.log(this.auth.resumen);
+      console.log(this.auth.resumenObservacion, 'obser ');
+      this.FormSend.controls.field_observaciones.setValue(localStorage.getItem('enviarProductos'));
+
+      //this.FormSend.controls.field_contacto.setValue(this.auth.resumen.field_direccion_entrega['0']['value']);
+
+      this.FormSend.controls.field_medio_de_transporte.setValue(this.auth.medioTransporte);
+
+      //this.FormSend.controls.field_prefijo_origen.setValue(this.auth.resumen.field_prefijo_origen['0']['value']);
+
+
+    } catch (error) {
+      console.error(error);
+    }
   }
-
   async ngAfterViewInit(){
-   
+
     await this.cs.get_cart().then((res:any)=>{
      console.log('que pasa', this.data);
      if(!res) return;
@@ -546,15 +563,15 @@ localStorage.setItem('actualizarContrato',estado);
      for(let x in res){
       this.subtotal += res[x].originaPrice *res[x].cantidad;
        this.total = this.subtotal+ Number(this.domicilioValor);
- 
-     }
-     
-   });
-     
-   }
-  
 
-  region(event){  
+     }
+
+   });
+
+   }
+
+
+  region(event){
     this.locacion= event;
     console.log(this.locacion);
     if(event!=''){
@@ -564,91 +581,91 @@ localStorage.setItem('actualizarContrato',estado);
       this.WillEnter();
       },3000)
     }
-   
-  } 
+
+  }
   WillEnter(){
 
     this.auth.getListBarriosSeleccion().subscribe(async data=>{
-  
+
       this.direccionDestino=await data;
           },async error=>{
-           
+
             console.log(error);
             const alert = await this.alertController.create({
-       
+
               header: 'Error de locación ',
-             
+
               message: 'Su locación no tiene barrios asignados.',
               buttons: [{
                 text:'aceptar',
                 handler:()=>{
-              
-                 
+
+
                 }
               }],
-              
+
             });
-        
+
             await alert.present();
             return;
-           
+
           });
           setTimeout(() => {
-          
+
 
            // console.log(this.direccionDestino[0]['name']);
 
             console.log(this.direccionDestino);
-            
+
             //si barrios es 1 agregar por defecto y ocultar input barrio origen
-            
+
             if(this.direccionDestino.length==1 ){
              this.FormSend.controls.field_barrio_destino.setValue(this.direccionDestino[0]['name']);
              localStorage.setItem('tarifaDestino',this.direccionDestino[0]['field_tarifa']);
 
              localStorage.setItem('tarifaExternaDestino',this.direccionDestino[0]['field_tarifa_externa']);
-           
-           
-           
+
+
+
              localStorage.setItem('imgBarrioDestino',this.direccionDestino[0]['field_imagen_barrio']);
             this.ocultarInput=true;
             this.bloquearInputBarrioDestino=true;
             document.getElementById('itemDestino').style.visibility = "hidden"; // hide
-       
-             
-       
-             
-            }else  
+
+
+
+
+            }else
             if(this.direccionDestino.length==1 && this.direccionDestino[0]['name']=='San Andrés'){
               this.FormSend.controls.field_barrio_destino.setValue(this.direccionDestino[0]['name']);
               localStorage.setItem('tarifaDestino',this.direccionDestino[0].field_tarifa);
-       
-          
-           
+
+
+
               localStorage.setItem('imgBarrioDestino',this.direccionDestino[0]['field_imagen_barrio']);
-            
+
             this.ocultarInput=true;
             this.bloquearInputBarrioDestino=true;
-            
-       
+
+
              document.getElementById('itemDestino').style.visibility = "hidden"; // hide
-      
+
             }else if(this.direccionDestino.length>1){
               this.FormSend.controls.field_barrio_destino.setValue('');
               this.ocultarInput=false;
               this.bloquearInputBarrioDestino=false;
-            
-       
+
+
              document.getElementById('itemDestino').style.visibility = "visible"; // hide
             }
-            
-       
-            
+
+
+
            },4000)
-          
+
   }
   ngOnDestroy() {
-   
+
     console.log("Resumen- OnDestroy")
   }
 

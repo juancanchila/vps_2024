@@ -23,7 +23,7 @@ export class ResumenAlmacenPage implements OnInit {
   constructor(private menucontrol:MenuController,private router: Router, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {
     this.menucontrol.enable(false);
     this.FormSend= this.fb.group({
-     
+
       field_locacion_entrega:[""],
       field_prefijo_destino:[""],
       field_locacion_destino:[""],
@@ -48,18 +48,18 @@ field_nombre_c_destino:[""]
 
 
      });
-    
+
    }
-  
+
    status="completed";
    disabledValue= true;
- 
+
    enableInput(){
-     
+
      if(this.status==="completed"){
        this.disabledValue=false;
        console.log('disabled');
- 
+
      }else{
        this.disabledValue = true;
      }
@@ -67,19 +67,19 @@ field_nombre_c_destino:[""]
    async irAPagar(){
     if(this.aux=='false'){
       this.presentAlert();
-      
-     }else{ 
+
+     }else{
     if(this.FormSend.invalid){
       const alertElement= await this.alertController.create({
-           
+
         header: '¡Su solicitud es mayor a 100000$ debe ser transportada en carro!',
         message: '¿Desea ir a medio de transporte carro?',
-        
+
         buttons: [
           {
           text:'cancel',
           role:'this.auth.CrearSencilla(this.FormSend.value);'
-          
+
         },
         {
           text:'aceptar',
@@ -89,31 +89,31 @@ field_nombre_c_destino:[""]
         }
       ]
       });
-    
+
       await alertElement.present();
     }else{
       this.auth.getSesion();
-    
+
       if(this.estadoButton==true){
         this.estadoButton=false;
         this.auth.CrearAlmacen(this.FormSend.value);
-       
+
       }
-     
+
       //this.router.navigate(['/formadepag']);
     }
-   
-    
-    
+
+
+
      //this.auth.sendFormulario(this.FormSend.value);
    }
   }
 
    async presentAlert() {
     const alert = await this.alertController.create({
-       
+
       header: 'Contrato por prestación de servicios  :',
-     
+
       message: '1.Objeto. El Prestador de Servicios se obliga a ponerse a disposición del Usuario/consumidor brindándole la compañía de un amigo, cómplice y/o acompañante, para ir a los sitios donde quiera, disfrute, necesite o requiera cuando él lo solicite a través de la aplicación.'
       +'Lo anterior de manera voluntaria, sin perjuicio de la supervisión y observaciones que pueda realizar el usuario durante la ejecución del contrato.'+ '<br>'
       +'2. Lugar de la Prestación del Servicio. Los servicios mencionados en la primera cláusula de este contrato serán llevados a cabo en la                                  '+ '<br>'
@@ -143,13 +143,13 @@ field_nombre_c_destino:[""]
       {
         text:'aceptar',
         handler:()=>{
-        
+
           this.aux = (document.getElementById("aut_contrato") as HTMLInputElement).ariaChecked;
           console.log(this.aux, 'estado');
 
           //si es igua igual a on, lpasas para la otra pagina
 
-         
+
  if(this.aux=='false'){
   // le muestra que no marcho (primero)
   let estado='false';
@@ -165,143 +165,100 @@ field_nombre_c_destino:[""]
     });
 
     await alert.present();
-    
-   
+
+
 
    }
-  
- 
-
-  ngOnInit() {
-    this.estadoButton=true;
-    this.aux='false';
-    this.auth.getListLocaciones().subscribe(data=>{
-      console.log(data);
-      this.locaciones=data;
-          },error=>{
-           
-            console.log(error);
-           
-          });
-    this.precio_origen = Number(localStorage.getItem('tarifaOrigen'));
-    this.precio_destino = Number(localStorage.getItem('tarifaDestino'));
-   this.presentAlert();
-  //obtener valor agregado por porcentaje
-  this.auth.getValorAgregadoVehiculo().subscribe(res =>{
-      
-    /** */
-    console.log(res[0].field_valor_descuento, ' aqui valor agregado +');
- localStorage.setItem('valorAgregado',res[0].field_valor_descuento);
 
 
 
-  });
-  console.log(this.auth.resumenAlmacen);
-  this.que_quieres_comprar=this.auth.resumenAlmacen.field_quieres_comprar['0']['value'];
-  this.costo_articulo=this.auth.resumenAlmacen.field_valor_declarado['0']['value'];
-  this.FormSend.controls.field_locacion_entrega.setValue(this.auth.resumenAlmacen.field_locacion_entrega['0']['value']);
-  this.FormSend.controls.field_prefijo_destino.setValue(this.auth.resumenAlmacen.field_prefijo_destino['0']['value']);
+  async ngOnInit() {
+    try {
 
-  this.FormSend.controls.field_nombre_del_establecimiento.setValue(this.auth.resumenAlmacen.field_nombre_del_establecimiento['0']['value']);
+      console.log(localStorage.getItem('zona_origen'), 'zona_origen');
+      console.log(localStorage.getItem('zona_destino'), 'zona_destino');
+      console.log(localStorage.getItem('servicioEvaluado'), 'servicioEvaluado');
 
-   
-  this.FormSend.controls.field_locacion_destino.setValue(this.auth.resumenAlmacen.field_locacion_destino['0']['value']);
-  
-  //this.FormSend.controls.field_direccion_entrega.setValue(this.auth.resumenAlmacen.field_direccion_entrega['0']['value']);
-  this.FormSend.controls.field_direccion_destino.setValue(this.auth.resumenAlmacen.field_direccion_destino['0']['value']);
+      let resultadoTotalCosto = await this.auth.calcularPrecioTarifa(
+        localStorage.getItem('servicioEvaluado'),
+        localStorage.getItem('zona_origen'),
+        localStorage.getItem('zona_destino'),
+        1
+      );
+      resultadoTotalCosto = Number(resultadoTotalCosto);
+      console.log(resultadoTotalCosto, 'resultadoTotalCosto');
 
-  this.FormSend.controls.field_direccion_entrega.setValue(this.auth.resumenAlmacen.field_direccion_entrega['0']['value']);
+      this.estadoButton = true;
+      this.aux = 'false';
+      this.auth.getListLocaciones().subscribe(data => {
+        console.log(data);
+        this.locaciones = data;
+      }, error => {
 
-  
-  this.FormSend.controls.field_observaciones.setValue(this.auth.resumenAlmacen.field_observaciones['0']['value']);
+        console.log(error);
 
+      });
+      this.precio_origen = Number(localStorage.getItem('tarifaOrigen'));
+      this.precio_destino = Number(localStorage.getItem('tarifaDestino'));
+      this.presentAlert();
+      //obtener valor agregado por porcentaje
+      this.auth.getValorAgregadoVehiculo().subscribe(res => {
 
-  
-  this.FormSend.controls.field_direccion_destino.setValue(this.auth.resumenAlmacen.field_direccion_destino['0']['value']);
-  this.FormSend.controls.field_contacto.setValue(this.auth.resumenAlmacen.field_contacto['0']['value']);
-  this.FormSend.controls.field_contacto_destino.setValue(this.auth.resumenAlmacen.field_contacto_destino['0']['value']);
- 
- this.FormSend.controls.field_valor_declarado.setValue(this.auth.resumenAlmacen.field_valor_declarado['0']['value']);
- this.FormSend.controls.field_prefijo_origen.setValue(this.auth.resumenAlmacen.field_prefijo_origen['0']['value']);
- this.FormSend.controls.field_barrio_origen.setValue(this.auth.resumenAlmacen.field_barrio_origen['0']['value']);
- this.FormSend.controls.field_barrio_destino.setValue(this.auth.resumenAlmacen.field_barrio_destino['0']['value']);
- 
- this.FormSend.controls.field_metodo_de_pago.setValue(this.auth.resumenAlmacen.field_metodo_de_pago['0']['value']);
- this.FormSend.controls.field_quieres_comprar.setValue(this.auth.resumenAlmacen.field_quieres_comprar['0']['value']);
-
- this.FormSend.controls.field_nombre_c_origen.setValue(this.auth.resumenAlmacen.field_nombre_c_origen['0']['value']);
-  this.FormSend.controls.field_nombre_c_destino.setValue(this.auth.resumenAlmacen.field_nombre_c_destino['0']['value']);
-
+        /** */
+        console.log(res[0].field_valor_descuento, ' aqui valor agregado +');
+        localStorage.setItem('valorAgregado', res[0].field_valor_descuento);
 
 
-  if( localStorage.getItem('locacionDestinoSeleccionada') != localStorage.getItem('locacionOrigenSeleccionada') ){
-    if( localStorage.getItem('tarifaExternaOrigen')>localStorage.getItem('tarifaExternaDestino')){
-      this.FormSend.controls.  field_precio_.setValue(localStorage.getItem('tarifaExternaOrigen'));
-      localStorage.setItem('precioTarifa',localStorage.getItem('tarifaExternaOrigen'));
-      //
 
-    }else  if(localStorage.getItem('tarifaExternaDestino') >localStorage.getItem('tarifaExternaOrigen')){
-      this.FormSend.controls.  field_precio_.setValue(localStorage.getItem('tarifaExternaDestino'));
-      localStorage.setItem('precioTarifa',localStorage.getItem('tarifaExternaDestino'));
-      //
-   
-    }else if(localStorage.getItem('tarifaExternaDestino') ==localStorage.getItem('tarifaExternaOrigen')){
-      this.FormSend.controls.  field_precio_.setValue(localStorage.getItem('tarifaExternaDestino'));
-      localStorage.setItem('precioTarifa',localStorage.getItem('tarifaExternaDestino'));
-      //
-      
+      });
+      console.log(this.auth.resumenAlmacen);
+      this.que_quieres_comprar = this.auth.resumenAlmacen.field_quieres_comprar['0']['value'];
+      this.costo_articulo = this.auth.resumenAlmacen.field_valor_declarado['0']['value'];
+      this.FormSend.controls.field_locacion_entrega.setValue(this.auth.resumenAlmacen.field_locacion_entrega['0']['value']);
+      this.FormSend.controls.field_prefijo_destino.setValue(this.auth.resumenAlmacen.field_prefijo_destino['0']['value']);
+
+      this.FormSend.controls.field_nombre_del_establecimiento.setValue(this.auth.resumenAlmacen.field_nombre_del_establecimiento['0']['value']);
+
+
+      this.FormSend.controls.field_locacion_destino.setValue(this.auth.resumenAlmacen.field_locacion_destino['0']['value']);
+
+      //this.FormSend.controls.field_direccion_entrega.setValue(this.auth.resumenAlmacen.field_direccion_entrega['0']['value']);
+      this.FormSend.controls.field_direccion_destino.setValue(this.auth.resumenAlmacen.field_direccion_destino['0']['value']);
+
+      this.FormSend.controls.field_direccion_entrega.setValue(this.auth.resumenAlmacen.field_direccion_entrega['0']['value']);
+
+
+      this.FormSend.controls.field_observaciones.setValue(this.auth.resumenAlmacen.field_observaciones['0']['value']);
+
+
+
+      this.FormSend.controls.field_direccion_destino.setValue(this.auth.resumenAlmacen.field_direccion_destino['0']['value']);
+      this.FormSend.controls.field_contacto.setValue(this.auth.resumenAlmacen.field_contacto['0']['value']);
+      this.FormSend.controls.field_contacto_destino.setValue(this.auth.resumenAlmacen.field_contacto_destino['0']['value']);
+
+      this.FormSend.controls.field_valor_declarado.setValue(this.auth.resumenAlmacen.field_valor_declarado['0']['value']);
+      this.FormSend.controls.field_prefijo_origen.setValue(this.auth.resumenAlmacen.field_prefijo_origen['0']['value']);
+      this.FormSend.controls.field_barrio_origen.setValue(this.auth.resumenAlmacen.field_barrio_origen['0']['value']);
+      this.FormSend.controls.field_barrio_destino.setValue(this.auth.resumenAlmacen.field_barrio_destino['0']['value']);
+
+      this.FormSend.controls.field_metodo_de_pago.setValue(this.auth.resumenAlmacen.field_metodo_de_pago['0']['value']);
+      this.FormSend.controls.field_quieres_comprar.setValue(this.auth.resumenAlmacen.field_quieres_comprar['0']['value']);
+
+      this.FormSend.controls.field_nombre_c_origen.setValue(this.auth.resumenAlmacen.field_nombre_c_origen['0']['value']);
+      this.FormSend.controls.field_nombre_c_destino.setValue(this.auth.resumenAlmacen.field_nombre_c_destino['0']['value']);
+
+
+
+      this.FormSend.controls.field_precio_.setValue(resultadoTotalCosto);
+
+    } catch (error) {
+      console.error(error);
     }
-  }else{
-    if(this.precio_origen>this.precio_destino){
-      this.FormSend.controls.  field_precio_.setValue(this.precio_origen);
-      localStorage.setItem('precioTarifa',this.precio_origen);
-    }else if(this.precio_destino>this.precio_origen){
-      this.FormSend.controls.  field_precio_.setValue(this.precio_destino);
-      localStorage.setItem('precioTarifa',this.precio_destino);
-    }else{
-      this.FormSend.controls.  field_precio_.setValue(localStorage.getItem('tarifaOrigen'));
-      localStorage.setItem('precioTarifa',this.precio_destino);
-    }
+
   }
 
- 
- 
-  //this.FormSend.controls.field_medio_de_transporte.setValue(this.auth.medioTransporte);
- //imprimir por consola file precio si es vehiculo le sumo el porcentaje
- console.log(this.FormSend.controls.field_precio_.value, 'precio costo domicilio');
-
-   
- var valorAgregado = parseFloat(localStorage.getItem('valorAgregado'));  // Ejemplo de valor agregado
- 
- // Calcula el resultado total
- var resultadoTotalCosto = Number(this.FormSend.controls.field_precio_.value);
- 
- // Calcula el porcentaje
- var porcentaje = ( resultadoTotalCosto * valorAgregado) / 100;
- 
- // Imprime los resultados en la consola
- 
- console.log("Resultado Total de Costo:", resultadoTotalCosto);
- console.log("Valor Agregado:", valorAgregado);
- console.log("Porcentaje de Valor Agregado:", porcentaje)
- console.log("Resultado Total de Costo + porcentaje:", resultadoTotalCosto + porcentaje);
- var TotalDefinitivoParaVehiculos = resultadoTotalCosto + porcentaje;
- 
- //condicion para mostrar el valor agregado si es vehiculo
- 
- if(this.auth.medioTransporte==2){
-   this.FormSend.controls.  field_precio_.setValue(TotalDefinitivoParaVehiculos);
-   localStorage.setItem('precioTarifa',TotalDefinitivoParaVehiculos.toString());
- }
- 
- 
-   
-  
-  }
-
-  
   ngOnDestroy() {
-   
+
     console.log("Resumen- OnDestroy")
   }
 

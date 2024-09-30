@@ -58,7 +58,9 @@
           <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@mipmap/ic_index2_round" />
         </provider>
 
-
+      <meta-data
+        android:name="com.google.firebase.messaging.default_notification_sound"
+        android:resource="@raw/custom_sound" />
     </application>
 
 </manifest>

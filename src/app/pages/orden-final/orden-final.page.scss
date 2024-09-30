@@ -1,7 +1,16 @@
+
 ion-title{
-    font-family: 'Montserrat', sans-serif;
+    margin-left: -17%;
     text-align: center;
     text-transform: uppercase;
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+}
+
+form{
+	margin: auto;
+	width: 95%;
 }
 ion-toolbar{
     color: white;
@@ -12,8 +21,8 @@ ion-toolbar{
 }
 ion-button{
     font-family: 'Poppins', sans-serif;
- 
-    
+
+
     color: #262262;
     margin-left: auto;
     margin-right: auto;
@@ -26,20 +35,22 @@ ion-tab-bar{
 
 }
 ion-icon,ion-label{
-
+    display: flex;
+    margin-left: 15.5px;
     color: yellow;
 }
 h1{
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     text-align: center;
     margin: auto;
     font-size: 20px;
-    
+
 }
 ion-row{
     height: auto;
     width: auto;
-    
+
 }
 .spacing{
     margin-bottom: 40%;

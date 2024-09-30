@@ -2,30 +2,41 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button  ></ion-back-button>
-      <ion-title>Detalles de ordenes</ion-title>
+
     </ion-buttons>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <ion-title>Detalles de ordenes</ion-title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat Light &display=swap" rel="stylesheet">
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
 
-    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-      <ion-refresher-content>
-
-      </ion-refresher-content>
-    </ion-refresher>
 
 
 
+    <div class="contentImg">
+      <ion-img class="" src="../../assets/banners/ordenes_creadas.gif" alt=""></ion-img>
 
+    </div>
 
 
 
 
-      <ion-card >
-        <ion-list *ngIf="character!='Completado' ">
+    <div class="ticket-background">
+      <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content>
+
+        </ion-refresher-content>
+      </ion-refresher>
+
+
+
+
+      <div class="ticket_fom">
+      <!--ion-card -->
+      <div class="ticket-header"></div>
+        <ion-list *ngIf="character!=='Completado' ">
           <ion-button [disabled]="estadoButton" id="camino" replaceUrl="true" (click)="cancelarPedido()" type="submit" color="warning" >Cancelar Pedido</ion-button>
         </ion-list>
         <ion-grid>
@@ -230,7 +241,9 @@
                 --><input id="radio5" type="radio" name="estrellas" (click)="clickStar('1')" value="1"><!--
                 --><label for="radio5">★</label>
               </p>
-              <textarea maxlength="250" id="comentario" type="text" [(ngModel)]="name" name="ok" placeholder="Escriba su comentario"  value=""></textarea>
+              <textarea maxlength="250" id="comentario" [(ngModel)]="name" name="ok" placeholder="Escriba su comentario"></textarea>
+
+
 
 
             </form>
@@ -245,11 +258,9 @@
 
 
 
-
-      </ion-card>
-
-
-
+      <div class="ticket-footer"></div>
+      <!--/ion-card-->
+</div>
 
 
 
@@ -261,5 +272,8 @@
 
 
 
+
+
+    </div>
 
 </ion-content>

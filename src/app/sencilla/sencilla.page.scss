@@ -1,8 +1,16 @@
+
 ion-title{
     margin-left: -17%;
     text-align: center;
-    font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+}
+
+form{
+	margin: auto;
+	width: 95%;
 }
 ion-toolbar{
     color: white;
@@ -10,8 +18,8 @@ ion-toolbar{
 }
 ion-content{
    // --background:#ecf0f1 url(../../assets/botones/FONDO) 0 0/100% 100% repeat;
-    //--background:#ecf0f1 url(../../assets/botones/FONDOENVIO2.png.jpg) 0 0/100% 100% repeat; 
-    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat; 
+    //--background:#ecf0f1 url(../../assets/botones/FONDOENVIO2.png.jpg) 0 0/100% 100% repeat;
+    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat;
 }
 
    .inputValor{
@@ -19,7 +27,7 @@ ion-content{
    }
 
 .contentImg{
-    padding-top: 20px;
+    /*padding-top: 20px;*/
 text-align: center;
 }
 .sc-ion-input-md-h {
@@ -35,7 +43,8 @@ text-align: center;
 }
 h2{
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 
 }
 .corto{
@@ -45,13 +54,14 @@ h2{
     width: 65%;
     display: block;
     background-color: #ecf0f1;
-   
+
     font-size: 17px;
     border: 1px solid #333;
 }
 select{
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     width: 115px;
     height: 38px;
     background-color: #ecf0f1;
@@ -77,7 +87,7 @@ textarea{
 }
 
 ion-input{
-    
+
     height: 38px;
     width: 100%;
     display: block;
@@ -105,14 +115,14 @@ ion-row{
 }
 .check{
     padding-top: 5px;
-  
+
     padding-bottom: 5px;
     border-bottom: 1px solid #262262;
 }
 .check2{
     padding-top: 5px;
-  
-   
+
+
 }
 ion-buttons{
     text-align: center;
@@ -141,7 +151,7 @@ button{
       border-radius: none;
       width: 120px;
       margin: auto;
-    
+
 }
 .imgtoolbar{
     max-width: 100%;
@@ -150,16 +160,19 @@ button{
 
 
 ion-label{
-    margin: 5%;
+    display: flex;
+    margin-left: 15.5px;
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     text-transform: uppercase;
-    
+
 }
 label{
     margin-left: 6%;;
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 }
 ion-item{
     --ion-background-color: transparent !important;
@@ -193,12 +206,12 @@ ion-button{
     /* max-height: 100%; */
 }
 ion-card{
-    border-radius: 5%;
+    border-radius: 20px;
     padding: 20px 0 20px 0;
 }
 small{
     font-size: 15px;
     color: white;
     font-family: 'Poppins', sans-serif;
-    
+
 }

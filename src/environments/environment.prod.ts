@@ -11,5 +11,5 @@ export const environment = {
     measurementId: 'G-5X77ZVR0CE',
   },
   production: true,
-  urlBase: "http://164.92.106.39/"
+  urlBase: "http://147.182.203.91/"
 };

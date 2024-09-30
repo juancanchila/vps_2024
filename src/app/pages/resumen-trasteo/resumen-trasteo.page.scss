@@ -8,9 +8,17 @@ input, label {
 }
 
 ion-title{
-    margin-left: 58px;
+    margin-left: -17%;
+    text-align: center;
     text-transform: uppercase;
-    font-family: "Montserrat", sans-serif;
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+}
+ 
+form{
+	margin: auto;
+	width: 95%;
 }
 .ion-color-warning {
     --ion-color-base: #FFF200  !important;
@@ -21,11 +29,13 @@ ion-title{
     padding-bottom: 5px;
 }
 ion-label{
-    margin: 4%;
+    display: flex;
+    margin: auto;
+    max-width: 95%;
     color: #262262;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat Light ", sans-serif;
     text-transform: uppercase;
-    
+
 }
 ion-icon{
     float: right;
@@ -35,9 +45,9 @@ ion-icon{
 
 input{
 
-    
+
     background-color: #ecf0f1;
-   
+
 
     margin-right: 9%;
     float: right;
@@ -45,7 +55,7 @@ input{
     height: 20px;
 }
 ion-card{
-   
+    border-radius: 20px;
     padding: 20px 0 20px 0;
 }
 .linea {
@@ -54,7 +64,7 @@ ion-card{
     max-width: 100%;
     padding: 0;
     margin: 20px auto 0 auto;
-    
+
   }
 textarea{
     color: #262262;
@@ -86,17 +96,18 @@ ion-col{
     border: 1px solid #333;
 }
 select{
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     color: #262262;
     background-color: #ecf0f1;
     height: 38px;
-   
-    
-    
+
+
+
 }
 
 ion-input{
-    
+
     height: 38px;
     width: 100%;
     display: block;
@@ -135,21 +146,22 @@ ion-tab-bar{
 }
 ion-icon{
     color: #262262;
-    
-    
-    
+
+
+
 }
 button{
     display: inline-block;
       border-radius: none;
       width: 120px;
       margin: auto;
-    
+
 }
 
 ion-label{
+    display: flex;
     text-transform: uppercase;
-    
+
 }
 ion-item{
     --min-height: 0 !important;
@@ -169,19 +181,20 @@ body{
     --ion-color-primary-contrast: #ffffff;
 }
 ion-content{
-    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat; 
+    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat;
 }
 h2{
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 }
 label {
     margin-left: 4%;
     color: #262262;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat Light ", sans-serif;
 }
 b{
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 }
- 

@@ -1,7 +1,16 @@
+
 ion-title{
-    font-family: 'Montserrat', sans-serif;
-    margin-left: 13%;
+    margin-left: -17%;
+    text-align: center;
     text-transform: uppercase;
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+}
+ 
+form{
+	margin: auto;
+	width: 95%;
 }
 ion-toolbar{
     color: white;
@@ -21,16 +30,16 @@ ion-icon{
     /* align-items: center; */
     /* justify-content: center; */
     display: inline;
-   
+
     /* margin-top: 6%; */
     font-size: 80%;
 }
 ion-content{
     // --background:#ecf0f1 url(../../assets/botones/FONDO) 0 0/100% 100% repeat;
-     //--background:#ecf0f1 url(../../assets/botones/FONDOENVIO2.png.jpg) 0 0/100% 100% repeat; 
-     --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat; 
+     //--background:#ecf0f1 url(../../assets/botones/FONDOENVIO2.png.jpg) 0 0/100% 100% repeat;
+     --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat;
  }
- 
+
 .content-botones {
     text-align: center;
     display: inline-flex;
@@ -67,19 +76,20 @@ ion-button{
 body{
     --ion-color-primary-contrast: #ffffff;
   }
- 
+
 ion-tab-bar{
     --ion-background-color: #262262;
 
 }
 
 .slider{
-   
+
         padding-top: 20px;
         text-align: center;
 
 }
 ion-icon,ion-label{
+    display: flex;
 
     color: yellow;
 }
@@ -104,8 +114,9 @@ ion-item{
 }
 h2{
     color: #262262;
-    
-    font-family: 'Montserrat', sans-serif;
+
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 }
 .dark{
     background-color: lime;
@@ -128,8 +139,9 @@ div{
 }
 h1 {
     color: #262262;
-    
-    font-family: 'Montserrat', sans-serif;
+
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     text-align: left;
     /* float: left; */
     margin-top: 0 !important;
@@ -139,8 +151,9 @@ h1 {
 p{
     margin-top: 0;
     color: #262262;
-    
-    font-family: 'Montserrat', sans-serif;
+
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     text-align: left;
 
 }
@@ -170,14 +183,15 @@ ion-button.botonRestaurante.md.button.button-solid.ion-activatable.ion-focusable
 }
 span {
     color: white;
-    
-    font-family: 'Montserrat', sans-serif;
+
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     font-size: 12px;
 }
 .dark{
-  
+
     background-color: #fff200;
- 
+
   }
 .img{
     border-radius: 10%;

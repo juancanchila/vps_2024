@@ -1,8 +1,16 @@
+
 ion-title{
-    font-family: 'Montserrat', sans-serif;
-    margin-left: -22%;
+    margin-left: -17%;
     text-align: center;
     text-transform: uppercase;
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+}
+
+form{
+	margin: auto;
+	width: 95%;
 }
 ion-toolbar{
     color: white;
@@ -12,10 +20,10 @@ small{
     font-size: 15px;
     color: white;
     font-family: 'Poppins', sans-serif;
-    
+
 }
 .contentImg{
-    padding-top: 20px;
+   /* padding-top: 20px;*/
  text-align: center;
  }
 
@@ -41,13 +49,14 @@ input{
 }
 select{
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     width: 115px;
     height: 38px;
     background-color: #ecf0f1;
 }
 ion-input{
-    
+
     height: 38px;
     width: 100%;
     display: block;
@@ -60,7 +69,7 @@ ion-col{
     text-align: center;
 }
 ion-card{
-    border-radius: 5%;
+    border-radius: 20px;
     padding: 20px 0 20px 0;
 }
 .descaera{
@@ -83,14 +92,19 @@ ion-tab-bar{
     --ion-background-color: #262262;
 
 }
-ion-icon{
+ ion-icon{
     color: yellow;
-    
-    
-    
+
+
+
+} form{
+	margin: auto;
+	font: inherit;
+	color: inherit;
+	width: 95%;
 }
 ion-content{
-    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat; 
+    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat;
 }
 button{
     font-family: 'Poppins', sans-serif;
@@ -98,15 +112,17 @@ button{
       border-radius: none;
       width: 120px;
       margin: auto;
-    
+
 }
 
 ion-label{
-    margin: 4%;
+    display: flex;
+    margin-left: 15.5px;
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     text-transform: uppercase;
-    
+
 }
 .form-check {
     padding: 10px;
@@ -144,4 +160,4 @@ input{
     color: #262262;
     font-family: 'Poppins', sans-serif;
   }
- 
+

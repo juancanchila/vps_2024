@@ -1,14 +1,26 @@
+
 ion-title{
-    font-family: 'Montserrat', sans-serif;
-    font-size: 17px;
+    margin-left: -17%;
     text-align: center;
     text-transform: uppercase;
-    margin-left: 10%;
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+}
+ 
+form{
+	margin: auto;
+	width: 95%;
 }
 ion-toolbar{
     color: white;
     --ion-background-color: #262262;
 }
+.img-gif {
+
+    object-fit: cover; /* Opcional, para cubrir el contenedor sin deformar la imagen */
+}
+
 ion-button{
     display: inline-block;
     --ion-background-color: #fff0;
@@ -17,9 +29,9 @@ ion-button{
     margin-right: auto;
 }
 ion-card{
-   
+
     text-align: center;
-  
+
     margin: 6%;
 }
 h1.h1Observ {
@@ -51,8 +63,8 @@ ion-grid{
     margin-top: 5px;
     margin-bottom: 5px;
     border-top: 1px solid #262262;
-   
-    
+
+
   }
 body{
     --ion-color-primary-contrast: #ffffff;
@@ -62,18 +74,20 @@ ion-tab-bar{
 
 }
 ion-content{
-    --background:#ecf0f1 url("/assets/botones/FONDOTIPOFACTURA-97-85.png") 0 0/100% 100% repeat; 
+    --background:#ecf0f1 url("/assets/botones/FONDOTIPOFACTURA-97-85.png") 0 0/100% 100% repeat;
 }
 ion-icon,ion-label{
+    display: flex;
 
     color: yellow;
 }
 h1{
     font-size: 14px;
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     margin: auto;
-    
+
 }
 .img-slider {
     border-radius: 50%;
@@ -86,7 +100,7 @@ small{
     font-size: 15px;
     color: white;
     font-family: 'Poppins', sans-serif;
-    
+
 }
 .rowBorder{
     height: 34px;

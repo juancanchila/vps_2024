@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ParamMap, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 
@@ -10,10 +11,10 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./fruver.page.scss'],
 })
 export class FruverPage implements OnInit {
- 
+
   searched: any;
   character: any =[
-    
+
   ];
     slider:any=[];
 
@@ -22,9 +23,10 @@ export class FruverPage implements OnInit {
   allPedidos:any;
   urlBase:any;
   precioSimple:any;
-  constructor(private auth: AuthService,private router: Router) { 
+  message_fruver: any;
+  constructor(private auth: AuthService,private router: Router,public alertController:AlertController) {
 
-   
+    localStorage.setItem('servicioEvaluado','fruver');
     this.urlBase=environment.urlBase;
   }
 
@@ -33,22 +35,47 @@ export class FruverPage implements OnInit {
 
   }
 
-  
+
 
   ngOnInit() {
+
+    this.auth.getMessageFruver().subscribe(async data => {
+      this.message_fruver = data[0]['body'];
+      console.log(data, 'Data received in component');
+
+      // Crear y mostrar la alerta después de recibir los datos
+      const alert = await this.alertController.create({
+        header: 'Importante',
+        message: this.message_fruver || 'No se recibió el mensaje de la API', // Muestra un mensaje por defecto si no hay datos
+        buttons: [
+          {
+            text: 'Aceptar',
+            handler: () => {
+              // Lógica adicional si es necesario cuando se presiona "Aceptar"
+            }
+          }
+        ]
+      });
+
+      await alert.present();
+    });
+
+
+
+
     this.auth.seleccionarSliderFruver().subscribe(res =>{
       console.log(res, ' aqui slider');
      this.slider=res[0]['field_imagen_fruver'];
-     
+
       console.log(this.slider);
-      
-     
-      
+
+
+
          this.searched = this.character;
     });
-    
 
-    
+
+
     this.auth.getSesion();
     this.auth.seleccionarProductosFruver().subscribe(res =>{
       console.log(res);
@@ -59,7 +86,7 @@ export class FruverPage implements OnInit {
       this.searched = this.character;
       this.precioSimple = localStorage.getItem('precio_product');
     })
-    
+
   }
   searchFruver(event){
     const text =event.target.value;
@@ -70,9 +97,9 @@ export class FruverPage implements OnInit {
           })
         }
       }
-  
+
   ngOnDestroy() {
-   
+
     console.log("Combo1 - OnDestroy")
   }
   iraCarrito(){
@@ -135,8 +162,9 @@ var prod={
 console.log(JSON.stringify(prod)) ;
 
 if(localStorage.getItem('tienda')=='undefined'){
- 
+
   localStorage.setItem('tarifaOrigenRestaurante',product.field_tarifa);
+  localStorage.setItem('zona_destino', product.field_zona_a);
 
 localStorage.setItem('imgBarrioOrigenRestaurante',product.field_imagen_barrio);
 localStorage.setItem('longitudOrigenRestaurante',product.field_longitud);
@@ -159,13 +187,13 @@ localStorage.setItem('tarifaExternaOrigen',product.field_tarifa_externa);
   localStorage.setItem('imgBarrioOrigenRestaurante',product.field_imagen_barrio);
   localStorage.setItem('longitudOrigenRestaurante',product.field_longitud);
   localStorage.setItem('latitudOrigenRestaurante',product.field_latitud);
-  
+
   localStorage.setItem('BarrioRestaurante',product.field_barrio_online);
   localStorage.setItem('DireccionRestaurante',product.field_dir_online);
   localStorage.setItem('ContactoRestaurante',product.field_contacto_fruver);
   localStorage.setItem('locacionTiendas',product.field_location_online);
-  
-  
+
+
   localStorage.setItem('locacionOrigenSeleccionada',product.field_location_online);
   localStorage.setItem('tarifaOrigen',product.field_tarifa);
   localStorage.setItem('tarifaExternaOrigen',product.field_tarifa_externa);

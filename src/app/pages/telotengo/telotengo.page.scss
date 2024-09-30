@@ -1,8 +1,16 @@
+
 ion-title{
     margin-left: -17%;
     text-align: center;
     text-transform: uppercase;
+    color:white;
     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+}
+ 
+form{
+	margin: auto;
+	width: 95%;
 }
 ion-toolbar{
     color: white;
@@ -12,7 +20,7 @@ body{
     --ion-color-primary-contrast: #ffffff;
   }
   .contentImg {
-    padding-top: 20px;
+   /* padding-top: 20px;*/
     text-align: center;
 }
 ion-button{
@@ -32,9 +40,11 @@ p {
     margin-left: 10%;
     margin-top: 10%;
     font-size: 130%;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 }
 ion-icon,ion-label{
+    display: flex;
 
     color: yellow;
 }
@@ -58,5 +68,5 @@ p.subtitle {
 }
 ion-grid{
     background-color: white;
-   
+
 }

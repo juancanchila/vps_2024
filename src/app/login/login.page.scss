@@ -6,11 +6,13 @@ ion-content{
     --background: url(../../assets/botones/inicioSesion.png) 0 0/100% 100% no-repeat;
 }
 .small-text{
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     color: white;
 }
 small{
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 
 }
 .locacion{
@@ -23,9 +25,9 @@ small{
 
 
 .contain {
- 
+
     text-align: center;
-  
+
     position: center;
     height: 300px;
     width: 300px;
@@ -33,29 +35,33 @@ small{
     top: 15%;
     margin-left: auto;
     margin-right: auto;
-   
+
   }
   select{
     font-size: 110%;
       color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
       height: 25px;
     border: unset;
       width: 100%;
       background-color: white !important;
   }
   ion-label{
-    font-family: 'Montserrat', sans-serif;
-    display: block;
-text-align: center;
+    display: flex;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+  text-align: center;
    color: white;
-   
+   margin-left: 15.5px;
+
+
 
   }
   span{
       color: #fff200;
   }
-  
+
   ion-input{
     color: #262262;
       height: 25px;
@@ -73,15 +79,24 @@ text-align: center;
       text-decoration: none;
   }
   ion-button{
-      text-transform: capitalize;
-    font-family: 'Poppins', sans-serif;
-      display: inline-block;
-      border-radius: none;
-      color: #262262;
+
+    display: inline-block;
+    border-radius: 50px!important;
+    width: 99%;
+  }
+
+  .login{
+
+    color: #262262;
+    text-transform: capitalize;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+
+
   }
   ion-menu-button{
     color: white;
-    
+
 }
 ion-icon{
     color: white;
@@ -102,7 +117,7 @@ input[type="button"] {
 
 img{
     width: 100%;
-    
+
 }
 .ion-color-warning {
     --ion-color-base: #FFF200  !important;

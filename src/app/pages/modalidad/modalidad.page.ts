@@ -84,21 +84,21 @@ export class ModalidadPage implements OnInit {
     console.log(this.AuxMotosDisponibles.length,'cantidad motos');
     console.log(this.AuxCarrosDisponibles.length,'cantidad carros');
 
-    
 
+    localStorage.setItem('servicioEvaluado','ruta_agil');
         localStorage.setItem('modalidad','Agil');
         this.router.navigate(['/transportes-ruta']);
 
 
-    
+
 
   }
   async selectModerada(){
- 
+
     console.log(this.AuxMotosDisponibles.length,'cantidad motos');
     console.log(this.AuxCarrosDisponibles.length,'cantidad carros');
 
-
+    localStorage.setItem('servicioEvaluado','ruta_moderada');
         localStorage.setItem('modalidad','Moderada');
         this.router.navigate(['/transportes-ruta']);
 

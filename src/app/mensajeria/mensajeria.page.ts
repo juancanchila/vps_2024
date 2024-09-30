@@ -73,7 +73,7 @@ export class MensajeriaPage implements OnInit {
   }
   async irPagePagos(){
     console.log(this.AuxMotosDisponibles['length'],'lengt de vector motos');
-    if(this.AuxMotosDisponibles.length==0){
+    if(this.AuxCarrosDisponibles.length==0){
 
         const alert = await this.alertCtrl.create({
 

@@ -1,14 +1,22 @@
 
 ion-title{
+    margin-left: -17%;
+    text-align: center;
     text-transform: uppercase;
-    margin-right: 18%;
+    color:white;
     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+}
+
+form{
+	margin: auto;
+	width: 95%;
 }
 .slider {
     padding-top: 20px;
 }
 ion-content{
-    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat; 
+    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat;
 }
 ion-toolbar{
     color: white;
@@ -19,16 +27,17 @@ ion-toolbar{
     --ion-color-base: #FFF200  !important;
 }
 b{
-    
-    font-family: 'Montserrat', sans-serif;
+
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 }
 ion-card{
-    border-radius: 5%;
+    border-radius: 20px;
     padding: 20px 0 20px 0;
 }
 
 .precio{
-    
+
     float: right;
 }
 
@@ -40,14 +49,14 @@ ion-card{
 }
 ion-card-content{
     margin-top: 0;
-    
+
     /* border: 1px solid gray; */
 }
 ion-row{
     border-bottom: 2px solid;
 }
 .form-check {
-  
+
     margin-left: 70%;
 }
 .rowBorder{
@@ -57,7 +66,7 @@ small{
     font-size: 15px;
     color: white;
     font-family: 'Poppins', sans-serif;
-    
+
 }
 
 .corto{
@@ -72,18 +81,20 @@ small{
     border: 1px solid #333;
 }
 ion-label{
-    margin: 4%;
+    display: flex;
+    margin-left: 15.5px;
    color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     text-transform: uppercase;
-    
+
 }
 .item-interactive-disabled.sc-ion-label-md-h:not(.item-multiple-inputs), .item-interactive-disabled:not(.item-multiple-inputs) .sc-ion-label-md-h {
     cursor: default;
     opacity: unset !important;
     pointer-events: none;
 }
-ion-input.ng-untouched.ng-pristine.ng-valid.sc-ion-input-md-h.sc-ion-input-md-s.md.has-value.hydrated.ion-untouched.ion-pristine.ion-valid 
+ion-input.ng-untouched.ng-pristine.ng-valid.sc-ion-input-md-h.sc-ion-input-md-s.md.has-value.hydrated.ion-untouched.ion-pristine.ion-valid
 .native-input[disabled].sc-ion-input-md {
     opacity: unset;
 }
@@ -96,7 +107,8 @@ ion-input.ng-untouched.ng-pristine.ng-valid.sc-ion-input-md-h.sc-ion-input-md-s.
 
 select{
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     width: 100px;
     height: 38px;
     background-color: #ecf0f1;
@@ -117,7 +129,8 @@ ion-col{
 
 td{
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 }
 .title{
     text-align: center;
@@ -125,7 +138,8 @@ td{
 
 }
 h2{
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     color: white;
 }
 .button1{
@@ -139,11 +153,13 @@ h2{
 b{
     line-height: 2.5;
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 }
 .botonSig{
     color: white;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 
 }
 

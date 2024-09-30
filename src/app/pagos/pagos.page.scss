@@ -1,8 +1,16 @@
+
 ion-title{
-    font-family: 'Montserrat', sans-serif;
-    margin-left: 47%;
+    margin-left: -17%;
     text-align: center;
     text-transform: uppercase;
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+}
+ 
+form{
+	margin: auto;
+	width: 95%;
 }
 ion-toolbar{
     color: white;
@@ -10,16 +18,16 @@ ion-toolbar{
 }
 ion-content{
   //  --background: url(../../assets/botones/FONDOPAGOS.png.png) 0 0/100% 100% repeat;
-  --background:#ecf0f1 url("/assets/botones/FONDOPAGOS.png.png") 0 0/100% 100% repeat; 
-     
+  --background:#ecf0f1 url("/assets/botones/FONDOPAGOS.png.png") 0 0/100% 100% repeat;
+
 }
 .contentImg{
-    padding-top: 20px;
+   /* padding-top: 20px;*/
  text-align: center;
  }
 
  ion-card{
-    border-radius: 5%;
+    border-radius: 20px;
     padding: 20px 0 20px 0;
 }
 .rowBorder{
@@ -30,14 +38,14 @@ ion-row{
 }
 .check{
     padding-top: 5px;
-  
+
     padding-bottom: 5px;
     border-bottom: 1px solid #262262;
 }
 .check2{
     padding-top: 5px;
-  
-   
+
+
 }
 
 ion-buttons{
@@ -79,26 +87,29 @@ ion-col{
 }
 select{
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     width: 115px;
     background-color: #ecf0f1;
     height: 38px;
 }
 h2{
     margin: 4%;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     color: #262262;
 
 }
 label{
     font-size: 12px;
-    margin-left: 5%;
+
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
-    
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+
 }
 ion-input{
-    
+
     height: 38px;
     width: 100%;
     display: block;
@@ -126,7 +137,7 @@ small{
     font-size: 15px;
     color: white;
     font-family: 'Poppins', sans-serif;
-    
+
 }
 .locacion{
     color: #262262;
@@ -138,29 +149,38 @@ ion-tab-bar{
     --ion-background-color: #262262;
 
 }
-ion-icon{
+ ion-icon{
     color: yellow;
-    
-    
-    
+
+
+
+} form{
+	margin: auto;
+	font: inherit;
+	color: inherit;
+	width: 95%;
 }
 button{
     display: inline-block;
       border-radius: none;
       width: 120px;
       margin: auto;
-    
+
 }
 .form-check {
     padding: 5px;
     margin-left: 70%;
 }
+
 ion-label{
-    font-family: 'Montserrat', sans-serif;
-    margin: 4%;
+    display: flex;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+  margin: auto;
+  max-width: 95%;
     color: #262262;
     text-transform: uppercase;
-    
+
 }
 ion-item{
     --ion-background-color: transparent !important;
@@ -185,4 +205,9 @@ body{
     color: #262262;
     font-family: 'Poppins', sans-serif;
   }
- 
+
+
+  form{
+	margin: auto;
+	width: 95%;
+}

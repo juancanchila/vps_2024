@@ -11,13 +11,14 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class MascotasPage implements OnInit {
 
- 
+
 
   FormSend: FormGroup;
   constructor(private menucontrol:MenuController,private router: Router, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {
     this.menucontrol.enable(false);
+    localStorage.setItem('servicioEvaluado','mascotas');
     this.FormSend= this.fb.group({
-     
+
  field_direccion_entrega:[""],
 
 field_contacto:[""],
@@ -34,19 +35,19 @@ field_contacto_destino:[""],
 
 
      });
-    
+
    }
-  
+
    async sendForm(){
     if(this.FormSend.invalid){
       const alert = await this.alertController.create({
-       
+
         header: 'Datos incompletos ',
-       
+
         message: 'llenar todos los datos.',
         buttons: ['Aceptar']
       });
-  
+
       await alert.present();
       return;
     }else{
@@ -54,16 +55,16 @@ field_contacto_destino:[""],
       this.router.navigate(['/resumen-mascotas']);
 
     }
-    
-   
-     
-    
+
+
+
+
    }
 
   ngOnInit() {
   }
   ngOnDestroy() {
-   
+
     console.log("Sencilla- OnDestroy")
   }
 

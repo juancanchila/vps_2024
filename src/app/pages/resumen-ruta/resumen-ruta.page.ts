@@ -52,9 +52,9 @@ field_locacion_entrega:[""],
       field_nombre_c_origen:[""],
 field_nombre_c_destino:[""],
 field_nombre_c_destino2:[""],
-    
+
       //field_valor_declarado:[""],
-      
+
       field_precio_:[""],
       field_precio_2:[""],
       field_precio_3:[""]
@@ -63,41 +63,41 @@ field_nombre_c_destino2:[""],
 
 
      });
-    
+
    }
 
    status="completed";
    disabledValue= true;
- 
+
    enableInput(){
-     
+
      if(this.status==="completed"){
        this.disabledValue=false;
        console.log('disabled');
- 
+
      }else{
        this.disabledValue = true;
      }
    }
-  
+
    async irAPagar(){
     if(this.aux=='false'){
       this.presentAlert();
-      
+
      }else{
     this.auth.getSesion();
-  
-  
-  
-     
+
+
+
+
     if(this.estadoButton==true){
       this.estadoButton=false;
       setTimeout(() => {
         console.log('aqui en is close metodo')
-       
+
         this.auth.CrearSencillaPadre(this.FormSend.value);
        }, 5000);
-    
+
        setTimeout(() => {
         this.auth.CrearSencilla1(this.FormSend.value);
        }, 5000);
@@ -105,28 +105,28 @@ field_nombre_c_destino2:[""],
        setTimeout(() => {
        this.auth.asignacionRutas();
        }, 14000);
-    
-      
+
+
     }
 
-    
-    
+
+
      // this.router.navigate(['/formadepag']);
-      
-    
-   
-    
-   
-    
-     
+
+
+
+
+
+
+
      //this.auth.sendFormulario(this.FormSend.value);
    }
   }
    async presentAlert() {
     const alert = await this.alertController.create({
-       
+
       header: 'Contrato por prestación de servicios  :',
-     
+
       message: '1.Objeto. El Prestador de Servicios se obliga a ponerse a disposición del Usuario/consumidor brindándole la compañía de un amigo, cómplice y/o acompañante, para ir a los sitios donde quiera, disfrute, necesite o requiera cuando él lo solicite a través de la aplicación.'
       +'Lo anterior de manera voluntaria, sin perjuicio de la supervisión y observaciones que pueda realizar el usuario durante la ejecución del contrato.'+ '<br>'
       +'2. Lugar de la Prestación del Servicio. Los servicios mencionados en la primera cláusula de este contrato serán llevados a cabo en la                                  '+ '<br>'
@@ -150,18 +150,18 @@ field_nombre_c_destino2:[""],
         handler:()=>{
           this.router.navigate(['/tabs']);
         } */
-        
+
       },
       {
         text:'aceptar',
         handler:()=>{
-        
+
           this.aux = (document.getElementById("aut_contrato") as HTMLInputElement).ariaChecked;
           console.log(this.aux, 'estado');
 
           //si es igua igual a on, lpasas para la otra pagina
 
-     //4    
+     //4
  if(this.aux=='false'){
   // le muestra que no marcho (primero)
   let estado='false';
@@ -178,24 +178,51 @@ field_nombre_c_destino2:[""],
     });
 
     await alert.present();
-    
-   
+
+
 
    }
-  
 
-  ngOnInit() {
+   async ngOnInit() {
+     try {
+
     this.estadoButton=true;
     this.aux='false';
     this.auth.getListLocaciones().subscribe(data=>{
       console.log(data);
       this.locaciones=data;
           },error=>{
-           
+
             console.log(error);
-           
-          });
- 
+
+    });
+
+
+    //new code
+    console.log(localStorage.getItem('zona_origen'), 'zona_origen');
+    console.log(localStorage.getItem('zona_destino'), 'zona_destino1');
+    console.log(localStorage.getItem('zona_destino2'), 'zona_destino2');
+    console.log(localStorage.getItem('servicioEvaluado'), 'servicioEvaluado');
+
+       //
+
+       let resultadoTotalCostoDestino1 = await this.auth.calcularPrecioTarifa(
+        localStorage.getItem('servicioEvaluado'),
+        localStorage.getItem('zona_origen'),
+        localStorage.getItem('zona_destino'),
+        this.auth.medioTransporte
+      );
+      resultadoTotalCostoDestino1 = Number(resultadoTotalCostoDestino1);
+
+      let resultadoTotalCostoDestino2 = await this.auth.calcularPrecioTarifa(
+        localStorage.getItem('servicioEvaluado'),
+        localStorage.getItem('zona_origen'),
+        localStorage.getItem('zona_destino2'),
+        this.auth.medioTransporte
+      );
+      resultadoTotalCostoDestino2 = Number(resultadoTotalCostoDestino2);
+
+
     this.precio_origen = Number(localStorage.getItem('tarifaOrigen'));
     this.precio_destino = Number(localStorage.getItem('tarifaDestino'));
     this.precio_destino2 = Number(localStorage.getItem('tarifaDestino2'));
@@ -204,7 +231,7 @@ field_nombre_c_destino2:[""],
 
 //obtener valor agregado por porcentaje
 this.auth.getValorDescuento().subscribe(res =>{
-      
+
   /** */
   console.log(res[0].field_valor_descuento, ' aqui valor agregado +');
 localStorage.setItem('valorAgregado',res[0].field_valor_descuento);
@@ -216,18 +243,18 @@ localStorage.setItem('valorAgregado',res[0].field_valor_descuento);
 
   //construir un innerHtml dependuendo de las variables que vengan
 
-  
+
   this.FormSend.controls.body.setValue(this.auth.resumenRuta.body['0']['value']);
   this.FormSend.controls.body2.setValue(this.auth.resumenRuta.body2['0']['value']);
   this.FormSend.controls.field_contacto.setValue(this.auth.resumenRuta.field_contacto['0']['value']);
   this.FormSend.controls.field_direccion_entrega.setValue(this.auth.resumenRuta.field_direccion_entrega['0']['value']);
-  
+
   this.FormSend.controls.field_contacto_destino.setValue(this.auth.resumenRuta.field_contacto_destino['0']['value']);
- 
+
   this.FormSend.controls.field_direccion_destino.setValue(this.auth.resumenRuta.field_direccion_destino['0']['value']);
   this.FormSend.controls.field_locacion_destino_r.setValue(this.auth.resumenRuta.field_locacion_destino_r['0']['value']);
   this.FormSend.controls.field_contacto_destino_r2.setValue(this.auth.resumenRuta.field_contacto_destino_r2['0']['value']);
- 
+
   this.FormSend.controls.field_direccion_destino_r2.setValue(this.auth.resumenRuta.field_direccion_destino_r2['0']['value']);
   this.FormSend.controls.field_locacion_destino_r2.setValue(this.auth.resumenRuta.field_locacion_destino_r2['0']['value']);
 
@@ -247,156 +274,29 @@ localStorage.setItem('valorAgregado',res[0].field_valor_descuento);
   this.FormSend.controls.field_nombre_c_destino.setValue(this.auth.resumenRuta.field_nombre_c_destino['0']['value']);
   this.FormSend.controls.field_nombre_c_destino2.setValue(this.auth.resumenRuta.field_nombre_c_destino2['0']['value']);
 
-  
 
 
- 
+
+
 //  this.FormSend.controls.field_valor_declarado.setValue(this.auth.resumenRuta.field_valor_declarado['0']['value']);
+var TotalDefinitivo =  resultadoTotalCostoDestino1 +  resultadoTotalCostoDestino2;
 
-if( localStorage.getItem('locacionDestinoSeleccionada') != localStorage.getItem('locacionOrigenSeleccionada') ){
-  if( localStorage.getItem('tarifaExternaOrigen')>localStorage.getItem('tarifaExternaDestino')){
-    this.FormSend.controls.  field_precio_.setValue(localStorage.getItem('tarifaExternaOrigen'));
-    localStorage.setItem('precioTarifa',localStorage.getItem('tarifaExternaOrigen'));
-    //
 
-  }else  if(localStorage.getItem('tarifaExternaDestino') >localStorage.getItem('tarifaExternaOrigen')){
-    this.FormSend.controls.  field_precio_.setValue(localStorage.getItem('tarifaExternaDestino'));
-    localStorage.setItem('precioTarifa',localStorage.getItem('tarifaExternaDestino'));
-    //
- 
-  }else if(localStorage.getItem('tarifaExternaDestino') ==localStorage.getItem('tarifaExternaOrigen')){
-    this.FormSend.controls.  field_precio_.setValue(localStorage.getItem('tarifaExternaDestino'));
-    localStorage.setItem('precioTarifa',localStorage.getItem('tarifaExternaDestino'));
-    //
-    
-  }
-}else{
-  if(this.precio_origen>this.precio_destino){
-    this.FormSend.controls.  field_precio_.setValue(this.precio_origen);
-    localStorage.setItem('precioTarifa',this.precio_origen);
-  }else if(this.precio_destino>this.precio_origen){
-    this.FormSend.controls.  field_precio_.setValue(this.precio_destino);
-    localStorage.setItem('precioTarifa',this.precio_destino);
-  }else{
-    this.FormSend.controls.  field_precio_.setValue(localStorage.getItem('tarifaOrigen'));
-    localStorage.setItem('precioTarifa',this.precio_destino);
-  }
+
+this.FormSend.controls.  field_precio_.setValue(resultadoTotalCostoDestino1);
+
+this.FormSend.controls.field_precio_2.setValue(resultadoTotalCostoDestino2);
+
+
+this.FormSend.controls.field_precio_3.setValue(TotalDefinitivo);
+} catch (error) {
+  console.error(error);
+}
 }
 
 
-
-if( localStorage.getItem('locacionDestinoSeleccionada2') != localStorage.getItem('locacionOrigenSeleccionada') ){
-  if( localStorage.getItem('tarifaExternaOrigen')>localStorage.getItem('tarifaExternaDestino2')){
-    this.FormSend.controls.  field_precio_2.setValue(localStorage.getItem('tarifaExternaOrigen'));
-    localStorage.setItem('precioTarifa2',localStorage.getItem('tarifaExternaOrigen'));
-    //
-
-  }else  if(localStorage.getItem('tarifaExternaDestino2') >localStorage.getItem('tarifaExternaOrigen')){
-    this.FormSend.controls.  field_precio_2.setValue(localStorage.getItem('tarifaExternaDestino2'));
-    localStorage.setItem('precioTarifa2',localStorage.getItem('tarifaExternaDestino2'));
-    //
- 
-  }else if(localStorage.getItem('tarifaExternaDestino2') ==localStorage.getItem('tarifaExternaOrigen')){
-    this.FormSend.controls.  field_precio_2.setValue(localStorage.getItem('tarifaExternaDestino2'));
-    localStorage.setItem('precioTarifa2',localStorage.getItem('tarifaExternaDestino2'));
-    //
-    
-  }
-}else{
-  if(this.precio_origen>this.precio_destino2){
-    this.FormSend.controls.  field_precio_2.setValue(this.precio_origen);
-    localStorage.setItem('precioTarifa2',this.precio_origen);
-  }else if(this.precio_destino2>this.precio_origen){
-    this.FormSend.controls.  field_precio_2.setValue(this.precio_destino2);
-    localStorage.setItem('precioTarifa2',this.precio_destino2);
-  }else{
-    this.FormSend.controls.  field_precio_2.setValue(localStorage.getItem('tarifaOrigen'));
-    localStorage.setItem('precioTarifa2',this.precio_destino2);
-  }
-}
-
-
-
-   //imprimir por consola file precio si es vehiculo le sumo el porcentaje
-   console.log(Number(this.FormSend.controls.field_precio_.value), 'precio costo domicilio 1');
-
-    console.log(Number(this.FormSend.controls.field_precio_2.value), 'precio costo domicilio 2');
-
-       
-var valorAgregado = parseFloat(localStorage.getItem('valorAgregado'));  // Ejemplo de valor agregado
-
-
-
-if(this.auth.medioTransporte==2){
-  //calcuo porcentaje destino 1
-  var resultadoTotalCostoDestino1 = Number(this.FormSend.controls.field_precio_.value) ;
-  var porcentajeDestino1 = ( resultadoTotalCostoDestino1 * valorAgregado) / 100;
-  
-  console.log("Valor Agregado:", valorAgregado);
-  console.log("Porcentaje de Valor Agregado:", porcentajeDestino1)
-  console.log("Resultado Total de Costo - porcentaje:", resultadoTotalCostoDestino1 - porcentajeDestino1);
-  var TotalDefinitivoParaVehiculosDestino1 = resultadoTotalCostoDestino1 - porcentajeDestino1;
-  this.FormSend.controls.  field_precio_.setValue(TotalDefinitivoParaVehiculosDestino1);
-  localStorage.setItem('precioTarifa',TotalDefinitivoParaVehiculosDestino1.toString());
-
-  //calculo porcentaje destino 2
-  var resultadoTotalCostoDestino2 = Number(this.FormSend.controls.field_precio_2.value) ;
-  var porcentajeDestino2 = ( resultadoTotalCostoDestino2 * valorAgregado) / 100;
-  
-  console.log("Valor Agregado:", valorAgregado);
-  console.log("Porcentaje de Valor Agregado:", porcentajeDestino2)
-  console.log("Resultado Total de Costo - porcentaje:", resultadoTotalCostoDestino2 - porcentajeDestino2);
-  var TotalDefinitivoParaVehiculosDestino2 = resultadoTotalCostoDestino2 - porcentajeDestino2;
-  this.FormSend.controls.  field_precio_2.setValue(TotalDefinitivoParaVehiculosDestino2);
-  localStorage.setItem('precioTarifa2',TotalDefinitivoParaVehiculosDestino2.toString());
-  //calculo total definitivo
-  // Calcula el resultado total
-
-console.log(TotalDefinitivoParaVehiculosDestino1 + TotalDefinitivoParaVehiculosDestino2, ' res total domicilio')
-
-
-var TotalDefinitivoParaVehiculos = TotalDefinitivoParaVehiculosDestino1 + TotalDefinitivoParaVehiculosDestino2;
-  this.FormSend.controls.  field_precio_3.setValue(TotalDefinitivoParaVehiculos);
-  localStorage.setItem('precioTarifaTotalRuta',TotalDefinitivoParaVehiculos.toString());
-}else{
-  //para cuando no sea moderada
-
-    //calcuo porcentaje destino 1
-    var resultadoTotalCostoDestino1 = Number(this.FormSend.controls.field_precio_.value) ;
-    
-    
-  
- 
-  
-   
-    this.FormSend.controls.  field_precio_.setValue(resultadoTotalCostoDestino1);
-    localStorage.setItem('precioTarifa',resultadoTotalCostoDestino1.toString());
-  
-    //calculo porcentaje destino 2
-    var resultadoTotalCostoDestino2 = Number(this.FormSend.controls.field_precio_2.value) ;
-  
-    
-  
-  
-   
-  
-    this.FormSend.controls.  field_precio_2.setValue(resultadoTotalCostoDestino2);
-    localStorage.setItem('precioTarifa2',resultadoTotalCostoDestino2.toString());
-    //calculo total definitivo
-    // Calcula el resultado total
-  
-  console.log(resultadoTotalCostoDestino1 + resultadoTotalCostoDestino2, ' res total domicilio')
-  
-  
-  var TotalDefinitivoParaVehiculos = resultadoTotalCostoDestino1 + resultadoTotalCostoDestino2;
-    this.FormSend.controls.  field_precio_3.setValue(TotalDefinitivoParaVehiculos);
-    localStorage.setItem('precioTarifaTotalRuta',TotalDefinitivoParaVehiculos.toString());
-}
-  }
-
-  
   ngOnDestroy() {
-   
+
     console.log("Resumen- OnDestroy")
   }
 

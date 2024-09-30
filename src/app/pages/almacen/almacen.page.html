@@ -2,21 +2,18 @@
   <ion-toolbar>
     <ion-buttons  slot="start">
       <ion-back-button></ion-back-button>
-      
     </ion-buttons>
     <ion-title>Almacen</ion-title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat Light &display=swap" rel="stylesheet">
 
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="contentImg">
-    <ion-img class="img-slider" [src]="urlBase+slider" alt=""></ion-img>
-
+    <ion-img class="img-slider" src="../../assets/banners/almacen.gif" alt=""></ion-img>
   </div>
-
     <ion-card-content class="contain">
       <swiper #swiper [virtual]="true"  [config]="swiperConfig">
         <ng-template swiperSlide >
@@ -25,320 +22,320 @@
       <!--
   <ion-label > <b>¿En Cual Almacen Quieres Comprar?*</b></ion-label>
       <ion-item >
-         
+
         <textarea formControlName="field_quieres_comprar" class="corto" type="text" siz required></textarea>
       </ion-item>
       -->
-    
+
       <ion-label > <b>Ubicación Almacen*</b></ion-label>
       <ion-item  id="locacionOrigen" [disabled]="disabledValue"   >
         <ion-select  (ionChange)="regionOrigen($event.target.value)"   formControlName="field_locacion_entrega" class="locacion">
-      
+
           <ion-select-option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</ion-select-option>
-          
+
          </ion-select>
         <!---->
-       
-        
-        
+
+
+
       </ion-item>
       <ion-item >
-    
-     
+
+
       <textarea formControlName="field_direccion_entrega" placeholder="Dirección"  type="text" siz required></textarea>
     </ion-item>
 
- 
+
     <ion-item id="itemOrigen" [disabled]="bloquearInputBarrio">
       <textarea  [hidden]="ocultarInputOrigen" formControlName="field_barrio_origen"  placeholder="Barrio de Origen" #input (input)="inputChanged($event)" type="text">{{barrio}}</textarea>
-      
+
     </ion-item>
     <ion-list [hidden]="items.length <= 0" >
      <ion-item (click)="selected(item, input)" *ngFor="let item of items">
        {{item.name}}
      </ion-item>
    </ion-list>
-    
+
 
 
    <ion-label > <b>Nombre del Establecimiento*</b></ion-label>
    <ion-item >
-       
+
      <textarea formControlName="field_nombre_del_establecimiento" class="corto" type="text" siz required></textarea>
    </ion-item>
 <!--
 
   <ion-label><b>Contacto Nombre :</b> </ion-label>
    <ion-item >
-     
+
      <textarea formControlName="field_nombre_c_origen" placeholder="Nombre" type="text" required></textarea>
    </ion-item>
 
-  <ion-label><b>Contacto Telefono:</b> </ion-label>
+  <ion-label><b>Contacto Teléfono:</b> </ion-label>
    <ion-item >
-     
+
      <textarea formControlName="field_contacto" placeholder="Número de celular" type="text" required></textarea>
    </ion-item>
 
 -->
- 
+
    <div class="labelArticulos">
 
-    <ion-label ><b>Numero de articulos :</b> </ion-label>
+    <ion-label class="n_articulos" ><b>Número de articulos :</b> </ion-label>
     <div class="counter">
-     
+
      <ion-icon class="mas" name="add-outline" (click)="add()" ></ion-icon>
      <ion-input class="input" type="text"  disabled=true > {{cantidadArticulos}} </ion-input>
-    
+
      <ion-icon class="menos" name="remove-outline" (click)="deleteNUm()" ></ion-icon>
-   
+
    </div>
 
    </div>
 
 
      <!--1-->
-     <div class="listado"> 
+     <div class="listado">
 
       <ion-label > <b>¿Qué quieres comprar?*</b></ion-label>
       <ion-item >
-          
+
         <textarea formControlName="field_quieres_comprar1" class="corto" type="text" siz required></textarea>
       </ion-item>
-   
-   
-        
+
+
+
       <ion-label class="txt"> <b>Costo Articulo*</b> </ion-label>
          <ion-item >
-          
+
            <ion-input formControlName="field_valor_declarado1" class="corto" type="number" required></ion-input>
          </ion-item>
          <ion-label > <b> Descripción*</b></ion-label>
          <ion-item >
-           
+
            <textarea formControlName="field_observaciones1" class="descaera" type="text" required></textarea>
          </ion-item>
      </div>
      <!--2-->
      <div [hidden]="cantidadArticulos <= 1" class="listado"   >
-      
+
       <ion-label > <b>¿Qué quieres comprar?*</b></ion-label>
       <ion-item >
-          
+
         <textarea formControlName="field_quieres_comprar2" class="corto" type="text" siz required></textarea>
       </ion-item>
-   
-   
-        
+
+
+
       <ion-label class="txt"> <b>Costo Articulo*</b> </ion-label>
          <ion-item >
-          
+
            <ion-input formControlName="field_valor_declarado2" class="corto" type="number" required></ion-input>
          </ion-item>
          <ion-label > <b> Descripción*</b></ion-label>
          <ion-item >
-           
+
            <textarea formControlName="field_observaciones2" class="descaera" type="text" required></textarea>
          </ion-item>
-  
-  
+
+
      </div>
       <!--3-->
       <div [hidden]="cantidadArticulos <= 2" class="listado"   >
-      
+
         <ion-label > <b>¿Qué quieres comprar?*</b></ion-label>
         <ion-item >
-            
+
           <textarea formControlName="field_quieres_comprar3" class="corto" type="text" siz required></textarea>
         </ion-item>
-     
-     
-          
+
+
+
         <ion-label class="txt"> <b>Costo Articulo*</b> </ion-label>
            <ion-item >
-            
+
              <ion-input formControlName="field_valor_declarado3" class="corto" type="number" required></ion-input>
            </ion-item>
            <ion-label > <b> Descripción*</b></ion-label>
            <ion-item >
-             
+
              <textarea formControlName="field_observaciones3" class="descaera" type="text" required></textarea>
            </ion-item>
-    
-    
+
+
        </div>
           <!--4-->
       <div [hidden]="cantidadArticulos <= 3" class="listado"   >
-      
+
         <ion-label > <b>¿Qué quieres comprar?*</b></ion-label>
         <ion-item >
-            
+
           <textarea formControlName="field_quieres_comprar4" class="corto" type="text" siz required></textarea>
         </ion-item>
-     
-     
-          
+
+
+
         <ion-label class="txt"> <b>Costo Articulo*</b> </ion-label>
            <ion-item >
-            
+
              <ion-input formControlName="field_valor_declarado4" class="corto" type="number" required></ion-input>
            </ion-item>
            <ion-label > <b> Descripción*</b></ion-label>
            <ion-item >
-             
+
              <textarea formControlName="field_observaciones4" class="descaera" type="text" required></textarea>
            </ion-item>
-    
-    
+
+
        </div>
               <!--5-->
       <div [hidden]="cantidadArticulos <= 4" class="listado"   >
-      
+
         <ion-label > <b>¿Qué quieres comprar?*</b></ion-label>
         <ion-item >
-            
+
           <textarea formControlName="field_quieres_comprar5" class="corto" type="text" siz required></textarea>
         </ion-item>
-     
-     
-          
+
+
+
         <ion-label class="txt"> <b>Costo Articulo*</b> </ion-label>
            <ion-item >
-            
+
              <ion-input formControlName="field_valor_declarado5" class="corto" type="number" required></ion-input>
            </ion-item>
            <ion-label > <b> Descripción*</b></ion-label>
            <ion-item >
-             
+
              <textarea formControlName="field_observaciones5" class="descaera" type="text" required></textarea>
            </ion-item>
-    
-    
+
+
        </div>
                <!--6-->
       <div [hidden]="cantidadArticulos <= 5" class="listado"   >
-      
+
         <ion-label > <b>¿Qué quieres comprar?*</b></ion-label>
         <ion-item >
-            
+
           <textarea formControlName="field_quieres_comprar6" class="corto" type="text" siz required></textarea>
         </ion-item>
-     
-     
-          
+
+
+
         <ion-label class="txt"> <b>Costo Articulo*</b> </ion-label>
            <ion-item >
-            
+
              <ion-input formControlName="field_valor_declarado6" class="corto" type="number" required></ion-input>
            </ion-item>
            <ion-label > <b> Descripción*</b></ion-label>
            <ion-item >
-             
+
              <textarea formControlName="field_observaciones6" class="descaera" type="text" required></textarea>
            </ion-item>
-    
-    
+
+
        </div>
                  <!--7-->
       <div [hidden]="cantidadArticulos <= 6" class="listado"   >
-      
+
         <ion-label > <b>¿Qué quieres comprar?*</b></ion-label>
         <ion-item >
-            
+
           <textarea formControlName="field_quieres_comprar7" class="corto" type="text" siz required></textarea>
         </ion-item>
-     
-     
-          
+
+
+
         <ion-label class="txt"> <b>Costo Articulo*</b> </ion-label>
            <ion-item >
-            
+
              <ion-input formControlName="field_valor_declarado7" class="corto" type="number" required></ion-input>
            </ion-item>
            <ion-label > <b> Descripción*</b></ion-label>
            <ion-item >
-             
+
              <textarea formControlName="field_observaciones7" class="descaera" type="text" required></textarea>
            </ion-item>
-    
-    
+
+
        </div>
                     <!--8-->
       <div [hidden]="cantidadArticulos <= 7" class="listado"   >
-      
+
         <ion-label > <b>¿Qué quieres comprar?*</b></ion-label>
         <ion-item >
-            
+
           <textarea formControlName="field_quieres_comprar8" class="corto" type="text" siz required></textarea>
         </ion-item>
-     
-     
-          
+
+
+
         <ion-label class="txt"> <b>Costo Articulo*</b> </ion-label>
            <ion-item >
-            
+
              <ion-input formControlName="field_valor_declarado8" class="corto" type="number" required></ion-input>
            </ion-item>
            <ion-label > <b> Descripción*</b></ion-label>
            <ion-item >
-             
+
              <textarea formControlName="field_observaciones8" class="descaera" type="text" required></textarea>
            </ion-item>
-    
-    
+
+
        </div>
                        <!--9-->
       <div [hidden]="cantidadArticulos <= 8" class="listado"   >
-      
+
         <ion-label > <b>¿Qué quieres comprar?*</b></ion-label>
         <ion-item >
-            
+
           <textarea formControlName="field_quieres_comprar9" class="corto" type="text" siz required></textarea>
         </ion-item>
-     
-     
-          
+
+
+
         <ion-label class="txt"> <b>Costo Articulo*</b> </ion-label>
            <ion-item >
-            
+
              <ion-input formControlName="field_valor_declarado9" class="corto" type="number" required></ion-input>
            </ion-item>
            <ion-label > <b> Descripción*</b></ion-label>
            <ion-item >
-             
+
              <textarea formControlName="field_observaciones9" class="descaera" type="text" required></textarea>
            </ion-item>
-    
-    
+
+
        </div>
                           <!--10-->
       <div [hidden]="cantidadArticulos <= 9" class="listado"   >
-      
+
         <ion-label > <b>¿Qué quieres comprar?*</b></ion-label>
         <ion-item >
-            
+
           <textarea formControlName="field_quieres_comprar10" class="corto" type="text" siz required></textarea>
         </ion-item>
-     
-     
-          
+
+
+
         <ion-label class="txt"> <b>Costo Articulo*</b> </ion-label>
            <ion-item >
-            
+
              <ion-input formControlName="field_valor_declarado10" class="corto" type="number" required></ion-input>
            </ion-item>
            <ion-label > <b> Descripción*</b></ion-label>
            <ion-item >
-             
+
              <textarea formControlName="field_observaciones10" class="descaera" type="text" required></textarea>
            </ion-item>
-    
-    
-       </div>
-     
 
-     
-  
+
+       </div>
+
+
+
+
       <ion-row class="rowBorder">
         <ion-col>
           <ion-button expand="block" (click)="slideNext()" color="danger" > <small><b>Siguiente</b></small>  </ion-button>
@@ -353,64 +350,64 @@
         <ng-template swiperSlide >
           <ion-card>
         <form  [formGroup]="FormSend" (ngSubmit)="sendForm()">
-         
+
           <ion-label id="myAnchor" > <b>¿A dóndelo llevo?</b> </ion-label>
           <ion-item  >
             <ion-select  (ionChange)="region($event.target.value)"   formControlName="field_locacion_destino" class="locacion">
-      
+
               <ion-select-option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</ion-select-option>
-              
+
              </ion-select>
           </ion-item>
           <ion-item >
-          
-            
+
+
             <textarea  formControlName="field_direccion_destino" placeholder="Dirección"  type="text" required></textarea>
           </ion-item>
-    
-          
+
+
           <ion-item id="itemDestino" [disabled]="bloquearInputBarrioDestino">
              <textarea id="ip" [hidden]="ocultarInput" formControlName="field_barrio_destino" placeholder="Barrio de Destino" (input)="inputChanged2($event)" #input2 type="text">{{barrio}}</textarea>
-             
-          
-         
+
+
+
            </ion-item>
            <ion-list [hidden]="items2.length <= 0" >
             <ion-item (click)="selected2(item, input2)" *ngFor="let item of items2">
               {{item.name}}
             </ion-item>
           </ion-list>
-          
-      
-         
-          
-        
-          
+
+
+
+
+
+
           <ion-label><b>Contacto Nombre :</b> </ion-label>
           <ion-item >
-            
+
             <textarea formControlName="field_nombre_c_destino" placeholder="Nombre" type="text" required></textarea>
           </ion-item>
-            
-          
-            
-            <ion-label > <b>Contacto Telefono:</b> </ion-label>
+
+
+
+            <ion-label > <b>Contacto Teléfono:</b> </ion-label>
             <ion-item >
-              
+
               <textarea formControlName="field_contacto_destino" placeholder="Número de celular" type="text" required></textarea>
             </ion-item>
-          
+
           <br>
-          
-        
-    
-         
-      
+
+
+
+
+
           <ion-row class="rowBorder">
             <ion-col>
               <ion-button replaceUrl="true" (click)="slideNext2()" color="danger" expand="block" > <small><b>Siguiente</b></small>  </ion-button>
               <ion-button replaceUrl="true"  (click)="slidePrev()" color="danger" expand="block" > <small> <b>atras</b></small>  </ion-button>
-  
+
             </ion-col>
           </ion-row>
         </form>
@@ -425,81 +422,81 @@
               <ion-label> <b>Medio de pago:</b> </ion-label>
               <ion-grid>
                 <ion-row>
-                 
+
                    <ion-col size="5">
                      <img src="../../assets/botones/PAGOSCOLOR-97.png" class="col-img" width="80%" height="80%" alt="">
                    </ion-col>
-                   <ion-col size="7"> 
+                   <ion-col size="7">
                     <div class="form-check">
                       <input type="radio" formControlName="field_metodo_de_pago" value="nequi"  class="form-check-input"  >
-                      
+
                     </div>
-                
-                     
+
+
                     </ion-col>
                  </ion-row>
-                 
+
                   <ion-row>
-                   
+
                     <ion-col size="5">
                       <img src="../../assets/botones/PAGOSCOLOR-98.png" class="col-img"  width="80%" height="80%" alt="">
                     </ion-col>
-                    <ion-col size="7"> 
+                    <ion-col size="7">
                       <div class="form-check">
                         <input formControlName="field_metodo_de_pago" type="radio" value="daviplata" class="form-check-input"  >
-                        
+
                       </div>
-                      
-                       
+
+
                       </ion-col>
                   </ion-row>
-                  <ion-row>
-                  
+                  <!--ion-row>
+
                     <ion-col size="5">
                       <img src="../../assets/botones/PAGOSCOLOREAZUL-99.png" class="col-img" width="80%" height="80%" alt="">
                     </ion-col>
-                    <ion-col *ngIf="permitirPagoEfectivo=='On'" size="7"> 
+                    <ion-col *ngIf="permitirPagoEfectivo ==='On'" size="7">
                       <div class="form-check">
                       <input formControlName="field_metodo_de_pago" type="radio" value="efectivo" class="form-check-input" >
                       </div>
-                 
-                 
-                     
+
+
+
                     </ion-col>
-                  </ion-row>
+                  </ion-row-->
                  <br>
                  <script>
                    document.getElementById("formulario").addEventListener("submit", function(event){
                    let hasError = false;
-                  
-               
+
+
                    // obtenemos todos los input radio del grupo horario que esten chequeados
                    // si no hay ninguno lanzamos alerta
                    if(!document.querySelector('input[name="field_medio_de_transporte"]:checked')) {
                      alert('Error, rellena el campo horario');
                      hasError = true;
                      }
-               
-                   
-                   
+
+
+
                    // si hay algún error no efectuamos la acción submit del form
                    if(hasError) event.preventDefault();
                });
                  </script>
-                 
+
                  <br>
                  <ion-label > <b> Descripción*</b></ion-label>
                  <ion-item >
-                   
+
                    <textarea formControlName="field_observaciones" class="descaera" type="text" required></textarea>
                  </ion-item>
               </ion-grid>
-           
-          
+
+
               <ion-row class="rowBorder">
                 <ion-col>
                   <ion-button replaceUrl="true"  type="submit" color="danger" expand="block" > <small><b>¡VaPa'Esa!</b></small>  </ion-button>
-                 
+
                   <ion-button replaceUrl="true"  (click)="slidePrev()" color="danger" expand="block" > <small><b>atras</b></small>  </ion-button>
                 </ion-col>
               </ion-row>
@@ -509,6 +506,6 @@
       </swiper>
     </ion-card-content>
 </ion-content>
- 
+
 
 

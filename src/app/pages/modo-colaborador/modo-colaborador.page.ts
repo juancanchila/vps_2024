@@ -47,7 +47,7 @@ export class ModoColaboradorPage implements OnInit {
       event.target.complete();
     }, 2000);
   }
-/** 
+/**
   ionViewWillEnter() {
 
     this.auth.consultarIdAuxiliar().subscribe(res => {
@@ -124,7 +124,7 @@ export class ModoColaboradorPage implements OnInit {
 
 
     });
-    
+
 
     this.auth.getDisponibilidadPropia().subscribe(res => {
       console.log(res, 'res');
@@ -135,28 +135,28 @@ export class ModoColaboradorPage implements OnInit {
 
           if (this.auth.longitud === "" || this.auth.latitud === "") {
             this.geo.openSetting();
-         
+
           }else{
 
             this.estadoAuxiliar = 'Auxiliar Disponible';
             this.value = true;
             //
-            
+
             this.auth.estadoPedido = true;
             this.auth.actualizarPosicionEnviadaAuxiliar();
-  
+
             this.auth.actualizarDisponibleAuxiliar(true);
-  
+
             localStorage.setItem('nodeDisponibilidad_estado', res['0']['field_estado']);
             localStorage.setItem('nodeDisponibilidad', res['0']['nid']);
           }
-         
+
         } else {
           this.getLocation();
 
           if (this.auth.longitud === "" || this.auth.latitud === "") {
             this.geo.openSetting();
-         
+
           }else{
 
             this.estadoAuxiliar = 'Auxiliar Ocupado';
@@ -168,7 +168,7 @@ export class ModoColaboradorPage implements OnInit {
             localStorage.setItem('nodeDisponibilidad_estado', res['0']['field_estado']);
             localStorage.setItem('nodeDisponibilidad', res['0']['nid']);
           }
-         
+
 
           //
 
@@ -181,23 +181,23 @@ export class ModoColaboradorPage implements OnInit {
         this.posicionActivaAuxiliar = res.length;
 
       } else {
-        
+
         this.auth.estadoPedido=false;
         this.getLocation();
         if (this.auth.longitud === "" || this.auth.latitud === "") {
           this.geo.openSetting();
-       
+
         }else{
 
           this.auth.EnviarPosicionAuxiliar();
-        
-        
+
+
           this.estadoAuxiliar = 'Auxiliar Ocupado';
           this.posicionActivaAuxiliar = '0';
           this.value = false;
           this.auth.actualizarDisponibleAuxiliar(false);
         }
-       
+
       }
 
 
@@ -227,7 +227,7 @@ export class ModoColaboradorPage implements OnInit {
 
 
     if (this.value) {
-      
+
       console.log(this.value);
 
       this.auth.getContenidoAsignado().subscribe(async res => {
@@ -238,30 +238,30 @@ export class ModoColaboradorPage implements OnInit {
           //validar que no envie posicion en blanco
           if (this.auth.longitud === "" || this.auth.latitud === "") {
             this.geo.openSetting();
-         
+
           }else{
 
             this.estadoAuxiliar = 'Auxiliar Disponible';
             this.value = true;
-  
-  
-            
+
+
+
             this.auth.estadoPedido = true;
             this.auth.actualizarPosicionEnviadaAuxiliar();
-  
+
             this.auth.actualizarDisponibleAuxiliar(true);
-  
+
             //this.ngOnInit();
-  
-  
+
+
             //document.getElementById('check').dis
-  
+
           }
-         
+
 
 
         } else {
-         
+
           const alert = await this.alertControl.create({
 
             header: 'Notificación Vapaesa',
@@ -297,22 +297,22 @@ export class ModoColaboradorPage implements OnInit {
            //validar que no envie posicion en blanco
            if (this.auth.longitud === "" || this.auth.latitud === "") {
             this.geo.openSetting();
-         
+
           }else{
 
             this.auth.estadoPedido = false;
             this.auth.actualizarPosicionEnviadaAuxiliarOcupado();
-  
+
             this.auth.actualizarDisponibleAuxiliar(false);
-            
-  
-  
-  
+
+
+
+
 
           }
-         
+
           //document.getElementById('check').dis
-       
+
 
 
         } else {
@@ -422,7 +422,7 @@ this.value = false;
 this.geo.openSetting();
 return ;
         }
-          
+
       }
       let options: PositionOptions={
         maximumAge: 3000,

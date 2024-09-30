@@ -7,11 +7,19 @@ input, label {
     opacity: 1 !important;
 }
 
+
 ion-title{
+    margin-left: -17%;
     text-align: center;
-    margin-left: -10%;
     text-transform: uppercase;
-    font-family: "Montserrat", sans-serif;
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+}
+
+form{
+	margin: auto;
+	width: 95%;
 }
 .ion-color-warning {
     --ion-color-base: #FFF200  !important;
@@ -28,14 +36,14 @@ input{
 }
 .check{
     padding-top: 5px;
-  
+
     padding-bottom: 5px;
     border-bottom: 1px solid #262262;
 }
 .check2{
     padding-top: 5px;
-  
-   
+
+
 }
 .linea {
     border-top: 1px solid #262262;
@@ -43,7 +51,7 @@ input{
     max-width: 100%;
     padding: 0;
     margin: 20px auto 0 auto;
-    
+
   }
 ion-toolbar{
     color: white;
@@ -68,17 +76,18 @@ ion-col{
     border: 1px solid #333;
 }
 select{
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     color: #262262;
     background-color: #ecf0f1;
     height: 38px;
-   
-    
-    
+
+
+
 }
 
 ion-input{
-    
+
     height: 38px;
     width: 100%;
     display: block;
@@ -114,26 +123,32 @@ ion-tab-bar{
     --ion-background-color: #262262;
 
 }
-ion-icon{
+ ion-icon{
     color: yellow;
-    
-    
-    
+
+
+
+} form{
+	margin: auto;
+	font: inherit;
+	color: inherit;
+	width: 95%;
 }
 button{
     display: inline-block;
       border-radius: none;
       width: 120px;
       margin: auto;
-    
+
 }
 
 ion-label{
-    margin: 4%;
+    display: flex;
+    margin-left: 15.5px;
     color: #262262;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat Light ", sans-serif;
     text-transform: uppercase;
-    
+
 }
 ion-item{
     --ion-background-color: transparent
@@ -145,10 +160,10 @@ ion-item{
 margin-bottom: 5%;
 }
 ion-content{
-    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat; 
+    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat;
 }
 ion-card{
-   
+    border-radius: 20px;
     padding: 20px 0 20px 0;
 }
 
@@ -167,23 +182,25 @@ body{
 }
 h2{
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 }
 #alert-1-msg {
-   
+
     text-align: justify;
 }
 .alert-message {
-   
+
     text-align: justify;
 }
 label{
     margin-left: 6%;
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 }
 b{
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 }
- 

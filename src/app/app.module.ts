@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ProviderService } from './provider.service';
-import { IonicStorageModule } from '@ionic/storage-angular'; 
+import { IonicStorageModule } from '@ionic/storage-angular';
 
 import { IndexPage } from './index/index.page';
 import { ComponentsModule } from './components/components.module';
@@ -19,7 +19,7 @@ import { Keyboard } from '@capacitor/keyboard';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
 import { NotificationsService } from './services/notifications.service';
 import { environment } from '../environments/environment';
-import { Diagnostic } from '@awesome-cordova-plugins/diagnostic/ngx';
+
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 
 
@@ -33,22 +33,22 @@ import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-  	BrowserModule, 
-  	HttpClientModule, 
+  	BrowserModule,
+  	HttpClientModule,
   	FormsModule,
 AutoCompleteModule,
-	ComponentsModule,  
-  	BrowserModule, 
-  	IonicModule.forRoot(), 
+	ComponentsModule,
+  	BrowserModule,
+  	IonicModule.forRoot(),
   	AppRoutingModule,
   	IonicStorageModule.forRoot(),
 
 ],
 
 
-  providers: [Clipboard, Diagnostic, ProviderService,NotificationsService, AuthService, ReactiveFormsModule,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [Clipboard, ProviderService,NotificationsService, AuthService, ReactiveFormsModule,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-	
+
 }

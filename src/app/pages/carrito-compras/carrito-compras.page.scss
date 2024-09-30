@@ -1,7 +1,16 @@
+
 ion-title{
-    font-family: 'Montserrat', sans-serif;
+    margin-left: -17%;
     text-align: center;
-    
+    text-transform: uppercase;
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+}
+ 
+form{
+	margin: auto;
+	width: 95%;
 }
 ion-button{
     font-family: 'Poppins', sans-serif;
@@ -15,7 +24,8 @@ ion-toolbar{
 }
 td{
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 }
 .button1{
     color: #262262 !important;
@@ -24,29 +34,32 @@ td{
 }
 b{
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 }
 small{
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 
 }
 
 body{
     --ion-color-primary-contrast: #ffffff;
   }
- 
+
 ion-tab-bar{
     --ion-background-color: #262262;
 
 }
 ion-icon,ion-label{
+    display: flex;
 
     color: yellow;
 }
 h1{
     margin: auto;
-    
+
 }
 ion-row{
     height: auto;
@@ -68,17 +81,17 @@ ion-item{
 div{
     margin-left: 38%;;
     text-align: justify;
-    
+
     margin-top: 3%
-    
+
 }
 
 .div1{
     margin-bottom: 30%;
 }
 ion-row{
-    
-   
+
+
     text-align: center;
 }
 strong{
@@ -99,5 +112,5 @@ strong{
 
 }
 ion-content{
-    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat; 
+    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat;
 }

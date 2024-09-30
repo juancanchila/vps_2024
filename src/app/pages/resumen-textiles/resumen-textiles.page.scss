@@ -1,7 +1,16 @@
+
 ion-title{
-    font-family: 'Montserrat', sans-serif;
-    margin-left: 20%;
+    margin-left: -17%;
+    text-align: center;
     text-transform: uppercase;
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+}
+
+form{
+	margin: auto;
+	width: 95%;
 }
 ion-toolbar{
     color: white;
@@ -18,7 +27,7 @@ body{
       text-align: center;
   }
   ion-content{
-    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat; 
+    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat;
 }
 
 .linea {
@@ -27,13 +36,12 @@ body{
     max-width: 100%;
     padding: 0;
     margin: 20px auto 0 auto;
-    
+
   }
-ion-card{
-   
+  ion-card{
+    border-radius: 20px;
     padding: 20px 0 20px 0;
 }
-
 
  ion-icol{
      text-align: center;
@@ -50,13 +58,14 @@ ion-card{
     border: 1px solid #333;
 }
 select{
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     color: #262262;
     height: 38px;
     background-color: #ecf0f1;
 }
 ion-input{
-    
+
     height: 38px;
     width: 100%;
     display: block;
@@ -79,11 +88,12 @@ ion-input{
 
 }
 ion-label{
-    margin: 4%;
+    display: flex;
+
     color: #262262;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat Light ", sans-serif;
     text-transform: uppercase;
-    
+
 }
 ion-icon{
     float: right;
@@ -106,26 +116,33 @@ ion-tab-bar{
 
 }
 b{
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     color: #262262;
 }
-ion-icon{
+ ion-icon{
     color: yellow;
-    
-    
-    
+
+
+
+} form{
+	margin: auto;
+	font: inherit;
+	color: inherit;
+	width: 95%;
 }
 button{
     display: inline-block;
       border-radius: none;
       width: 120px;
       margin: auto;
-    
+
 }
 
 ion-label{
+    display: flex;
     text-transform: uppercase;
-    
+    margin-left: 15.5px;
 }
 ion-item{
     --min-height: 0 !important;
@@ -160,7 +177,7 @@ ion-icon{
     opacity: unset !important;
     pointer-events: none;
 }
-ion-input.ng-untouched.ng-pristine.ng-valid.sc-ion-input-md-h.sc-ion-input-md-s.md.has-value.hydrated.ion-untouched.ion-pristine.ion-valid 
+ion-input.ng-untouched.ng-pristine.ng-valid.sc-ion-input-md-h.sc-ion-input-md-s.md.has-value.hydrated.ion-untouched.ion-pristine.ion-valid
 .native-input[disabled].sc-ion-input-md {
     opacity: unset;
 }

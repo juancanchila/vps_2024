@@ -1,32 +1,32 @@
 <ion-header>
   <ion-toolbar>
-   
-      
+
+
       <ion-title>Completar pedidos</ion-title>
-  
-    
+
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
 
-    
-    
-   
 
-    
-   
-  
- 
-    
-   
+
+
+
+
+
+
+
+
+
 <ion-card  >
-  
+
 
 <ion-list>
   <ion-item>
-    
+
     <ion-label>
       <h1> Orden Nro: <b>{{allPedidos}} </b>  </h1>
     </ion-label>
@@ -54,46 +54,46 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  
+
   <h1> Orden :  </h1>
   <h1 *ngIf="character38 != undefined"><b>{{character38}} </b>  </h1>
   <h1 *ngIf="character26 != undefined"> Nro de Orden: </h1>
   <h1 *ngIf="character26 != undefined"> <b>{{character26}} </b>   </h1>
   <div class="linea"></div>
- 
+
   <h1 *ngIf="character1 != undefined"> <b>Datos de origen </b>  </h1>
   <h1 *ngIf="character1 != undefined"> <b>Dirección </b>  </h1>
   <h1 *ngIf="character1 != undefined"> {{character1}}     </h1>
-  
-    
+
+
     <h1 *ngIf="character34 != undefined"> <b>Barrio:</b>  </h1>
     <h1 *ngIf="character34 != undefined"> {{character34}}  </h1>
 
-    
+
     <h1 *ngIf="character41 != undefined"> <b>Nombre del Establecimiento:</b>  </h1>
     <h1 *ngIf="character41 != undefined"> {{character41}}  </h1>
-  
+
     <h1 *ngIf="character2 != undefined"> <b>Locacion:</b>  </h1>
     <h1 *ngIf="character2 != undefined"> {{character2}}  </h1>
     <h1 *ngIf="character39 != undefined"><b>Nombre de contacto: </b>  </h1>
     <h1 *ngIf="character39 != undefined">{{character39}}  </h1>
-  
-    <h1 *ngIf="character20 != undefined"><b>Numero de Contacto:</b>   </h1>
+
+    <h1 *ngIf="character20 != undefined"><b>Número de Contacto:</b>   </h1>
     <h1 *ngIf="character20 != undefined"> {{character20}}   <ion-icon name="copy-outline" (click)="copy(character20)" id="copytxt3"></ion-icon> </h1>
     <div *ngIf="character4 != undefined" class="linea"></div>
 
-  
-  
- 
-  
-  
- 
-  
+
+
+
+
+
+
+
     <h1 *ngIf="character4 != undefined"> <b>Datos de Destino </b>  </h1>
     <h1 *ngIf="character4 != undefined"> <b>Dirección </b>  </h1>
     <h1 *ngIf="character4!= undefined">{{character4}} </h1>
 
-  
+
 
     <h1 *ngIf="character35 != undefined"> <b>Barrio:</b>  </h1>
     <h1 *ngIf="character35 != undefined"> {{character35}}  </h1>
@@ -104,27 +104,27 @@
 
   <h1 *ngIf="character5 != undefined"> <b>Contacto:  </b> </h1>
   <h1 *ngIf="character5 != undefined"> {{character5}} <ion-icon name="copy-outline" (click)="copy(character5)" id="copytxt3"></ion-icon>  </h1>
- 
 
-  
+
+
   <h1 *ngIf="character6 != undefined"><b>Locacion: </b>  </h1>
   <h1 *ngIf="character6 != undefined"> {{character6}}   </h1>
- 
-  
+
+
   <div class="linea"></div>
 
- 
+
 
   <h1 *ngIf="character14 != undefined"><b>Observaciones: </b> </h1>
   <h1 *ngIf="character14 != undefined"> {{character14}}  </h1>
- 
+
   <h1 *ngIf="character15 != undefined"><b>Observaciones:</b>   </h1>
   <h1 *ngIf="character15 != undefined"> {{character15}}   </h1>
 
-  
+
   <h1 *ngIf="character7 != undefined"><b>Observaciones:</b>    </h1>
   <h1 class="h1Observ" *ngIf="character7 != undefined"> {{character7}}  </h1>
- 
+
 
   <h1 *ngIf="character28 != undefined"> <b>Locacion:</b>   </h1>
   <h1 *ngIf="character28 != undefined"> {{character28}} </h1>
@@ -135,49 +135,49 @@
 
   <h1 *ngIf="character30 != undefined"><b>Contacto: </b>   </h1>
   <h1 *ngIf="character30 != undefined"> {{character30}}  </h1>
- 
-  
 
- 
 
- 
+
+
+
+
     <h1 *ngIf="character4 != undefined"> <b>Detalles </b>  </h1>
     <h1 *ngIf="character31 != undefined"><b>Estado del servicio: </b>    </h1>
     <h1 *ngIf="character31 != undefined"> {{character31}} </h1>
     <br>
     <h1 *ngIf="character16 != undefined" ><b>Que quieres comprar: </b> </h1>
     <h1 *ngIf="character16 != undefined" > {{character16}}  </h1>
-   
-  
-    
+
+
+
     <h1 *ngIf="character32 != undefined" ><b>Respuesta Documentos:</b>  </h1>
     <h1 *ngIf="character32 != undefined" > {{character32}}  </h1>
-   
+
 
     <h1 *ngIf="character21 != undefined" > <b>Ida y Vuelta: </b> </h1>
     <h1 *ngIf="character21 != undefined" >{{character21}}  </h1>
-   
-    
+
+
     <h1 *ngIf="character8 != undefined" > <b>Metodo de pago:</b>  </h1>
     <h1 *ngIf="character8 != undefined" > {{character8}}   </h1>
-   
-    
+
+
     <h1 *ngIf="character12 != undefined" ><b>fecha creacion orden:</b>  </h1>
     <h1 *ngIf="character12 != undefined" > {{character12}}  </h1>
-   
+
 
     <h1 *ngIf="character17 != undefined" ><b> Farmacia:</b> </h1>
     <h1 *ngIf="character17 != undefined" > {{character17}}   </h1>
-  
+
     <h1 *ngIf="character19 != undefined" > Tema de interes:</h1>
     <h1 *ngIf="character19 != undefined" > <b>{{character19}} </b>  </h1>
 
     <h1 *ngIf="character18 != undefined" > <b>Musica preferida:</b> </h1>
     <h1 *ngIf="character18 != undefined" >{{character18}}  </h1>
- 
+
     <h1 *ngIf="character23 != undefined" ><b>Medio de transporte:</b>    </h1>
     <h1 *ngIf="character23 != undefined" > {{character23}} </h1>
- 
+
     <h1 *ngIf="character24 != undefined" ><b>Valor declarado:</b>  </h1>
     <h1 *ngIf="character24 != undefined" > {{character24}}  </h1>
 
@@ -189,15 +189,14 @@
     <a (click)="presentAlert()">Terminos y Condiciones del Contrato</a>
     <div class="linea"></div>
 <img class="cdbarra" src="assets/botones/cdgBarra.PNG" alt="">
- 
- 
+
+
 
 
 
 
   </ion-card>
 </ion-content>
-   
-    
-   
-  
+
+
+

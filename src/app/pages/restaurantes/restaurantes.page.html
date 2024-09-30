@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="index"></ion-back-button>
-      
+
     </ion-buttons>
     <ion-title>Restaurantes</ion-title>
     <ion-buttons slot="end">
@@ -10,36 +10,39 @@
         <ion-icon name="cart-outline"></ion-icon>
 
       </ion-button>
-      
-    </ion-buttons>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 
-    
+    </ion-buttons>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat Light &display=swap" rel="stylesheet">
+
+
   </ion-toolbar>
 </ion-header>
 <ion-content>
-   
+
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content>
 
     </ion-refresher-content>
   </ion-refresher>
-  <swiper [config]="swiperConfig">
+  <!---swiper [config]="swiperConfig">
 
     <ng-template swiperSlide *ngFor="let slide of slider" >
       <div class="slider" >
-        
+
          <ion-img class="img-slider" [src]="urlBase+slide.field_imagen_restaurante" alt=""></ion-img>
-          
-       
-  
+
+
+
       </div>
     </ng-template>
-  
-  </swiper>
 
+  </swiper-->
+
+  <div class="contentImg">
+    <ion-img class="img-slider" src="../../assets/banners/restaurantes.gif" alt=""></ion-img>
+  </div>
   <div class="content">
-    <ion-button expand="large" class="botonRestaurante" (click)="buscarRestaurante()"> <span>¿No encuentras tu Restaurante?</span> </ion-button> 
+    <ion-button expand="large" class="botonRestaurante" (click)="buscarRestaurante()"> <span>¿No encuentras tu Restaurante?</span> </ion-button>
     <ion-searchbar  placeholder="Buscar" animated (ionChange)="searchRestaurantes($event)"></ion-searchbar>
     <swiper [config]="swiperConfig2">
       <ng-template swiperSlide *ngFor="let filtro of filtroRestaurantes">
@@ -54,47 +57,47 @@
 </div>
 </ng-template>
 </swiper>
- 
- 
-  
-  
- 
+
+
+
+
+
 <br>
 
 <ion-grid >
-  
+
   <style></style>
 
   <ion-row *ngFor="let characte of searched" (click)="fondo" (click)="irPageProductos(characte)" >
- 
+
 
 
       <ion-col class="col1" size="3" class={{characte.field_creiteria}} [ngClass]="fondo" >
-       
+
           <img [src]="urlBase+characte.field_imagen_apk_r" class="img" >
-        
-       
+
+
       </ion-col>
       <ion-col  class="col2" size="9" class={{characte.field_creiteria}} [ngClass]="fondo">
-        
-        
-          
+
+
+
         <h1 class="title"><b>{{characte.Titulo}}  </b></h1>
          <p>
-          
-          {{characte.field_detalle_restaurtante}} 
+
+          {{characte.field_detalle_restaurtante}}
           <br>
-          
+
          </p>
-           
-        
-         
-        
-      
-      
+
+
+
+
+
+
     </ion-col>
-   
-    
+
+
 
   </ion-row>
 

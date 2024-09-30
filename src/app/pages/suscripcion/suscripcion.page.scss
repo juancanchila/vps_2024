@@ -22,15 +22,17 @@ ion-tab-bar{
 
 }
 ion-icon,ion-label{
-
+    display: flex;
+    margin-left: 15.5px;
     color: yellow;
 }
 h1{
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     color: white;
     margin: auto;
     text-align: center;
-    
+
 }
 b{
     text-align: center;

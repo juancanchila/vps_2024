@@ -17,7 +17,7 @@ export class RestaurantesPage implements OnInit {
   filtroSeleccionado: string = '';
 
   fondo= "";
-  
+
   store_id:any;
 criterio:any;
   character: any =[];
@@ -28,9 +28,11 @@ criterio:any;
   sombra2 ="";
   sombra3 ="";
   sombra4 ="";
-  
+  message_restaurantes: any;
 
-  constructor(private http: HttpClient,private router: Router, private auth: AuthService,public alertController:AlertController) {
+
+  constructor(private http: HttpClient, private router: Router, private auth: AuthService, public alertController: AlertController) {
+    localStorage.setItem('servicioEvaluado','restaurantes');
     this.urlBase=environment.urlBase;
    }
 
@@ -38,10 +40,10 @@ criterio:any;
     pagination:false,
     autoplay:{delay: 10000},
     EffectFade:true
-    
+
   };
 
-  
+
   public swiperConfig2={
     slidesPerView: 4,
     spaceBetween: 10,
@@ -49,31 +51,55 @@ criterio:any;
       delay: 5000,
       disableOnInteraction: false
     }
-    
+
   };
 
   ngOnInit() {
+
+
+  this.auth.getMessageRestaurante().subscribe(async data => {
+    this.message_restaurantes = data[0]['body'];
+    console.log(data, 'Data received in component');
+
+    // Crear y mostrar la alerta después de recibir los datos
+    const alert = await this.alertController.create({
+      header: 'Importante',
+      message: this.message_restaurantes || 'No se recibió el mensaje de la API', // Muestra un mensaje por defecto si no hay datos
+      buttons: [
+        {
+          text: 'Aceptar',
+          handler: () => {
+            // Lógica adicional si es necesario cuando se presiona "Aceptar"
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  });
+
+
     Swiper.use([Pagination,Autoplay,EffectFade]);
     this.auth.seleccionarSliderRestaurantes().subscribe(res =>{
       console.log(res, ' aqui slider');
      // this.slider=res[0]['field_img_banner'];
       this.slider=res;
-      
+
      //inicializarlas en true
-      
+
     });
 
-    
+
     this.auth.seleccionarRestaurantes().subscribe(res =>{
       console.log(res);
       for(let x in res){
         console.log(res[0]['field_creiteria']);
-        
+
       }
-     
+
      this.character=res;
      this.searched = this.character;
-     
+
     });
     this.auth.getSesion();
 
@@ -85,16 +111,16 @@ criterio:any;
 
   aplicarFiltro(filtro: string) {
     console.log(filtro,'tofil');
-   
+
     this.iconos.forEach(icono => {
       icono.seleccionado = icono.filtro === filtro;
   });
     if (this.filtroSeleccionado === filtro) {
-     
+
       this.ngOnInit();
       this.filtroSeleccionado = "";
          // Volver a cargar todos los restaurantes
-        
+
     } else {
         // Establecer el nuevo filtro seleccionado
         this.filtroSeleccionado = filtro;
@@ -107,25 +133,25 @@ criterio:any;
           this.character = res.filter(character => character.field_creiteria === filtro);
           this.searched = this.character;
           this.filtroSeleccionado = filtro;
-          
+
       });
     }
     // Lógica para aplicar el filtro, por ejemplo, filtrar los restaurantes por el criterio seleccionado
- 
+
 }
 
-  
+
   cargarTiendas(){
-    
+
     this.auth.seleccionarRestaurantes().subscribe(res =>{
       console.log(res);
       for(let x in res){
         console.log(res[0]['field_creiteria']);
-        
+
       }
-     
+
      this.character=res;
-     
+
     },error2=>{
       console.log(error2);
     });
@@ -140,11 +166,11 @@ criterio:any;
     }, 2000);
   }
   ngOnDestroy() {
-   
+
     console.log("Restaurante1 - OnDestroy")
   }
   irPageRestaurante1(){
-   
+
 
   }
   buscarRestaurante(){
@@ -155,11 +181,11 @@ criterio:any;
   iraCarrito(){
     this.router.navigate(['/carrito-compras']);
   }
-  
+
   irPageProductos(allPedidos:any){
     localStorage.setItem('idTienda',allPedidos.store_id);
     this.router.navigate(['/restaurante1',JSON.stringify(allPedidos)]);
-   
+
   }
   searchRestaurantes(event){
     const text =event.target.value;
@@ -170,40 +196,40 @@ criterio:any;
           })
         }
       }
-  
+
   // metodo para mostra popu en otros restaurantes
 
     async presentAlert() {
     const alert = await this.alertController.create({
-       
+
       header: 'Va Pa Esa',
-     
+
       message: 'En esta sesión puedes hacer los pedidos que se te antojen, nosotros nos encargamos'
-      
-     
-       
+
+
+
        ,
       // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
       buttons: [{
         text:'cancel',
         role:'cancel',
-        /** 
+        /**
         handler:()=>{
-          
+
           this.router.navigate(['/tabs']);
         }*/
-        
+
       },
       {
         text:'aceptar',
         handler:()=>{
-        
-      
+
+
 
           //si es igua igual a on, lpasas para la otra pagina
 
-         
- 
+
+
 
           //this.router.navigate(['/transportes']);
         }
@@ -211,8 +237,8 @@ criterio:any;
     });
 
     await alert.present();
-    
-   
+
+
 
    }
 }

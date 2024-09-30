@@ -1,62 +1,33 @@
 {
   "project_info": {
-    "project_number": "332561864460",
-    "project_id": "vapaesa-2faf7",
-    "storage_bucket": "vapaesa-2faf7.appspot.com"
+    "project_number": "6605322708",
+    "project_id": "vapaesa-dd4b6",
+    "storage_bucket": "vapaesa-dd4b6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:332561864460:android:1a7382d6ae6be167fe5b29",
-        "android_client_info": {
-          "package_name": "com.vapaesa"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "332561864460-g9vuikabikf5n16b3f1jj5pqd6ia2vgl.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCvefTJIpx95VZ5bK-wIVUQyuR5Objkvuk"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "332561864460-g9vuikabikf5n16b3f1jj5pqd6ia2vgl.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:332561864460:android:631374511f2a9749fe5b29",
+        "mobilesdk_app_id": "1:6605322708:android:90eb63aa2d28b4ad29be41",
         "android_client_info": {
           "package_name": "io.ionic.starter"
         }
       },
       "oauth_client": [
         {
-          "client_id": "332561864460-g9vuikabikf5n16b3f1jj5pqd6ia2vgl.apps.googleusercontent.com",
+          "client_id": "6605322708-mj15kdlheo591s1cf5qo80srbct1428k.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCvefTJIpx95VZ5bK-wIVUQyuR5Objkvuk"
+          "current_key": "AIzaSyCu2SsJPW4kvOFv9TmgghJpeBVFl8ah2_4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "332561864460-g9vuikabikf5n16b3f1jj5pqd6ia2vgl.apps.googleusercontent.com",
+              "client_id": "6605322708-mj15kdlheo591s1cf5qo80srbct1428k.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

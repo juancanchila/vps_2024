@@ -12,17 +12,17 @@ import { AuthService } from 'src/app/services/auth.service';
 export class PedidosPage implements OnInit {
 character: any =[];
   constructor(private auth: AuthService, private http: HttpClient, private router:Router) { }
-  
-  
+
+
   ngOnInit() {
     this.auth.mostrarContenido().subscribe(res =>{
       console.log(res)
      this.character=res;
     })
 
-    
-    
-   
+
+
+
   }
   doRefresh(event) {
     this.ngOnInit();
@@ -42,28 +42,29 @@ character: any =[];
   }
   irPageProductos(allPedidos:any){
 console.log(allPedidos,'id');
-  
-    
+
+
         this.router.navigate(['/ver-mas-ordenes',JSON.stringify(allPedidos)]);
       }
-    
 
 
-  irAIndex(){
-   if(localStorage.getItem('rolAuxiliar')== 'Auxiliar'){
+
+  irAIndex() {
+
+    this.router.navigate(['/tabs/index']);
+/*
+   if(localStorage.getItem('rolAuxiliar') === 'Auxiliar'){
     this.router.navigate(['/modo-colaborador']);
    } else{
     this.router.navigate(['/tabs/index']);
    }
-   
-    
 
-
+*/
   }
 
 
   ngOnDestroy() {
-   
+
     console.log("Pedidos - OnDestroy")
   }
 

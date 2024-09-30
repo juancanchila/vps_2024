@@ -1,21 +1,21 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button ></ion-back-button> 
+      <ion-back-button ></ion-back-button>
     </ion-buttons>
     <ion-title>Resumen</ion-title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat Light &display=swap" rel="stylesheet">
 
   </ion-toolbar>
 </ion-header>
 <ion-content>
 
   <div class="slider" >
-        
+
     <ion-img class="img-slider" [src]="urlBase+slider" alt=""></ion-img>
-     
-  
+
+
 
  </div>
 
@@ -24,66 +24,66 @@
         <ng-template swiperSlide >
       <ion-card>
     <form  [formGroup]="FormSend" (ngSubmit)="irAPagar()">
-     
-  
+
+
       <ion-label > <b>Destino*</b> </ion-label>
       <ion-item >
         <ion-select  (ionChange)="region($event.target.value)"   formControlName="field_locacion_destino" class="locacion">
-      
+
           <ion-select-option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</ion-select-option>
-          
+
          </ion-select>
-       
+
       </ion-item>
       <ion-item >
-       
+
         <textarea  class="corto" placeholder="Direccion" formControlName="field_direccion_destino"  type="text" required></textarea>
       </ion-item>
 
       <ion-item id="itemDestino" [disabled]="bloquearInputBarrioDestino">
         <textarea [hidden]="ocultarInput" class="corto" formControlName="field_barrio_destino" placeholder="Barrio de Destino" (input)="inputChanged2($event)" #input2 type="text">{{barrio}}</textarea>
-        
-     
-    
+
+
+
       </ion-item>
       <ion-list [hidden]="items2.length <= 0" >
        <ion-item (click)="selected2(item, input2)" *ngFor="let item of items2">
          {{item.name}}
        </ion-item>
      </ion-list>
-  
-     
+
+
 
      <ion-label><b>Contacto Nombre :</b> </ion-label>
      <ion-item >
-       
+
        <textarea class="corto" formControlName="field_nombre_c_origen" placeholder="Nombre" type="text" required></textarea>
      </ion-item>
-  
-    <ion-label><b>Contacto Telefono:</b> </ion-label>
+
+    <ion-label><b>Contacto Teléfono:</b> </ion-label>
      <ion-item >
-       
+
        <textarea class="corto" formControlName="field_contacto" placeholder="Número de celular" type="text" required></textarea>
      </ion-item>
-      
-     
-     
-      
+
+
+
+
       <br>
-      
+
       <ion-label > <b> Descripción:    {{body}}</b></ion-label>
       <ion-item >
-        
+
         <textarea size="25" formControlName="field_observaciones" disabled="true" class="descaera" type="textarea" required>
 
-        
-        </textarea>
-      </ion-item> 
-     
-     
 
-     
-  
+        </textarea>
+      </ion-item>
+
+
+
+
+
       <ion-row class="rowBorder">
         <ion-col>
           <ion-button replaceUrl="true"  (click)="slideNext()" color="danger" expand="block" > <small><b class="botonSig"> siguiente</b></small>  </ion-button>
@@ -98,15 +98,15 @@
 
             <ion-header>
               <div class="title">
-              
-              
+
+
                 <h2 class="title margin-botton-10">
                  <span class="subtitle"> PRODUCTO(S) :({{data.length}})</span>
                 </h2>
-              
+
               <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
-              <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-              
+              <link href="https://fonts.googleapis.com/css2?family=Montserrat Light &display=swap" rel="stylesheet">
+
               </div>
               </ion-header>
               <div *ngIf="data.length>0;else carritovaciotmpl">
@@ -114,7 +114,7 @@
                   <table class="margin-top-20">
                     <thead>
                       <tr col="3">
-                       
+
                         <td style="width:20%"> <b>Cantidad.</b> </td>
                         <td > <b> Producto</b></td>
                         <td > <b>Valor</b> </td>
@@ -122,52 +122,52 @@
                     </thead>
                     <tbody>
                       <tr >
-                        
+
                         <td  class="has-text-centered">
                           <span>{{item.cantidad}}</span>
                         </td>
                         <td>{{item.titulo}}</td>
                         <td>${{item.originaPrice*item.cantidad}}</td>
-                      
-                      </tr>      
+
+                      </tr>
                     </tbody>
                     <tfoot>
                         <tr class="carrito-total">
                           <td colspan="2"></td>
                           <td>
-                            
+
                           </td>
                         </tr>
                     </tfoot>
                   </table>
-                
+
                 </ion-item>
                 <div  class="div1">
                   <b class="bearer">Subtotal:</b> <div class="sub">${{subtotal}}</div>
                 </div>
                 <div  class="div2">
-                 <b class="bearer">Domicilio:</b> <div class="sub">${{domicilioValor}}</div> 
+                 <b class="bearer">Domicilio:</b> <div class="sub">${{domicilioValor}}</div>
                 </div>
                 <div class="div2">
-                  <b class="bearer">Total:</b> <div class="sub">${{total}}</div> 
+                  <b class="bearer">Total:</b> <div class="sub">${{total}}</div>
                 </div>
-               
-              
-                
-              
+
+
+
+
               <!--
    <ion-row>
                   <ion-col>
                     <ion-button replaceUrl="true" (click)="irASeguirComprando()" type="submit" color="warning" expand="block"><br><small>  <b class="button1">Seguir Comprando</b> </small></ion-button>
                   </ion-col>
-              
+
                 </ion-row>
               -->
-             
-                
+
+
               </div>
 
-              
+
 <ng-template color="warning" #carritovaciotmpl>
   <div class="content2">
     <div class="margin-top-20">
@@ -182,99 +182,99 @@
 
 </div>
 </ng-template>
-      
-         
-    
-         
-      
+
+
+
+
+
           <ion-row class="rowBorder">
             <ion-col>
               <ion-button replaceUrl="true"  (click)="slideNext()" color="danger" expand="block" > <small><b class="botonSig">siguiente</b></small>  </ion-button>
               <ion-button replaceUrl="true"  (click)="slidePrev()" color="danger" expand="block" > <small><b class="botonSig">atras</b></small>  </ion-button>
-    
+
             </ion-col>
           </ion-row>
-  
+
           </ion-card>
             </ng-template>
         <ng-template swiperSlide >
           <ion-card>
         <form  [formGroup]="FormSend" (ngSubmit)="irAPagar()">
-       
+
           <ion-label> <b>Medio de pago:</b> </ion-label>
           <ion-grid>
             <ion-row>
-             
+
                <ion-col size="5">
                  <img src="../../assets/botones/PAGOSCOLOR-97.png" class="col-img" width="80%" height="80%" alt="">
                </ion-col>
-               <ion-col size="7"> 
+               <ion-col size="7">
                 <div class="form-check">
                   <input type="radio" formControlName="field_metodo_de_pago" value="nequi"  class="form-check-input"  >
-                  
+
                 </div>
-            
-                 
+
+
                 </ion-col>
              </ion-row>
-             
+
               <ion-row>
-               
+
                 <ion-col size="5">
                   <img src="../../assets/botones/PAGOSCOLOR-98.png" class="col-img"  width="80%" height="80%" alt="">
                 </ion-col>
-                <ion-col size="7"> 
+                <ion-col size="7">
                   <div class="form-check">
                     <input formControlName="field_metodo_de_pago" type="radio" value="daviplata" class="form-check-input"  >
-                    
+
                   </div>
-                  
-                   
+
+
                   </ion-col>
               </ion-row>
-              <ion-row>
-              
+              <!--ion-row>
+
                 <ion-col size="5">
                   <img src="../../assets/botones/PAGOSCOLOREAZUL-99.png" class="col-img" width="80%" height="80%" alt="">
                 </ion-col>
-                <ion-col *ngIf="permitirPagoEfectivo=='On'" size="7"> 
+                <ion-col *ngIf="permitirPagoEfectivo=='On'" size="7">
                   <div class="form-check">
                   <input formControlName="field_metodo_de_pago" type="radio" value="efectivo" class="form-check-input" >
                   </div>
-             
-             
-                 
+
+
+
                 </ion-col>
-              </ion-row>
-            
+              </ion-row-->
+
              <script>
                document.getElementById("formulario").addEventListener("submit", function(event){
                let hasError = false;
-              
-           
+
+
                // obtenemos todos los input radio del grupo horario que esten chequeados
                // si no hay ninguno lanzamos alerta
                if(!document.querySelector('input[name="field_medio_de_transporte"]:checked')) {
                  alert('Error, rellena el campo horario');
                  hasError = true;
                  }
-           
-               
-               
+
+
+
                // si hay algún error no efectuamos la acción submit del form
                if(hasError) event.preventDefault();
            });
              </script>
-             
-            
-          
+
+
+
           </ion-grid>
-       
-      
+
+
           <ion-row class="rowBorder">
             <ion-col>
               <ion-button expand="block"  replaceUrl="true" type="submit" color="warning" >Ir A Pagar</ion-button>
-             
+
               <ion-button replaceUrl="true"  (click)="slidePrev()" color="danger" expand="block" > <small><b class="botonSig"> atras</b></small>  </ion-button>
             </ion-col>
           </ion-row>
@@ -283,11 +283,11 @@
             </ng-template>
       </swiper>
   </ion-card-content>
-  
-  
 
 
-  
+
+
+
 </ion-content>
 
 

@@ -16,16 +16,16 @@ export class CarroTallerPage implements OnInit {
   public items: {name: string}[] = [];
   public items2: {name: string}[] = [];
   @ViewChild('swiper', { static: false }) swiper?: SwiperComponent;
-  
+
   public swiperConfig={
     Virtual: true,
     //slidesPerView: 2,
     navigation: true,
     allowTouchMove: false,
     //pagination: { type:'fraction'},
- 
+
     EffectFade:true
-    
+
   };
   permitirPagoEfectivo;
   AuxCarrosDisponibles:any=[];
@@ -45,11 +45,12 @@ export class CarroTallerPage implements OnInit {
   disabledValueOrigen: boolean;
   bloquearInputBarrio: boolean=true;
   locacion: any;
-  constructor(private menucontrol:MenuController,private router: Router, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {
+  constructor(private menucontrol: MenuController, private router: Router, private auth: AuthService, public fb: FormBuilder, public alertController: AlertController) {
+    localStorage.setItem('servicioEvaluado','carrotaller');
     this.menucontrol.enable(false);
     this.urlBase=environment.urlBase;
     this.FormSend= this.fb.group({
-     
+
  field_direccion_entrega:[""],
 
 field_contacto:[""],
@@ -66,34 +67,34 @@ field_latitud_origen_:['']
 
 
      });
-    
+
    }
 
-   
+
    async slideNext(){
-    
-   
-    
+
+
+
     if(this.AuxCarrosDisponibles['length']==0 && this.AuxMotosDisponibles['length']==0){
       const alert = await this.alertController.create({
-        
+
         header: 'Advertencia',
-       
+
         message: 'En este momento no tenemos auxiliar disponible',
         // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
         buttons: [
-       
+
         {
           text:'aceptar',
           handler:()=>{
-        
+
             this.ngOnInit();
-            
+
           }
         }
       ]
       });
-      
+
       await alert.present();
     }else{
       console.log(this.FormSend.value['field_barrio_origen']);
@@ -101,49 +102,49 @@ field_latitud_origen_:['']
       // console.log(this.direccion)
       var barrioExiste= new Boolean();
        for (var i = 0; i <this.direccion.length; i++) {
-         
-         
+
+
          if(this.FormSend.value['field_barrio_origen']==this.direccion[i].name){
            barrioExiste=true;
            let n = i;
            this.swiper.swiperRef.slideNext(1000);
-                
+
       // this.auth.sendFormulario(this.FormSend.value);
       // this.router.navigate(['/resumen']);
    return
-   
+
          }else{
           barrioExiste=false;
-          
+
          }
-   
-         
-        
-         
-        
-       }  
+
+
+
+
+
+       }
    console.log(barrioExiste);
-   
+
    if(barrioExiste==false){
    const alert = await this.alertController.create({
-                   
+
      header: 'Error de barrios',
-    
+
      message: 'Barrio(s) no identificado, Debes seleccionar tu barrio de la lista',
      // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
      buttons: [
      {
        text:'aceptar',
-      
+
      }]
    });
-   
+
    await alert.present();
-   
+
    }
     }
 
-    
+
 
 
   }
@@ -161,7 +162,7 @@ field_latitud_origen_:['']
       this.items = [];
       return; // stoper l'exection du script
     }
-    
+
     // récupération de la liste de posibilités
     const list = this.direccion;
     // filtrer la list pour extraire uniquement les element pertinants
@@ -208,24 +209,24 @@ field_latitud_origen_:['']
     this.FormSend.controls.field_longitud_origen.setValue(item.field_longitud);
     this.FormSend.controls.field_latitud_origen_.setValue(item.field_latitud);
     // vider la valeur du champ de saisie
-   
+
     // mettre à jour le formuaire
     this.FormSend.patchValue({item});
     // cacher la liste d'items en vidant la liste
     this.items = [];
    // console.log('selected---->',this.FormSend.value['barrioOrigen']);
-   
+
     input.value = item.name;
     this.FormSend.controls.field_barrio_origen.setValue(item.name);
   }
 
 
    openResumen(){
-   
+
     this.auth.sendFormulario(this.FormSend.value);
-    
-    
-   
+
+
+
 
    }
    iraIndex(){
@@ -234,13 +235,13 @@ field_latitud_origen_:['']
    async sendForm(){
     if(this.FormSend.invalid || this.FormSend.value['field_metodo_de_pago']==''){
       const alert = await this.alertController.create({
-       
+
         header: 'Datos incompletos ',
-       
+
         message: 'llenar todos los datos.',
         buttons: ['Aceptar']
       });
-  
+
       await alert.present();
       return;
     }else{
@@ -251,32 +252,32 @@ field_latitud_origen_:['']
           if(this.AuxMotosDisponibles['length']==0){
             if(this.AuxCarrosDisponibles['length']==0){
               const alert = await this.alertController.create({
-                
+
                 header: 'Advertencia',
-               
+
                 message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
                 // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
                 buttons: [
-               
+
                 {
                   text:'aceptar',
                   handler:()=>{
-                
+
                 this.router.navigate(['/tabs']);
-                    
+
                   }
                 }
               ]
               });
-              
+
               await alert.present();
             }else{
               console.log('carro');
               this.auth.seleccionarServicioCarro();
               this.auth.sendFormularioCarrotaller(this.FormSend.value);
               this.router.navigate(['/resumen-carrotaller']);
-               
-    
+
+
             }
 
           }else{
@@ -288,32 +289,32 @@ field_latitud_origen_:['']
           break;
         }else{
           console.log('publo');
-  
+
           if(this.AuxDisponiblesMunicipios['length']==0){
-          
+
             const alert = await this.alertController.create({
-                
+
               header: 'Advertencia',
-             
+
               message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
               // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
               buttons: [
-             
+
               {
                 text:'aceptar',
                 handler:()=>{
-              
+
               this.router.navigate(['/tabs']);
-                  
+
                 }
               }
             ]
             });
-            
+
             await alert.present();
-  
+
           }else{
-            
+
             this.auth.sendFormularioCarrotaller(this.FormSend.value);
       this.router.navigate(['/resumen-carrotaller']);
              //this.router.navigate(['/resumen']);
@@ -321,13 +322,13 @@ field_latitud_origen_:['']
           }
         }
       }
-     
+
 
     }
-    
-   
-     
-    
+
+
+
+
    }
 
   ngOnInit() {
@@ -335,167 +336,149 @@ field_latitud_origen_:['']
     this.auth.getCiudad().subscribe(res =>{
       console.log(res, ' ciudad');
       this.ciudades=res;
- 
+
     });
 
     this.auth.getAuxiliaresDisponiblesCarros().subscribe(res =>{
       console.log(res, ' aqui carro');
       this.AuxCarrosDisponibles=res;
- 
+
     });
     this.auth.getAuxiliaresDisponiblesMotos().subscribe(res =>{
       console.log(res, ' aqui motos');
       this.AuxMotosDisponibles=res;
-    
+
     });
 
     this.auth.getAuxiliaresDisponiblesMunicipio().subscribe(res =>{
       console.log(res, ' aqui aux municiipio');
       this.AuxDisponiblesMunicipios=res;
-    
+
     });
     this.auth.seleccionarSliderCarroTaller().subscribe(res =>{
       console.log(res, ' aqui slider');
      this.slider=res[0]['field_imagen_taller_slider_1'];
-     
+
       console.log(this.slider);
-      
-     
-      
-      
+
+
+
+
     });
     this.auth.getListLocaciones().subscribe(data=>{
       console.log(data);
       this.locaciones=data;
           },error=>{
-           
+
             console.log(error);
-           
+
           });
-   
+
     Swiper.use([Pagination,Navigation,EffectFade,Virtual]);
-   
-    
+
+
   }
-  regionOrigen(event){  
+  regionOrigen(event){
     console.log('regionOrigen');
     this.locacion= event;
     console.log(event);
     if(event!=''){
       this.auth.locacion=event;
       localStorage.setItem('locacionOrigenSeleccionada',event);
-      setTimeout(() => {
+
       this.WillEnterOrigen();
-      },3000)
+
     }
-   
-  } 
 
-WillEnterOrigen(){
-
- 
-        this.auth.getListBarriosSeleccion().subscribe(async data=>{
-          console.log(data);
-        
-          this.direccion= await data;
-              },async error=>{
-               
-                console.log(error);
-                const alert = await this.alertController.create({
-           
-                  header: 'Error de locación ',
-                 
-                  message: 'Su locación no tiene barrios asignados.',
-                  buttons: [{
-                    text:'aceptar',
-                    handler:()=>{
-                  
-                     
-                    }
-                  }],
-                  
-                });
-            
-                await alert.present();
-                return;
-               
-              });
-         
-  
- 
-  setTimeout(() => {
-    console.log(this.direccion,'direccion');
-
-    console.log(this.direccion.length);
-    this.bloquearInputBarrio=false;
-    //si barrios es 1 agregar por defecto y ocultar input barrio origen
-    
-    if(this.direccion.length==1 &&this.direccion[0]['name']!='San Andrés' ){
-      //estableciendo informacion en input
-      this.FormSend.controls.field_locacion_entrega.setValue(this.direccion[0]['name']);
-     this.FormSend.controls.field_barrio_origen.setValue(this.direccion[0]['name']);
-    
-      this.ocultarInputOrigen=true;
-    this.disabledValueOrigen=true;
-     //variables de local storage
-     localStorage.setItem('tarifaOrigen',this.direccion[0].field_tarifa_externa);
-
-   localStorage.setItem('imgBarrioOrigen',this.direccion[0].field_imagen_barrio);
-   localStorage.setItem('longitudOrigen',this.direccion[0].field_longitud);
-   localStorage.setItem('latitudOrigen',this.direccion[0].field_latitud);
-
-   localStorage.setItem('valorDeterminanteLONG',this.direccion[0].field_longitud_1);
-   localStorage.setItem('valorDeterminanteLAT',this.direccion[0].field_latitud_1);
-
-   //ocultando campo de barrio
- 
-    document.getElementById('itemOrigen').style.visibility = "hidden"; // hide
-   
-//desabilitando campo de locacion origen
-
-
-     //si barrios es 1 agregar por defecto y ocultar input barrio destino
-
-
-     
-    }else  if(this.direccion.length==1 && this.direccion[0]['name']=='San Andrés'){
-      console.log(' es san andres');
-      this.FormSend.controls.field_locacion_entrega.setValue(this.direccion[0]['name']);
-      this.FormSend.controls.field_barrio_origen.setValue(this.direccion[0]['name']);
-    
-      localStorage.setItem('tarifaOrigen',this.direccion[0]['field_tarifa']);
-
-   localStorage.setItem('imgBarrioOrigen',this.direccion[0]['field_imagen_barrio']);
-   localStorage.setItem('longitudOrigen',this.direccion[0]['field_longitud']);
-   localStorage.setItem('latitudOrigen',this.direccion[0]['field_latitud']);
-
-   localStorage.setItem('valorDeterminanteLONG',this.direccion[0]['field_longitud_1']);
-   localStorage.setItem('valorDeterminanteLAT',this.direccion[0]['field_latitud_1']);
- 
-    this.ocultarInputOrigen=true;
-   this.disabledValueOrigen=true;
-
-    // document.getElementById('itemOrigen').style.visibility = "hidden"; // hide
-
-    
-
-    }else  if(this.direccion.length>1){
-     // this.FormSend.controls.field_locacion_entrega.setValue(localStorage.getItem('locacion'));
-      
-      this.ocultarInputOrigen=false;
-      this.disabledValueOrigen=true;
-     this.FormSend.controls.field_barrio_origen.setValue('');
-
-     document.getElementById('itemOrigen').style.visibility = "visible"; // hide
-    }
-    
-
-    
-   },3000)
-          
   }
+
+  async WillEnterOrigen() {
+    try {
+      // Obtener los datos de barrios origen
+      const data = await this.auth.getListBarriosSeleccion().toPromise();
+      console.log(data);
+
+      this.direccion = data;
+
+      console.log(this.direccion, 'direccion');
+      console.log(this.direccion.length);
+
+      this.bloquearInputBarrio = false;
+
+      // Si hay solo un barrio
+      if (this.direccion.length === 1 && this.direccion[0]['name'] !== 'San Andrés') {
+        const barrio = this.direccion[0];
+        this.FormSend.controls.field_locacion_entrega.setValue(barrio['name']);
+        this.FormSend.controls.field_barrio_origen.setValue(barrio['name']);
+
+        this.ocultarInputOrigen = true;
+        this.disabledValueOrigen = true;
+
+        // Establecer información en localStorage
+        localStorage.setItem('tarifaOrigen', barrio['field_tarifa_externa']);
+        localStorage.setItem('imgBarrioOrigen', barrio['field_imagen_barrio']);
+        localStorage.setItem('longitudOrigen', barrio['field_longitud']);
+        localStorage.setItem('latitudOrigen', barrio['field_latitud']);
+        localStorage.setItem('valorDeterminanteLONG', barrio['field_longitud_1']);
+        localStorage.setItem('valorDeterminanteLAT', barrio['field_latitud_1']);
+
+
+        console.log('selected----> origin',barrio['field_zona_a']);
+
+        localStorage.setItem('zona_origen',barrio['field_zona_a']);
+
+
+        // Ocultar el campo de barrio
+        document.getElementById('itemOrigen').style.visibility = "hidden"; // Ocultar
+
+      } else if (this.direccion.length === 1 && this.direccion[0]['name'] === 'San Andrés') {
+        const barrio = this.direccion[0];
+        this.FormSend.controls.field_locacion_entrega.setValue(barrio['name']);
+        this.FormSend.controls.field_barrio_origen.setValue(barrio['name']);
+
+        // Establecer información en localStorage
+        localStorage.setItem('tarifaOrigen', barrio['field_tarifa']);
+        localStorage.setItem('imgBarrioOrigen', barrio['field_imagen_barrio']);
+        localStorage.setItem('longitudOrigen', barrio['field_longitud']);
+        localStorage.setItem('latitudOrigen', barrio['field_latitud']);
+        localStorage.setItem('valorDeterminanteLONG', barrio['field_longitud_1']);
+        localStorage.setItem('valorDeterminanteLAT', barrio['field_latitud_1']);
+        console.log('selected----> origin',barrio['field_zona_a']);
+
+        localStorage.setItem('zona_origen',barrio['field_zona_a']);
+        this.ocultarInputOrigen = true;
+        this.disabledValueOrigen = true;
+
+        // No ocultar el campo para 'San Andrés'
+        // document.getElementById('itemOrigen').style.visibility = "hidden"; // Comentado por ahora
+
+      } else if (this.direccion.length > 1) {
+        // Si hay más de un barrio
+        this.FormSend.controls.field_barrio_origen.setValue('');
+        this.ocultarInputOrigen = false;
+        this.disabledValueOrigen = true;
+
+        document.getElementById('itemOrigen').style.visibility = "visible"; // Mostrar
+      }
+    } catch (error) {
+      console.log(error);
+      const alert = await this.alertController.create({
+        header: 'Error de locación',
+        message: 'Su locación no tiene barrios asignados.',
+        buttons: [{
+          text: 'Aceptar',
+          handler: () => {
+            // Manejar el evento después de aceptar si es necesario
+          }
+        }],
+      });
+
+      await alert.present();
+    }
+  }
+
   ngOnDestroy() {
-   
+
     console.log("Sencilla- OnDestroy")
   }
 

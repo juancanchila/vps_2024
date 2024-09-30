@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
-     
+
     </ion-buttons>
     <ion-title>Emprendedores</ion-title>
     <ion-buttons slot="end">
@@ -10,31 +10,35 @@
         <ion-icon name="cart-outline"></ion-icon>
 
       </ion-button>
-      
+
     </ion-buttons>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat Light &display=swap" rel="stylesheet">
+
   </ion-toolbar>
 </ion-header>
 <ion-content>
+
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content>
 
     </ion-refresher-content>
   </ion-refresher>
-  <swiper [config]="swiperConfig">
+  <!---swiper [config]="swiperConfig">
 
     <ng-template swiperSlide *ngFor="let slide of slider" >
       <div class="slider" >
-        
+
          <ion-img class="img-slider" [src]="urlBase+slide.field_imagen_emprededores" alt=""></ion-img>
-          
-       
-  
+
+
+
       </div>
     </ng-template>
-  
-  </swiper>
+
+  </swiper --->
+  <div class="contentImg">
+    <ion-img class="img-slider" src="../../assets/banners/emprendedores.gif" alt=""></ion-img>
+  </div>
 
   <div class="content">
     <ion-searchbar placeholder="Buscar" animated (ionChange)="searchEmprendedores($event)"></ion-searchbar>
@@ -43,57 +47,57 @@
 
     <ng-template swiperSlide *ngFor="let filtro of filtroEmprendedores" >
       <div class="content-botones" >
-        
+
         <div  class="boton"  [ngClass]="{'sombra': filtroSeleccionado  === filtro.field_criterio}" (click)="aplicarFiltro(filtro.field_criterio)" >
           <img  class="img-etiquetas" [src]="urlBase + filtro.field_img_emprendedor" alt="{{filtro.info}}" alt="">
           <br>
           <h1 class="letter-center">{{filtro.info}}</h1>
         </div>
 
-          
-      
-  
+
+
+
       </div>
     </ng-template>
-  
+
   </swiper>
-  
+
 
 
 <ion-grid >
-  
-  
+
+
 
   <ion-row *ngFor="let characte of searched" (click)="irPageProductos(characte)">
-    
-   
-    
+
+
+
 
     <ion-col class="col1" size="3" class={{characte.field_criterio}} [ngClass]="fondo" >
-       
+
       <img [src]="urlBase+characte.field_imagen_apk" class="img" >
-    
-   
+
+
   </ion-col>
   <ion-col  class="col2" size="9" class={{characte.field_criterio}} [ngClass]="fondo">
-    
-    
-      
+
+
+
     <h1 class="title"><b>{{characte.Titulo}}  </b></h1>
      <p>
-      
-      {{characte.field_detalle_emprendedor}} 
+
+      {{characte.field_detalle_emprendedor}}
       <br>
-      
+
      </p>
-       
-    
-     
-    
-  
-  
+
+
+
+
+
+
 </ion-col>
-    
+
 
   </ion-row>
 

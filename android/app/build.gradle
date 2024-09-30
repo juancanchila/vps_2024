@@ -11,7 +11,7 @@ android {
     compileSdk 33
     defaultConfig {
 
-        applicationId "com.vapaesa"
+        applicationId "io.ionic.starter"
         minSdkVersion 31
         //noinspection EditedTargetSdkVersion
         targetSdkVersion 33

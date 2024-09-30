@@ -4,8 +4,12 @@ ion-toolbar{
     text-align: center;
 }
 ion-title{
-    font-family: 'Montserrat', sans-serif;
-    margin-left: -13%;
+  margin-left: -17%;
+  text-align: center;
+  text-transform: uppercase;
+  color:white;
+  font-family: 'Montserrat', sans-serif;
+font-weight: 300; /* Asegura que se use la variante Light */
 }
 ion-content{
     --ion-background-color: #262262;
@@ -15,17 +19,19 @@ ion-content{
     color: white;
 }
 small{
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 
 }
 p{
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 }
 
 .contain {
- 
+
     text-align: center;
-  
+
     position: center;
     height: 300px;
     width: 300px;
@@ -36,10 +42,11 @@ p{
     background-color: #262262;
   }
   ion-label{
+    display: flex;
     display: block;
 text-align: left;
    color: white;
-   margin-left: 10%;
+   margin-left: 15.5px;
 
   }
   ion-input{
@@ -66,7 +73,7 @@ text-align: left;
   }
   ion-menu-button{
     color: white;
-    
+
 }
 ion-icon{
     width: 43px;
@@ -98,7 +105,7 @@ input{
      -webkit-border-radius: 50%;
      border-radius: 50%;
      background: #5cb85c;
-   
+
     margin-right: 20px;
     margin-left: 15px;
     margin-bottom: 9px;
@@ -107,13 +114,13 @@ input{
     color: white;
 }
 input:hover{
-  
+
     width: 100px;
     height: 100px;
     -moz-border-radius: 50% !important;
     -webkit-border-radius: 50% !important;
     border-radius: 50%;
-   
+
      background: #5cb85c;
    margin-right: 20px;
     margin-left: 15px;
@@ -129,16 +136,16 @@ input[type="button"] {
 
 ion-input{
     font-size: 20px;
-   
+
     width: 20px;
     height: 20px;
 
     display: inline-block;
     margin-left: 20px;
 
-   
-     
-     border: 3px solid #fff; 
+
+
+     border: 3px solid #fff;
      background: #262262;
      -webkit-transform: rotate(45deg);
      -moz-transform: rotate(45deg);
@@ -147,8 +154,8 @@ ion-input{
      transform: rotate(45deg);
 }
 ion-input:hover{
-   
-   
+
+
     width: 30px;
     height: 30px;
 
@@ -156,8 +163,8 @@ ion-input:hover{
     margin-left: 20px;
 
     margin-bottom: 40%;
-     
-     border: 3px solid #fff; 
+
+     border: 3px solid #fff;
      background: #262262;
      -webkit-transform: rotate(45deg);
      -moz-transform: rotate(45deg);
@@ -167,11 +174,11 @@ ion-input:hover{
 }
 
 
-    
+
 _ngcontent-dja-c141{
-         height: 0 !important; 
+         height: 0 !important;
         color: white !important;
-         border-width: 0 !important; 
+         border-width: 0 !important;
         box-sizing: content-box !important;
     }
 
@@ -187,7 +194,7 @@ _ngcontent-dja-c141{
         max-width: 100%;
         padding: 0;
         margin: 20px auto 0 auto;
-        
+
       }
 
       p{

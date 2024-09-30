@@ -1,7 +1,16 @@
+
 ion-title{
-    margin-left: 6%;
-    font-family: 'Montserrat', sans-serif;
+    margin-left: -17%;
+    text-align: center;
     text-transform: uppercase;
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+}
+
+form{
+	margin: auto;
+	width: 95%;
 }
 ion-toolbar{
     color: white;
@@ -9,15 +18,16 @@ ion-toolbar{
 }
 ion-content{
    // --background:#ecf0f1 url(../../assets/botones/FONDO) 0 0/100% 100% repeat;
-    //--background:#ecf0f1 url(../../assets/botones/FONDOENVIO2.png.jpg) 0 0/100% 100% repeat; 
-    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat; 
+    //--background:#ecf0f1 url(../../assets/botones/FONDOENVIO2.png.jpg) 0 0/100% 100% repeat;
+    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat;
 }
 .ion-color-warning {
     --ion-color-base: #FFF200  !important;
 }
 h2{
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 
 }
 .corto{
@@ -33,7 +43,8 @@ h2{
 }
 select{
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     width: 115px;
     height: 38px;
     background-color: white;
@@ -51,7 +62,7 @@ textarea{
 }
 
 ion-input{
-    
+
     height: 38px;
     width: 100%;
     display: block;
@@ -77,30 +88,38 @@ ion-tab-bar{
     --ion-background-color: #262262;
 
 }
-ion-icon{
+ ion-icon{
     color: yellow;
-    
-    
-    
+
+
+
+} form{
+	margin: auto;
+	font: inherit;
+	color: inherit;
+	width: 95%;
 }
 button{
     display: inline-block;
       border-radius: none;
       width: 120px;
       margin: auto;
-    
+
 }
 
 ion-label{
-    margin: 4%;
+    display: flex;
+    margin-left: 15.5px;
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     text-transform: uppercase;
-    
+
 }
 label{
     color: #262262;
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
 }
 ion-item{
     --ion-background-color: transparent !important;
@@ -126,4 +145,3 @@ ion-button{
     color: #262262;
     font-family: 'Poppins', sans-serif;
 }
- 

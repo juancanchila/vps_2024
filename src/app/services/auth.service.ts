@@ -19,8 +19,11 @@ import { Capacitor } from '@capacitor/core';
 import { ActionPerformed, PushNotifications, PushNotificationSchema, Token } from '@capacitor/push-notifications';
 import { GeolocationsService } from './geolocations.service';
 
-
-
+/**
+ *
+ * 64.227.105.85 new
+ * 64.227.105.85
+ */
 
 @Injectable()
 
@@ -46,6 +49,10 @@ export class AuthService {
   validarQuitarSecilla: boolean = false;
   resumenOtherRestaurantes: { title: { value: string; }[]; type: { target_id: string; }[]; field_donde_comprar: { value: [{ value: ""; }]; }[]; field_quieres_comprar: { value: [{ value: ""; }]; }[]; field_direccion_entrega: { value: [{ value: ""; }]; }[]; field_nombre_del_establecimiento: { value: [{ value: ""; }]; }[]; field_contacto: { value: [{ value: ""; }]; }[]; field_contacto_destino: { value: [{ value: ""; }]; }[]; field_direccion_destino: { value: [{ value: ""; }]; }[]; field_ida_y_vuelta: { value: boolean; }[]; field_locacion_destino: { value: [{ value: ""; }]; }[]; field_locacion_entrega: { value: [{ value: ""; }]; }[]; field_valor_declarado: { value: [{ value: ""; }]; }[]; field_medio_de_transporte: { value: number; }[]; field_observaciones: { value: [{ value: ""; }]; }[]; field_prefijo_origen: { value: [{ value: ""; }]; }[]; field_prefijo_destino: { value: [{ "": ""; }]; }[]; field_metodo_de_pago: { value: [{ value: ""; }]; }[]; field_barrio_origen: { value: [{ value: ""; }]; }[]; field_barrio_destino: { value: [{ value: ""; }]; }[]; field_nombre_c_origen: { value: [{ value: ""; }]; }[]; field_nombre_c_destino: { value: [{ value: ""; }]; }[]; };
   messajeErr: any;
+
+  private serverKey = 'AAAAAYm1OdQ:APA91bEEHCib2Hs7R6mkYtGus_xpxGt9w46mfNQZzg10DRgDioKBYPreCfRoXpbKLndJLUB2YR2wiOK78Rd6O6zIoLv9IMrifFqV96JF4D8DtP1yKO0uNTt85ld0WB77l8Cktmh4UVjM';
+  private fcmUrl = 'https://fcm.googleapis.com/v1/projects/6605322708/messages:send';
+
 
   init() {
     this.platform.backButton.subscribeWithPriority(10, async () => {
@@ -127,16 +134,16 @@ export class AuthService {
 
 
 
-
+  private basePath = 'assets/barrios/';
   private carrito = [];
   private contadorItem = new BehaviorSubject(0);
   private subject: BehaviorSubject<ProductosI[]> = new BehaviorSubject([]);
   private itemsCarrito: ProductosI[] = [];
   character = [];
-  url: string = "http://164.92.106.39/user/login?_format=json";
-  urlexit: string = "http://164.92.106.39/user/logout?_format=json&token=";
-  urlregister: string = "http://164.92.106.39/user/register?_format=hal_json";
-  urlSesionAnonima: string = "http://164.92.106.39/session/token";
+  url: string = "http://147.182.203.91/user/login?_format=json";
+  urlexit: string = "http://147.182.203.91/user/logout?_format=json&token=";
+  urlregister: string = "http://147.182.203.91/user/register?_format=hal_json";
+  urlSesionAnonima: string = "http://147.182.203.91/session/token";
   authSubject = new BehaviorSubject(false);
   public currentUser: BehaviorSubject<ResponseI>;
   public nameUser = 'currentUser';
@@ -203,7 +210,7 @@ export class AuthService {
   }
 
   getAllToken() {
-    this.http.get('http://164.92.106.39/session/token', {}).subscribe(data => {
+    this.http.get('http://147.182.203.91/session/token', {}).subscribe(data => {
       console.log(data);
     }, error => {
       this.anonimustoken = error.error.text;
@@ -224,7 +231,7 @@ export class AuthService {
   //metodo para obtener lista de barios
   getListBarrios() {
     this.locacion = localStorage.getItem('locacion');
-    return this.http.get('http://164.92.106.39/barrios_json/' + this.locacion + '', {})
+    return this.http.get('http://147.182.203.91/barrios_json/' + this.locacion + '', {})
       .pipe(
         map((res: any) => {
 
@@ -248,11 +255,12 @@ export class AuthService {
       )
 
   }
+
   //metodo para obtener lista de barrios dependinedo locacion
 
   getListBarriosSeleccion() {
     //this.locacion= localStorage.getItem('locacion');
-    return this.http.get('http://164.92.106.39/barrios_json/' + this.locacion + '', {})
+    return this.http.get('http://147.182.203.91/barrios_json/' + this.locacion + '', {})
       .pipe(
         map((res: any) => {
 
@@ -278,7 +286,21 @@ export class AuthService {
   }
 
   getMessageTC(): Observable<any> {
-    return this.http.get('http://164.92.106.39/tc_message').pipe(
+    return this.http.get('http://147.182.203.91/tc_message').pipe(
+      map((res: any) => {
+
+        return res;
+
+
+
+      })
+    )
+
+  }
+
+
+  getMessageLLaves(): Observable<any> {
+    return this.http.get('http://147.182.203.91/llaves_message').pipe(
       map((res: any) => {
 
         return res;
@@ -292,10 +314,75 @@ export class AuthService {
 
 
 
+  getMessageRestaurante(): Observable<any> {
+    return this.http.get('http://147.182.203.91/restaurante_message').pipe(
+      map((res: any) => {
+
+        return res;
+
+
+
+      })
+    )
+
+  }
+
+
+  getMessageTecnologia(): Observable<any> {
+    return this.http.get('http://147.182.203.91/tecnologia').pipe(
+      map((res: any) => {
+
+        return res;
+
+
+
+      })
+    )
+
+  }
+
+  getMessageAlmacen(): Observable<any> {
+    return this.http.get('http://147.182.203.91/almacen').pipe(
+      map((res: any) => {
+
+        return res;
+
+
+
+      })
+    )
+
+  }
+
+  getMessageTextiles(): Observable<any> {
+    return this.http.get('http://147.182.203.91/textiles').pipe(
+      map((res: any) => {
+
+        return res;
+
+
+
+      })
+    )
+
+  }
+
+  getMessageFruver(): Observable<any> {
+    return this.http.get('http://147.182.203.91/fruver').pipe(
+      map((res: any) => {
+
+        return res;
+
+
+
+      })
+    )
+
+  }
   //metodo para obtener locaciones
   getListLocaciones() {
     this.departamento = localStorage.getItem('departamento');
-    return this.http.get('http://164.92.106.39/location_json/' + this.departamento + '', {})
+    return this.http.get('http://147.182.203.91/location_json/' + this.departamento + '', {})
       .pipe(
         map((res: any) => {
 
@@ -309,7 +396,7 @@ export class AuthService {
   }
   //metodo para obtener lista departa,entos
   getListDepartamento() {
-    return this.http.get('http://164.92.106.39/location_json', {})
+    return this.http.get('http://147.182.203.91/location_json', {})
       .pipe(
         map((res: any) => {
 
@@ -322,7 +409,7 @@ export class AuthService {
 
   }
   getListDepartamentoAtlantico(departamento) {
-    return this.http.get('http://164.92.106.39/location_json/' + departamento, {})
+    return this.http.get('http://147.182.203.91/location_json/' + departamento, {})
       .pipe(
         map((res: any) => {
 
@@ -335,7 +422,7 @@ export class AuthService {
 
   }
   getSesion() {
-    this.http.get('http://164.92.106.39/session/token', {}).subscribe(data => {
+    this.http.get('http://147.182.203.91/session/token', {}).subscribe(data => {
       console.log(data);
     }, error => {
 
@@ -349,7 +436,7 @@ export class AuthService {
   //metodo para hacer register
   register(user: RegisterI) {
     console.log(user.mail);
-    this.http.get('http://164.92.106.39/session/token', {}).subscribe(data => {
+    this.http.get('http://147.182.203.91/session/token', {}).subscribe(data => {
       console.log(data);
     }, error => {
 
@@ -395,7 +482,7 @@ export class AuthService {
     };
     console.log(datoRegistro);
 
-    this.http.post<RegisterI>('http://164.92.106.39/user/register?_format=hal_json', datoRegistro, { headers: headers }).subscribe(data2 => {
+    this.http.post<RegisterI>('http://147.182.203.91/user/register?_format=hal_json', datoRegistro, { headers: headers }).subscribe(data2 => {
       console.log(data2);
     }, error2 => {
       this.anonimustoken = "" + error2.error.text;
@@ -435,7 +522,7 @@ export class AuthService {
                 localStorage.setItem('idAuxiliar', res['0']['uid']);
                 localStorage.setItem('rolAuxiliar', res['0']['roles_target_id']);
                 if (res['0']['roles_target_id'] == 'Auxiliar' && localStorage.getItem('modoAuxiliar') == 'modoColaborador') {
-  
+
                   localStorage.setItem('Ingresado', 'true');
                   this.router.navigateByUrl('/modo-colaborador');
                   this.geolocation.requestPermissions();
@@ -483,7 +570,7 @@ export class AuthService {
         console.log(this.csrf);
         localStorage.setItem("csrf_token", this.csrf);
         localStorage.setItem("base64", this.base64);
-        
+
         console.log(this.base64);
         this.tokencsrf2 = localStorage.getItem("csrf_token");
         localStorage.setItem('EXPIRES_IN', data['logout_token']);
@@ -959,7 +1046,7 @@ export class AuthService {
   sendFormularioPagos(user: FormularioI) {
     //sendFormulario
     let pagos = {
-      "title": [{ "value": 'Mensajeria Medicamentos' }],
+      "title": [{ "value": 'Pagos' }],
 
       "type": [{ "target_id": 'sencilla' }],
       "field_direccion_entrega": [{ "value": user.field_direccion_entrega }],
@@ -1288,7 +1375,7 @@ export class AuthService {
     console.log(converSencilla);
     if (sencilla.field_longitud_actual[0].value == undefined||sencilla.field_latitud_actual[0].value == undefined) {
       this.geolocation.openSetting();
-   
+
     } else {
 
       const headers = new HttpHeaders({
@@ -1296,7 +1383,7 @@ export class AuthService {
         'X-CSRF-Token': this.tokencsrf
       });
 
-      this.http.post('http://164.92.106.39/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(async data2 => {
+      this.http.post('http://147.182.203.91/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(async data2 => {
 
 
 
@@ -1361,7 +1448,7 @@ export class AuthService {
         'Content-Type': 'application/json', 'Authorization': 'Basic ' + this.b64,
         'X-CSRF-Token': this.tokencsrf
       });
-      let url = 'http://164.92.106.39/node/' + localStorage.getItem('nodeDisponibilidad') + '?_format=json';
+      let url = 'http://147.182.203.91/node/' + localStorage.getItem('nodeDisponibilidad') + '?_format=json';
       console.log(url, 'patch act poscion')
       this.http.patch(url, converSencilla, { headers: headers }).subscribe(async data2 => {
         const alert = await this.alertControl.create({
@@ -1455,13 +1542,13 @@ export class AuthService {
     console.log('lengnt',sencilla.field_longitud_actual.length,'sin lenght',sencilla.field_longitud_actual[0].value , 'aver lengt' ,sencilla.field_latitud_actual.length,'sin lengt',sencilla.field_latitud_actual[0].value);
     if (sencilla.field_longitud_actual[0].value == undefined||sencilla.field_latitud_actual[0].value == undefined) {
       this.geolocation.openSetting();
-   
+
     } else {
       const headers = new HttpHeaders({
         'Content-Type': 'application/json', 'Authorization': 'Basic ' + this.b64,
         'X-CSRF-Token': this.tokencsrf
       });
-      let url = 'http://164.92.106.39/node/' + localStorage.getItem('nodeDisponibilidad') + '?_format=json';
+      let url = 'http://147.182.203.91/node/' + localStorage.getItem('nodeDisponibilidad') + '?_format=json';
       console.log(url, 'patch act poscion')
       this.http.patch(url, converSencilla, { headers: headers }).subscribe(async data2 => {
         const alert = await this.alertControl.create({
@@ -1509,7 +1596,7 @@ export class AuthService {
       'Content-Type': 'application/json', 'Authorization': 'Basic ' + auxB64,
     });
     console.log(headers);
-    this.urlAuxName = 'http://164.92.106.39/diponibilidad_auxliliar';
+    this.urlAuxName = 'http://147.182.203.91/diponibilidad_auxliliar';
 
     return this.http.get(this.urlAuxName, { headers: headers })
       .pipe(
@@ -1552,7 +1639,7 @@ export class AuthService {
       'X-CSRF-Token': this.tokencsrf
     });
     console.log(headers, 'aqui header en act met pago');
-    let url = 'http://164.92.106.39/user/' + localStorage.getItem('idAuxiliar') + '?_format=json';
+    let url = 'http://147.182.203.91/user/' + localStorage.getItem('idAuxiliar') + '?_format=json';
     console.log(url, 'antes de patch');
 
 
@@ -1600,7 +1687,7 @@ export class AuthService {
       'X-CSRF-Token': this.tokencsrf
     });
     console.log(headers, 'aqui header en act met pago');
-    let url = 'http://164.92.106.39/user/' + localStorage.getItem('idAuxiliar') + '?_format=json';
+    let url = 'http://147.182.203.91/user/' + localStorage.getItem('idAuxiliar') + '?_format=json';
     console.log(url, 'antes de patch');
 
 
@@ -1646,7 +1733,7 @@ export class AuthService {
       'X-CSRF-Token': this.tokencsrf
     });
     console.log(headers, 'aqui header en act met pago');
-    let url = 'http://164.92.106.39/user/' + localStorage.getItem('idAuxiliar') + '?_format=json';
+    let url = 'http://147.182.203.91/user/' + localStorage.getItem('idAuxiliar') + '?_format=json';
     console.log(url, 'antes de patch');
 
 
@@ -1698,7 +1785,7 @@ export class AuthService {
       'X-CSRF-Token': this.tokencsrf
     });
     console.log(headers, 'aqui header en act met pago');
-    let url = 'http://164.92.106.39/node/' + localStorage.getItem('nodePatch') + '?_format=json';
+    let url = 'http://147.182.203.91/node/' + localStorage.getItem('nodePatch') + '?_format=json';
     console.log(url, 'antes de patch');
 
 
@@ -1717,6 +1804,7 @@ export class AuthService {
 
 
   }
+
   //metodo para actualizar contrato pedidos
   actualizarContraoPedidos(nodoCreado, estado) {
 
@@ -1747,7 +1835,7 @@ export class AuthService {
       'X-CSRF-Token': this.tokencsrf
     });
     console.log(headers, 'aqui header en act met pago');
-    let url = 'http://164.92.106.39/node/' + nodoCreado + '?_format=json';
+    let url = 'http://147.182.203.91/node/' + nodoCreado + '?_format=json';
     console.log(url, 'antes de patch');
 
 
@@ -1768,6 +1856,57 @@ export class AuthService {
   }
 
 
+  calcularPrecioTarifa(tipo, origen, destino, vehiculo): Promise<any> {
+    return new Promise((resolve, reject) => {
+      console.log('Estamos aquí confirmando calcularPrecioTarifa');
+
+      // Obteniendo el token CSRF y Base64 de Local Storage
+      this.tokencsrf = localStorage.getItem("csrf_token");
+      this.b64 = localStorage.getItem("base64").toString();
+
+      console.log(this.tokencsrf, 'aquí csrf');
+      console.log(this.b64, 'aquí b64');
+
+      // Construyendo el cuerpo de la solicitud (body)
+      let body = {
+        "tipo": tipo,
+        "origen": origen,
+        "destino": destino,
+        "vehiculo": vehiculo
+      };
+
+      console.log(body, 'aquí el body');
+
+      // Construyendo los headers
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + this.b64,
+        'X-CSRF-Token': this.tokencsrf
+      });
+
+      console.log(headers, 'aquí header en calcularPrecioTarifa');
+
+      // Definiendo la URL
+      let url = 'http://147.182.203.91/api/demo_resource11?_format=json';
+      console.log(url, 'antes de PATCH');
+
+      // Enviando el POST request
+      this.http.post(url, body, { headers: headers }).subscribe(
+        data => {
+          console.log(data, 'Resultado recibido en consola');
+          resolve(data);  // Resolvemos la promesa con el resultado
+        },
+        error => {
+          console.log(error, 'Error en la solicitud');
+          reject(error);  // Rechazamos la promesa en caso de error
+          if (error.status === 0) {
+            alert('Error, revise su conexión');
+            this.logout2();
+          }
+        }
+      );
+    });
+  }
 
 
   asignarAuxiliarPost() {
@@ -1805,7 +1944,7 @@ export class AuthService {
       'X-CSRF-Token': this.tokencsrf
     });
 
-    this.http.post('http://164.92.106.39/api/demo_resource?_format=json', converSencilla, { headers: headers }).subscribe(async data2 => {
+    this.http.post('http://147.182.203.91/api/demo_resource?_format=json', converSencilla, { headers: headers }).subscribe(async data2 => {
 
 
       console.log(data2);
@@ -1950,7 +2089,7 @@ export class AuthService {
       'X-CSRF-Token': this.tokencsrf
     });
 
-    this.http.post('http://164.92.106.39/api/demo_resource?_format=json', converSencilla, { headers: headers }).subscribe(async data2 => {
+    this.http.post('http://147.182.203.91/api/demo_resource?_format=json', converSencilla, { headers: headers }).subscribe(async data2 => {
 
 
       console.log(data2);
@@ -2038,7 +2177,7 @@ export class AuthService {
   //metodo para recuperar contraseña
   resetPassword(email) {
 
-    this.http.get('http://164.92.106.39/session/token', {}).subscribe(data => {
+    this.http.get('http://147.182.203.91/session/token', {}).subscribe(data => {
       console.log(data);
     }, error => {
 
@@ -2070,7 +2209,7 @@ export class AuthService {
         'X-CSRF-Token': this.anonimustoken
       });
 
-      this.http.post('http://164.92.106.39/api/demo_resource3?_format=json', converSencilla, { headers: headers }).subscribe(async data2 => {
+      this.http.post('http://147.182.203.91/api/demo_resource3?_format=json', converSencilla, { headers: headers }).subscribe(async data2 => {
 
 
         console.log(data2);
@@ -2152,7 +2291,7 @@ export class AuthService {
       'X-CSRF-Token': this.tokencsrf
     });
 
-    this.http.post('http://164.92.106.39/api/demo_resource2?_format=json', converSencilla, { headers: headers }).subscribe(async data2 => {
+    this.http.post('http://147.182.203.91/api/demo_resource2?_format=json', converSencilla, { headers: headers }).subscribe(async data2 => {
 
 
       console.log(data2);
@@ -2251,7 +2390,7 @@ export class AuthService {
     console.log(this.tokencsrf + '8');
 
     let verifyStatus;
-    this.http.post('http://164.92.106.39/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
+    this.http.post('http://147.182.203.91/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
       this.router.navigateByUrl('/orden-final');
       console.log(data2);
       localStorage.setItem('sencillaCreada', data2['nid']['0'].value);
@@ -2343,7 +2482,7 @@ export class AuthService {
     console.log(this.tokencsrf + '8');
 
     let verifyStatus;
-    this.http.post('http://164.92.106.39/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
+    this.http.post('http://147.182.203.91/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
       this.router.navigateByUrl('/orden-final');
       console.log(data2);
       localStorage.setItem('sencillaCreada', data2['nid']['0'].value);
@@ -2427,7 +2566,7 @@ export class AuthService {
     console.log(this.tokencsrf + '8');
 
     let verifyStatus;
-    this.http.post('http://164.92.106.39/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
+    this.http.post('http://147.182.203.91/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
       this.router.navigateByUrl('/formadepag');
       console.log(data2);
       localStorage.setItem('sencillaCreada', data2['nid']['0'].value);
@@ -2515,7 +2654,7 @@ export class AuthService {
     console.log(this.tokencsrf + '8');
 
     let verifyStatus;
-    this.http.post('http://164.92.106.39/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
+    this.http.post('http://147.182.203.91/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
       this.router.navigateByUrl('/orden-final');
       console.log(data2);
       localStorage.setItem('sencillaCreada', data2['nid']['0'].value);
@@ -2592,7 +2731,7 @@ export class AuthService {
     console.log(this.tokencsrf + '8');
 
     let verifyStatus;
-    this.http.post('http://164.92.106.39/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
+    this.http.post('http://147.182.203.91/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
       this.router.navigateByUrl('/formadepag');
       console.log(data2);
       localStorage.setItem('sencillaCreada', data2['nid']['0'].value);
@@ -2670,7 +2809,7 @@ export class AuthService {
     console.log(this.tokencsrf + '8');
 
     let verifyStatus;
-    this.http.post('http://164.92.106.39/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
+    this.http.post('http://147.182.203.91/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
       this.router.navigateByUrl('/formadepag');
       console.log(data2);
       localStorage.setItem('sencillaCreada', data2['nid']['0'].value);
@@ -2757,7 +2896,7 @@ export class AuthService {
     console.log(this.tokencsrf + '8');
 
     let verifyStatus;
-    this.http.post('http://164.92.106.39/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
+    this.http.post('http://147.182.203.91/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
       this.router.navigateByUrl('/orden-final');
       console.log(data2);
       localStorage.setItem('sencillaCreada', data2['nid']['0'].value);
@@ -2847,7 +2986,7 @@ export class AuthService {
     });
 
 
-    this.http.post('http://164.92.106.39/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
+    this.http.post('http://147.182.203.91/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
       this.router.navigateByUrl('/orden-final');
       console.log(data2);
       localStorage.setItem('sencillaCreada', data2['nid']['0'].value);
@@ -2941,7 +3080,7 @@ export class AuthService {
     });
 
 
-    this.http3.post('http://164.92.106.39/node?_format=hal_json', converSencillahija1, { headers: headers }).subscribe(data23 => {
+    this.http3.post('http://147.182.203.91/node?_format=hal_json', converSencillahija1, { headers: headers }).subscribe(data23 => {
       console.log(data23);
       // this.router.navigateByUrl('/formadepag');
 
@@ -3077,7 +3216,7 @@ export class AuthService {
 
 
     setTimeout(() => {
-      this.http.post('http://164.92.106.39/node?_format=hal_json', converSencillahija1, { headers: headers }).subscribe(data21 => {
+      this.http.post('http://147.182.203.91/node?_format=hal_json', converSencillahija1, { headers: headers }).subscribe(data21 => {
         console.log(data21);
         localStorage.setItem('sencillaCreadaDes1', data21['nid']['0'].value);
         // this.asignacion(data21['nid']['0'].value);
@@ -3100,7 +3239,7 @@ export class AuthService {
     }, 3000);
 
     setTimeout(() => {
-      this.http2.post('http://164.92.106.39/node?_format=hal_json', converSencillahija2, { headers: headers }).subscribe(data22 => {
+      this.http2.post('http://147.182.203.91/node?_format=hal_json', converSencillahija2, { headers: headers }).subscribe(data22 => {
         console.log(data22);
         localStorage.setItem('sencillaCreadaDes2', data22['nid']['0'].value);
 
@@ -3207,7 +3346,7 @@ export class AuthService {
     });
 
 
-    this.http3.post('http://164.92.106.39/node?_format=hal_json', converSencillahija1, { headers: headers }).subscribe(data23 => {
+    this.http3.post('http://147.182.203.91/node?_format=hal_json', converSencillahija1, { headers: headers }).subscribe(data23 => {
       console.log(data23);
       // this.asignacion(data23['nid']['0'].value);
       localStorage.setItem('sencillaCreadaDes3', data23['nid']['0'].value);
@@ -3302,7 +3441,7 @@ export class AuthService {
     });
 
 
-    this.http4.post('http://164.92.106.39/node?_format=hal_json', converSencillahija1, { headers: headers }).subscribe(data24 => {
+    this.http4.post('http://147.182.203.91/node?_format=hal_json', converSencillahija1, { headers: headers }).subscribe(data24 => {
       console.log(data24);
       //this.asignacion(data24['nid']['0'].value);
       localStorage.setItem('sencillaCreadaDes4', data24['nid']['0'].value);
@@ -3398,7 +3537,7 @@ export class AuthService {
     });
 
 
-    this.http5.post('http://164.92.106.39/node?_format=hal_json', converSencillahija1, { headers: headers }).subscribe(data25 => {
+    this.http5.post('http://147.182.203.91/node?_format=hal_json', converSencillahija1, { headers: headers }).subscribe(data25 => {
       console.log(data25);
       //this.asignacion(data25['nid']['0'].value);
       localStorage.setItem('sencillaCreadaDes5', data25['nid']['0'].value);
@@ -3494,7 +3633,7 @@ export class AuthService {
     });
 
 
-    this.http6.post('http://164.92.106.39/node?_format=hal_json', converSencillahija1, { headers: headers }).subscribe(data26 => {
+    this.http6.post('http://147.182.203.91/node?_format=hal_json', converSencillahija1, { headers: headers }).subscribe(data26 => {
       console.log(data26);
 
       localStorage.setItem('sencillaCreadaDes6', data26['nid']['0'].value);
@@ -3590,7 +3729,7 @@ export class AuthService {
     });
 
 
-    this.http7.post('http://164.92.106.39/node?_format=hal_json', converSencillahija1, { headers: headers }).subscribe(data27 => {
+    this.http7.post('http://147.182.203.91/node?_format=hal_json', converSencillahija1, { headers: headers }).subscribe(data27 => {
       console.log(data27);
 
       localStorage.setItem('sencillaCreadaDes7', data27['nid']['0'].value);
@@ -3686,7 +3825,7 @@ export class AuthService {
     });
 
 
-    this.http8.post('http://164.92.106.39/node?_format=hal_json', converSencillahija1, { headers: headers }).subscribe(data28 => {
+    this.http8.post('http://147.182.203.91/node?_format=hal_json', converSencillahija1, { headers: headers }).subscribe(data28 => {
       console.log(data28);
       // this.asignacion(data28['nid']['0'].value);
       localStorage.setItem('sencillaCreadaDes8', data28['nid']['0'].value);
@@ -3782,7 +3921,7 @@ export class AuthService {
     });
 
 
-    this.http9.post('http://164.92.106.39/node?_format=hal_json', converSencillahija1, { headers: headers }).subscribe(data29 => {
+    this.http9.post('http://147.182.203.91/node?_format=hal_json', converSencillahija1, { headers: headers }).subscribe(data29 => {
       console.log(data29);
       // this.asignacion(data29['nid']['0'].value);
       localStorage.setItem('sencillaCreadaDes9', data29['nid']['0'].value);
@@ -3878,7 +4017,7 @@ export class AuthService {
     });
 
 
-    this.http10.post('http://164.92.106.39/node?_format=hal_json', converSencillahija1, { headers: headers }).subscribe(data30 => {
+    this.http10.post('http://147.182.203.91/node?_format=hal_json', converSencillahija1, { headers: headers }).subscribe(data30 => {
       console.log(data30);
 
       localStorage.setItem('sencillaCreadaDes10', data30['nid']['0'].value);
@@ -3965,7 +4104,7 @@ export class AuthService {
     });
 
 
-    this.http.post('http://164.92.106.39/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
+    this.http.post('http://147.182.203.91/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
       console.log(data2);
       this.router.navigateByUrl('/orden-final');
       localStorage.setItem('sencillaCreada', data2['nid']['0'].value);
@@ -4016,7 +4155,7 @@ export class AuthService {
       "field_metodo_de_pago": [{ "value": user.field_metodo_de_pago }],
 
       "field_direccion_destino": [{ "value": user.field_direccion_destino }],
-      "field_medio_de_transporte": [{ "value": this.medioTransporte }],
+      "field_medio_de_transporte": [{ "value": 2 }],
 
 
       "field_prefijo_destino": [{ "value": user.field_prefijo_destino }],
@@ -4057,7 +4196,7 @@ export class AuthService {
     });
 
 
-    this.http.post('http://164.92.106.39/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
+    this.http.post('http://147.182.203.91/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
       console.log(data2);
       this.router.navigateByUrl('/orden-final');
       localStorage.setItem('sencillaCreada', data2['nid']['0'].value);
@@ -4150,7 +4289,7 @@ export class AuthService {
     });
 
 
-    this.http.post('http://164.92.106.39/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
+    this.http.post('http://147.182.203.91/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
       console.log(data2);
       this.router.navigateByUrl('/orden-final');
       localStorage.setItem('sencillaCreada', data2['nid']['0'].value);
@@ -4245,7 +4384,7 @@ export class AuthService {
     });
 
 
-    this.http.post('http://164.92.106.39/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
+    this.http.post('http://147.182.203.91/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
       console.log(data2);
       this.router.navigateByUrl('/orden-final');
       localStorage.setItem('sencillaCreada', data2['nid']['0'].value);
@@ -4343,7 +4482,7 @@ export class AuthService {
     });
 
 
-    this.http.post('http://164.92.106.39/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
+    this.http.post('http://147.182.203.91/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
       this.router.navigateByUrl('/orden-final');
       console.log(data2);
       localStorage.setItem('sencillaCreada', data2['nid']['0'].value);
@@ -4441,7 +4580,7 @@ export class AuthService {
     });
 
 
-    this.http.post('http://164.92.106.39/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
+    this.http.post('http://147.182.203.91/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(data2 => {
       this.router.navigateByUrl('/orden-final');
       console.log(data2);
       localStorage.setItem('sencillaCreada', data2['nid']['0'].value);
@@ -4479,7 +4618,7 @@ export class AuthService {
   /*
   resetPassword(){
 
-  this.http.get('http://164.92.106.39/session/token',{}).subscribe(data=>{
+  this.http.get('http://147.182.203.91/session/token',{}).subscribe(data=>{
     console.log(data);
         },error=>{
 
@@ -4509,7 +4648,7 @@ export class AuthService {
      const headers = new HttpHeaders({'Content-Type': 'application/json','Accept':'application/json',
      'X-CSRF-Token': this.anonimustoken});
 
-     this.http.post('http://164.92.106.39/api/demo_resource3?_format=json',converSencilla,{headers:headers}).subscribe(async data2=>{
+     this.http.post('http://147.182.203.91/api/demo_resource3?_format=json',converSencilla,{headers:headers}).subscribe(async data2=>{
 
 
       console.log(data2);
@@ -4590,7 +4729,7 @@ export class AuthService {
     var exit = this.urlexit + localStorage.getItem("EXPIRES_IN");
     //
     headers.append('X-CSRF-Token', localStorage.getItem('csrf_token'));
-    this.http.post('http://164.92.106.39/api/demo_resource4?_format=json', converData, { headers })
+    this.http.post('http://147.182.203.91/api/demo_resource4?_format=json', converData, { headers })
       .subscribe(data => {
         console.log(data);
       }, error55 => {
@@ -4651,7 +4790,7 @@ export class AuthService {
       'Content-Type': 'application/json', 'Authorization': 'Basic ' + auxB64,
     });
     console.log(headers);
-    this.urlAuxName = 'http://164.92.106.39/user_role_values';
+    this.urlAuxName = 'http://147.182.203.91/user_role_values';
 
     console.log(this.urlAuxName, 'por aqui vamos ');
     // console.log(data['0']['Role'],'estoy en data');
@@ -4679,7 +4818,7 @@ export class AuthService {
     this.nodoCreado = localStorage.getItem('sencillaCreada');
 
 
-    let url = 'http://164.92.106.39/node/' + this.nodoCreado + '?_format=json';
+    let url = 'http://147.182.203.91/node/' + this.nodoCreado + '?_format=json';
 
 
 
@@ -4723,7 +4862,7 @@ export class AuthService {
 
     console.log(this.nodoCreado);
 
-    let url = 'http://164.92.106.39/node/' + this.nodoCreado + '?_format=json';
+    let url = 'http://147.182.203.91/node/' + this.nodoCreado + '?_format=json';
 
 
     console.log(url, 'url');
@@ -4783,7 +4922,7 @@ export class AuthService {
       'X-CSRF-Token': this.tokencsrf
     });
     console.log(headers, 'aqui header en act met pago');
-    let url = 'http://164.92.106.39/node/' + localStorage.getItem('sencillaCreada') + '?_format=json';
+    let url = 'http://147.182.203.91/node/' + localStorage.getItem('sencillaCreada') + '?_format=json';
     console.log(url, 'antes de patch');
 
 
@@ -4818,102 +4957,282 @@ export class AuthService {
     });
 
   }
-  enviarPushEnCamino() {
-
-    let body = {
-
-      "notification": {
-        "sound": "sonalert",
-        "title": "Notificación Vapaesa",
-        "body": "Pedido en camino",
-
-      },
-      "android": {
-        "ttl": "86400s"
-
-      },
-      "to": localStorage.getItem('tokenNotificacionRecibido')
-    }
-    const converBody = JSON.stringify(body);
-
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'key=AAAATW47Vww:APA91bFAoJeZSQFrt6z_VGfZJL1N3_M9vYrfHjfgYhZDDmCceWVsF5CCg81jNRYVrAuDZJFxFqmO3TEFPhYslhY1Ly8HgzkicyZpOPQb_B2yReRRmmMyTF4--i17ETbLNF_2LO1RcNGx' });
 
 
-    this.http.post('https://fcm.googleapis.com/fcm/send', converBody, { headers: headers }).subscribe(async data24 => {
-      console.log(data24);
-      const alert = await this.alertControl.create({
 
-        header: 'Notificación Vapaesa',
+  async enviarPushEnCamino() {
+    try {
+      // Obtener el token y otros datos necesarios del almacenamiento local.
+      this.getToken();
+      this.tokencsrf = localStorage.getItem("csrf_token");
+      this.b64 = localStorage.getItem("base64")?.toString() ?? '';
 
-        message: 'El Cliente ha sido notificado Pedido en camino',
-        // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-        buttons: [
-          {
-            text: 'aceptar',
+      console.log(this.b64, 'aqui b64');
+      console.log(this.tokencsrf, 'aqui Token');
 
-          }]
+      // Crear el cuerpo de la solicitud.
+      console.log(localStorage.getItem('tokenNotificacionRecibido'));
+      let body = {
+        "user_token": localStorage.getItem('tokenNotificacionRecibido') ?? '',
+        "notification_tipe": 1
+      };
+
+      // Configurar los encabezados para la solicitud HTTP.
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + this.b64,
+        'X-CSRF-Token': this.tokencsrf
       });
 
-      await alert.present();
+      // Definir la URL para la solicitud HTTP PATCH.
+      let url = 'http://147.182.203.91/api/demo_resource9?_format=json';
 
-    }, error24 => {
-      console.log(error24);
+      // Realizar la solicitud HTTP PATCH.
+      this.http.post(url, body, { headers: headers }).subscribe({
+        next: async (data2) => {
+          console.log(data2);
 
-    });
+          // Mostrar una alerta cuando la notificación se haya enviado correctamente.
+          const alert = await this.alertControl.create({
+            header: 'Notificación Vapaesa',
+            message: 'El Cliente ha sido notificado: Pedido En Camino',
+            buttons: [
+              {
+                text: 'Aceptar',
+                handler: () => {
+                  // Acción a realizar al aceptar la alerta.
+                }
+              }
+            ]
+          });
 
+          await alert.present();
+        },
+        error: async (error2) => {
+          console.log(error2);
+
+          if (error2.status === 0) {
+            // Mostrar una alerta en caso de error con la solicitud.
+            const alert = await this.alertControl.create({
+              header: 'Error de Notificación',
+              message: 'No podemos enviar el mensaje',
+              buttons: [
+                {
+                  text: 'Aceptar',
+                  handler: () => {
+                    this.router.navigateByUrl("/tabs");
+                  }
+                }
+              ]
+            });
+
+            await alert.present();
+          }
+        }
+      });
+    } catch (err) {
+      console.error('Error en enviarPushEnCamino:', err);
+      // Manejo de errores global, si ocurre un error fuera de la solicitud HTTP.
+    }
   }
 
-  enviarPushEnCompletado() {
 
-    let body = {
+  async enviarPushEnCompletado() {
+    try {
+      // Obtener el token y otros datos necesarios del almacenamiento local.
+      this.getToken();
+      this.tokencsrf = localStorage.getItem("csrf_token");
+      this.b64 = localStorage.getItem("base64")?.toString() ?? '';
 
-      "notification": {
-        "sound": "sonalert",
-        "title": "Notificación Vapaesa ",
-        "body": "Pedido completado",
+      console.log(this.b64, 'aqui b64');
+      console.log(this.tokencsrf, 'aqui Token');
 
-      },
-      "android": {
-        "ttl": "86400s"
+      // Crear el cuerpo de la solicitud.
+      console.log(localStorage.getItem('tokenNotificacionRecibido'));
+      let body = {
+        "user_token": localStorage.getItem('tokenNotificacionRecibido') ?? '',
+        "notification_tipe": 2
+      };
 
-      },
-      "to": localStorage.getItem('tokenNotificacionRecibido')
+      // Configurar los encabezados para la solicitud HTTP.
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + this.b64,
+        'X-CSRF-Token': this.tokencsrf
+      });
+
+      // Definir la URL para la solicitud HTTP PATCH.
+      let url = 'http://147.182.203.91/api/demo_resource9?_format=json';
+
+      // Realizar la solicitud HTTP PATCH.
+      this.http.post(url, body, { headers: headers }).subscribe({
+        next: async (data2) => {
+          console.log(data2);
+
+          // Mostrar una alerta cuando la notificación se haya enviado correctamente.
+          const alert = await this.alertControl.create({
+            header: 'Notificación Vapaesa',
+            message: 'El Cliente ha sido notificado: Pedido completado',
+            buttons: [
+              {
+                text: 'Aceptar',
+                handler: () => {
+                  // Acción a realizar al aceptar la alerta.
+                }
+              }
+            ]
+          });
+
+          await alert.present();
+        },
+        error: async (error2) => {
+          console.log(error2);
+
+          if (error2.status === 0) {
+            // Mostrar una alerta en caso de error con la solicitud.
+            const alert = await this.alertControl.create({
+              header: 'Error de Notificación',
+              message: 'No podemos enviar el mensaje',
+              buttons: [
+                {
+                  text: 'Aceptar',
+                  handler: () => {
+                    this.router.navigateByUrl("/tabs");
+                  }
+                }
+              ]
+            });
+
+            await alert.present();
+          }
+        }
+      });
+    } catch (err) {
+      console.error('Error en enviarPushEnCamino:', err);
+      // Manejo de errores global, si ocurre un error fuera de la solicitud HTTP.
     }
-    const converBody = JSON.stringify(body);
-
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'key=AAAATW47Vww:APA91bFAoJeZSQFrt6z_VGfZJL1N3_M9vYrfHjfgYhZDDmCceWVsF5CCg81jNRYVrAuDZJFxFqmO3TEFPhYslhY1Ly8HgzkicyZpOPQb_B2yReRRmmMyTF4--i17ETbLNF_2LO1RcNGx' });
+  }
 
 
-    this.http.post('https://fcm.googleapis.com/fcm/send', converBody, { headers: headers }).subscribe(async data24 => {
-      console.log(data24);
+  async enviarPushParaCancelarPedido() {
+    try {
+      // Obtener el token y otros datos necesarios del almacenamiento local.
+      this.getToken();
+      this.tokencsrf = localStorage.getItem("csrf_token");
+      this.b64 = localStorage.getItem("base64")?.toString() ?? '';
 
+      console.log(this.b64, 'aqui b64');
+      console.log(this.tokencsrf, 'aqui Token');
 
+      // Crear el cuerpo de la solicitud.
+      console.log(localStorage.getItem('tokenNotificacionRecibido'));
+      let body = {
+        "user_token": localStorage.getItem('tokenNotificacionRecibido') ?? '',
+        "notification_tipe": 2
+      };
 
-      //
+      // Configurar los encabezados para la solicitud HTTP.
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + this.b64,
+        'X-CSRF-Token': this.tokencsrf
+      });
+
+      // Definir la URL para la solicitud HTTP PATCH.
+      let url = 'http://147.182.203.91/api/demo_resource9?_format=json';
+
+      // Realizar la solicitud HTTP PATCH.
+      this.http.post(url, body, { headers: headers }).subscribe({
+        next: async (data2) => {
+          console.log(data2);
+
+          // Mostrar una alerta cuando la notificación se haya enviado correctamente.
+          const alert = await this.alertControl.create({
+            header: 'Notificación Vapaesa',
+            message: 'El auxiliar ha sido notificado: Pedido Cancelado',
+            buttons: [
+              {
+                text: 'Aceptar',
+                handler: () => {
+                  // Acción a realizar al aceptar la alerta.
+                }
+              }
+            ]
+          });
+
+          await alert.present();
+        },
+        error: async (error2) => {
+          console.log(error2);
+
+          if (error2.status === 0) {
+            // Mostrar una alerta en caso de error con la solicitud.
+            const alert = await this.alertControl.create({
+              header: 'Error de Notificación',
+              message: 'No podemos enviar el mensaje',
+              buttons: [
+                {
+                  text: 'Aceptar',
+                  handler: () => {
+                    this.router.navigateByUrl("/tabs");
+                  }
+                }
+              ]
+            });
+
+            await alert.present();
+          }
+        }
+      });
+    } catch (err) {
+      console.error('Error en enviarPushEnCamino:', err);
+      // Manejo de errores global, si ocurre un error fuera de la solicitud HTTP.
+    }
+  }
+
+  /*
+async enviarPushEnCompletado() {
+    const body = {
+      "message": {
+        "notification": {
+          "title": "Notificación Vapaesa",
+          "body": "Pedido completado",
+          "sound": "default" // Use "default" sound for the notification
+        },
+        "android": {
+          "ttl": "86400s"
+        },
+        "token": localStorage.getItem('tokenNotificacionRecibido') // Use the "token" field for the recipient
+      }
+    };
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.serverKey}`
+    });
+
+    try {
+      const response = await this.http.post(this.fcmUrl, body, { headers }).toPromise();
+      console.log(response);
 
       const alert = await this.alertControl.create({
-
         header: 'Notificación Vapaesa',
-
-        message: 'El Cliente ha sido notificado Pedido completado',
-        // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+        message: 'El Cliente ha sido notificado: Pedido completado',
         buttons: [
           {
-            text: 'aceptar',
+            text: 'Aceptar',
             handler: () => {
-              //  this.router.navigate(['/modo-colaborador']);
+              // Acción a realizar al aceptar el alert
             }
-
-          }]
+          }
+        ]
       });
 
       await alert.present();
-
-    }, error24 => {
-      console.log(error24);
-      alert('error de notificacion');
-    });
-
+    } catch (error) {
+      console.error('Error al enviar la notificación:', error);
+      alert('Error de notificación');
+    }
   }
 
   enviarPushParaCancelarPedido() {
@@ -4934,10 +5253,10 @@ export class AuthService {
     }
     const converBody = JSON.stringify(body);
 
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'key=AAAATW47Vww:APA91bFAoJeZSQFrt6z_VGfZJL1N3_M9vYrfHjfgYhZDDmCceWVsF5CCg81jNRYVrAuDZJFxFqmO3TEFPhYslhY1Ly8HgzkicyZpOPQb_B2yReRRmmMyTF4--i17ETbLNF_2LO1RcNGx' });
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'key=AAAAAYm1OdQ:APA91bEEHCib2Hs7R6mkYtGus_xpxGt9w46mfNQZzg10DRgDioKBYPreCfRoXpbKLndJLUB2YR2wiOK78Rd6O6zIoLv9IMrifFqV96JF4D8DtP1yKO0uNTt85ld0WB77l8Cktmh4UVjM'});
 
 
-    this.http.post('https://fcm.googleapis.com/fcm/send', converBody, { headers: headers }).subscribe(async data24 => {
+    this.http.post('https://fcm.googleapis.com/v1/projects/6605322708/messages:send', converBody, { headers: headers }).subscribe(async data24 => {
       console.log(data24);
       const alert = await this.alertControl.create({
 
@@ -4960,7 +5279,7 @@ export class AuthService {
     });
 
   }
-
+*/
 
   obtenerRoleUsuario() {
     let auxB64 = localStorage.getItem('base64');
@@ -4971,7 +5290,7 @@ export class AuthService {
       'Content-Type': 'application/json', 'Authorization': 'Basic ' + auxB64,
     });
     console.log(headers);
-    this.urlAuxName = 'http://164.92.106.39/user_role_value?_format=json';
+    this.urlAuxName = 'http://147.182.203.91/user_role_value?_format=json';
 
     console.log(this.urlAuxName, 'por aqui vamos ');
     // console.log(data['0']['Role'],'estoy en data');
@@ -4981,8 +5300,10 @@ export class AuthService {
     return this.http.get(this.urlAuxName, { headers: headers })
       .pipe(
         map((res: any) => {
+          console.log(res['0']['Role'],'estoy en data');
           return res['0']['Role'];
-          // console.log(res['0']['Role'],'estoy en data');
+
+
         })
       )
 
@@ -4995,7 +5316,7 @@ export class AuthService {
       'Content-Type': 'application/json', 'Authorization': 'Basic ' + auxB64,
     });
     console.log(headers);
-    this.urlAuxName = 'http://164.92.106.39/auxiliares_disponibles_motos';
+    this.urlAuxName = 'http://147.182.203.91/auxiliares_disponibles_motos';
 
     return this.http.get(this.urlAuxName, { headers: headers })
       .pipe(
@@ -5014,7 +5335,7 @@ export class AuthService {
       'Content-Type': 'application/json', 'Authorization': 'Basic ' + auxB64,
     });
     console.log(headers);
-    this.urlAuxName = 'http://164.92.106.39/auxiliares_disponibles_carro';
+    this.urlAuxName = 'http://147.182.203.91/auxiliares_disponibles_carro';
 
     return this.http.get(this.urlAuxName, { headers: headers })
       .pipe(
@@ -5034,7 +5355,7 @@ export class AuthService {
       'Content-Type': 'application/json', 'Authorization': 'Basic ' + auxB64,
     });
     console.log(headers);
-    this.urlAuxName = 'http://164.92.106.39/auxiliares_disponibles_municipios';
+    this.urlAuxName = 'http://147.182.203.91/auxiliares_disponibles_municipios';
 
     return this.http.get(this.urlAuxName, { headers: headers })
       .pipe(
@@ -5052,7 +5373,7 @@ export class AuthService {
       'Content-Type': 'application/json', 'Authorization': 'Basic ' + auxB64,
     });
     console.log(headers);
-    this.urlAuxName = 'http://164.92.106.39/auxiliares_disponibles_carro_grande';
+    this.urlAuxName = 'http://147.182.203.91/auxiliares_disponibles_carro_grande';
 
     return this.http.get(this.urlAuxName, { headers: headers })
       .pipe(
@@ -5063,7 +5384,24 @@ export class AuthService {
       )
 
   }
+  getAuxiliaresDisponiblesParaCarrosMediano() {
+    let auxB64 = localStorage.getItem('base64');
 
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json', 'Authorization': 'Basic ' + auxB64,
+    });
+    console.log(headers);
+    this.urlAuxName = 'http://147.182.203.91/auxiliares_disponibles_carro_mediano';
+
+    return this.http.get(this.urlAuxName, { headers: headers })
+      .pipe(
+        map((res: any) => {
+          return res;
+          // console.log(res['0']['Role'],'estoy en data');
+        })
+      )
+
+  }
   //get disponibles carro taller
   getAuxiliaresDisponiblesParaCarroTaller() {
     let auxB64 = localStorage.getItem('base64');
@@ -5072,7 +5410,7 @@ export class AuthService {
       'Content-Type': 'application/json', 'Authorization': 'Basic ' + auxB64,
     });
     console.log(headers);
-    this.urlAuxName = 'http://164.92.106.39/auxiliares_disponibles_carro_taller';
+    this.urlAuxName = 'http://147.182.203.91/auxiliares_disponibles_carro_taller';
 
     return this.http.get(this.urlAuxName, { headers: headers })
       .pipe(
@@ -5086,7 +5424,7 @@ export class AuthService {
   getCiudad() {
 
 
-    this.urlAuxName = 'http://164.92.106.39/ciudades';
+    this.urlAuxName = 'http://147.182.203.91/ciudades';
 
     return this.http.get(this.urlAuxName,)
       .pipe(
@@ -5107,7 +5445,7 @@ export class AuthService {
       'Content-Type': 'application/json', 'Authorization': 'Basic ' + auxB64,
     });
     console.log(headers);
-    this.urlAuxName = 'http://164.92.106.39/contenido_asignado?_format=json';
+    this.urlAuxName = 'http://147.182.203.91/contenido_asignado?_format=json';
 
     console.log(this.urlAuxName, 'por aqui vamos ');
     // console.log(data['0']['Role'],'estoy en data');
@@ -5133,7 +5471,7 @@ export class AuthService {
       'Content-Type': 'application/json', 'Authorization': 'Basic ' + auxB64,
     });
     console.log(headers);
-    this.urlAuxName = 'http://164.92.106.39/historico_auxiliar?_format=json';
+    this.urlAuxName = 'http://147.182.203.91/historico_auxiliar?_format=json';
 
     console.log(this.urlAuxName, 'por aqui vamos ');
     // console.log(data['0']['Role'],'estoy en data');
@@ -5161,7 +5499,7 @@ export class AuthService {
       'Content-Type': 'application/json', 'Authorization': 'Basic ' + auxB64,
     });
     console.log(headers);
-    this.urlAuxName = 'http://164.92.106.39/historico_cliente?_format=json';
+    this.urlAuxName = 'http://147.182.203.91/historico_cliente?_format=json';
 
     console.log(this.urlAuxName, 'por aqui vamos ');
     // console.log(data['0']['Role'],'estoy en data');
@@ -5194,7 +5532,7 @@ export class AuthService {
       'Content-Type': 'application/json', 'Authorization': 'Basic ' + auxB64,
     });
     console.log(headers);
-    this.urlAuxName = 'http://164.92.106.39/user/' + auxAsignado + '?_format=json';
+    this.urlAuxName = 'http://147.182.203.91/user/' + auxAsignado + '?_format=json';
 
     console.log(this.urlAuxName, 'por aqui vamos ');
 
@@ -5225,7 +5563,7 @@ export class AuthService {
     });
     console.log(headers);
     return this.http
-      .get("http://164.92.106.39/contenido-propio-cliente", { headers: headers })
+      .get("http://147.182.203.91/contenido-propio-cliente", { headers: headers })
       .pipe(
         map((res: any) => {
           return res;
@@ -5268,7 +5606,7 @@ export class AuthService {
       'X-CSRF-Token': this.tokencsrf
     });
     console.log(headers, 'aqui header en act met pago');
-    let url = 'http://164.92.106.39/node/' + this.nodoCreado + '?_format=json';
+    let url = 'http://147.182.203.91/node/' + this.nodoCreado + '?_format=json';
     console.log(url);
 
 
@@ -5312,7 +5650,7 @@ export class AuthService {
       'X-CSRF-Token': this.tokencsrf
     });
     console.log(headers, 'aqui header en act met pago');
-    let url = 'http://164.92.106.39/node/' + this.nodoCreado + '?_format=json';
+    let url = 'http://147.182.203.91/node/' + this.nodoCreado + '?_format=json';
     console.log(url);
 
 
@@ -5421,7 +5759,7 @@ export class AuthService {
   //moto llaves
   seleccionarMotollaves() {
     this.medioTransporte = 1;
-  
+
     console.log(this.medioTransporte);
 
 
@@ -5435,7 +5773,7 @@ export class AuthService {
     this.medioTransporte = 2;
 
     console.log(this.medioTransporte);
-  
+
 
 
     this.router.navigate(['/llaves']);
@@ -5460,7 +5798,7 @@ export class AuthService {
     console.log(headers, 'aqui header en act tiendas');
 
     return this.http
-      .get("http://164.92.106.39/user_id", { headers: headers })
+      .get("http://147.182.203.91/user_id", { headers: headers })
       .pipe(
         map((res: any) => {
           return res;
@@ -5496,7 +5834,7 @@ export class AuthService {
     console.log(headers, 'aqui header en act tiendas');
 
     return this.http
-      .get("http://164.92.106.39/emprendedores", { headers: headers })
+      .get("http://147.182.203.91/emprendedores", { headers: headers })
       .pipe(
         map((res: any) => {
           return res;
@@ -5531,7 +5869,7 @@ export class AuthService {
     console.log(headers, 'aqui header en act tiendas');
 
     return this.http
-      .get("http://164.92.106.39/restaurantes/" + localStorage.getItem('locacion'), { headers: headers })
+      .get("http://147.182.203.91/restaurantes/" + localStorage.getItem('locacion'), { headers: headers })
       .pipe(
         map((res: any) => {
           return res;
@@ -5569,7 +5907,7 @@ export class AuthService {
     console.log(headers, 'aqui header en act tiendas');
 
     return this.http
-      .get("http://164.92.106.39/filtro_restaurantes?_format=json", { headers: headers })
+      .get("http://147.182.203.91/filtro_restaurantes?_format=json", { headers: headers })
       .pipe(
         map((res: any) => {
           return res;
@@ -5606,7 +5944,7 @@ export class AuthService {
     console.log(headers, 'aqui header en act tiendas');
 
     return this.http
-      .get("http://164.92.106.39//fiiltro_emprendedores?_format=json", { headers: headers })
+      .get("http://147.182.203.91//fiiltro_emprendedores?_format=json", { headers: headers })
       .pipe(
         map((res: any) => {
           return res;
@@ -5641,7 +5979,7 @@ export class AuthService {
       'X-CSRF-Token': this.tokencsrf
     });
     console.log(headers, 'aqui header en act prodcuto tiendas');
-    let url = 'http://164.92.106.39/productos/' + this.idTiendaSeleccionada + '?_format=json';
+    let url = 'http://147.182.203.91/productos/' + this.idTiendaSeleccionada + '?_format=json';
     console.log(url);
     return this.http
       .get(url, { headers: headers })
@@ -5679,7 +6017,7 @@ export class AuthService {
       'X-CSRF-Token': this.tokencsrf
     });
     console.log(headers, 'aqui header en act prodcuto tiendas');
-    let url = 'http://164.92.106.39/productos/1?_format=json';
+    let url = 'http://147.182.203.91/productos/1?_format=json';
     console.log(url);
     return this.http
       .get(url, { headers: headers })
@@ -5712,7 +6050,7 @@ export class AuthService {
 
 
 
-    let url = 'http://164.92.106.39/slides_apk?_format=hal_json';
+    let url = 'http://147.182.203.91/slides_apk?_format=hal_json';
     console.log(url);
     return this.http
       .get(url)
@@ -5746,7 +6084,7 @@ export class AuthService {
 
 
 
-    let url = 'http://164.92.106.39/slides_apk_telo?_format=hal_json';
+    let url = 'http://147.182.203.91/slides_apk_telo?_format=hal_json';
     console.log(url);
     return this.http
       .get(url)
@@ -5779,7 +6117,7 @@ export class AuthService {
 
 
 
-    let url = 'http://164.92.106.39/slider_tiendas?_format=hal_json';
+    let url = 'http://147.182.203.91/slider_tiendas?_format=hal_json';
     console.log(url);
     return this.http
       .get(url)
@@ -5810,7 +6148,7 @@ export class AuthService {
 
 
 
-    let url = 'http://164.92.106.39/slides_apk_emprededores?_format=hal_json';
+    let url = 'http://147.182.203.91/slides_apk_emprededores?_format=hal_json';
     console.log(url);
     return this.http
       .get(url)
@@ -5842,7 +6180,7 @@ export class AuthService {
 
 
 
-    let url = 'http://164.92.106.39/slides_apk_restaurantes?_format=hal_json';
+    let url = 'http://147.182.203.91/slides_apk_restaurantes?_format=hal_json';
     console.log(url);
     return this.http
       .get(url)
@@ -5873,7 +6211,7 @@ export class AuthService {
 
 
 
-    let url = 'http://164.92.106.39/slides_apk_compras?_format=hal_json';
+    let url = 'http://147.182.203.91/slides_apk_compras?_format=hal_json';
     console.log(url);
     return this.http
       .get(url)
@@ -5904,7 +6242,7 @@ export class AuthService {
 
 
 
-    let url = 'http://164.92.106.39/slides_apk_medicamentos?_format=hal_json';
+    let url = 'http://147.182.203.91/slides_apk_medicamentos?_format=hal_json';
     console.log(url);
     return this.http
       .get(url)
@@ -5928,7 +6266,7 @@ export class AuthService {
 
 
 
-    return this.http.get('http://164.92.106.39/aux_no_disponible', {}).subscribe(async data => {
+    return this.http.get('http://147.182.203.91/aux_no_disponible', {}).subscribe(async data => {
       this.messajeErr = await data[0].body;
       console.log(data[0].body);
     }, error => {
@@ -5962,7 +6300,7 @@ export class AuthService {
 
 
 
-    let url = 'http://164.92.106.39/slides_apk_especial?_format=hal_json';
+    let url = 'http://147.182.203.91/slides_apk_especial?_format=hal_json';
     console.log(url);
     return this.http
       .get(url)
@@ -5994,7 +6332,7 @@ export class AuthService {
 
 
 
-    let url = 'http://164.92.106.39/slides_apk_pagos?_format=hal_json';
+    let url = 'http://147.182.203.91/slides_apk_pagos?_format=hal_json';
     console.log(url);
     return this.http
       .get(url)
@@ -6026,7 +6364,7 @@ export class AuthService {
 
 
 
-    let url = 'http://164.92.106.39/slides_apk_trasteos?_format=hal_json';
+    let url = 'http://147.182.203.91/slides_apk_trasteos?_format=hal_json';
     console.log(url);
     return this.http
       .get(url)
@@ -6058,7 +6396,7 @@ export class AuthService {
 
 
 
-    let url = 'http://164.92.106.39/slides_apk_carro_taller?_format=hal_json';
+    let url = 'http://147.182.203.91/slides_apk_carro_taller?_format=hal_json';
     console.log(url);
     return this.http
       .get(url)
@@ -6091,7 +6429,7 @@ export class AuthService {
 
 
 
-    let url = 'http://164.92.106.39/slides_apk_fruver?_format=hal_json';
+    let url = 'http://147.182.203.91/slides_apk_fruver?_format=hal_json';
     console.log(url);
     return this.http
       .get(url)
@@ -6124,7 +6462,7 @@ export class AuthService {
 
 
 
-    let url = 'http://164.92.106.39/slides_apk_tecno?_format=hal_json';
+    let url = 'http://147.182.203.91/slides_apk_tecno?_format=hal_json';
     console.log(url);
     return this.http
       .get(url)
@@ -6156,7 +6494,7 @@ export class AuthService {
 
 
 
-    let url = 'http://164.92.106.39/slides_apk_textiles?_format=hal_json';
+    let url = 'http://147.182.203.91/slides_apk_textiles?_format=hal_json';
     console.log(url);
     return this.http
       .get(url)
@@ -6188,7 +6526,7 @@ export class AuthService {
 
 
 
-    let url = 'http://164.92.106.39/slides_apk_almacen?_format=hal_json';
+    let url = 'http://147.182.203.91/slides_apk_almacen?_format=hal_json';
     console.log(url);
     return this.http
       .get(url)
@@ -6220,7 +6558,7 @@ export class AuthService {
 
 
 
-    let url = 'http://164.92.106.39/slides_apk_rutas?_format=hal_json';
+    let url = 'http://147.182.203.91/slides_apk_rutas?_format=hal_json';
     console.log(url);
     return this.http
       .get(url)
@@ -6253,7 +6591,7 @@ export class AuthService {
 
 
 
-    let url = 'http://164.92.106.39/slides_apk_sencilla?_format=hal_json';
+    let url = 'http://147.182.203.91/slides_apk_sencilla?_format=hal_json';
     console.log(url);
     return this.http
       .get(url)
@@ -6286,7 +6624,7 @@ export class AuthService {
 
 
 
-    let url = 'http://164.92.106.39/slides_apk_llaves?_format=hal_json';
+    let url = 'http://147.182.203.91/slides_apk_llaves?_format=hal_json';
     console.log(url);
     return this.http
       .get(url)
@@ -6317,7 +6655,7 @@ export class AuthService {
 
 
 
-    let url = 'http://164.92.106.39/footervpe?_format=hal_json';
+    let url = 'http://147.182.203.91/footervpe?_format=hal_json';
     console.log(url);
     return this.http
       .get(url)
@@ -6366,7 +6704,7 @@ export class AuthService {
       'Content-Type': 'application/json', 'Authorization': 'Basic ' + auxB64,
     });
     console.log(headers);
-    this.urlAuxName = 'http://164.92.106.39/descuento_moderado';
+    this.urlAuxName = 'http://147.182.203.91/descuento_moderado';
 
     return this.http.get(this.urlAuxName, { headers: headers })
       .pipe(
@@ -6388,7 +6726,7 @@ export class AuthService {
       'Content-Type': 'application/json', 'Authorization': 'Basic ' + auxB64,
     });
     console.log(headers);
-    this.urlAuxName = 'http://164.92.106.39/incremento_taller';
+    this.urlAuxName = 'http://147.182.203.91/incremento_taller';
 
     return this.http.get(this.urlAuxName, { headers: headers })
       .pipe(
@@ -6410,7 +6748,7 @@ export class AuthService {
       'Content-Type': 'application/json', 'Authorization': 'Basic ' + auxB64,
     });
     console.log(headers);
-    this.urlAuxName = 'http://164.92.106.39/incremento_trasteo';
+    this.urlAuxName = 'http://147.182.203.91/incremento_trasteo';
 
     return this.http.get(this.urlAuxName, { headers: headers })
       .pipe(
@@ -6432,7 +6770,7 @@ export class AuthService {
       'Content-Type': 'application/json', 'Authorization': 'Basic ' + auxB64,
     });
     console.log(headers);
-    this.urlAuxName = 'http://164.92.106.39/incremento_llaves';
+    this.urlAuxName = 'http://147.182.203.91/incremento_llaves';
 
     return this.http.get(this.urlAuxName, { headers: headers })
       .pipe(
@@ -6454,7 +6792,7 @@ export class AuthService {
       'Content-Type': 'application/json', 'Authorization': 'Basic ' + auxB64,
     });
     console.log(headers);
-    this.urlAuxName = 'http://164.92.106.39/incremento_vehiculo';
+    this.urlAuxName = 'http://147.182.203.91/incremento_vehiculo';
 
     return this.http.get(this.urlAuxName, { headers: headers })
       .pipe(

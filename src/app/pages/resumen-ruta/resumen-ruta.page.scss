@@ -1,17 +1,26 @@
+
 ion-title{
-    margin-left: 22%;
+    margin-left: -17%;
+    text-align: center;
     text-transform: uppercase;
-    font-family: "Montserrat", sans-serif;
+    color:white;
+    font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
+}
+
+form{
+	margin: auto;
+	width: 95%;
 }
 ion-toolbar{
     color: white;
     --ion-background-color: #262262;
 }
 ion-content{
-    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat; 
+    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat;
 }
 ion-card{
-   
+    border-radius: 20px;
     padding: 20px 0 20px 0;
 }
 .linea {
@@ -20,10 +29,10 @@ ion-card{
     max-width: 100%;
     padding: 0;
     margin: 20px auto 0 auto;
-    
+
   }
   ion-checkbox#aut_contrato {
-   
+
     padding: 5px 0px 0px 4px;
 }
 body{
@@ -36,7 +45,7 @@ body{
   ion-col{
       text-align: center;
   }
- 
+
 .corto{
     //margin-left: 29%;
     height: 38px;
@@ -50,13 +59,14 @@ body{
 }
 
 select{
-    font-family: 'Montserrat', sans-serif;
+     font-family: 'Montserrat', sans-serif;
+  font-weight: 300; /* Asegura que se use la variante Light */
     color: #262262;
     background-color: #ecf0f1;
     height: 38px;
 }
 ion-input{
-    
+
     height: 38px;
     width: 100%;
     display: block;
@@ -103,15 +113,16 @@ button{
       border-radius: none;
       width: 120px;
       margin: auto;
-    
+
 }
 
 ion-label{
-    margin: 4%;
+    display: flex;
+    margin-left: 15.5px;
     color: #262262;
-    font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat Light ", sans-serif;
     text-transform: uppercase;
-    
+
 }
 ion-item{
     --ion-background-color: transparent
@@ -147,7 +158,7 @@ ion-icon{
     opacity: unset !important;
     pointer-events: none;
 }
-ion-input.ng-untouched.ng-pristine.ng-valid.sc-ion-input-md-h.sc-ion-input-md-s.md.has-value.hydrated.ion-untouched.ion-pristine.ion-valid 
+ion-input.ng-untouched.ng-pristine.ng-valid.sc-ion-input-md-h.sc-ion-input-md-s.md.has-value.hydrated.ion-untouched.ion-pristine.ion-valid
 .native-input[disabled].sc-ion-input-md {
     opacity: unset;
 }

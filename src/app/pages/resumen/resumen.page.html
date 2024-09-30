@@ -2,10 +2,10 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button ></ion-back-button>
-      
+
     </ion-buttons>
     <ion-title>Resumen</ion-title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat Light &display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
   </ion-toolbar>
 </ion-header>
@@ -20,18 +20,18 @@
       <ion-item >
         <select disabled formControlName="field_locacion_entrega" class="locacion">
           <option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</option>
-         
+
         </select>
-        
+
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
       </ion-item>
-      
+
       <ion-item >
-        
-       
-          
+
+
+
         <textarea  [disabled]="disabledValue"  formControlName="field_direccion_entrega"  type="text" siz required></textarea >
           <ion-buttons>
             <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -40,35 +40,35 @@
 
       <ion-item>
          <textarea disabled  id="ip" formControlName="field_barrio_origen"  #input2 type="text"></textarea>
-         
+
          <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
-     
+
        </ion-item>
-    
+
 
 
        <ion-label><b>Contacto Nombre :</b> </ion-label>
        <ion-item >
-         
+
          <textarea formControlName="field_nombre_c_origen" placeholder="Nombre" type="text" required></textarea>
          <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
        </ion-item>
-     
-      <ion-label > <b>Contacto Telefono:</b> </ion-label>
+
+      <ion-label > <b>Contacto Teléfono:</b> </ion-label>
       <ion-item >
-        
+
         <textarea   [disabled]="disabledValue" formControlName="field_contacto" type="text" required></textarea >
           <ion-buttons>
             <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
           </ion-buttons>
       </ion-item>
-   
-     
-      
+
+
+
       <div class="linea"></div>
       <ion-label > <b>destino :</b></ion-label>
       <ion-item >
@@ -80,8 +80,8 @@
         </ion-buttons>
       </ion-item>
       <ion-item >
-       
-        
+
+
         <textarea  [disabled]="disabledValue" formControlName="field_direccion_destino" type="text" required></textarea >
           <ion-buttons>
             <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -92,40 +92,51 @@
          <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
-      
-     
+
+
        </ion-item>
-    
-   
-    
- 
+
+
+
+
        <ion-label><b>Contacto Nombre :</b> </ion-label>
        <ion-item >
-         
+
          <textarea formControlName="field_nombre_c_destino" placeholder="Nombre" type="text" required></textarea>
          <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
        </ion-item>
-  
-      
-      <ion-label  *ngIf="contactoDestino != undefined" > <b>Contacto Telefono:</b> </ion-label>
+
+
+      <ion-label  *ngIf="contactoDestino != undefined" > <b>Contacto Teléfono:</b> </ion-label>
       <ion-item  *ngIf="contactoDestino != undefined">
-        
+
         <textarea   [disabled]="disabledValue" formControlName="field_contacto_destino" type="text" required></textarea >
           <ion-buttons>
             <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
           </ion-buttons>
       </ion-item>
-     
-      
-     
-     <label class="switchBtn">
-      <input  id="field_ida_y_vuelta" disabled formControlName="field_ida_y_vuelta" value="true"  type="checkbox">
-      </label>
-      <ion-label>ida y vuelta</ion-label>
+
+
+
+      <ion-grid>
+        <ion-row class="align-items-center">
+
+          <ion-col size="7" class="align-left">
+            <ion-label><b>Ida y vuelta</b></ion-label>
+          </ion-col>
+
+
+          <ion-col size="5" class="align-right">
+          <input id="field_ida_y_vuelta" formControlName="field_ida_y_vuelta" value="true" type="checkbox" checked>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
       <br>
     <script>
+
       if (document.getElementById('field_ida_y_vuelta').checked)
 {
 alert('checkbox1 esta seleccionado');
@@ -144,8 +155,8 @@ if( $('#checkbox1').prop('checked') ) {
 }
     </script>
       <br>
-     
-      <ion-label *ngIf="quienPaga != undefined" > <b>¿Quien paga?* </b> </ion-label>
+
+      <!-- ion-label *ngIf="quienPaga != undefined" > <b>¿Quien paga?* </b> </ion-label>
 
   <div *ngIf="quienPaga != undefined" class="check">
     <input id="checkbox1" disabled="true" class="recogerInput" formControlName="field_quien_paga_" value="Cobrar en destino"  class="form-check-input" type="radio" checked>
@@ -159,7 +170,8 @@ if( $('#checkbox1').prop('checked') ) {
     <label class="form-check-label" for="flexRadioDefault2">
      Cobrar en Origen
     </label>
-  </div>
+  </div-->
+
   <script>
      if(document.getElementById('field_respuesta_documentos').checked){
     alert('field_respuesta_documentos esta seleccionado');
@@ -168,7 +180,7 @@ if( $('#checkbox1').prop('checked') ) {
   <br>
       <ion-label  *ngIf="valorDeclarado != undefined" class="txt">Valor declarado</ion-label>
       <ion-item   *ngIf="valorDeclarado != undefined">
-        
+
         <ion-input [disabled]="disabledValue" formControlName="field_valor_declarado"  type="number" required></ion-input>
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -176,16 +188,16 @@ if( $('#checkbox1').prop('checked') ) {
       </ion-item>
       <ion-label class="txt">Medio de pago</ion-label>
       <ion-item >
-        
+
         <ion-input  disabled formControlName="field_metodo_de_pago"   required></ion-input>
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
       </ion-item>
-      
+
       <ion-label *ngIf="observaciones != undefined" > <b> Descripción</b></ion-label>
       <ion-item *ngIf="observaciones != undefined" >
-        
+
         <textarea [disabled]="disabledValue" size="25" formControlName="field_observaciones" class="descaera" type="textarea" required></textarea>
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -193,12 +205,12 @@ if( $('#checkbox1').prop('checked') ) {
       </ion-item>
       <ion-label class="txt"> <b class="domicilio_class">Costo Domicilio </b> </ion-label>
       <ion-item >
-        
+
         <ion-input formControlName="field_precio_" [disabled]="true" type="text" required></ion-input>
       </ion-item>
 
-     
-  
+
+
       <ion-row>
         <ion-col>
           <ion-button   replaceUrl="true"  type="submit" color="warning" expand="block" > <b>!Vapaesa</b> </ion-button>
@@ -207,6 +219,6 @@ if( $('#checkbox1').prop('checked') ) {
     </form>
   </ion-card>
   </ion-card-content>
-  
+
 </ion-content>
 
