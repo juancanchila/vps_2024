@@ -577,93 +577,86 @@ localStorage.setItem('actualizarContrato',estado);
     if(event!=''){
       localStorage.setItem('locacionDestinoSeleccionada',event);
       this.auth.locacion=event;
-      setTimeout(() => {
+
       this.WillEnter();
-      },3000)
+
     }
 
   }
-  WillEnter(){
-
-    this.auth.getListBarriosSeleccion().subscribe(async data=>{
-
-      this.direccionDestino=await data;
-          },async error=>{
-
-            console.log(error);
-            const alert = await this.alertController.create({
-
-              header: 'Error de locación ',
-
-              message: 'Su locación no tiene barrios asignados.',
-              buttons: [{
-                text:'aceptar',
-                handler:()=>{
 
 
-                }
-              }],
+  async WillEnter() {
+    try {
+      // Obtener los datos de barrios destino usando suscripción
+      this.auth.getListBarriosSeleccion().subscribe(async data => {
+        this.direccionDestino = await data;
 
-            });
+        // Si solo hay un barrio
+        if (this.direccionDestino.length === 1) {
+          this.FormSend.controls.field_barrio_destino.setValue(this.direccionDestino[0]['name']);
+          localStorage.setItem('tarifaDestino', this.direccionDestino[0]['field_tarifa']);
+          localStorage.setItem('tarifaExternaDestino', this.direccionDestino[0]['field_tarifa_externa']);
+          localStorage.setItem('imgBarrioDestino', this.direccionDestino[0]['field_imagen_barrio']);
 
-            await alert.present();
-            return;
+          // Agregando la zona de destino
+          console.log('selected----> destino', this.direccionDestino[0]['field_zona_a']);
+          localStorage.setItem('zona_destino', this.direccionDestino[0]['field_zona_a']);
 
-          });
-          setTimeout(() => {
+          this.ocultarInput = true;
+          this.bloquearInputBarrioDestino = true;
 
+          // Ocultar el campo de barrio origen
+          document.getElementById('itemOrigen').style.visibility = "hidden";
+        }
 
-           // console.log(this.direccionDestino[0]['name']);
+        // Caso especial para San Andrés
+        if (this.direccionDestino.length === 1 && this.direccionDestino[0]['name'] === 'San Andrés') {
+          this.FormSend.controls.field_barrio_destino.setValue(this.direccionDestino[0]['name']);
+          localStorage.setItem('tarifaDestino', this.direccionDestino[0]['field_tarifa']);
+          localStorage.setItem('imgBarrioDestino', this.direccionDestino[0]['field_imagen_barrio']);
 
-            console.log(this.direccionDestino);
+          // Agregando la zona de destino para San Andrés
+          console.log('selected----> destino', this.direccionDestino[0]['field_zona_a']);
+          localStorage.setItem('zona_destino', this.direccionDestino[0]['field_zona_a']);
 
-            //si barrios es 1 agregar por defecto y ocultar input barrio origen
+          this.ocultarInput = true;
+          this.bloquearInputBarrioDestino = true;
 
-            if(this.direccionDestino.length==1 ){
-             this.FormSend.controls.field_barrio_destino.setValue(this.direccionDestino[0]['name']);
-             localStorage.setItem('tarifaDestino',this.direccionDestino[0]['field_tarifa']);
+          // Ocultar el campo de barrio destino
+          document.getElementById('itemDestino').style.visibility = "hidden";
+        }
 
-             localStorage.setItem('tarifaExternaDestino',this.direccionDestino[0]['field_tarifa_externa']);
+        // Si hay más de un barrio
+        else if (this.direccionDestino.length > 1) {
+          this.FormSend.controls.field_barrio_destino.setValue('');
+          this.ocultarInput = false;
+          this.bloquearInputBarrioDestino = false;
 
+          // Mostrar el campo de barrio destino
+          document.getElementById('itemDestino').style.visibility = "visible";
+        }
 
+      }, async error => {
+        console.log(error);
 
-             localStorage.setItem('imgBarrioDestino',this.direccionDestino[0]['field_imagen_barrio']);
-            this.ocultarInput=true;
-            this.bloquearInputBarrioDestino=true;
-            document.getElementById('itemDestino').style.visibility = "hidden"; // hide
-
-
-
-
-            }else
-            if(this.direccionDestino.length==1 && this.direccionDestino[0]['name']=='San Andrés'){
-              this.FormSend.controls.field_barrio_destino.setValue(this.direccionDestino[0]['name']);
-              localStorage.setItem('tarifaDestino',this.direccionDestino[0].field_tarifa);
-
-
-
-              localStorage.setItem('imgBarrioDestino',this.direccionDestino[0]['field_imagen_barrio']);
-
-            this.ocultarInput=true;
-            this.bloquearInputBarrioDestino=true;
-
-
-             document.getElementById('itemDestino').style.visibility = "hidden"; // hide
-
-            }else if(this.direccionDestino.length>1){
-              this.FormSend.controls.field_barrio_destino.setValue('');
-              this.ocultarInput=false;
-              this.bloquearInputBarrioDestino=false;
-
-
-             document.getElementById('itemDestino').style.visibility = "visible"; // hide
+        const alert = await this.alertController.create({
+          header: 'Error de locación',
+          message: 'Su locación no tiene barrios asignados.',
+          buttons: [{
+            text: 'Aceptar',
+            handler: () => {
+              // Puedes manejar el evento después de aceptar
             }
+          }],
+        });
 
-
-
-           },4000)
-
+        await alert.present();
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
+
   ngOnDestroy() {
 
     console.log("Resumen- OnDestroy")

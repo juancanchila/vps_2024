@@ -379,7 +379,7 @@ export class AuthService {
   }
 
   getMessageFruver(): Observable<any> {
-    return this.http.get('http://147.182.203.91/fruver').pipe(
+    return this.http.get('http://147.182.203.91/fruver_message').pipe(
       map((res: any) => {
 
         return res;

@@ -26,24 +26,16 @@ export class ResumenTecnologiaPage implements OnInit {
 
       field_locacion_entrega:[""],
       field_locacion_destino:[""],
-     // field_donde_comprar:[""],
       field_direccion_destino:[""],
       field_direccion_entrega:[""],
-      field_quieres_comprar:[""],
       field_nombre_del_establecimiento:[""],
 
-field_valor_declarado:[ ""],
 field_observaciones:[""],
-field_prefijo_destino:[""],
-field_prefijo_origen:[""],
-
 field_contacto_destino:[""],
-field_contacto:[""],
 field_metodo_de_pago:[""],
 field_barrio_origen:[""],
 field_barrio_destino:[""],
 field_precio_:[""],
-field_nombre_c_origen:[""],
 field_nombre_c_destino:[""]
 
 
@@ -73,11 +65,11 @@ field_nombre_c_destino:[""]
 
       if (this.FormSend.invalid) {
 
-        console.log(this.FormSend.value);
+        console.log(this.FormSend);
       const alertElement= await this.alertController.create({
 
-        header: '¡Su solicitud es mayor a $100000 debe ser transportada en carro!',
-        message: '¿Desea ir a medio de transporte carro?',
+        header: '¡Alerta!',
+        message: 'La solicitud no se puede completar',
 
         buttons: [
           {
@@ -88,7 +80,7 @@ field_nombre_c_destino:[""]
         {
           text:'aceptar',
           handler:()=>{
-            this.router.navigate(['/transportes']);
+            this.router.navigate(['/tabs']);
           }
         }
       ]
@@ -220,8 +212,8 @@ field_nombre_c_destino:[""]
 
       console.log(this.auth.resumenTecnologias);
 
-      this.que_quieres_comprar = this.auth.resumenTecnologias.field_quieres_comprar['0']['value'];
-      this.costo_articulo = this.auth.resumenTecnologias.field_valor_declarado['0']['value'];
+
+
       this.FormSend.controls.field_locacion_entrega.setValue(this.auth.resumenTecnologias.field_locacion_entrega['0']['value']);
 
       this.FormSend.controls.field_nombre_del_establecimiento.setValue(this.auth.resumenTecnologias.field_nombre_del_establecimiento['0']['value']);
@@ -233,25 +225,18 @@ field_nombre_c_destino:[""]
 
       this.FormSend.controls.field_observaciones.setValue(this.auth.resumenTecnologias.field_observaciones['0']['value']);
 
-      this.FormSend.controls.field_prefijo_origen.setValue(this.auth.resumenTecnologias.field_prefijo_origen['0']['value']);
 
-      this.FormSend.controls.field_prefijo_destino.setValue(this.auth.resumenTecnologias.field_prefijo_destino['0']['value']);
-
-
-
-      this.FormSend.controls.field_quieres_comprar.setValue(this.auth.resumenTecnologias.field_quieres_comprar['0']['value']);
 
       this.FormSend.controls.field_contacto_destino.setValue(this.auth.resumenTecnologias.field_contacto_destino['0']['value']);
 
-      this.FormSend.controls.field_contacto.setValue(this.auth.resumenTecnologias.field_contacto['0']['value']);
-      this.FormSend.controls.field_valor_declarado.setValue(this.auth.resumenTecnologias.field_valor_declarado['0']['value']);
+
 
       this.FormSend.controls.field_barrio_origen.setValue(this.auth.resumenTecnologias.field_barrio_origen['0']['value']);
       this.FormSend.controls.field_barrio_destino.setValue(this.auth.resumenTecnologias.field_barrio_destino['0']['value']);
 
       this.FormSend.controls.field_metodo_de_pago.setValue(this.auth.resumenTecnologias.field_metodo_de_pago['0']['value']);
 
-      this.FormSend.controls.field_nombre_c_origen.setValue(this.auth.resumenTecnologias.field_nombre_c_origen['0']['value']);
+
       this.FormSend.controls.field_nombre_c_destino.setValue(this.auth.resumenTecnologias.field_nombre_c_destino['0']['value']);
 
 

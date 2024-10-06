@@ -69,28 +69,30 @@ field_nombre_c_destino:[""]
       this.presentAlert();
 
      }else{
-    if(this.FormSend.invalid){
-      const alertElement= await this.alertController.create({
+      if (this.FormSend.invalid) {
 
-        header: '¡Su solicitud es mayor a 100000$ debe ser transportada en carro!',
-        message: '¿Desea ir a medio de transporte carro?',
+        console.log(this.FormSend.value);
+        const alertElement= await this.alertController.create({
 
-        buttons: [
+          header: '¡Alerta!',
+          message: 'La solicitud no se puede completar',
+
+          buttons: [
+            {
+            text:'cancel',
+            role:'this.auth.CrearSencilla(this.FormSend.value);'
+
+          },
           {
-          text:'cancel',
-          role:'this.auth.CrearSencilla(this.FormSend.value);'
-
-        },
-        {
-          text:'aceptar',
-          handler:()=>{
-            this.router.navigate(['/transportes']);
+            text:'aceptar',
+            handler:()=>{
+              this.router.navigate(['/tabs']);
+            }
           }
-        }
-      ]
-      });
+        ]
+        });
 
-      await alertElement.present();
+        await alertElement.present();
     }else{
       this.auth.getSesion();
 
