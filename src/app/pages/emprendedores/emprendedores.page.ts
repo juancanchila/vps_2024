@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 import Swiper, { Autoplay, EffectFade, Pagination } from 'swiper';
@@ -21,7 +22,8 @@ export class EmprendedoresPage implements OnInit {
   criterio: string;
   searched: any;
   sombra: string[] = new Array(8).fill('');
-  constructor(private router: Router, private auth: AuthService) {
+  message_emprendedores: any;
+  constructor(private router: Router, private auth: AuthService , public alertController: AlertController) {
     this.urlBase = environment.urlBase;
     localStorage.setItem('servicioEvaluado','emprendedores');
    }
@@ -41,6 +43,29 @@ export class EmprendedoresPage implements OnInit {
 
   };
   ngOnInit() {
+
+
+    this.auth.getMessageEmprendedores().subscribe(async data => {
+      this.message_emprendedores = data[0]['body'];
+      console.log(data, 'Data received in component');
+
+      // Crear y mostrar la alerta después de recibir los datos
+      const alert = await this.alertController.create({
+        header: 'Importante',
+        message: this.message_emprendedores || 'No se recibió el mensaje de la API', // Muestra un mensaje por defecto si no hay datos
+        buttons: [
+          {
+            text: 'Aceptar',
+            handler: () => {
+              // Lógica adicional si es necesario cuando se presiona "Aceptar"
+            }
+          }
+        ]
+      });
+
+      await alert.present();
+    });
+
     Swiper.use([Pagination,Autoplay,EffectFade]);
     this.auth.seleccionarSliderEmprendedores().subscribe(res =>{
       console.log(res, ' aqui slider');

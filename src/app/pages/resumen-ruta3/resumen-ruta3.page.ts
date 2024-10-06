@@ -221,7 +221,7 @@ export class ResumenRuta3Page implements OnInit {
       //
 
 
-      let resultadoTotalCostoDestino1 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino1 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino'),
@@ -229,14 +229,14 @@ export class ResumenRuta3Page implements OnInit {
       );
       resultadoTotalCostoDestino1 = Number(resultadoTotalCostoDestino1);
 
-      let resultadoTotalCostoDestino2 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino2 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino2'),
         this.auth.medioTransporte
       );
       resultadoTotalCostoDestino2 = Number(resultadoTotalCostoDestino2);
-      let resultadoTotalCostoDestino3 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino3 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino3'),

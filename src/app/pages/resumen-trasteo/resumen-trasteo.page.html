@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button ></ion-back-button>
-      
+
     </ion-buttons>
     <ion-title>Resumen</ion-title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat Light &display=swap" rel="stylesheet">
@@ -12,6 +12,10 @@
 
 
 <ion-content>
+  <div class="contentImg">
+    <ion-img  src="../../assets/banners/ordenes_creadas.gif" alt=""></ion-img>
+
+  </div>
     <ion-card-content class="contain">
       <ion-card>
     <form  [formGroup]="FormSend" (ngSubmit)="irAPagar()">
@@ -20,15 +24,15 @@
         <select disabled formControlName="field_locacion_entrega" class="locacion">
           <option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</option>
         </select>
-        
+
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
       </ion-item>
 
       <ion-item >
-    
-          
+
+
         <textarea  [disabled]="disabledValue"  formControlName="field_direccion_entrega"  type="text" siz required></textarea >
           <ion-buttons>
             <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -37,31 +41,31 @@
 
       <ion-item>
          <textarea disabled  id="ip" formControlName="field_barrio_origen"  #input2 type="text"></textarea>
-         
+
          <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
-     
+
        </ion-item>
-      
-      
 
 
 
-      
-     
+
+
+
+
        <ion-label><b>Contacto Nombre :</b> </ion-label>
       <ion-item >
-        
+
         <textarea formControlName="field_nombre_c_origen" placeholder="Nombre" type="text" required></textarea>
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
       </ion-item>
-    
+
      <ion-label > <b>Contacto Teléfono:</b> </ion-label>
      <ion-item >
-       
+
        <textarea   [disabled]="disabledValue" formControlName="field_contacto" type="text" required></textarea >
          <ion-buttons>
            <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -75,7 +79,7 @@
         <label class="form-check-label" for="flexRadioDefault1">
           Carga pequeña
         </label>
-    
+
       </div>
       <div>
         <input disabled  id="checkbox2" formControlName="body" value="Carga grande" class="form-check-input" type="radio" checked>
@@ -88,9 +92,9 @@
         alert('field_contacto_destino esta seleccionado');
        }
       </script>
-      
+
        <div class="linea"></div>
-      
+
       <ion-label > <b>¿ A dónde te diriges ?</b> </ion-label>
       <ion-item >
         <select  disabled formControlName="field_locacion_destino" class="locacion">
@@ -101,8 +105,8 @@
         </ion-buttons>
       </ion-item>
       <ion-item >
-      
-        
+
+
         <textarea   [disabled]="disabledValue" formControlName="field_direccion_destino" type="text" required></textarea >
           <ion-buttons>
             <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -113,33 +117,33 @@
         <ion-buttons>
          <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
        </ion-buttons>
-     
-    
+
+
       </ion-item>
       <ion-label><b>Contacto Nombre :</b> </ion-label>
       <ion-item >
-        
+
         <textarea formControlName="field_nombre_c_destino" placeholder="Nombre" type="text" required></textarea>
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
       </ion-item>
- 
-     
+
+
      <ion-label > <b>Contacto Teléfono:</b> </ion-label>
      <ion-item >
-       
+
        <textarea   [disabled]="disabledValue" formControlName="field_contacto_destino" type="text" required></textarea >
          <ion-buttons>
            <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
          </ion-buttons>
      </ion-item>
-     
-     
-      
+
+
+
       <ion-label > <b>Observaciones</b></ion-label>
       <ion-item >
-        
+
         <textarea [disabled]="disabledValue" formControlName="field_observaciones" class="descaera" type="text" rows="10" cols="50" required></textarea>
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -149,7 +153,7 @@
       <div class="linea"></div>
       <ion-label class="txt">Medio de pago</ion-label>
       <ion-item >
-        
+
         <ion-input disabled formControlName="field_metodo_de_pago"   required></ion-input>
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -158,15 +162,15 @@
 
       <ion-label class="txt"> <b class="domicilio_class">Costo Domicilio </b> </ion-label>
       <ion-item >
-        
+
         <ion-input formControlName="field_precio_" [disabled]="true" type="text" required></ion-input>
       </ion-item>
 
-  
-  
-      
-      
-  
+
+
+
+
+
       <ion-row>
         <ion-col>
           <ion-button expand="block"  replaceUrl="true"  type="submit" color="warning" >¡Vapaesa!</ion-button>
@@ -175,6 +179,6 @@
     </form>
   </ion-card>
   </ion-card-content>
-  
+
 </ion-content>
 

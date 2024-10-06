@@ -1,4 +1,5 @@
 
+
 ion-title{
     margin-left: -17%;
     text-align: center;
@@ -7,6 +8,12 @@ ion-title{
     font-family: 'Montserrat', sans-serif;
   font-weight: 300; /* Asegura que se use la variante Light */
 }
+.centered-title {
+    position: relative;
+    left: 68%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
 
 form{
 	margin: auto;
@@ -56,4 +63,8 @@ ion-row{
     margin-bottom: 40%;
 
 }
-
+.mensajeria {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}

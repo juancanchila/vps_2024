@@ -7,7 +7,12 @@ ion-title{
     font-family: 'Montserrat', sans-serif;
   font-weight: 300; /* Asegura que se use la variante Light */
 }
-
+.centered-title {
+    position: relative;
+    left: 68%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
 form{
 	margin: auto;
 	width: 95%;

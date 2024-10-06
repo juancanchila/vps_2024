@@ -38,9 +38,15 @@ Basic CSS for apps built with Ionic */
 
 /*@import "~ionic4-auto-complete/auto-complete";*/
 
-.domicilio_class {
-    font-size: 160%;
-}
+.domicilio_class{
+
+    color: #262262;
+    text-transform: capitalize;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+
+
+  }
 
 /* Montserrat Regular */
 @font-face {
@@ -73,3 +79,7 @@ Basic CSS for apps built with Ionic */
     font-weight: bold;
     font-style: italic;
 }
+.contentImg {
+    /* padding-top: 20px;*/
+     text-align: center;
+ }

@@ -209,13 +209,15 @@ export class ResumenPage implements OnInit {
       console.log(localStorage.getItem('zona_destino'), 'zona_destino');
       console.log(localStorage.getItem('servicioEvaluado'), 'servicioEvaluado');
 
-      let resultadoTotalCosto = await this.auth.calcularPrecioTarifa(
+      var resultadoTotalCosto = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino'),
         this.auth.medioTransporte
       );
-      resultadoTotalCosto = Number(resultadoTotalCosto);
+
+      // set local storage
+      localStorage.setItem('precioTarifa',resultadoTotalCosto);
       console.log(resultadoTotalCosto, 'resultadoTotalCosto');
 
 
@@ -225,6 +227,9 @@ export class ResumenPage implements OnInit {
  if (this.auth.resumen.field_ida_y_vuelta[0].value === true) {
   resultadoTotalCosto *= 2;
 }
+
+      resultadoTotalCosto = Number(resultadoTotalCosto);
+      this.FormSend.controls.field_precio_.setValue(resultadoTotalCosto);
 
       this.estadoButton = true;
       this.aux = 'false';
@@ -273,7 +278,11 @@ export class ResumenPage implements OnInit {
       this.FormSend.controls.field_metodo_de_pago.setValue(this.auth.resumen.field_metodo_de_pago[0].value);
       this.FormSend.controls.field_nombre_c_origen.setValue(this.auth.resumen.field_nombre_c_origen[0].value);
       this.FormSend.controls.field_nombre_c_destino.setValue(this.auth.resumen.field_nombre_c_destino[0].value);
-      this.FormSend.controls.field_precio_.setValue(resultadoTotalCosto);
+
+      console.log('resultadoTotalCosto antes de asignar:', resultadoTotalCosto);
+
+      this.FormSend.controls.field_precio_.setValue(Number(resultadoTotalCosto));
+
 
     } catch (error) {
       console.error(error);

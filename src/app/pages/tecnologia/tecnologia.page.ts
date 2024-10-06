@@ -416,7 +416,8 @@ await alert.present();
    this.FormSend.controls.field_barrio_destino.setValue(item.name);
   }
 
-   async sendForm(){
+  async sendForm() {
+     console.log("enviando");
     if(this.FormSend.value['field_metodo_de_pago']==''){
       const alert = await this.alertController.create({
 
@@ -431,7 +432,8 @@ await alert.present();
     }
     for(let i=0;i<this.ciudades.length;i++){
       if(this.ciudades[i]['name']==localStorage.getItem('locacion')){
-        console.log(this.auth.medioTransporte,'estoy en ciudad');
+        console.log(this.auth.medioTransporte, 'estoy en ciudad');
+        console.log(this.AuxMotosDisponibles['length']);
         if(this.AuxMotosDisponibles['length']==0){
           const alert = await this.alertController.create({
 
@@ -491,6 +493,8 @@ await alert.present();
           this.router.navigate(['/resumen-tecnologia']);
 
         }
+
+        console.log("Saliendo");
         break;
       }else{
         console.log('publo');

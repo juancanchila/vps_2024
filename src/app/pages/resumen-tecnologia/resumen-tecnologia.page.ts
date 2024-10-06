@@ -71,10 +71,12 @@ field_nombre_c_destino:[""]
 
      }else{
 
-    if(this.FormSend.invalid){
+      if (this.FormSend.invalid) {
+
+        console.log(this.FormSend.value);
       const alertElement= await this.alertController.create({
 
-        header: '¡Su solicitud es mayor a 100000$ debe ser transportada en carro!',
+        header: '¡Su solicitud es mayor a $100000 debe ser transportada en carro!',
         message: '¿Desea ir a medio de transporte carro?',
 
         buttons: [
@@ -177,7 +179,7 @@ field_nombre_c_destino:[""]
       console.log(localStorage.getItem('zona_destino'), 'zona_destino');
       console.log(localStorage.getItem('servicioEvaluado'), 'servicioEvaluado');
 
-      let resultadoTotalCosto = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCosto = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino'),

@@ -312,10 +312,21 @@ export class AuthService {
 
   }
 
+  getMessageEmprendedores(): Observable<any> {
+    return this.http.get('http://147.182.203.91/emprendedores_message').pipe(
+      map((res: any) => {
 
+        return res;
+
+
+
+      })
+    )
+
+  }
 
   getMessageRestaurante(): Observable<any> {
-    return this.http.get('http://147.182.203.91/restaurante_message').pipe(
+    return this.http.get('http://147.182.203.91/restaurantes_message').pipe(
       map((res: any) => {
 
         return res;
@@ -342,7 +353,7 @@ export class AuthService {
   }
 
   getMessageAlmacen(): Observable<any> {
-    return this.http.get('http://147.182.203.91/almacen').pipe(
+    return this.http.get('http://147.182.203.91/almacen_message').pipe(
       map((res: any) => {
 
         return res;
@@ -355,7 +366,7 @@ export class AuthService {
   }
 
   getMessageTextiles(): Observable<any> {
-    return this.http.get('http://147.182.203.91/textiles').pipe(
+    return this.http.get('http://147.182.203.91//textiles_message').pipe(
       map((res: any) => {
 
         return res;

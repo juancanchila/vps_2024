@@ -1,5 +1,3 @@
-
-
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
@@ -19,9 +17,8 @@ import { Keyboard } from '@capacitor/keyboard';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
 import { NotificationsService } from './services/notifications.service';
 import { environment } from '../environments/environment';
-
+import { Diagnostic } from '@awesome-cordova-plugins/diagnostic/ngx';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
-
 
 
 
@@ -46,7 +43,7 @@ AutoCompleteModule,
 ],
 
 
-  providers: [Clipboard, ProviderService,NotificationsService, AuthService, ReactiveFormsModule,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [Clipboard, Diagnostic,ProviderService,NotificationsService, AuthService, ReactiveFormsModule,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

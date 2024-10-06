@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button ></ion-back-button>
-      
+
     </ion-buttons>
     <ion-title>Resumen</ion-title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat Light &display=swap" rel="stylesheet">
@@ -12,15 +12,19 @@
 
 
 <ion-content>
+  <div class="contentImg">
+    <ion-img  src="../../assets/banners/ordenes_creadas.gif" alt=""></ion-img>
+
+  </div>
     <ion-card-content class="contain">
     <form  [formGroup]="FormSend" (ngSubmit)="irAPagar()">
       <ion-label > <b>Disciplina </b></ion-label>
 
 
 
-      
+
       <ion-item >
-          
+
         <select disabled="true" formControlName="field_prefijo_origen" class="locacion">
           <option value="fútbol" selected >fútbol</option>
           <option value="ciclismo">ciclismo</option>
@@ -36,11 +40,11 @@
           <option value="item3">item3</option>
           <option value="item4"> item4</option>
         </select>
-       
+
       </ion-item>
       <ion-label > <b>Fecha</b> </ion-label>
       <ion-item >
-        
+
         <ion-input formControlName="field_contacto" type="date" id="start" name="trip-start"
         value="2018-07-22"
         min="2018-01-01" max="2030-12-31" required></ion-input>
@@ -48,20 +52,20 @@
 
       <ion-label > <b>Hora</b> </ion-label>
       <ion-item >
-        
+
         <ion-input formControlName="field_prefijo_destino"  type="time" name="hora" value="11:45:00" max="22:30:00" min="10:00:00" step="1" required></ion-input>
       </ion-item>
       <ion-label > <b>Punto de encuentro </b> </ion-label>
       <ion-item >
         <textarea disabled="true" formControlName="field_locacion_entrega" type="text" required></textarea>
-       
-        
-        
+
+
+
       </ion-item>
-      
-      
-      
-   
+
+
+
+
       <ion-label > <b>Locación Destino</b> </ion-label>
       <ion-item >
         <select disabled="true" formControlName="field_locacion_destino" class="locacion">
@@ -75,18 +79,18 @@
           <option>Baranoa</option>
           <option>Sabanalarga</option>
         </select>
-        
+
       </ion-item>
-  
-      
+
+
       <ion-label > <b>Contacto</b> </ion-label>
       <ion-item >
-        
+
         <textarea disabled="true" formControlName="field_contacto_destino" type="text" required></textarea>
       </ion-item>
-     
-     
-  
+
+
+
       <ion-row>
         <ion-col>
           <ion-button   replaceUrl="true"  type="submit" color="warning" >Ir a Pagar</ion-button>
@@ -94,6 +98,6 @@
       </ion-row>
     </form>
   </ion-card-content>
-  
+
 </ion-content>
 

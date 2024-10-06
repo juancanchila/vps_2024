@@ -286,7 +286,7 @@ validadorDeRuta:any;
 
 
 
-      let resultadoTotalCostoDestino1 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino1 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino'),
@@ -294,14 +294,14 @@ validadorDeRuta:any;
       );
       resultadoTotalCostoDestino1 = Number(resultadoTotalCostoDestino1);
 
-      let resultadoTotalCostoDestino2 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino2 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino2'),
         this.auth.medioTransporte
       );
       resultadoTotalCostoDestino2 = Number(resultadoTotalCostoDestino2);
-      let resultadoTotalCostoDestino3 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino3 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino3'),
@@ -310,7 +310,7 @@ validadorDeRuta:any;
 
       resultadoTotalCostoDestino3 = Number(resultadoTotalCostoDestino3);
 
-      let resultadoTotalCostoDestino4 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino4 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino4'),
@@ -319,7 +319,7 @@ validadorDeRuta:any;
 
       resultadoTotalCostoDestino4 = Number(resultadoTotalCostoDestino4);
 
-      let resultadoTotalCostoDestino5 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino5 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino5'),
@@ -328,7 +328,7 @@ validadorDeRuta:any;
 
       resultadoTotalCostoDestino5 = Number(resultadoTotalCostoDestino5);
 
-      let resultadoTotalCostoDestino6 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino6 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino6'),
@@ -337,7 +337,7 @@ validadorDeRuta:any;
 
       resultadoTotalCostoDestino6 = Number(resultadoTotalCostoDestino6);
 
-      let resultadoTotalCostoDestino7 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino7 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino7'),
@@ -346,7 +346,7 @@ validadorDeRuta:any;
 
       resultadoTotalCostoDestino7 = Number(resultadoTotalCostoDestino7);
 
-      let resultadoTotalCostoDestino8 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino8 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino8'),

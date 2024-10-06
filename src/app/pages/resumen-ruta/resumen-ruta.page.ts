@@ -206,7 +206,7 @@ field_nombre_c_destino2:[""],
 
        //
 
-       let resultadoTotalCostoDestino1 = await this.auth.calcularPrecioTarifa(
+      var resultadoTotalCostoDestino1 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino'),
@@ -214,7 +214,7 @@ field_nombre_c_destino2:[""],
       );
       resultadoTotalCostoDestino1 = Number(resultadoTotalCostoDestino1);
 
-      let resultadoTotalCostoDestino2 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino2 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino2'),

@@ -321,7 +321,7 @@ export class ResumenRuta10Page implements OnInit {
 
 
 
-      let resultadoTotalCostoDestino1 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino1 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino'),
@@ -329,14 +329,14 @@ export class ResumenRuta10Page implements OnInit {
       );
       resultadoTotalCostoDestino1 = Number(resultadoTotalCostoDestino1);
 
-      let resultadoTotalCostoDestino2 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino2 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino2'),
         this.auth.medioTransporte
       );
       resultadoTotalCostoDestino2 = Number(resultadoTotalCostoDestino2);
-      let resultadoTotalCostoDestino3 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino3 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino3'),
@@ -345,7 +345,7 @@ export class ResumenRuta10Page implements OnInit {
 
       resultadoTotalCostoDestino3 = Number(resultadoTotalCostoDestino3);
 
-      let resultadoTotalCostoDestino4 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino4 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino4'),
@@ -354,7 +354,7 @@ export class ResumenRuta10Page implements OnInit {
 
       resultadoTotalCostoDestino4 = Number(resultadoTotalCostoDestino4);
 
-      let resultadoTotalCostoDestino5 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino5 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino5'),
@@ -363,7 +363,7 @@ export class ResumenRuta10Page implements OnInit {
 
       resultadoTotalCostoDestino5 = Number(resultadoTotalCostoDestino5);
 
-      let resultadoTotalCostoDestino6 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino6 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino6'),
@@ -372,7 +372,7 @@ export class ResumenRuta10Page implements OnInit {
 
       resultadoTotalCostoDestino6 = Number(resultadoTotalCostoDestino6);
 
-      let resultadoTotalCostoDestino7 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino7 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino7'),
@@ -381,7 +381,7 @@ export class ResumenRuta10Page implements OnInit {
 
       resultadoTotalCostoDestino7 = Number(resultadoTotalCostoDestino7);
 
-      let resultadoTotalCostoDestino8 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino8 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino8'),
@@ -389,7 +389,7 @@ export class ResumenRuta10Page implements OnInit {
       );
 
       resultadoTotalCostoDestino8 = Number(resultadoTotalCostoDestino8);
-      let resultadoTotalCostoDestino9 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino9 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino9'),
@@ -397,7 +397,7 @@ export class ResumenRuta10Page implements OnInit {
       );
 
       resultadoTotalCostoDestino9 = Number(resultadoTotalCostoDestino9);
-      let resultadoTotalCostoDestino10 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino10 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino10'),

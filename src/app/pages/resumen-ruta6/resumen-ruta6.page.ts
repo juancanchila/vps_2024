@@ -259,7 +259,7 @@ localStorage.setItem('actualizarContrato',estado);
 
 
 
-      let resultadoTotalCostoDestino1 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino1 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino'),
@@ -267,14 +267,14 @@ localStorage.setItem('actualizarContrato',estado);
       );
       resultadoTotalCostoDestino1 = Number(resultadoTotalCostoDestino1);
 
-      let resultadoTotalCostoDestino2 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino2 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino2'),
         this.auth.medioTransporte
       );
       resultadoTotalCostoDestino2 = Number(resultadoTotalCostoDestino2);
-      let resultadoTotalCostoDestino3 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino3 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino3'),
@@ -283,7 +283,7 @@ localStorage.setItem('actualizarContrato',estado);
 
       resultadoTotalCostoDestino3 = Number(resultadoTotalCostoDestino3);
 
-      let resultadoTotalCostoDestino4 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino4 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino4'),
@@ -292,7 +292,7 @@ localStorage.setItem('actualizarContrato',estado);
 
       resultadoTotalCostoDestino4 = Number(resultadoTotalCostoDestino4);
 
-      let resultadoTotalCostoDestino5 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino5 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino5'),
@@ -301,7 +301,7 @@ localStorage.setItem('actualizarContrato',estado);
 
       resultadoTotalCostoDestino5 = Number(resultadoTotalCostoDestino5);
 
-      let resultadoTotalCostoDestino6 = await this.auth.calcularPrecioTarifa(
+     var resultadoTotalCostoDestino6 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino6'),
