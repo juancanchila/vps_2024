@@ -183,6 +183,7 @@ field_nombre_c_origen:[""],
         1
       );
       resultadoTotalCosto = Number(resultadoTotalCosto);
+
       console.log(resultadoTotalCosto, 'resultadoTotalCosto');
 
 
@@ -237,7 +238,7 @@ field_nombre_c_origen:[""],
 
 
    this.FormSend.controls.field_precio_.setValue(resultadoTotalCosto);
-
+   localStorage.setItem('precioTarifa',resultadoTotalCosto);
     } catch (error) {
       console.error(error);
     }

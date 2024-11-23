@@ -93,9 +93,8 @@ field_prefijo_destino:[ ""],
    }
 
 
-   async slideNext(){
-
-        // Obtener el valor del radio button seleccionado usando el ID
+   async slideNext() {
+    // Obtener el valor del radio button seleccionado usando el ID
     const cargaPequena = (document.getElementById('checkbox1') as HTMLInputElement);
     const cargaGrande = (document.getElementById('checkbox2') as HTMLInputElement);
 
@@ -103,84 +102,52 @@ field_prefijo_destino:[ ""],
       this.selectedCargaType = cargaPequena.value; // "Carga pequeña"
     } else if (cargaGrande.checked) {
       this.selectedCargaType = cargaGrande.value; // "Carga grande"
-     }
-
-     localStorage.setItem('tipoCarga', this.selectedCargaType);
-      console.log(this.selectedCargaType);
-
-    if(this.AuxCarrosGrandesDisponibles['length']==0){
-      const alert = await this.alertController.create({
-
-        header: 'Advertencia',
-
-        message: 'En este momento no tenemos auxiliar disponible',
-        // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-        buttons: [
-
-        {
-          text:'aceptar',
-          handler:()=>{
-
-            this.ngOnInit();
-
-          }
-        }
-      ]
-      });
-
-      await alert.present();
-    }else{
-      console.log(this.FormSend.value['field_barrio_origen']);
-      // console.log(this.FormSend.value['field_barrio_destino']);
-      // console.log(this.direccion)
-      var barrioExiste= new Boolean();
-       for (var i = 0; i <this.direccion.length; i++) {
-
-
-         if(this.FormSend.value['field_barrio_origen']==this.direccion[i].name){
-           barrioExiste=true;
-           let n = i;
-           this.swiper.swiperRef.slideNext(1000);
-
-      // this.auth.sendFormulario(this.FormSend.value);
-      // this.router.navigate(['/resumen']);
-   return
-
-         }else{
-          barrioExiste=false;
-
-         }
-
-
-
-
-
-       }
-   console.log(barrioExiste);
-
-   if(barrioExiste==false){
-   const alert = await this.alertController.create({
-
-     header: 'Error de barrios',
-
-     message: 'Barrio(s) no identificado, Debes seleccionar tu barrio de la lista',
-     // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-     buttons: [
-     {
-       text:'aceptar',
-
-     }]
-   });
-
-   await alert.present();
-
-   }
-
     }
 
+    // Guardar el tipo de carga en el localStorage
+    localStorage.setItem('tipoCarga', this.selectedCargaType);
+    console.log(this.selectedCargaType);
 
+    // Verificar si hay vehículos disponibles según el tipo de carga
+    if (this.selectedCargaType === 'Carga pequeña' && this.AuxCarrosMedianosDisponibles['length'] === 0) {
+      // No hay vehículos disponibles para carga pequeña
+      await this.showAlert('Advertencia', 'En este momento no tenemos carros disponibles para carga pequeña.');
+      this.swiper.swiperRef.slidePrev(1000);  // Regresar al slide anterior
+      return;  // No continuar con la acción
+    } else if (this.selectedCargaType === 'Carga grande' && this.AuxCarrosGrandesDisponibles['length'] === 0) {
+      // No hay vehículos disponibles para carga grande
+      await this.showAlert('Advertencia', 'En este momento no tenemos carros disponibles para carga grande.');
+      this.swiper.swiperRef.slidePrev(1000);  // Regresar al slide anterior
+      return;  // No continuar con la acción
+    }
 
+    // Si hay vehículos disponibles, verificar el barrio y continuar al siguiente slide
+    console.log(this.FormSend.value['field_barrio_origen']);
 
+    let barrioExiste = false;
+    for (let i = 0; i < this.direccion.length; i++) {
+      if (this.FormSend.value['field_barrio_origen'] === this.direccion[i].name) {
+        barrioExiste = true;
+        this.swiper.swiperRef.slideNext(1000);  // Avanzar al siguiente slide
+        return;
+      }
+    }
+
+    console.log(barrioExiste);
+
+    // Si no se encuentra el barrio, mostrar un error
+    if (!barrioExiste) {
+      await this.showAlert('Error de barrios', 'Barrio(s) no identificado, Debes seleccionar tu barrio de la lista');
+    }
+  }
+
+  async showAlert(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['Aceptar']
+    });
+    await alert.present();
   }
 
   setCargaType(event: any) {

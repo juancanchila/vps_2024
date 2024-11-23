@@ -493,7 +493,7 @@ export class AuthService {
     };
     console.log(datoRegistro);
 
-    this.http.post<RegisterI>('http://147.182.203.91/user/register?_format=hal_json', datoRegistro, { headers: headers }).subscribe(data2 => {
+    this.http.post<RegisterI>('http://147.182.203.91/user/register?_format=json', datoRegistro, { headers: headers }).subscribe(data2 => {
       console.log(data2);
     }, error2 => {
       this.anonimustoken = "" + error2.error.text;
@@ -526,26 +526,36 @@ export class AuthService {
           //metodo para para consultar rol de de usuario
           this.consultarIdAuxiliar().subscribe(res => {
             console.log(res);
+            console.log(  localStorage.getItem('modoAuxiliar'),"Antes de iniicar que modo es?");
+
             if (res != null ) {
 
+              if (localStorage.getItem('modoAuxiliar') === null || localStorage.getItem('modoAuxiliar') === '') {
+                localStorage.setItem('modoAuxiliar', 'modoCliente');
+            }
+
               if(res['0']['field_push_user'] == ""){
+
 
                 localStorage.setItem('idAuxiliar', res['0']['uid']);
                 localStorage.setItem('rolAuxiliar', res['0']['roles_target_id']);
                 if (res['0']['roles_target_id'] == 'Auxiliar' && localStorage.getItem('modoAuxiliar') == 'modoColaborador') {
 
+                  localStorage.setItem('modoAuxiliar','modoColaborador');
                   localStorage.setItem('Ingresado', 'true');
                   this.router.navigateByUrl('/modo-colaborador');
                   this.geolocation.requestPermissions();
                   this.getLocation();
                 } else {
+                  localStorage.setItem('modoAuxiliar','modoCliente');
                   localStorage.setItem('Ingresado', 'true');
                   this.router.navigateByUrl('/tabs');
                   this.getLocation();
                   this.geolocation.requestPermissions();
                 }
                 this.enviarPushNotificacionAuxiliar();
-              }else{
+              } else {
+
                 alert('Debe cerrar sesion en el dispositivo anterior o comunicate con el administrador');
 
               }
@@ -585,6 +595,9 @@ export class AuthService {
         console.log(this.base64);
         this.tokencsrf2 = localStorage.getItem("csrf_token");
         localStorage.setItem('EXPIRES_IN', data['logout_token']);
+
+        localStorage.setItem('session_ends', data['access_token']);
+
         console.log(this.tokencsrf2);
 
 
@@ -1361,71 +1374,59 @@ export class AuthService {
   //metodo para enviat posicion
 
   async EnviarPosicionAuxiliar() {
-
-
-
-
     let sencilla = {
       "title": [{ "value": 'Posicion auxiliar' }],
-
       "type": [{ "target_id": 'disponibles' }],
       "field_estado": [{ "value": this.estadoPedido }],
       "field_longitud_actual": [{ "value": this.longitud }],
       "field_latitud_actual": [{ "value": this.latitud }],
       "field_location": [{ "value": localStorage.getItem('locacion') }],
       "field_tipo_vehiculo": [{ "value": localStorage.getItem('tipoVehiculo') }],
-
-
-
+    };
+/*
+    // Verificar que todos los campos estén completos
+    if (
+      !sencilla.field_estado[0].value ||
+      !sencilla.field_longitud_actual[0].value ||
+      !sencilla.field_latitud_actual[0].value ||
+      !sencilla.field_location[0].value ||
+      !sencilla.field_tipo_vehiculo[0].value
+    ) {
+      // Mostrar alerta y cerrar sesión si falta algún campo
+      alert('Algo salió mal, por favor intente nuevamente');
+      this.logout2();
+      return; // Salir de la función para evitar que se envíe la solicitud
     }
-
+*/
     this.resumen = sencilla;
-
-
     const converSencilla = JSON.stringify(sencilla);
     console.log(converSencilla);
-    if (sencilla.field_longitud_actual[0].value == undefined||sencilla.field_latitud_actual[0].value == undefined) {
-      this.geolocation.openSetting();
 
-    } else {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + this.b64,
+      'X-CSRF-Token': this.tokencsrf
+    });
 
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json', 'Authorization': 'Basic ' + this.b64,
-        'X-CSRF-Token': this.tokencsrf
-      });
-
-      this.http.post('http://147.182.203.91/node?_format=hal_json', converSencilla, { headers: headers }).subscribe(async data2 => {
-
-
-
-        console.log(data2);
-
-        localStorage.setItem('nodeDisponibilidad', data2['nid']['0'].value);
-
-      }, error2 => {
-        console.log(error2);
-        if (error2.status == 0) {
-          alert('Error revise su conexion');
-          this.logout2();
-
-        } else if (error2.status == 422) {
-          alert('En estos momentos no podemos atender tu orden');
-          this.logout2();
-
+    this.http.post('http://147.182.203.91/node?_format=hal_json', converSencilla, { headers: headers })
+      .subscribe(
+        async data2 => {
+          console.log(data2);
+          localStorage.setItem('nodeDisponibilidad', data2['nid']['0'].value);
+        },
+        error2 => {
+          console.log(error2);
+          if (error2.status === 0) {
+            alert('Error: revise su conexión');
+            this.logout2();
+          } else if (error2.status === 422) {
+            alert('En estos momentos no podemos atender tu orden');
+            this.logout2();
+          }
         }
-
-
-      });
-
-
-    }
-
-
-
-
-
-
+      );
   }
+
   //metodo para actualizar posicion
   async actualizarPosicionEnviadaAuxiliar() {
 
@@ -2188,25 +2189,11 @@ export class AuthService {
   //metodo para recuperar contraseña
   resetPassword(email) {
 
-    this.http.get('http://147.182.203.91/session/token', {}).subscribe(data => {
-      console.log(data);
-    }, error => {
 
-      console.log(error);
-      console.log(error.error.text);
-      console.log(error.status);
-      this.anonimustoken = error.status;
-    });
 
-    setTimeout(() => {
+
       let sencilla = {
         "email": email,
-
-
-
-
-
-
 
       }
 
@@ -2216,8 +2203,7 @@ export class AuthService {
       console.log(converSencilla);
 
       const headers = new HttpHeaders({
-        'Content-Type': 'application/json', 'Accept': 'application/json',
-        'X-CSRF-Token': this.anonimustoken
+        'Content-Type': 'application/json', 'Accept': 'application/json'
       });
 
       this.http.post('http://147.182.203.91/api/demo_resource3?_format=json', converSencilla, { headers: headers }).subscribe(async data2 => {
@@ -2273,7 +2259,7 @@ export class AuthService {
       });
 
 
-    }, 5000)
+
 
   }
 
@@ -2869,7 +2855,7 @@ export class AuthService {
       "field_barrio_destino": [{ "value": user.field_barrio_destino }],
       "field_push_token": [{ "value": localStorage.getItem('tokenFire') }],
       "field_nombre_c_destino": [{ "value": user.field_nombre_c_origen }],
-      "field_precio_": [{ "value": this.domicilioRestaurante }],
+      "field_precio_": [{ "value": localStorage.getItem('precioTarifa') }],
       "field_medio_de_transporte": [{ "value": this.medioTransporte }],
       "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino') }],
       "field_url_imagen_origen": [{ "value": localStorage.getItem('imgBarrioOrigenRestaurante') }],
@@ -4718,7 +4704,8 @@ export class AuthService {
   */
   logout2() {
     //Eliminar ususario
-    this.enviarPushNotificacionAuxiliarEnBlanco();
+   // this.enviarPushNotificacionAuxiliarEnBlanco();
+
     let data = {
       "iduser": this.id
 
@@ -5709,9 +5696,6 @@ async enviarPushEnCompletado() {
   seleccionarServicioCarroGrande() {
     this.medioTransporte = 4;
     console.log(this.medioTransporte);
-
-
-
 
   }
   seleccionarServicioMotoYcarroMunicipio() {

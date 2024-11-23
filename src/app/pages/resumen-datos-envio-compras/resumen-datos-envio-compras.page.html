@@ -5,14 +5,20 @@
     </ion-buttons>
     <ion-title>Resumen</ion-title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat Light &display=swap" rel="stylesheet">
+
 
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div class="contentImg">
-    <ion-img  src="../../assets/banners/ordenes_creadas.gif" alt=""></ion-img>
 
+
+  <div class="contentImg">
+    <ng-container *ngIf="servicioEvaluado === 'restaurantes' || servicioEvaluado === 'emprendedores' || servicioEvaluado === 'fruver'; else defaultImage">
+      <ion-img class="img-slider" [src]="'../../assets/banners/' + servicioEvaluado + '.gif'" alt=""></ion-img>
+    </ng-container>
+    <ng-template #defaultImage>
+      <ion-img class="img-slider" src="../../assets/banners/ordenes_creadas.gif" alt="Default Image"></ion-img>
+    </ng-template>
   </div>
 
     <ion-card-content class="contain">
@@ -101,7 +107,7 @@
                 </h2>
 
               <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
-              <link href="https://fonts.googleapis.com/css2?family=Montserrat Light &display=swap" rel="stylesheet">
+
 
               </div>
               </ion-header>
@@ -138,15 +144,21 @@
                   </table>
 
                 </ion-item>
-                <div  class="div1">
-                  <b class="bearer">Subtotal:</b> <div class="sub">${{subtotal}}</div>
-                </div>
-                <div  class="div2">
-                 <b class="bearer">Domicilio:</b> <div class="sub">${{domicilioValor}}</div>
-                </div>
-                <div class="div2">
-                  <b class="bearer">Total:</b> <div class="sub">${{total}}</div>
-                </div>
+
+          <div class="totals">
+    <div class="total-item">
+        <b class="label">Subtotal:</b>
+        <div class="value">${{subtotal}}</div>
+    </div>
+    <div class="total-item">
+        <b class="label">Domicilio:</b>
+        <div class="value">${{domicilioValor}}</div>
+    </div>
+    <div class="total-item">
+        <b class="label">Total:</b>
+        <div class="value">${{total}}</div>
+    </div>
+</div>
 
 
 

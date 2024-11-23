@@ -4,7 +4,7 @@
       <ion-back-button defaultHref="tabs"></ion-back-button>
       <img class="imgtoolbar" src="../../assets/botones/LOGOUPERIOR-92.png"  alt="">
     </ion-buttons>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat Light &display=swap" rel="stylesheet">
+
 
   </ion-toolbar>
 </ion-header>
@@ -20,7 +20,9 @@
    <br>
    <div class="box-img-perfil">
 
-    <img rounded-corners [src]="urlBase+characte.user_picture" >
+    <img class="profile-img" rounded-corners [src]="urlBase+characte.user_picture" >
+
+
     <h1 class="txtperfil" color="warning"> <b >Mi perfil</b> </h1>
    </div>
 
@@ -31,10 +33,11 @@
   <h1 class=".boxh1">{{characte?.Role}}</h1>
    <h1><b>Teléfono: </b>  </h1>
    <h1 class=".boxh1"> {{characte?.field_telefono_auxuliar}}</h1>
-   <h1><b>Cuenta Nequi: </b> </h1>
+   <h1  *ngIf="characte?.field_cuenta_nequi"><b>Cuenta Nequi: </b> </h1>
    <h1 class=".boxh1">{{characte?.field_cuenta_nequi}}</h1>
-   <h1><b>Cuenta Daviplata: </b> </h1>
+   <h1 *ngIf="characte?.field_cuenta_daviplata" ><b>Cuenta Daviplata: </b> </h1>
    <h1 class=".boxh1">{{characte?.field_cuenta_daviplata}}</h1>
+
   </div>
 
  </ion-card>

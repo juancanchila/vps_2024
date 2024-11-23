@@ -1,32 +1,32 @@
 <ion-header class="back">
   <ion-toolbar >
-    
+
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <img class="imgtoolbar" src="../../assets/botones/LOGOUPERIOR-92.png"  alt="">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat Light &display=swap" rel="stylesheet">
 
-    
+
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="background">
   <ion-label class="title"><b>Formulario de Registro</b></ion-label>
   <ion-card-content class="contain">
-  <form [formGroup]="regisForm" (ngSubmit)="guardar()" > 
-   
+  <form [formGroup]="regisForm" (ngSubmit)="guardar()" >
 
-     
+
+
     <ion-item >
       <ion-label  >Nombre</ion-label>
       <ion-input  class="corto" formControlName="field_nombres_registro" type="text" required></ion-input>
     </ion-item>
- 
 
 
-  
+
+
     <ion-item >
       <ion-label >Apellidos</ion-label>
       <ion-input class="corto" formControlName="field_apellidos_registro" type="text" required></ion-input>
@@ -59,14 +59,14 @@
       <ion-label >Dirección</ion-label>
       <ion-input class="corto" formControlName="field_direccion_registro"type="text" required></ion-input>
     </ion-item>
-   
+
     <div>
-     
+
        <small> <label class="switchBtn">
         <input class="corto1" id="field_acepta_terminos_registro" formControlName="field_acepta_terminos_registro" value="true" type="checkbox">
-        
-        </label>  Acepto que he leído y comprendido los siguientes   <a (click)="presentAlert()" style="color:yellow"> términos y Condiciones de Uso </a> y al hacer clic en el recuadro y seleccionar "Aceptar", Así como utilizar el presente servicio, dejo constancia expresa de que los acepto de manera libre y consciente habiendo de mi parte revisado satisfactoriamente la información la cual considero adecuada y suficiente</small> 
-      
+
+        </label>  Acepto que he leído y comprendido los siguientes   <a (click)="presentAlert()" style="color:yellow"> términos y Condiciones de Uso </a> y al hacer clic en el recuadro y seleccionar "Aceptar", Así como utilizar el presente servicio, dejo constancia expresa de que los acepto de manera libre y consciente habiendo de mi parte revisado satisfactoriamente la información la cual considero adecuada y suficiente</small>
+
     </div>
     <script>
       if (document.getElementById('field_acepta_terminos_registro').ariaChecked)
@@ -86,16 +86,17 @@ if( $('#checkbox1').prop('checked') ) {
     alert('checkbox1 esta Seleccionado');
 }
     </script>
-    
-    
-    
-    
 
-    
-    
+
+
+
+
+
+
     <ion-row>
       <ion-col>
-        <ion-button type="submit" color="warning" expand="block"><b>Aceptar!</b></ion-button>
+        <ion-button type="submit" color="warning" expand="block"
+        class="send" ><b>Aceptar!</b></ion-button>
       </ion-col>
     </ion-row>
   </form>

@@ -112,87 +112,42 @@ export class TelotengoPage implements OnInit {
 
 
   }
-  async irPageTrasteo(){
-this.auth.getMensajeError();
-    //
-    console.log(this.AuxCarrosGrandesDisponibles['length'],'carros grandes');
-    if(this.AuxCarrosGrandesDisponibles['length']==0){
 
-        const alert = await this.alertCtrl.create({
 
-          header: 'Advertencia',
+async irPageTrasteo() {
+  this.auth.getMensajeError();
 
-          message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-          // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-          buttons: [
+  console.log(this.AuxCarrosGrandesDisponibles['length'], 'carros grandes');
+  console.log(this.AuxCarrosMedianosDisponibles['length'], 'carros medianos');
 
-          {
-            text:'aceptar',
-            handler:()=>{
-
-          this.ngOnInit();
-
-            }
+  // Verificamos si no hay carros grandes ni medianos disponibles
+  if (this.AuxCarrosGrandesDisponibles['length'] == 0 && this.AuxCarrosMedianosDisponibles['length'] == 0) {
+    const alert = await this.alertCtrl.create({
+      header: 'Advertencia',
+      message: 'En este momento no tenemos auxiliares disponibles, no podemos crear tu orden.',
+      buttons: [
+        {
+          text: 'Aceptar',
+          handler: () => {
+            this.ngOnInit();
           }
-        ]
-        });
+        }
+      ]
+    });
 
-        await alert.present();
+    await alert.present();
 
+  } else {
+    // Si hay al menos un carro grande o uno mediano disponible, continuamos
+    this.auth.seleccionarServicioCarroGrande(); // Puedes ajustar esto si necesitas seleccionar otro servicio
 
-
-
-
-
-
-    }else{
-      //
-    console.log(this.AuxCarrosGrandesDisponibles['length'],'carros grandes');
-    if(this.AuxCarrosGrandesDisponibles['length']==0){
-
-        const alert = await this.alertCtrl.create({
-
-          header: 'Advertencia',
-
-          message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-          // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-          buttons: [
-
-          {
-            text:'aceptar',
-            handler:()=>{
-
-          this.ngOnInit();
-
-            }
-          }
-        ]
-        });
-
-        await alert.present();
-
-
-
-
-
-
-
-    }else{
-      this.auth.seleccionarServicioCarroGrande();
-      setTimeout(async () => {
-
-
-        this.router.navigate(['/trasteo']);
-
-
-      },2000)
-    }
-
-
-
-    }
-
+    setTimeout(async () => {
+      this.router.navigate(['/trasteo']);
+    }, 1000);
   }
+}
+
+
   irPageArmaTuEquipo(){
     this.router.navigate(['/arma-tu-equipo']);
 

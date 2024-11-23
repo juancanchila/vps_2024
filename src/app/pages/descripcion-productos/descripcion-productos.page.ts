@@ -240,7 +240,10 @@ if(localStorage.getItem('tienda')=='undefined'){
 
   this.tienda =this.product.stores_target_id;
 // acctuaizar lavariable tienda en el local storage
-localStorage.setItem('tienda',this.tienda);
+  localStorage.setItem('tienda',this.tienda);
+
+  console.log("Definiendo ZOna");
+
 //this.product.cantidad = this.cantidades;
 //this.product.field_price_simple =this.originaPrice;
 this.product.cantidad = this.cantidadDestinos;
@@ -346,7 +349,7 @@ console.log(this.cs,'aqui res');
 
 console.log(this.product.stores_target_id,'target id');
 //crear una variable con la url de la eid
-if(localStorage.getItem('tienda')=='undefined'){
+if(localStorage.getItem('tienda')==='undefined' ){
   /*
   this.cantidades +=  this.cantidadDestinos;
   this.originaPrice = this.originaPrice *this.cantidadDestinos;*/
@@ -354,7 +357,9 @@ if(localStorage.getItem('tienda')=='undefined'){
 
   this.tienda =this.product.stores_target_id;
 // acctuaizar lavariable tienda en el local storage
-localStorage.setItem('tienda',this.tienda);
+  localStorage.setItem('tienda', this.tienda);
+  localStorage.setItem('zona_origen', this.product.field_zona_b);
+  console.log("definiendo origen del producto");
 //this.product.cantidad = this.cantidades;
 //this.product.field_price_simple =this.originaPrice;
 this.product.cantidad = this.cantidadDestinos;
@@ -380,7 +385,7 @@ this.presentAlert();
 //datos emprendedore
 
 }else{
-  if(localStorage.getItem('tienda')==this.product.stores_target_id){
+  if(localStorage.getItem('tienda') === this.product.stores_target_id){
 
     console.log(this.product,'imprimiendo producto');
 /*

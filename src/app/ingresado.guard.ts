@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class IngresadoGuard implements CanActivate { 
+export class IngresadoGuard  implements CanActivate {
   constructor(private router: Router , private menuctrl:MenuController){
 
   }
@@ -21,8 +21,8 @@ export class IngresadoGuard implements CanActivate {
       this.menuctrl.enable(false,'first');
     this.router.navigateByUrl('login');
       return false;
-      
+
       }
   }
-  
+
 }

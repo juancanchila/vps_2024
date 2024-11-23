@@ -217,7 +217,8 @@ export class ResumenPage implements OnInit {
       );
 
       // set local storage
-      localStorage.setItem('precioTarifa',resultadoTotalCosto);
+
+
       console.log(resultadoTotalCosto, 'resultadoTotalCosto');
 
 
@@ -281,8 +282,8 @@ export class ResumenPage implements OnInit {
 
       console.log('resultadoTotalCosto antes de asignar:', resultadoTotalCosto);
 
-      this.FormSend.controls.field_precio_.setValue(Number(resultadoTotalCosto));
-
+      this.FormSend.controls.field_precio_.setValue(resultadoTotalCosto);
+      localStorage.setItem('precioTarifa', resultadoTotalCosto);
 
     } catch (error) {
       console.error(error);

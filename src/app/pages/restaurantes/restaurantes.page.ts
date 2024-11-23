@@ -183,7 +183,8 @@ criterio:any;
   }
 
   irPageProductos(allPedidos:any){
-    localStorage.setItem('idTienda',allPedidos.store_id);
+    localStorage.setItem('idTienda', allPedidos.store_id);
+    localStorage.setItem('zona_origen',allPedidos.zona_b);
     this.router.navigate(['/restaurante1',JSON.stringify(allPedidos)]);
 
   }

@@ -309,13 +309,17 @@ export class ResumenRuta3Page implements OnInit {
 
       this.FormSend.controls.  field_precio_.setValue(resultadoTotalCostoDestino1);
 
+      localStorage.setItem('precioTarifa', resultadoTotalCostoDestino1);
+
       this.FormSend.controls.field_precio_2.setValue(resultadoTotalCostoDestino2);
+      localStorage.setItem('precioTarifa2', resultadoTotalCostoDestino2);
       this.FormSend.controls.field_precio_3.setValue(resultadoTotalCostoDestino3);
+      localStorage.setItem('precioTarifa3', resultadoTotalCostoDestino3);
 
       this.FormSend.controls.field_precio_4.setValue(TotalDefinitivo);
 
 
-
+      localStorage.setItem('precioTarifaTotalRuta',TotalDefinitivo);
 
 
 } catch (error) {

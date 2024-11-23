@@ -194,6 +194,7 @@ localStorage.setItem('actualizarContrato',estado);
         1
       );
       resultadoTotalCosto = Number(resultadoTotalCosto);
+
       console.log(resultadoTotalCosto, 'resultadoTotalCosto');
 
     this.estadoButton=true;
@@ -236,10 +237,12 @@ localStorage.setItem('actualizarContrato',estado);
   this.FormSend.controls.field_metodo_de_pago.setValue(this.auth.resumen.field_metodo_de_pago['0']['value']);
 
   this.FormSend.controls.field_nombre_c_origen.setValue(this.auth.resumen.field_nombre_c_origen['0']['value']);
-  this.FormSend.controls.field_nombre_c_destino.setValue(this.auth.resumen.field_nombre_c_destino['0']['value']);
+      this.FormSend.controls.field_nombre_c_destino.setValue(this.auth.resumen.field_nombre_c_destino['0']['value']);
+
+  console.log('resultadoTotalCosto antes de asignar:', resultadoTotalCosto);
 
   this.FormSend.controls.field_precio_.setValue(resultadoTotalCosto);
-
+  localStorage.setItem('precioTarifa', resultadoTotalCosto);
 } catch (error) {
   console.error(error);
 }

@@ -1,47 +1,47 @@
-
-ion-title{
+ion-title {
     margin-left: -17%;
     text-align: center;
     text-transform: uppercase;
-    color:white;
+    color: white;
     font-family: 'Montserrat', sans-serif;
-  font-weight: 300; /* Asegura que se use la variante Light */
+    font-weight: 300; /* Asegura que se use la variante Light */
 }
 
-form{
-	margin: auto;
-	width: 95%;
+form {
+    margin: auto;
+    width: 95%;
 }
-ion-toolbar{
+
+ion-toolbar {
     color: white;
     --ion-background-color: #262262;
 }
-small{
+
+small {
     font-size: 15px;
     color: white;
     font-family: 'Poppins', sans-serif;
+}
 
+ion-content {
+    --background: #ecf0f1 url("/assets/botones/FONDOMEDICAMENTOS.png") 0 0/100% 100% repeat;
 }
-ion-content{
-  //  --background: url(../../assets/botones/FONDOMEDICAMENTOS.png) 0 0/100% 100% repeat;
-  --background:#ecf0f1 url("/assets/botones/FONDOMEDICAMENTOS.png") 0 0/100% 100% repeat;
-}
+
 .ion-color-warning {
-    --ion-color-base: #FFF200  !important;
+    --ion-color-base: #FFF200 !important;
 }
-.contentImg{
-   /* padding-top: 20px;*/
- text-align: center;
- }
 
- ion-card{
-    border-radius: 20px;
-    padding: 20px 0 20px 0;
+.contentImg {
+    text-align: center;
 }
-.corto{
-    //margin-left: 29%;
+
+ion-card {
+    border-radius: 20px;
+    padding: 20px 0;
+}
+
+.corto {
     height: 38px;
-   // position: absolute;
     width: 100%;
     display: block;
     background-color: #ecf0f1;
@@ -49,36 +49,40 @@ ion-content{
     font-size: 18px;
     border: 1px solid #333;
 }
-label{
-    color: #262262;
-     font-family: 'Montserrat', sans-serif;
-  font-weight: 300; /* Asegura que se use la variante Light */
 
+label {
+    color: #262262;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
 }
-ion-col{
+
+ion-col {
     text-align: center;
 }
-select{
+
+select {
     color: #262262;
-     font-family: 'Montserrat', sans-serif;
-  font-weight: 300; /* Asegura que se use la variante Light */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
     width: 115px;
     height: 38px;
     background-color: #ecf0f1;
 }
-.locacion{
+
+.locacion {
     color: #262262;
     background-color: #ecf0f1;
     border: unset;
-    width:100%
+    width: 100%;
 }
-input{
+
+input {
     float: right;
     background-color: #ecf0f1;
     margin-right: 6%;
 }
-ion-input{
 
+ion-input {
     height: 38px;
     width: 100%;
     display: block;
@@ -88,18 +92,14 @@ ion-input{
     border: 1px solid #333;
 }
 
-.file{
-
-        margin-top: -11px;
-        font-size: 19px;
-        margin-left: 4px;
-        height: 100%;
-
-
-
-
+.file {
+    margin-top: -11px;
+    font-size: 19px;
+    margin-left: 4px;
+    height: 100%;
 }
-.descaera{
+
+.descaera {
     height: 60px;
     width: 100%;
     display: block;
@@ -107,87 +107,94 @@ ion-input{
     color: #262262;
     font-size: 1rem;
     border: 1px solid #333;
-
 }
 
-ion-tab-bar{
+ion-tab-bar {
     --ion-background-color: #262262;
-
 }
 
-button{
+button {
     display: inline-block;
-      border-radius: none;
-      width: 120px;
-      margin: auto;
-
+    border-radius: none;
+    width: 120px;
+    margin: auto;
 }
 
-ion-label{
-    display: flex;
+ion-label {
     display: flex;
     color: #262262;
     text-transform: uppercase;
-     font-family: 'Montserrat', sans-serif;
-  font-weight: 300; /* Asegura que se use la variante Light */
-  margin-left: 15.5px;
-
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    margin-left: 15.5px;
 }
-.check{
+
+.check {
     padding-top: 5px;
     max-width: 90%;
     padding-bottom: 5px;
     border-bottom: 1px solid #262262;
-    margin:auto;
+    margin: auto;
 }
-.check2{
+
+.check2 {
     padding-top: 5px;
     max-width: 95%;
-    margin:auto;
+    margin: auto;
 }
+
 .form-check {
     padding: 5px;
     margin-left: 70%;
 }
-ion-buttons{
+
+ion-buttons {
     text-align: center;
     margin-left: 11px;
 }
-ion-icon{
+
+ion-icon {
     font-size: 25px;
     color: white;
 }
-.rowBorder{
+
+.rowBorder {
     border: none !important;
 }
-ion-row{
+
+ion-row {
     border-bottom: 2px solid;
 }
-ion-item{
+
+ion-item {
     --ion-background-color: transparent !important;
     --min-height: 0 !important;
-    --border-width: 0 0 0 0 !important;
---inner-border-width: 0 !important;
---show-full-highlight: 0 !important;
---show-inset-highlight: 0 !important;
-margin-bottom: 2%;
+    --border-width: 0 !important;
+    --inner-border-width: 0 !important;
+    --show-full-highlight: 0 !important;
+    --show-inset-highlight: 0 !important;
+    margin-bottom: 2%;
 }
+
 .slide.round {
     border-radius: 34px;
 }
+
 .slide.round:before {
     border-radius: 50%;
 }
-body{
-    --ion-color-primary-contrast: #ffffff;
-  }
- ion-button{
-     color: #fff;
-    font-family: 'Poppins', sans-serif;
- }
 
- .form-check-label.ellipsis {
+body {
+    --ion-color-primary-contrast: #ffffff;
+}
+
+ion-button {
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+}
+
+.form-check-label.ellipsis {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
+}

@@ -1,16 +1,16 @@
 
 
 <ion-header>
-  
- 
+
+
   <ion-toolbar class="background">
     <ion-buttons>
     <ion-menu-button class="main-menu"></ion-menu-button>
     <img class="imgtoolbar" src="../../assets/botones/LOGOUPERIOR-92.png"  alt="">
   </ion-buttons>
-  
+
   </ion-toolbar>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat Light &display=swap" rel="stylesheet">
+
 </ion-header>
 
 <ion-content>
@@ -18,65 +18,65 @@
 
     <ng-template swiperSlide *ngFor="let slide of slider" >
       <div class="slider" >
-        
+
          <ion-img class="img-slider" [src]="urlBase+slide.field_img_banner" alt=""></ion-img>
-          
-       
-  
+
+
+
       </div>
     </ng-template>
-  
+
   </swiper>
 
-  
+
 
 <ion-grid >
- 
- 
+
+
   <ion-row class="mensajeria" col="5" (click)="irPageMensajeria()">
-    
+
     <img src="../../assets/botones/BOTONICONO1.png" alt="">
-   
+
     <p>Mensajería</p>
-   
-  
+
+
   </ion-row>
-  
+
   <ion-row (click)="irPageLlaves()">
     <img src="../../assets/botones/BOTONICONO2.png" alt="">
     <p>LLaves</p>
-    
-   
-   
+
+
+
   </ion-row>
   <ion-row (click)="irPageTelotengo()">
     <img src="../../assets/botones/BOTONTELOTENGO-99.png" alt="">
     <p>Te lo tengo!</p>
-    
-    
+
+
    </ion-row>
-   
+
    <ion-row (click)="irPageRestaurantes()">
     <img src="../../assets/botones/BOTONES-92.jpg" alt="">
-    
+
     <p>Restaurantes</p>
-    
-    
+
+
   </ion-row>
-  
+
   <ion-row (click)="irPageCompras()">
     <img src="../../assets/botones/BOTONES-91.jpg" alt="">
     <p>Compras</p>
-    
-    
+
+
   </ion-row>
   <ion-row (click)="irPageEmprendedores()">
     <img src="../../assets/botones/BOTONES-90.jpg" alt="">
     <p>Emprendedores</p>
-    
-    
+
+
    </ion-row>
-   
+
 </ion-grid>
 <ion-img  [src]="urlBase+character"></ion-img>
 

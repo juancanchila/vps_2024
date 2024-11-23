@@ -225,7 +225,8 @@ field_nombre_c_destino2:[""],
 
     this.precio_origen = Number(localStorage.getItem('tarifaOrigen'));
     this.precio_destino = Number(localStorage.getItem('tarifaDestino'));
-    this.precio_destino2 = Number(localStorage.getItem('tarifaDestino2'));
+       this.precio_destino2 = Number(localStorage.getItem('tarifaDestino2'));
+
     this.presentAlert();
   console.log(this.auth.resumenRuta);
 
@@ -285,10 +286,15 @@ var TotalDefinitivo =  resultadoTotalCostoDestino1 +  resultadoTotalCostoDestino
 
 this.FormSend.controls.  field_precio_.setValue(resultadoTotalCostoDestino1);
 
+       localStorage.setItem('precioTarifa', resultadoTotalCostoDestino1);
+
 this.FormSend.controls.field_precio_2.setValue(resultadoTotalCostoDestino2);
+localStorage.setItem('precioTarifa2', resultadoTotalCostoDestino2);
 
+       this.FormSend.controls.field_precio_3.setValue(TotalDefinitivo);
 
-this.FormSend.controls.field_precio_3.setValue(TotalDefinitivo);
+       localStorage.setItem('precioTarifaTotalRuta', TotalDefinitivo);
+
 } catch (error) {
   console.error(error);
 }

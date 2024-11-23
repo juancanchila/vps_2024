@@ -69,22 +69,23 @@ pasteText:string="";
   openModal: string;
   isModalOpen: boolean;
   validaModal: boolean=false;
+  servicioEvaluado: string;
 
-  constructor(private modalCtrl: ModalController,private clipboard: Clipboard,private router:Router,private auth: AuthService,private alertController:AlertController ,private _route: ActivatedRoute) { 
+  constructor(private modalCtrl: ModalController,private clipboard: Clipboard,private router:Router,private auth: AuthService,private alertController:AlertController ,private _route: ActivatedRoute) {
     this.urlBase=environment.urlBase;
     this.openModal='open-modal';
     this._route.paramMap.subscribe((params: ParamMap) =>  {
-      
+
       this.allPedidos=JSON.parse(params.get('allPedidos'));
 
       console.log(this.allPedidos);
       console.log(this.allPedidos['nid']);
       localStorage.setItem('nodePatch',this.allPedidos['nid']);
 this.eliminarIdNode=this.allPedidos['nid'];
-  this.notificarPushParaCancelar=this.allPedidos['field_push_user'];    
+  this.notificarPushParaCancelar=this.allPedidos['field_push_user'];
 
-    
-      
+
+
     });
   }
   doRefresh(event) {
@@ -99,9 +100,9 @@ this.eliminarIdNode=this.allPedidos['nid'];
 
   async presentAlert() {
     const alert = await this.alertController.create({
-       
+
       header: 'Contrato por prestación de servicios  :',
-     
+
       message: '1.Objeto. El Prestador de Servicios se obliga a ponerse a disposición del Usuario/consumidor brindándole la compañía de un amigo, cómplice y/o acompañante, para ir a los sitios donde quiera, disfrute, necesite o requiera cuando él lo solicite a través de la aplicación.'
       +'Lo anterior de manera voluntaria, sin perjuicio de la supervisión y observaciones que pueda realizar el usuario durante la ejecución del contrato.'+ '<br>'
       +'2. Lugar de la Prestación del Servicio. Los servicios mencionados en la primera cláusula de este contrato serán llevados a cabo en la                                  '+ '<br>'
@@ -118,25 +119,25 @@ this.eliminarIdNode=this.allPedidos['nid'];
       +'<style> ion-checkbox#aut_contrato{padding: 5px 0px 0px 4px} #alert-1-msg{text-align: justify} .alert-message {text-align: justify}  .labelAcepto{display: inline} div{display: block}   </style>'
         ,
       // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-     
+
     });
 
     await alert.present();
-    
-   
+
+
 
    }
-   
+
    async cancelarPedido(){
     localStorage.setItem('tokenNotificacionRecibido', this.notificarPushParaCancelar);
     localStorage.setItem('sencillaCreada',this.eliminarIdNode);
       console.log('cancelar pedido',this.eliminarIdNode);
      if(this.allPedidos['field_aceptado_auxiliar']!='Aceptado' ){
       const alertElement= await this.alertController.create({
-         
+
         header: '¿Esta seguro que desea cancelar este pedido?',
         message: 'Vapaesa',
-        
+
         buttons: [
           {
           text:'cancel',
@@ -145,7 +146,7 @@ this.eliminarIdNode=this.allPedidos['nid'];
         {
           text:'aceptar',
           handler:()=>{
-           
+
           this.auth.quitarSencillaLista();
           this.auth.enviarPushParaCancelarPedido();
           this.router.navigate(['/pedidos']);
@@ -153,15 +154,15 @@ this.eliminarIdNode=this.allPedidos['nid'];
         }
       ]
       });
-    
+
       await alertElement.present();
 
      }else{
       const alertElement= await this.alertController.create({
-         
+
         header: 'Notificación',
         message: 'Ya No es posible cancelar este pedido',
-        
+
         buttons: [
           {
           text:'cancel',
@@ -170,24 +171,26 @@ this.eliminarIdNode=this.allPedidos['nid'];
         {
           text:'aceptar',
           handler:()=>{
-         
+
           }
         }
       ]
       });
-    
+
       await alertElement.present();
      }
-     
+
   }
-  
+
   ngOnInit() {
-  
+
+
+
    if(this.allPedidos['field_estado_del_servicio']=='Completado' && this.allPedidos['field_calificaion']=='false'){
     this.isModalOpen=true;
     }
-     
-   
+
+
 
     if(this.allPedidos['field_observaciones'] != ""){
       this.character7=this.allPedidos['field_observaciones'];
@@ -241,10 +244,10 @@ this.eliminarIdNode=this.allPedidos['nid'];
       this.character9=this.allPedidos['field_ida_y_vuelta'];
 
     }
-    
-    
-    
-   
+
+
+
+
     if(this.allPedidos['created']!= ""){
       this.character12=this.allPedidos['created'];
 
@@ -265,7 +268,7 @@ this.eliminarIdNode=this.allPedidos['nid'];
       this.character17=this.allPedidos['field_farmacia'];
 
     }
-    
+
     if(this.allPedidos['field_musica_preferida']!= ""){
       this.character18=this.allPedidos['field_musica_preferida'];
 
@@ -289,7 +292,7 @@ this.eliminarIdNode=this.allPedidos['nid'];
   else if(this.character21==3){
     this.character22='MotoyCarro';
 
-  
+
 }else if(this.character21==4){
   this.character22='Carro Grande';
 
@@ -378,7 +381,7 @@ this.eliminarIdNode=this.allPedidos['nid'];
       }else{
         this.character41=" No Aceptado";
       }
-      
+
 
     }
 
@@ -397,10 +400,10 @@ this.eliminarIdNode=this.allPedidos['nid'];
 //tipo de orden
       this.character45=this.allPedidos['field_tipo_de_orden'];
 
-    
-    
-    
-    
+
+
+
+
   }
 
   ionViewDidEnter() {
@@ -457,10 +460,10 @@ this.eliminarIdNode=this.allPedidos['nid'];
       this.character9=this.allPedidos['field_ida_y_vuelta'];
 
     }
-    
-    
-    
-   
+
+
+
+
     if(this.allPedidos['created']!= ""){
       this.character12=this.allPedidos['created'];
 
@@ -481,7 +484,7 @@ this.eliminarIdNode=this.allPedidos['nid'];
       this.character17=this.allPedidos['field_farmacia'];
 
     }
-    
+
     if(this.allPedidos['field_musica_preferida']!= ""){
       this.character18=this.allPedidos['field_musica_preferida'];
 
@@ -523,9 +526,9 @@ this.eliminarIdNode=this.allPedidos['nid'];
 
     }
 
-    
-    
-    
+
+
+
   }
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
@@ -539,13 +542,13 @@ this.eliminarIdNode=this.allPedidos['nid'];
       this.auth.enviarCalificacionPedido(this.name);
      this.modalCtrl.dismiss(this.name, 'confirm');
      this.ngOnInit();
-   
+
 
     }else  if(this.auth.ponderacion<3){
-      
-    
+
+
       if( this.name != undefined){
-      
+
         this.validaModal=true;
         this.auth.enviarCalificacionPedido(this.name);
        this.modalCtrl.dismiss(this.name, 'confirm');
@@ -556,10 +559,10 @@ this.eliminarIdNode=this.allPedidos['nid'];
         alert('coloca el motivo de tu calificacion!');
       }
     }
-    
+
   }
 
-  //metodo para copiar 
+  //metodo para copiar
    async copy(copyText) {
     this.clipboard.copy(copyText).then(()=>{
       alert("texto copiado");
@@ -586,6 +589,6 @@ clearCopy(){
     console.log(star);
   }
 
- 
-  
+
+
 }

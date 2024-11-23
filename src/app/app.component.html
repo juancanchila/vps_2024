@@ -1,31 +1,31 @@
 <ion-app>
-  <ion-menu side="start" menuId="first" contentId="main" (ionWillOpen)="nuestraFuncion()">
+  <ion-menu side="start" menuId="first" contentId="main" >
       <ion-header>
         <ion-toolbar >
           <ion-title> <b>Bienvenido</b> </ion-title>
         </ion-toolbar>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat Light &display=swap" rel="stylesheet">
+
       </ion-header>
       <ion-content>
-        
+
         <ion-button class="botonIni" replaceUrl="true" (click)="irAColaborador()" type="submit" color="light" expand="block">{{textoPerfil}}</ion-button>
-        
-       
+
+
           <ion-item (click)="irAPerfil()"><ion-icon name="person-outline"></ion-icon> <p>Mi perfil</p> </ion-item>
           <ion-item *ngIf="textoPerfil==' IR A MODO COLABORADOR'" (click)="irAPedidos()"><ion-icon name="search-outline"></ion-icon><p>Pedidos</p> </ion-item>
            <ion-item *ngIf="textoPerfil==' IR A MODO CLIENTE'"><ion-icon name="logo-usd"></ion-icon> <a href="http://147.182.203.91/flujo_de_pagos">Suscripción</a>  </ion-item>
           <ion-item (click)="iraAyuda()"><ion-icon name="call-outline"></ion-icon><p>Ayuda</p> </ion-item>
-         
-         
-          
-       
-       
+
+
+
+
+
           <ion-button class="salir" type="submit" (click)="logout()"  color="light" expand="block">Cerrar sesión</ion-button>
       </ion-content>
-     
-     
+
+
     </ion-menu>
-    
+
 
 <ion-router-outlet id="main"></ion-router-outlet>
 

@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { IngresadoGuard } from './ingresado.guard';
 import { NoIngresadoGuard } from './no-ingresado.guard';
+import { AuxiliarGuard } from './guards/auxiliar.guard';
+import { ModoColaboradorGuard } from './guards/modo-colaborador-guard.guard';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
- 
+
   {
     path: 'index',
     loadChildren: () => import('./index/index.module').then( m => m.IndexPageModule),
@@ -13,8 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
-    canActivate: [NoIngresadoGuard]
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'register',
@@ -25,7 +26,7 @@ const routes: Routes = [
     path: 'forgot-password',
     loadChildren: () => import('./forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   },
- 
+
   {
     path: 'mensajeria',
     loadChildren: () => import('./mensajeria/mensajeria.module').then( m => m.MensajeriaPageModule),
@@ -74,7 +75,7 @@ const routes: Routes = [
     path: 'resumen',
     loadChildren: () => import('./pages/resumen/resumen.module').then( m => m.ResumenPageModule)
   },
- 
+
   {
     path: 'ordenes-creadas',
     loadChildren: () => import('./pages/ordenes-creadas/ordenes-creadas.module').then( m => m.OrdenesCreadasPageModule)
@@ -124,7 +125,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/almacen/almacen.module').then( m => m.AlmacenPageModule),
     canActivate: [IngresadoGuard]
   },
-  
+
   {
     path: 'carrito-compras',
     loadChildren: () => import('./pages/carrito-compras/carrito-compras.module').then( m => m.CarritoComprasPageModule),
@@ -165,7 +166,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/resumen-medicamentos/resumen-medicamentos.module').then( m => m.ResumenMedicamentosPageModule),
     canActivate: [IngresadoGuard]
   },
-  
+
   {
     path: 'descripcion-productos/:product',
     loadChildren: () => import('./pages/descripcion-productos/descripcion-productos.module').then( m => m.DescripcionProductosPageModule),
@@ -191,7 +192,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/resumen-almacen/resumen-almacen.module').then( m => m.ResumenAlmacenPageModule),
     canActivate: [IngresadoGuard]
   },
-  
+
   {
     path: 'ver-mas-ordenes/:allPedidos',
     loadChildren: () => import('./pages/ver-mas-ordenes/ver-mas-ordenes.module').then( m => m.VerMasOrdenesPageModule),
@@ -199,13 +200,13 @@ const routes: Routes = [
   },
   {
     path: 'login-clave/:name',
-    loadChildren: () => import('./pages/login-clave/login-clave.module').then( m => m.LoginClavePageModule),
+    loadChildren: () => import('./pages/login-clave/login-clave.module').then(m => m.LoginClavePageModule),
     canActivate: [NoIngresadoGuard]
   },
   {
     path: 'tabs',
     loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule),
-    canActivate: [IngresadoGuard]
+    canActivate: [IngresadoGuard,ModoColaboradorGuard]
   },
   {
     path: 'buscar',
@@ -307,7 +308,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/animacion/animacion.module').then( m => m.AnimacionPageModule),
     canActivate: [IngresadoGuard]
   },
-  
+
   {
     path: 'splashcreen',
     loadChildren: () => import('./pages/splashcreen/splashcreen.module').then( m => m.SplashcreenPageModule),
@@ -315,7 +316,9 @@ const routes: Routes = [
   },
   {
     path: 'telotengo',
-    loadChildren: () => import('./pages/telotengo/telotengo.module').then( m => m.TelotengoPageModule)
+    loadChildren: () => import('./pages/telotengo/telotengo.module').then(m => m.TelotengoPageModule)
+    ,
+    canActivate: [IngresadoGuard]
   },
   {
     path: 'carro-taller',
@@ -323,23 +326,33 @@ const routes: Routes = [
   },
   {
     path: 'trasteo',
-    loadChildren: () => import('./pages/trasteo/trasteo.module').then( m => m.TrasteoPageModule)
+    loadChildren: () => import('./pages/trasteo/trasteo.module').then(m => m.TrasteoPageModule)
+    ,
+    canActivate: [IngresadoGuard]
   },
   {
     path: 'arma-tu-equipo',
-    loadChildren: () => import('./pages/arma-tu-equipo/arma-tu-equipo.module').then( m => m.ArmaTuEquipoPageModule)
+    loadChildren: () => import('./pages/arma-tu-equipo/arma-tu-equipo.module').then(m => m.ArmaTuEquipoPageModule)
+    ,
+    canActivate: [IngresadoGuard]
   },
   {
     path: 'zona-gamer',
-    loadChildren: () => import('./pages/zona-gamer/zona-gamer.module').then( m => m.ZonaGamerPageModule)
+    loadChildren: () => import('./pages/zona-gamer/zona-gamer.module').then(m => m.ZonaGamerPageModule)
+    ,
+    canActivate: [IngresadoGuard]
   },
   {
     path: 'resumen-carrotaller',
-    loadChildren: () => import('./pages/resumen-carrotaller/resumen-carrotaller.module').then( m => m.ResumenCarrotallerPageModule)
+    loadChildren: () => import('./pages/resumen-carrotaller/resumen-carrotaller.module').then(m => m.ResumenCarrotallerPageModule)
+    ,
+    canActivate: [IngresadoGuard]
   },
   {
     path: 'resumen-trasteo',
-    loadChildren: () => import('./pages/resumen-trasteo/resumen-trasteo.module').then( m => m.ResumenTrasteoPageModule)
+    loadChildren: () => import('./pages/resumen-trasteo/resumen-trasteo.module').then(m => m.ResumenTrasteoPageModule)
+    ,
+    canActivate: [IngresadoGuard]
   },
   {
     path: 'resumen-arma-tu-equipo',
@@ -347,7 +360,9 @@ const routes: Routes = [
   },
   {
     path: 'resumen-zonagamer',
-    loadChildren: () => import('./pages/resumen-zonagamer/resumen-zonagamer.module').then( m => m.ResumenZonagamerPageModule)
+    loadChildren: () => import('./pages/resumen-zonagamer/resumen-zonagamer.module').then(m => m.ResumenZonagamerPageModule)
+    ,
+    canActivate: [IngresadoGuard]
   },
   {
     path: 'suscripcion',
@@ -355,26 +370,36 @@ const routes: Routes = [
   },
   {
     path: 'mascotas',
-    loadChildren: () => import('./pages/mascotas/mascotas.module').then( m => m.MascotasPageModule)
+    loadChildren: () => import('./pages/mascotas/mascotas.module').then(m => m.MascotasPageModule)
+    ,
+    canActivate: [IngresadoGuard]
   },
   {
     path: 'resumen-mascotas',
-    loadChildren: () => import('./pages/resumen-mascotas/resumen-mascotas.module').then( m => m.ResumenMascotasPageModule)
+    loadChildren: () => import('./pages/resumen-mascotas/resumen-mascotas.module').then(m => m.ResumenMascotasPageModule)
+    ,
+    canActivate: [IngresadoGuard]
   },
   {
     path: 'otros-restaurantes',
-    loadChildren: () => import('./pages/otros-restaurantes/otros-restaurantes.module').then( m => m.OtrosRestaurantesPageModule)
+    loadChildren: () => import('./pages/otros-restaurantes/otros-restaurantes.module').then(m => m.OtrosRestaurantesPageModule)
+    ,
+    canActivate: [IngresadoGuard]
   },
   {
     path: 'resumen-otros-restaurantes',
-    loadChildren: () => import('./pages/resumen-otros-restaurantes/resumen-otros-restaurantes.module').then( m => m.ResumenOtrosRestaurantesPageModule)
+    loadChildren: () => import('./pages/resumen-otros-restaurantes/resumen-otros-restaurantes.module').then(m => m.ResumenOtrosRestaurantesPageModule)
+    ,
+    canActivate: [IngresadoGuard]
   },
   {
     path: 'modalidad',
-    loadChildren: () => import('./pages/modalidad/modalidad.module').then( m => m.ModalidadPageModule)
+    loadChildren: () => import('./pages/modalidad/modalidad.module').then(m => m.ModalidadPageModule)
+    ,
+    canActivate: [IngresadoGuard]
   },
- 
- 
+
+
 ];
 
 @NgModule({

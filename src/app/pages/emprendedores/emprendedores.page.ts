@@ -130,8 +130,11 @@ export class EmprendedoresPage implements OnInit {
     this.router.navigate(['/carrito-compras']);
   }
 
-  irPageProductos(allPedidos:any){
-    localStorage.setItem('idTienda',allPedidos.store_id);
+  irPageProductos(allPedidos: any) {
+    console.log("Definiendo Tenda");
+    localStorage.setItem('idTienda', allPedidos.store_id);
+
+
     this.router.navigate(['/emprendedores1',JSON.stringify(allPedidos)]);
     console.log(this.searched);
   }

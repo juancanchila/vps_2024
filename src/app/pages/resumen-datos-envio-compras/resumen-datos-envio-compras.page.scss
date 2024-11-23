@@ -186,3 +186,27 @@ strong{
 .div1{
     margin-top: 20px;
 }
+
+.totals {
+    padding: 15px;
+}
+
+.total-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    font-size: 16px;
+}
+
+.label {
+    color: #262262;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+
+.value {
+    color: #262262;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    text-align: right;
+}

@@ -11,38 +11,38 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ResumenMascotasPage implements OnInit {
 
- 
+
   FormSend: FormGroup;
 
   constructor(private router: Router, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {
     this.FormSend= this.fb.group({
-     
+
       field_direccion_entrega:[""],
 
       field_contacto:[""],
       field_observaciones:[""],
       field_locacion_entrega:[""],
       field_prefijo_origen:[ ""],
-      
+
       field_locacion_destino:[""],
       field_contacto_destino:[""],
      });
-    
+
    }
-  
+
    async irAPagar(){
-     
+
     if(this.FormSend.invalid ){
       const alertElement= await this.alertController.create({
-           
+
         header: '¡Llene todos los campos!',
         message: ' ¿Desea continuar?',
-        
+
         buttons: [
           {
           text:'cancel',
          role:'Cancel'
-          
+
         },
         {
           text:'aceptar',
@@ -51,30 +51,30 @@ export class ResumenMascotasPage implements OnInit {
             //la orden si se crea pero manualemte cambias de moto a carro
            // this.auth.medioTransporte= 2;
 
-           
+
 
           }
         }
       ]
       });
-    
+
       await alertElement.present();
     }else{
       this.auth.CrearSencillaMascotas(this.FormSend.value);
-     
-      
+
+
 
     }
-   
-    
-    
+
+
+
      //this.auth.sendFormulario(this.FormSend.value);
    }
    async presentAlert() {
     const alert = await this.alertController.create({
-       
+
       header: 'Contrato por prestación de servicios  :',
-     
+
       message: '1.Objeto. El Prestador de Servicios se obliga a ponerse a disposición del Usuario/consumidor brindándole la compañía de un amigo, cómplice y/o acompañante, para ir a los sitios donde quiera, disfrute, necesite o requiera cuando él lo solicite a través de la aplicación.'
       +'Lo anterior de manera voluntaria, sin perjuicio de la supervisión y observaciones que pueda realizar el usuario durante la ejecución del contrato.'+ '<br>'
       +'2. Lugar de la Prestación del Servicio. Los servicios mencionados en la primera cláusula de este contrato serán llevados a cabo en la                                  '+ '<br>'
@@ -97,12 +97,12 @@ export class ResumenMascotasPage implements OnInit {
         handler:()=>{
         //  this.router.navigate(['/tabs']);
         }
-        
+
       },
       {
         text:'aceptar',
         handler:()=>{
-        
+
           let aux = (document.getElementById("aut_contrato") as HTMLInputElement).ariaChecked;
           console.log(aux, 'estado');
 
@@ -120,39 +120,40 @@ export class ResumenMascotasPage implements OnInit {
     });
 
     await alert.present();
-    
-   
+
+
 
    }
-  
- 
+
+
 
   ngOnInit() {
     this.presentAlert();
     this.auth.getSesion();
-   
-  
+
+
   console.log(this.auth.resumen);
   this.FormSend.controls.field_locacion_destino.setValue(this.auth.resumen.field_locacion_destino['0']['value']);
   this.FormSend.controls.field_contacto_destino.setValue(this.auth.resumen.field_contacto_destino['0']['value']);
 
   this.FormSend.controls.field_contacto.setValue(this.auth.resumen.field_contacto['0']['value']);
   this.FormSend.controls.field_observaciones.setValue(this.auth.resumen.field_observaciones['0']['value']);
- 
+
 
   this.FormSend.controls.field_direccion_entrega.setValue(this.auth.resumen.field_direccion_entrega['0']['value']);
- 
+
 
   this.FormSend.controls.field_locacion_entrega.setValue(this.auth.resumen.field_locacion_entrega['0']['value']);
- 
 
-  this.FormSend.controls.field_prefijo_origen.setValue(this.auth.resumen.field_prefijo_origen['0']['value']);
-  
+
+    this.FormSend.controls.field_prefijo_origen.setValue(this.auth.resumen.field_prefijo_origen['0']['value']);
+
+
   }
 
-  
+
   ngOnDestroy() {
-   
+
     console.log("Resumen- OnDestroy")
   }
 

@@ -523,18 +523,26 @@ export class ResumenRuta9Page implements OnInit {
 
 
   this.FormSend.controls.  field_precio_.setValue(resultadoTotalCostoDestino1);
-
-  this.FormSend.controls.field_precio_2.setValue(resultadoTotalCostoDestino2);
+  localStorage.setItem('precioTarifa', resultadoTotalCostoDestino1);
+      this.FormSend.controls.field_precio_2.setValue(resultadoTotalCostoDestino2);
+      localStorage.setItem('precioTarifa2', resultadoTotalCostoDestino2);
       this.FormSend.controls.field_precio_3.setValue(resultadoTotalCostoDestino3);
+      localStorage.setItem('precioTarifa3', resultadoTotalCostoDestino3);
       this.FormSend.controls.field_precio_4.setValue(resultadoTotalCostoDestino4);
+      localStorage.setItem('precioTarifa4', resultadoTotalCostoDestino4);
       this.FormSend.controls.field_precio_5.setValue(resultadoTotalCostoDestino5);
+      localStorage.setItem('precioTarifa5', resultadoTotalCostoDestino5);
       this.FormSend.controls.field_precio_6.setValue(resultadoTotalCostoDestino6);
+      localStorage.setItem('precioTarifa6', resultadoTotalCostoDestino6);
       this.FormSend.controls.field_precio_7.setValue(resultadoTotalCostoDestino7);
+      localStorage.setItem('precioTarifa7', resultadoTotalCostoDestino7);
       this.FormSend.controls.field_precio_8.setValue(resultadoTotalCostoDestino8);
+      localStorage.setItem('precioTarifa8', resultadoTotalCostoDestino8);
       this.FormSend.controls.field_precio_9.setValue(resultadoTotalCostoDestino9);
+      localStorage.setItem('precioTarifa9', resultadoTotalCostoDestino9);
 
   this.FormSend.controls.field_precio_10.setValue(TotalDefinitivo);
-
+  localStorage.setItem('precioTarifaTotalRuta',TotalDefinitivo);
 } catch (error) {
   console.error(error);
 }

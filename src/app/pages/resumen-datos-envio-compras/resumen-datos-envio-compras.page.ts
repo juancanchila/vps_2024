@@ -49,6 +49,8 @@ export class ResumenDatosEnvioComprasPage implements OnInit {
   disabledValue: boolean;
   locacion: any;
   domicilio: string;
+  private resultadoTotalCosto_general: number;
+  servicioEvaluado: string;
   constructor(private cs: CarritoService,private router: Router, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {
     this.urlBase=environment.urlBase;
     this.FormSend= this.fb.group({
@@ -74,6 +76,25 @@ field_nombre_c_origen:[""],
    }
    async slideNext(){
 
+          console.log(localStorage.getItem('zona_origen'), 'zona_origen');
+      console.log(localStorage.getItem('zona_destino'), 'zona_destino');
+      console.log(localStorage.getItem('servicioEvaluado'), 'servicioEvaluado');
+
+     var resultadoTotalCosto = await this.auth.calcularPrecioTarifa(
+        localStorage.getItem('servicioEvaluado'),
+        localStorage.getItem('zona_origen'),
+        localStorage.getItem('zona_destino'),
+        2
+      );
+      this.domicilioValor = resultadoTotalCosto;
+      resultadoTotalCosto = Number(resultadoTotalCosto);
+      console.log(resultadoTotalCosto, 'resultadoTotalCosto');
+
+     this.resultadoTotalCosto_general = Number(resultadoTotalCosto);
+     this.domicilioValor = resultadoTotalCosto;
+     this.total = Number(this.subtotal) + resultadoTotalCosto;
+    //resultado  costo + total
+     localStorage.setItem('precioTarifa', String(this.total));
 
     if(this.AuxCarrosDisponibles['length']==0 && this.AuxMotosDisponibles['length']==0){
       const alert = await this.alertController.create({
@@ -108,7 +129,7 @@ field_nombre_c_origen:[""],
            barrioExiste=true;
            let n = i;
            this.swiper.swiperRef.slideNext(1000);
-                this.calcularDomicilio();
+
 
    return
 
@@ -318,80 +339,7 @@ field_nombre_c_origen:[""],
 
 
   //metodo que calcula precio domicilio
-  calcularDomicilio(){
 
-    if( localStorage.getItem('locacionDestinoSeleccionada') != localStorage.getItem('locacionOrigenSeleccionada') ){
-      if( localStorage.getItem('tarifaExternaOrigen')>localStorage.getItem('tarifaExternaDestino')){
-        this.domicilioValor=Number(localStorage.getItem('tarifaExternaOrigen'));
-        this.auth.domicilioRestaurante=localStorage.getItem('tarifaExternaOrigen');
-        localStorage.setItem('precioTarifa',localStorage.getItem('tarifaExternaOrigen'));
-        //
-
-      }else  if(localStorage.getItem('tarifaExternaDestino') >localStorage.getItem('tarifaExternaOrigen')){
-        this.domicilioValor=Number(localStorage.getItem('tarifaExternaDestino'));
-        this.auth.domicilioRestaurante=localStorage.getItem('tarifaExternaDestino');
-        localStorage.setItem('precioTarifa',localStorage.getItem('tarifaExternaDestino'));
-        //
-
-      }else if(localStorage.getItem('tarifaExternaDestino') ==localStorage.getItem('tarifaExternaOrigen')){
-        this.domicilioValor=Number(localStorage.getItem('tarifaExternaDestino'));
-        this.auth.domicilioRestaurante=localStorage.getItem('tarifaExternaDestino');
-        localStorage.setItem('precioTarifa',localStorage.getItem('tarifaExternaDestino'));
-        //
-
-      }
-    }else{
-      if(Number(localStorage.getItem('tarifaOrigen')) > Number(localStorage.getItem('tarifaDestino')) ){
-     this.domicilioValor=Number(localStorage.getItem('tarifaOrigen'));
-     this.auth.domicilioRestaurante=localStorage.getItem('tarifaOrigen');
-        localStorage.setItem('precioTarifa',localStorage.getItem('tarifaOrigen'));
-      }else if(Number(localStorage.getItem('tarifaDestino'))>Number(localStorage.getItem('tarifaOrigen'))){
-        this.domicilioValor=Number(localStorage.getItem('tarifaDestino'));
-        this.auth.domicilioRestaurante=localStorage.getItem('tarifaDestino');
-        localStorage.setItem('precioTarifa',localStorage.getItem('tarifaDestino'));
-      }else{
-        this.domicilioValor=Number(localStorage.getItem('tarifaDestino'));
-        this.auth.domicilioRestaurante=localStorage.getItem('tarifaDestino');
-        localStorage.setItem('precioTarifa',localStorage.getItem('tarifaDestino'));
-      }
-    }
-    console.log(this.domicilioValor,'domi');
-
-    console.log(Number(this.domicilioValor),'domi a num');
-
-    this.total = this.subtotal+ this.domicilioValor;
-
-     //imprimir por consola file precio si es vehiculo le sumo el porcentaje
-
-
-
-var valorAgregado = parseFloat(localStorage.getItem('valorAgregado'));  // Ejemplo de valor agregado
-
-// Calcula el resultado total
-var resultadoTotalCosto = this.domicilioValor;
-
-// Calcula el porcentaje
-var porcentaje = ( resultadoTotalCosto * valorAgregado) / 100;
-
-// Imprime los resultados en la consola
-
-console.log("Resultado Total de Costo:", resultadoTotalCosto);
-console.log("Valor Agregado:", valorAgregado);
-console.log("Porcentaje de Valor Agregado:", porcentaje)
-console.log("Resultado Total de Costo + porcentaje:", resultadoTotalCosto + porcentaje);
-var TotalDefinitivoParaVehiculos = resultadoTotalCosto + porcentaje;
-
-//condicion para mostrar el valor agregado si es vehiculo
-
-if(this.auth.medioTransporte==2){
-  console.log(this.domicilioValor,'domi');
-
-    console.log(this.domicilioValor = TotalDefinitivoParaVehiculos);
-
-    this.total = this.subtotal+ Number(this.domicilioValor);
-    localStorage.setItem('precioTarifa',this.total.toString());
-}
-  }
    async presentAlert() {
     const alert = await this.alertController.create({
 
@@ -460,20 +408,9 @@ localStorage.setItem('actualizarContrato',estado);
 
 
   async ngOnInit() {
+    this.servicioEvaluado = localStorage.getItem('servicioEvaluado');
     try {
 
-      console.log(localStorage.getItem('zona_origen'), 'zona_origen');
-      console.log(localStorage.getItem('zona_destino'), 'zona_destino');
-      console.log(localStorage.getItem('servicioEvaluado'), 'servicioEvaluado');
-
-     var resultadoTotalCosto = await this.auth.calcularPrecioTarifa(
-        localStorage.getItem('servicioEvaluado'),
-        localStorage.getItem('zona_origen'),
-        localStorage.getItem('zona_destino'),
-        2
-      );
-      resultadoTotalCosto = Number(resultadoTotalCosto);
-      console.log(resultadoTotalCosto, 'resultadoTotalCosto');
 
       this.estadoButton = true;
       this.auth.seleccionarSliderTiendas().subscribe(res => {

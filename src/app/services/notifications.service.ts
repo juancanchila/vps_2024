@@ -17,15 +17,15 @@ import { AuthService } from './auth.service';
 })
 export class NotificationsService {
   token: string;
-  
+
   constructor(public platform: Platform,private alertController : AlertController,
     public auth : AuthService,
-   
+
     private router: Router,
     private http: HttpClient) {
 this.inicializar();
 
-          
+
      }
 
     send(token : string){
@@ -34,9 +34,9 @@ this.inicializar();
         os: 'Android'
       };
 
-      
-    } 
-     
+
+    }
+
 
   inicializar() {
     const isPushNotificationsAvailable = Capacitor.isPluginAvailable('PushNotifications');
@@ -45,21 +45,26 @@ this.inicializar();
         if (result.receive === 'granted') {
          // alert('permisos concedidos')
           // Register with Apple / Google to receive push via APNS/FCM
+          this.createNotificationChannel();
           PushNotifications.register();
           this.addListeners();
         } else {
           // Show some error
         }
       });
+
+
+
+
  } else {
    console.log('PushNotifications.requestPermission(yyo) -> no es movil');
  }
-   
+
 }
 
 addListeners() {
-  
-  
+
+
 // On success, we should be able to receive notifications
 PushNotifications.addListener('registration',
 (token: Token) => {
@@ -68,7 +73,7 @@ PushNotifications.addListener('registration',
           this.guadarToken(token.value);
           localStorage.setItem('tokenFire',token.value);
   console.log('Push registration success, token: ' + token.value);
- 
+
 }
 );
 
@@ -83,33 +88,33 @@ PushNotifications.addListener('registration',
     PushNotifications.addListener('pushNotificationReceived',
       async (notification: PushNotificationSchema) => {
         const alert = await this.alertController.create({
-       
+
           header: notification.title,
-         
+
           message: notification.body,
           // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
           buttons: [
           {
             text:'aceptar',
-           
+
           }]
         });
-    
+
         await alert.present();
-        
-       
-    
-       
-      
+
+
+
+
+
       console.log('Push received en 1er plano: ', notification);
-    
+
           LocalNotifications.schedule({
             notifications: [
               {
                 title: notification.title,
                 body: notification.body,
                 id: 1,
-              
+                sound: 'custom_sound',
               }
             ]
           });
@@ -119,19 +124,19 @@ PushNotifications.addListener('registration',
     // Method called when tapping on a notification
     PushNotifications.addListener('pushNotificationActionPerformed',
       async (notification: ActionPerformed) => {
-     
+
       }
     );
 
-    
-    LocalNotifications.addListener('localNotificationReceived', 
+
+    LocalNotifications.addListener('localNotificationReceived',
     (notification: LocalNotificationSchema) => {
        console.log('Push action performed en primer plano: ', notification);
-      
-    });
-      
 
-      
+    });
+
+
+
 }
 async guadarToken(token: any) {
 
@@ -139,8 +144,40 @@ async guadarToken(token: any) {
 }
 
 guadarTokenFIrebase() {
-  
+
 
 }
+
+
+createNotificationChannel() {
+  if (Capacitor.getPlatform() === 'android') {
+    // Eliminar el canal si ya existe
+    PushNotifications.deleteChannel({ id: 'vapaesa_canal' })
+      .then(() => {
+        console.log('Canal de notificación eliminado con éxito');
+      })
+      .catch(error => {
+        console.error('Error al eliminar el canal de notificación', error);
+      })
+      .finally(() => {
+        // Crear el nuevo canal después de eliminarlo
+        PushNotifications.createChannel({
+          id: 'vapaesa_canal',
+          name: 'Notificaciones de Vapaesa',
+          description: 'Canal para recibir notificaciones importantes de Vapaesa',
+          importance: 5, // IMPORTANCE_HIGH para sonido
+          sound: 'custom_sound', // Nombre del sonido (sin extensión)
+        })
+        .then(() => {
+          console.log('Canal de notificación de Vapaesa creado con éxito');
+        })
+        .catch(error => {
+          console.error('Error al crear el canal de notificación de Vapaesa', error);
+        });
+      });
+  }
+}
+
+
 
 }

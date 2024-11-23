@@ -247,7 +247,7 @@ field_barrio_origen:[""],
 
   this.FormSend.controls.field_precio_.setValue(resultadoTotalCosto);
 
-
+  localStorage.setItem('precioTarifa', resultadoTotalCosto);
   } catch (error) {
     console.error(error);
   }
