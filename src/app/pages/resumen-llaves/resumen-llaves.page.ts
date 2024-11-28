@@ -25,23 +25,20 @@ field_locacion_entrega:[""],
 field_locacion_destino:[""],
 field_contacto:[""],
 
-field_musica_preferida:[ ""],
+
 
 field_precio_:[""],
 field_medio_de_transporte:[""],
 field_direccion_destino:[""],
 field_direccion_entrega:[""],
-field_tema_de_interes:[""],
 field_ida_y_vuelta:[""],
-field_prefijo_destino:[""],
-field_prefijo_origen:[""],
 
 field_metodo_de_pago:[""],
 field_barrio_origen:[""],
       field_barrio_destino:[""],
-      field_contacto_destino:[""],
+
       field_nombre_c_origen:[""],
-      field_nombre_c_destino:[""]
+
      });
 
    }
@@ -59,62 +56,26 @@ field_barrio_origen:[""],
       this.disabledValue = true;
     }
   }
+  async irAPagar() {
+    console.log(this.FormSend.value);
 
-   async irAPagar(){
-    if(this.aux=='false'){
-      this.presentAlert();
-
-     }else{
-
-    if(this.auth.medioTransporte==1 &&this.auth.resumen.field_valor_declarado['0']['value']>100000 ){
-      const alertElement= await this.alertController.create({
-
-        header: '¡Su Valor declarado es mayor a $100000 debe ser transportada en carro!',
-        message: 'Cambiaremos el metodo de transporte a carro ¿Desea continuar?',
-
-        buttons: [
-          {
-          text:'cancel',
-          handler:()=>{
-            //La la orden  no se crea
-
-
-          }
-
-
-        },
-        {
-          text:'aceptar',
-          handler:()=>{
-
-            //la orden si se crea pero manualemte cambias de moto a carro
-            this.auth.medioTransporte= 2;
-
-          //  this.router.navigate(['/formadepag']);
-
-          }
-        }
-      ]
-      });
-
-      await alertElement.present();
-    }else{
-      console.log('aqui en is close metodo')
-      if(this.estadoButton==true){
-        this.estadoButton=false;
-        this.auth.CrearSencillaLlaves(this.FormSend.value);
-
-      }
-
-
-     // this.router.navigate(['/formadepag']);
+    // Verificar si el formulario está completo
+    if (this.FormSend.invalid) {
+      await this.presentAlert(); // Mostrar alerta indicando que el formulario está incompleto
+      return; // Salir de la función
     }
 
+    // Lógica para crear la orden
+    if (this.estadoButton === true) {
+      this.estadoButton = false;
+      this.auth.CrearSencillaLlaves(this.FormSend.value); // Aquí se envía el formulario
+      console.log('Formulario enviado correctamente');
+    }
 
-
-     //this.auth.sendFormulario(this.FormSend.value);
-   }
+    // Redirigir al método de pago si es necesario
+    // this.router.navigate(['/formadepag']);
   }
+
    async presentAlert() {
     const alert = await this.alertController.create({
 
@@ -187,6 +148,14 @@ field_barrio_origen:[""],
       localStorage.getItem('zona_destino'),
       this.auth.medioTransporte
     );
+      this.FormSend.controls.field_precio_.setValue(resultadoTotalCosto);
+      this.FormSend.controls.field_metodo_de_pago.setValue(this.auth.resumen.field_metodo_de_pago['0']['value']);
+
+
+      this.FormSend.controls.field_barrio_destino.setValue(this.auth.resumen.field_barrio_destino['0']['value']);
+
+
+      this.FormSend.controls.field_barrio_origen.setValue(this.auth.resumen.field_metodo_de_pago['0']['value']);
 
     this.estadoButton=true;
     this.aux='false';

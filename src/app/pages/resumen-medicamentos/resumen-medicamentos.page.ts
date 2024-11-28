@@ -235,8 +235,8 @@ field_nombre_c_destino:[""]
       this.FormSend.controls.field_observaciones.setValue(this.auth.resumenMedicamentos.field_observaciones['0']['value']);
       this.FormSend.controls.field_farmacia.setValue(this.auth.resumenMedicamentos.field_farmacia['0']['value']);
 
-
-      this.FormSend.controls.field_ida_y_vuelta.setValue(this.auth.resumenMedicamentos.field_ida_y_vuelta['0']['value']);
+/*
+      this.FormSend.controls.field_ida_y_vuelta.setValue(this.auth.resumenMedicamentos.field_ida_y_vuelta['0']['value']);*/
       this.FormSend.controls.field_prefijo_destino.setValue(this.auth.resumenMedicamentos.field_prefijo_destino['0']['value']);
       this.FormSend.controls.field_prefijo_origen.setValue(this.auth.resumenMedicamentos.field_prefijo_origen['0']['value']);
 
@@ -258,7 +258,10 @@ field_nombre_c_destino:[""]
       this.FormSend.controls.field_nombre_c_origen.setValue(this.auth.resumenMedicamentos.field_nombre_c_origen['0']['value']);
       this.FormSend.controls.field_nombre_c_destino.setValue(this.auth.resumenMedicamentos.field_nombre_c_destino['0']['value']);
 
+
+      console.log(this.FormSend.value['field_respuesta_documentos'],"Regoger?");
       if (this.FormSend.value['field_respuesta_documentos'] === 'Recoger Documentos') {
+        this.FormSend.controls.field_ida_y_vuelta.setValue(true);
         resultadoTotalCosto *= 2;
       }
 

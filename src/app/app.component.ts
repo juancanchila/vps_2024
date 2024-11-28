@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { ProviderService } from './provider.service';
 import { Router } from '@angular/router';
-import { AlertController, MenuController, Platform, LoadingController } from '@ionic/angular';
+import { AlertController, MenuController, Platform } from '@ionic/angular';
 import { NotificationsService } from './services/notifications.service';
 import { GeolocationsService } from './services/geolocations.service';
 
@@ -28,8 +28,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private router: Router,
     public auth: AuthService,
     public provider: ProviderService,
-    private alertCtrl: AlertController,
-    private loadingCtrl: LoadingController // Incluir el LoadingController
+    private alertCtrl: AlertController
   ) {
     this.inializarApp();
   }
@@ -44,25 +43,25 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
     if (localStorage.getItem('modoAuxiliar') === 'modoColaborador') {
       this.textoPerfil = ' IR A MODO CLIENTE';
-    } else {
-      this.textoPerfil = ' IR A MODO COLABORADOR';
+
+  } else {
+    this.textoPerfil = ' IR A MODO COLABORADOR';
     }
 
-    this.auth.consultarIdAuxiliar().subscribe((res) => {
+    this.auth.consultarIdAuxiliar().subscribe(res => {
       console.log(res);
       this.ifAuxiliar = res;
 
       if (!this.ifAuxiliar.includes('Auxiliar')) {
+        console.log(res['0']['roles_target_id']);
         localStorage.setItem('rolAuxiliar', res['0']['roles_target_id']);
         localStorage.setItem('idAuxiliar', res['0']['uid']);
         localStorage.setItem('tipoVehiculo', res['0']['field_tipo_de_vehiculo']);
 
-        if (
-          res['0']['roles_target_id'].includes('Auxiliar') &&
-          localStorage.getItem('modoAuxiliar') == 'modoColaborador'
-        ) {
+        if (res['0']['roles_target_id'].includes('Auxiliar') && localStorage.getItem('modoAuxiliar') == 'modoColaborador') {
           this.textoPerfil = ' IR A MODO CLIENTE';
           this.router.navigate(['/modo-colaborador']);
         } else {
@@ -75,11 +74,32 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log('App- OnDestroy');
+    console.log("App- OnDestroy");
+  }
+
+  irAPerfil() {
+    this.router.navigate(['/perfil']);
+    this.menucontrol.close();
+  }
+
+  irAPedidos() {
+    this.auth.obtenerRoleUsuario().subscribe(res => {
+      console.log(res);
+      this.ifAuxiliar = res;
+
+      if (this.ifAuxiliar.includes('Auxiliar') && this.textoPerfil == ' IR A MODO CLIENTE') {
+        this.router.navigate(['/index-auxiliares']);
+      } else {
+        this.router.navigate(['/pedidos']);
+      }
+
+      this.menucontrol.close();
+    });
   }
 
   async irAColaborador() {
-    this.auth.obtenerRoleUsuario().subscribe(async (res) => {
+
+    this.auth.obtenerRoleUsuario().subscribe(async res => {
       console.log(res);
       this.ifAuxiliar = res;
 
@@ -92,63 +112,32 @@ export class AppComponent implements OnInit, OnDestroy {
               text: 'Aceptar',
               handler: () => {
                 this.router.navigate(['/tabs']);
-              },
-            },
-          ],
+              }
+            }
+          ]
         });
 
         await alert.present();
         this.menucontrol.close();
       } else {
-        const loadingMessage =
-          this.textoPerfil === ' IR A MODO CLIENTE'
-            ? 'Redirigiendo a modo cliente...'
-            : 'Redirigiendo a modo colaborador...';
-
-        const loading = await this.showLoading(loadingMessage);
-
         if (this.textoPerfil === ' IR A MODO CLIENTE') {
           this.textoPerfil = ' IR A MODO COLABORADOR';
           localStorage.setItem('modoAuxiliar', 'modoCliente');
-          await this.router.navigate(['/tabs']);
+          this.router.navigate(['/tabs']);
         } else {
           this.textoPerfil = ' IR A MODO CLIENTE';
           localStorage.setItem('modoAuxiliar', 'modoColaborador');
-          await this.router.navigate(['/modo-colaborador']);
+          this.router.navigate(['/modo-colaborador']);
         }
 
-        await loading.dismiss();
         this.menucontrol.close();
       }
     });
   }
 
-  async irAPedidos() {
-    this.auth.obtenerRoleUsuario().subscribe(async (res) => {
-      console.log(res);
-      this.ifAuxiliar = res;
-
-      const loading = await this.showLoading('Cargando pedidos...');
-
-      if (this.ifAuxiliar.includes('Auxiliar') && this.textoPerfil === ' IR A MODO CLIENTE') {
-        await this.router.navigate(['/index-auxiliares']);
-      } else {
-        await this.router.navigate(['/pedidos']);
-      }
-
-      await loading.dismiss();
-      this.menucontrol.close();
-    });
-  }
-
-  async showLoading(message: string): Promise<HTMLIonLoadingElement> {
-    const loading = await this.loadingCtrl.create({
-      message, // Mensaje personalizado
-      spinner: 'crescent', // Tipo de spinner
-      duration: 1500, // Duración máxima (ajustable)
-    });
-    await loading.present();
-    return loading;
+  iraAyuda() {
+    this.router.navigate(['/especial']);
+    this.menucontrol.close();
   }
 
   async logout() {
@@ -158,7 +147,7 @@ export class AppComponent implements OnInit, OnDestroy {
       buttons: [
         {
           text: 'Cancelar',
-          role: 'cancel',
+          role: 'cancel'
         },
         {
           text: 'Aceptar',
@@ -168,9 +157,9 @@ export class AppComponent implements OnInit, OnDestroy {
             this.ifAuxiliar = null;
             this.textoPerfil = ' IR A MODO COLABORADOR';
             this.role = null;
-          },
-        },
-      ],
+          }
+        }
+      ]
     });
 
     await alertElement.present();
@@ -178,30 +167,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private clearLocalStorage() {
     const keysToRemove = [
-      'name',
-      'rol',
-      'rolAuxiliar',
-      'idAuxiliar',
-      'permitirPagoefectivo',
-      'tarifaDestino',
-      'tarifaDestino2',
-      'tarifaDestino3',
-      'tarifaDestino4',
-      'tarifaDestino5',
-      'tarifaDestino6',
-      'tarifaDestino7',
-      'tarifaOrigen',
-      'precioTarifa',
-      'precioTarifa2',
-      'mensajeria',
-      'ServicioEvaluado',
-      'tipoVehiculo',
-      'zona_destino',
-      'zona_origen',
-      'session_ends',
-      'EXPIRES_IN',
+      'name', 'rol', 'rolAuxiliar', 'idAuxiliar',
+      'permitirPagoefectivo', 'tarifaDestino',
+      'tarifaDestino2', 'tarifaDestino3', 'tarifaDestino4',
+      'tarifaDestino5', 'tarifaDestino6', 'tarifaDestino7',
+      'tarifaOrigen', 'precioTarifa', 'precioTarifa2','mensajeria','ServicioEvaluado','tipoVehiculo','zona_destino','zona_origen','session_ends','EXPIRES_IN'
     ];
 
-    keysToRemove.forEach((key) => localStorage.removeItem(key));
+    keysToRemove.forEach(key => localStorage.removeItem(key));
   }
 }

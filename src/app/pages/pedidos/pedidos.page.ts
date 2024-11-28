@@ -15,6 +15,7 @@ character: any =[];
 
 
   ngOnInit() {
+
     this.auth.mostrarContenido().subscribe(res =>{
       console.log(res)
      this.character=res;

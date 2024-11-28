@@ -27,6 +27,7 @@ export class ModoColaboradorPage implements OnInit {
   estadoDisponibilidad: any;
   posicionActivaAuxiliar: any;
 
+
   constructor(
     private alertControl: AlertController,
     private diagnostic: Diagnostic,
@@ -41,13 +42,33 @@ export class ModoColaboradorPage implements OnInit {
   }
 
   ngOnInit() {
-    this.auth.consultarIdAuxiliar().subscribe((res) => {
+    this.auth.consultarIdAuxiliar().subscribe(
+      async (res) => {
       console.log(res, "Respuesta");
       console.log(res['0']['roles_target_id']);
 
       localStorage.setItem('rolAuxiliar', res['0']['roles_target_id']);
       localStorage.setItem('idAuxiliar', res['0']['uid']);
       localStorage.setItem('tipoVehiculo', res['0']['field_tipo_de_vehiculo']);
+
+      const rolesTargetId = res?.['0']?.roles_target_id || null;
+      const uid = res?.['0']?.uid || null;
+      const tipoVehiculo = res?.['0']?.field_tipo_de_vehiculo || null;
+
+      if (!rolesTargetId || !uid || !tipoVehiculo) {
+        console.error("Datos incompletos o nulos. Realizando logout...");
+        const alert = await this.alertControl.create({
+          header: 'Error',
+          message: 'Algo salió mal. Se cerrará la sesión.',
+          buttons: ['Aceptar'],
+        });
+        await alert.present();
+
+        this.auth.logout2();
+        this.auth.clearLocalStorage();
+        return;
+      }
+
     });
 
     this.getGpsPermision();
@@ -125,7 +146,7 @@ export class ModoColaboradorPage implements OnInit {
       console.log(this.value);
       this.auth.getContenidoAsignado().subscribe(async (res) => {
         console.log(res, 'respuesta contenido asignado');
-        if (res.length == 0) {
+        if (res.length === 0) {
           this.getLocation();
           if (this.auth.longitud === "" || this.auth.latitud === "") {
             this.geo.openSetting();

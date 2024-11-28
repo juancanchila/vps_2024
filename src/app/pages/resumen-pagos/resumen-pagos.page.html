@@ -120,20 +120,16 @@
 
 <!---->
 
-<ion-label > <b>Seleccione recolección de documentos* </b> </ion-label>
-<div class="check">
-  <input disabled id="checkbox1" formControlName="field_respuesta_documentos" value="Recoger Documentos"  class="form-check-input" type="radio" checked>
-  <label class="form-check-label" for="flexRadioDefault1">
-    Recoger Documentos
-  </label>
 
-</div>
-<div class="check2">
-  <input disabled  id="checkbox2" formControlName="field_respuesta_documentos" value="Enviar Documentos por WhatSapp" class="form-check-input" type="radio" checked>
-  <label class="form-check-label" for="flexRadioDefault2">
-    Enviar Documentos por WhatSapp
-  </label>
-</div>
+<ion-label><b>Documentos:</b></ion-label>
+<!-- Condicionalmente mostrar el contenido según la selección -->
+<ion-item *ngIf="FormSend.get('field_respuesta_documentos').value === 'Recoger Documentos'">
+  <p class="domicilio_class">El usuario ha seleccionado Recoger Documentos.</p>
+</ion-item>
+
+<ion-item *ngIf="FormSend.get('field_respuesta_documentos').value === 'Enviar Documentos por WhatSapp'">
+  <p class="domicilio_class">El usuario ha seleccionado Enviar Documentos por WhatSapp.</p>
+</ion-item>
 <script>
    if(document.getElementById('field_respuesta_documentos').checked){
   alert('field_respuesta_documentos esta seleccionado');
@@ -142,22 +138,17 @@
 
 <!---->
 
-      <br>
 
-      <ion-label > <b>Seleccione Envio de Comprobantes* </b> </ion-label>
-      <div class="check">
-        <input disabled  id="checkbox1" formControlName="field_regresar_por_wasap" value="Enviar comprobante por whatsapp"  class="form-check-input" type="radio" checked>
-        <label  class="form-check-label" for="flexRadioDefault1">
-          Enviar comprobante por whatsapp
-        </label>
+      <ion-label><b>Comprobantes:</b></ion-label>
 
-      </div>
-      <div class="check2">
-        <input disabled  id="checkbox2" formControlName="field_regresar_por_wasap" value="Llevar recibo de vuelta" class="form-check-input" type="radio" checked>
-        <label class="form-check-label" for="flexRadioDefault2">
-          Llevar recibo de vuelta
-        </label>
-      </div>
+      <!-- Condicionalmente mostrar el contenido según la selección -->
+      <ion-item *ngIf="FormSend.get('field_regresar_por_wasap').value === 'Enviar comprobante por whatsapp'">
+        <p class="domicilio_class">El usuario ha seleccionado Enviar comprobante por whatsapp.</p>
+      </ion-item>
+
+      <ion-item *ngIf="FormSend.get('field_regresar_por_wasap').value === 'Llevar recibo de vuelta'">
+        <p class="domicilio_class">El usuario ha seleccionado Llevar recibo de vuelta.</p>
+      </ion-item>
       <script>
          if(document.getElementById('field_respuesta_documentos').checked){
         alert('field_respuesta_documentos esta seleccionado');

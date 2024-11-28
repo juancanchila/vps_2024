@@ -70,6 +70,7 @@ pasteText:string="";
   isModalOpen: boolean;
   validaModal: boolean=false;
   servicioEvaluado: string;
+  evaluadoval: boolean = false;
 
   constructor(private modalCtrl: ModalController,private clipboard: Clipboard,private router:Router,private auth: AuthService,private alertController:AlertController ,private _route: ActivatedRoute) {
     this.urlBase=environment.urlBase;
@@ -186,8 +187,17 @@ this.eliminarIdNode=this.allPedidos['nid'];
 
 
 
-   if(this.allPedidos['field_estado_del_servicio']=='Completado' && this.allPedidos['field_calificaion']=='false'){
-    this.isModalOpen=true;
+    if (this.allPedidos['field_estado_del_servicio'] === 'Completado' && this.allPedidos['field_calificaion'] === 'false') {
+      this.isModalOpen = true; // Abrir el modal
+      if (!this.evaluadoval) {
+        this.openModalval();
+      }
+
+       // Iniciar el temporizador de 15 segundos para calificar automáticamente con 3 estrellas
+    /*  setTimeout(() => {
+        this.closeModal();
+        this.autoConfirm(); // Llamar al método AutoConfirm si no se califica en 15 segundos
+      }, 15000); // 15 segundos*/
     }
 
 
@@ -281,7 +291,8 @@ this.eliminarIdNode=this.allPedidos['nid'];
       this.character21=this.allPedidos['field_medio_de_transporte'];
 
     }
-    console.log(this.character21),'med transport';
+    console.log(this.character21), 'med transport';
+
     if(this.character21==1){
       this.character22='Moto';
 
@@ -531,16 +542,21 @@ this.eliminarIdNode=this.allPedidos['nid'];
 
   }
   cancel() {
+
     return this.modalCtrl.dismiss(null, 'cancel');
   }
 
   confirm() {
+
     console.log(this.name);
-    console.log(this.auth.ponderacion,'start');
+    console.log(this.auth.ponderacion, 'start');
+    this.closeModal();
+    this.evaluadoval = true;
     if(this.auth.ponderacion>=3){
       this.validaModal=true;
       this.auth.enviarCalificacionPedido(this.name);
-     this.modalCtrl.dismiss(this.name, 'confirm');
+      this.modalCtrl.dismiss(this.name, 'confirm');
+
      this.ngOnInit();
 
 
@@ -560,7 +576,11 @@ this.eliminarIdNode=this.allPedidos['nid'];
       }
     }
 
+
+
   }
+
+
 
   //metodo para copiar
    async copy(copyText) {
@@ -589,6 +609,14 @@ clearCopy(){
     console.log(star);
   }
 
+  openModalval(): void {
 
+    this.auth.setCalificationModalState(true);
+  }
+
+  // Example: Close modal
+  closeModal(): void {
+    this.auth.setCalificationModalState(false);
+  }
 
 }

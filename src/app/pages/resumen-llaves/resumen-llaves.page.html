@@ -38,14 +38,13 @@
           </ion-buttons>
       </ion-item>
 
-      <ion-item>
-         <textarea disabled  id="ip" formControlName="field_barrio_origen"  #input2 type="text"></textarea>
-
-         <ion-buttons>
-          <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
+      <ion-item *ngIf="FormSend.get('field_barrio_origen').value">
+        <textarea disabled id="ip" formControlName="field_barrio_origen" #input2></textarea>
+        <ion-buttons>
+          <ion-icon (click)="enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
+      </ion-item>
 
-       </ion-item>
 
 
 
@@ -71,12 +70,21 @@
 </ion-item>
 
 
+<ion-label>Necesitas Que me quede?</ion-label>
+<label class="switchBtn">
+      <ion-item>
+        <input type="checkbox" formControlName="field_ida_y_vuelta" [checked]="FormSend.get('field_ida_y_vuelta').value" disabled>
+        <ion-label>{{ FormSend.get('field_ida_y_vuelta').value ? 'Sí' : 'No' }}</ion-label>
+      </ion-item>
+
+<!--
       <ion-label>Necesitas Que me quede?</ion-label>
-     <label class="switchBtn">
+
+
       <input disabled  formControlName="field_ida_y_vuelta" type="checkbox">
 
       <br>
-
+     -->
       <!--
   <ion-label > <b>De Que Quieres Hablar</b> </ion-label>
       <ion-item >
@@ -139,7 +147,7 @@
             <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
           </ion-buttons>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="FormSend.get('field_barrio_destino').value">
          <textarea disabled id="ip" formControlName="field_barrio_destino" (input)="inputChanged2($event)" #input2 type="text">{{barrio}}</textarea>
          <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>

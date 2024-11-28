@@ -359,6 +359,7 @@ if(localStorage.getItem('tienda')==='undefined' ){
 // acctuaizar lavariable tienda en el local storage
   localStorage.setItem('tienda', this.tienda);
   localStorage.setItem('zona_origen', this.product.field_zona_b);
+  localStorage.setItem('img_zona_origen', this.product.field_img_barrio);
   console.log("definiendo origen del producto");
 //this.product.cantidad = this.cantidades;
 //this.product.field_price_simple =this.originaPrice;

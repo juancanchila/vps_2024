@@ -4,6 +4,7 @@ import { IngresadoGuard } from './ingresado.guard';
 import { NoIngresadoGuard } from './no-ingresado.guard';
 import { AuxiliarGuard } from './guards/auxiliar.guard';
 import { ModoColaboradorGuard } from './guards/modo-colaborador-guard.guard';
+import { ModalCalificacionGuard } from './guards/modal-calificacion.guard';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -103,7 +104,7 @@ const routes: Routes = [
   {
     path: 'pedidos',
     loadChildren: () => import('./pages/pedidos/pedidos.module').then( m => m.PedidosPageModule),
-    canActivate: [IngresadoGuard]
+    canActivate: [IngresadoGuard,ModalCalificacionGuard]
   },
   {
     path: 'fruver',

@@ -67,25 +67,24 @@ export class LlavesPage implements OnInit {
       field_barrio_origen:[""],
       field_barrio_destino:[""],
  field_direccion_entrega:[""],
- field_quien_paga_:[''],
+
 
 field_contacto:[""],
 
 field_locacion_entrega:[""],
 field_locacion_destino:[""],
 
-field_tema_de_interes:[""],
+
 
 field_direccion_destino:[""],
 
-field_contacto_destino:[""],
+
 field_ida_y_vuelta:[false],
 
-field_valor_declarado:[ ""],
 
-field_observaciones:[""],
 
-field_medio_de_transporte:[ ""],
+
+field_medio_de_transporte:[""],
 
 field_metodo_de_pago:[''],
 
@@ -95,7 +94,6 @@ field_longitud_origen:[''],
 field_latitud_origen_:[''],
 
 field_nombre_c_origen:[''],
-field_nombre_c_destino:['']
 
 
 
@@ -360,241 +358,56 @@ this.value = $event.target.value as string;
 
 
    }
+   async sendForm() {
+    console.log('Hasta aquí medio transporte', this.auth.medioTransporte);
 
+    // Asignar medio de transporte
+    this.FormSend.controls.field_medio_de_transporte.setValue(this.auth.medioTransporte);
 
-   async sendForm(){
+    console.log('Formulario:', this.FormSend.value);
 
-  console.log('hatsa qui mediotranporte', this.auth.medioTransporte)
-    if(this.FormSend.invalid || this.FormSend.value['field_metodo_de_pago']=='' || this.FormSend.value[' field_quien_paga_']==''){
+    // Si el formulario es inválido, muestra una alerta y detiene el proceso
+    if (this.FormSend.invalid) {
       const alert = await this.alertController.create({
-
-        header: 'Datos incompletos ',
-
-        message: 'llenar todos los datos.',
+        header: 'Datos incompletos',
+        message: 'Por favor, completa todos los datos.',
         buttons: ['Aceptar']
       });
-
       await alert.present();
       return;
-    }else{
-
-      for(let i=0;i<this.ciudades.length;i++){
-        console.log(localStorage.getItem('locacion'),'locacion');
-        if(this.ciudades[i]['name']==localStorage.getItem('locacion')){
-          console.log(this.auth.medioTransporte,'estoy en ciudad');
-
-          console.log(this.FormSend.value['field_valor_declarado'], 'valor declarado');
-          if(this.auth.medioTransporte == 1 && this.FormSend.value['field_valor_declarado'] < 100000){
-            console.log('moto');
-           // console.log(this.AuxCarrosDisponibles);
-          console.log(this.AuxMotosDisponibles);
-          console.log(this.AuxMotosDisponibles['length'],'lengt de vector motos');
-          if(this.AuxMotosDisponibles.length==0){
-            const alert = await this.alertController.create({
-
-              header: 'Advertencia',
-
-              message: 'En este momento no tenemos auxiliar disponible en moto, ¿desea medio de transporte carro?',
-              // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-              buttons: [
-                {
-                text:'cancel',
-                role:'cancel',
-                handler:async ()=>{
-                this.router.navigate(['/tabs']);
-                }
-
-              },
-              {
-                text:'aceptar',
-                handler:async ()=>{
-                  if(this.AuxCarrosDisponibles.length!=0){
-                    this.auth.seleccionarCarro();
-                   this.auth.sendFormulario(this.FormSend.value);
-                this.router.navigate(['/resumen-llaves']);
-
-                  }else{
-                    const alert = await this.alertController.create({
-
-                      header: 'Oops!',
-
-                      message: '¡En este momento no tenemos auxiliar disponible para otro medio de transporte, reduce tu valor declarado!',
-                      // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-                      buttons: [
-
-                      {
-                        text:'aceptar',
-                        handler:()=>{
-
-                          this.router.navigate(['/tabs']);
-
-                        }
-                      }
-                    ]
-                    });
-
-                    await alert.present();
-                  }
-
-
-                }
-              }
-            ]
-            });
-
-          }else{
-            //
-              this.auth.sendFormulario(this.FormSend.value);
-              this.router.navigate(['/resumen-llaves']);
-          }
-
-
-
-          }else if(this.auth.medioTransporte == 1 && this.FormSend.value['field_valor_declarado'] >= 100000){
-            const alert = await this.alertController.create({
-
-              header: 'Su valor declarado es mayor de 100.000$',
-
-              message: 'desea medio de transporte carro?',
-              // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-              buttons: [
-                {
-                text:'cancel',
-                role:'cancel',
-
-              },
-              {
-                text:'aceptar',
-                handler:async ()=>{
-                  if(this.AuxCarrosDisponibles.length!=0){
-                    this.auth.seleccionarCarro();
-                    this.auth.sendFormulario(this.FormSend.value);
-                    this.router.navigate(['/resumen-llaves']);
-
-                  }else{
-                    const alert = await this.alertController.create({
-
-                      header: 'Oops!',
-
-                      message: '¡En este momento no tenemos auxiliar disponible para otro medio de transporte, reduce tu valor declarado!',
-                      // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-                      buttons: [
-
-                      {
-                        text:'aceptar',
-                        handler:()=>{
-
-
-
-                        }
-                      }
-                    ]
-                    });
-
-                    await alert.present();
-                  }
-
-
-                }
-              }
-            ]
-            });
-
-            await alert.present();
-
-
-          }else if(this.auth.medioTransporte == 2 && this.AuxCarrosDisponibles.length>0){
-             this.auth.sendFormulario(this.FormSend.value);
-      this.router.navigate(['/resumen-llaves'])
-
-          }else if(this.auth.medioTransporte == 2 && this.AuxCarrosDisponibles.length==0 && this.AuxMotosDisponibles.length>0){
-            this.auth.seleccionarServicioMoto();
-            this.auth.sendFormulario(this.FormSend.value);
-              this.router.navigate(['/resumen-llaves']);
-
-
-          }else{
-            const alert = await this.alertController.create({
-
-              header: 'Advertencia',
-
-              message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-              // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-              buttons: [
-
-              {
-                text:'aceptar',
-                handler:()=>{
-
-              this.router.navigate(['/tabs']);
-
-                }
-              }
-            ]
-            });
-
-            await alert.present();
-
-          }
-
-
-     // this.auth.sendFormulario(this.FormSend.value);
-      //this.router.navigate(['/resumen']);
-      break;
-        }else{
-          //pueblo
-          console.log('publo');
-
-          if(this.AuxDisponiblesMunicipios['length']==0){
-
-            const alert = await this.alertController.create({
-
-              header: 'Advertencia',
-
-              message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-              // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-              buttons: [
-
-              {
-                text:'aceptar',
-                handler:()=>{
-
-              this.router.navigate(['/tabs']);
-
-                }
-              }
-            ]
-            });
-
-            await alert.present();
-
-
-
-
-
-          }else{
-            //
-            this.auth.seleccionarServicioMotoYcarroMunicipio();
-              this.auth.sendFormulario(this.FormSend.value);
-              this.router.navigate(['/resumen-llaves']);
-              break;
-          }
-
-        }
-
-       };
-
-
-
-
-
-
-
     }
 
+    // Verificar disponibilidad según el medio de transporte
+    if (this.auth.medioTransporte === 1 && this.AuxMotosDisponibles.length <= 1) {
+      // Si el medio de transporte es moto y no hay motos disponibles
+      const alert = await this.alertController.create({
+        header: 'Advertencia',
+        message: 'En este momento no tenemos auxiliar disponible en moto, no podemos crear tu orden.',
+        buttons: ['Aceptar']
+      });
+      await alert.present();
+      return; // No envía los datos si no hay motos
+    }
 
+    if (this.auth.medioTransporte === 2 && this.AuxCarrosDisponibles.length <= 2) {
+      // Si el medio de transporte es carro y no hay carros disponibles
+      const alert = await this.alertController.create({
+        header: 'Advertencia',
+        message: 'En este momento no tenemos auxiliar disponible en carro, no podemos crear tu orden.',
+        buttons: ['Aceptar']
+      });
+      await alert.present();
+      return; // No envía los datos si no hay carros
+    }
 
-
+    // Enviar formulario y redirigir
+    try {
+      await this.auth.sendFormularioLlaves(this.FormSend.value);
+      console.log('Formulario enviado correctamente');
+      this.router.navigate(['/resumen-llaves']);
+    } catch (error) {
+      console.error('Error al enviar formulario:', error);
+    }
   }
 
 

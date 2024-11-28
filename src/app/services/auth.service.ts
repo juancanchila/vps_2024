@@ -28,6 +28,8 @@ import { GeolocationsService } from './geolocations.service';
 @Injectable()
 
 export class AuthService {
+  private calificationModalState = new BehaviorSubject<boolean>(false);
+  private calificationModalOpen: boolean = false;
   isToken;
   respuestaDocumentoBoolean: string;
   private lastTimeBackButtonWasPressed = 0;
@@ -207,6 +209,26 @@ export class AuthService {
     this.subject.subscribe(data => this.itemsCarrito = data);
     this.localStorageService = localStorage;
     this.getMensajeError();
+    const initialState = localStorage.getItem('calificationModalOpen') === 'fase';
+    this.calificationModalState.next(initialState);
+  }
+
+    // Method to update the modal state
+    setCalificationModalState(isOpen: boolean): void {
+      localStorage.setItem('calificationModalOpen', String(isOpen));
+      console.log(isOpen,"Modificando estado");
+      this.calificationModalState.next(isOpen);
+    }
+
+    // Observable to get the current modal state
+  getCalificationModalState() {
+
+      return this.calificationModalState.asObservable();
+    }
+
+    // Synchronous method to get the current state value
+    isCalificationModalOpen(): boolean {
+      return this.calificationModalState.value;
   }
 
   getAllToken() {
@@ -1372,130 +1394,202 @@ export class AuthService {
 
   }
   //metodo para enviat posicion
-
   async EnviarPosicionAuxiliar() {
-    let sencilla = {
-      "title": [{ "value": 'Posicion auxiliar' }],
-      "type": [{ "target_id": 'disponibles' }],
-      "field_estado": [{ "value": this.estadoPedido }],
-      "field_longitud_actual": [{ "value": this.longitud }],
-      "field_latitud_actual": [{ "value": this.latitud }],
-      "field_location": [{ "value": localStorage.getItem('locacion') }],
-      "field_tipo_vehiculo": [{ "value": localStorage.getItem('tipoVehiculo') }],
-    };
-/*
-    // Verificar que todos los campos estén completos
-    if (
-      !sencilla.field_estado[0].value ||
-      !sencilla.field_longitud_actual[0].value ||
-      !sencilla.field_latitud_actual[0].value ||
-      !sencilla.field_location[0].value ||
-      !sencilla.field_tipo_vehiculo[0].value
-    ) {
-      // Mostrar alerta y cerrar sesión si falta algún campo
-      alert('Algo salió mal, por favor intente nuevamente');
-      this.logout2();
-      return; // Salir de la función para evitar que se envíe la solicitud
-    }
-*/
-    this.resumen = sencilla;
-    const converSencilla = JSON.stringify(sencilla);
-    console.log(converSencilla);
+    try {
+      // Verificar si los datos necesarios están en localStorage
+      let tipoVehiculo = localStorage.getItem('tipoVehiculo');
+      let locacion = localStorage.getItem('locacion');
+      let nodeDisponibilidad = localStorage.getItem('nodeDisponibilidad');
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Basic ' + this.b64,
-      'X-CSRF-Token': this.tokencsrf
-    });
+      // Si alguno de los datos está vacío, null o undefined, intentar precargar
+      if (!tipoVehiculo || !locacion || !nodeDisponibilidad) {
+        console.log('Datos incompletos en localStorage. Intentando precargar datos...');
 
-    this.http.post('http://147.182.203.91/node?_format=hal_json', converSencilla, { headers: headers })
-      .subscribe(
-        async data2 => {
-          console.log(data2);
-          localStorage.setItem('nodeDisponibilidad', data2['nid']['0'].value);
-        },
-        error2 => {
-          console.log(error2);
-          if (error2.status === 0) {
-            alert('Error: revise su conexión');
-            this.logout2();
-          } else if (error2.status === 422) {
-            alert('En estos momentos no podemos atender tu orden');
-            this.logout2();
-          }
-        }
-      );
-  }
+        await new Promise<void>((resolve, reject) => {
+          this.consultarIdAuxiliar().subscribe({
+            next: (res) => {
+              // Guardar datos en localStorage
+              localStorage.setItem('rolAuxiliar', res['0']['roles_target_id'] || '');
+              localStorage.setItem('idAuxiliar', res['0']['uid'] || '');
+              localStorage.setItem('tipoVehiculo', res['0']['field_tipo_de_vehiculo'] || '');
+              localStorage.setItem('nodeDisponibilidad', res['0']['node_disponibilidad'] || '');
+              tipoVehiculo = localStorage.getItem('tipoVehiculo'); // Actualizar después de guardar
+              locacion = localStorage.getItem('locacion'); // Actualizar locacion
+              nodeDisponibilidad = localStorage.getItem('nodeDisponibilidad'); // Actualizar nodeDisponibilidad
+              resolve();
+            },
+            error: (err) => {
+              console.error('Error al precargar datos:', err);
+              reject();
+            }
+          });
+        });
+      }
 
-  //metodo para actualizar posicion
-  async actualizarPosicionEnviadaAuxiliar() {
+      // Si después de intentar precargar los datos siguen incompletos, cerrar sesión
+      if (!tipoVehiculo || !locacion || !nodeDisponibilidad) {
+        this.mostrarAlerta('Algo salió mal al cargar los datos. Cerrando sesión...');
+        this.logout2();
+        this.clearLocalStorage();
+        return;
+      }
 
+      // Crear el objeto sencilla con los datos validados
+      let sencilla = {
+        "title": [{ "value": 'Posicion auxiliar' }],
+        "type": [{ "target_id": 'disponibles' }],
+        "field_estado": [{ "value": this.estadoPedido }],
+        "field_longitud_actual": [{ "value": this.longitud }],
+        "field_latitud_actual": [{ "value": this.latitud }],
+        "field_tipo_vehiculo": [{ "value": tipoVehiculo }],
+        "field_location": [{ "value": locacion }]
+      };
 
+      this.resumen = sencilla;
 
-    let sencilla = {
-      "title": [{ "value": 'Posicion auxiliar' }],
+      const converSencilla = JSON.stringify(sencilla);
+      console.log(converSencilla);
 
-      "type": [{ "target_id": 'disponibles' }],
-      "field_estado": [{ "value": this.estadoPedido }],
-      "field_longitud_actual": [{ "value": this.longitud }],
-      "field_latitud_actual": [{ "value": this.latitud }],
-
-      //"status":[{"value":"1"}],
-      "field_location": [{ "value": localStorage.getItem('locacion') }]
-
-
-
-    }
-
-    this.resumen = sencilla;
-
-    const converSencilla = JSON.stringify(sencilla);
-    console.log(converSencilla);
-    if (sencilla.field_longitud_actual[0].value == undefined||sencilla.field_latitud_actual[0].value == undefined) {
-      this.geolocation.openSetting();
-    } else {
-
-
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json', 'Authorization': 'Basic ' + this.b64,
-        'X-CSRF-Token': this.tokencsrf
-      });
-      let url = 'http://147.182.203.91/node/' + localStorage.getItem('nodeDisponibilidad') + '?_format=json';
-      console.log(url, 'patch act poscion')
-      this.http.patch(url, converSencilla, { headers: headers }).subscribe(async data2 => {
-        const alert = await this.alertControl.create({
-
-          header: 'Notificación Vapaesa',
-
-          message: 'Posición de auxiliar actualizada y enviada como disponible..! ',
-          // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-          buttons: [
-            {
-              text: 'aceptar',
-
-            }]
+      // Validar si la latitud o longitud son undefined
+      if (sencilla.field_longitud_actual[0].value === undefined || sencilla.field_latitud_actual[0].value === undefined) {
+        this.geolocation.openSetting();
+      } else {
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic ' + this.b64,
+          'X-CSRF-Token': this.tokencsrf
         });
 
-        await alert.present();
-        console.log(data2, 'posicion actualizada');
+        let url = 'http://147.182.203.91/node/' + nodeDisponibilidad + '?_format=json';
+        console.log(url, 'patch act poscion');
 
+        this.http.patch(url, converSencilla, { headers: headers }).subscribe(async data2 => {
+          const alert = await this.alertControl.create({
+            header: 'Notificación Vapaesa',
+            message: 'Posición de auxiliar actualizada y enviada como disponible..!',
+            buttons: [
+              { text: 'Aceptar' }
+            ]
+          });
 
+          await alert.present();
+          console.log(data2, 'posicion actualizada');
 
-      }, async error2 => {
-        console.log(error2);
-        this.errorPosicion = error2;
+        }, async error2 => {
+          console.log(error2);
+          this.errorPosicion = error2;
+        });
+      }
 
-
-
-      });
+    } catch (error) {
+      console.error('Error en EnviarPosicionAuxiliar:', error);
+      this.mostrarAlerta('Algo salió mal al cargar los datos. Cerrando sesión...');
+      this.logout2();
+      this.clearLocalStorage();
     }
-
-
-
-
-
-
   }
+
+
+  async actualizarPosicionEnviadaAuxiliar() {
+    try {
+      // Verificar si los datos necesarios están en localStorage
+      let tipoVehiculo = localStorage.getItem('tipoVehiculo');
+      let locacion = localStorage.getItem('locacion');
+      let nodeDisponibilidad = localStorage.getItem('nodeDisponibilidad');
+
+      // Si alguno de los datos está vacío, null o undefined, intentar precargar
+      if (!tipoVehiculo || !locacion || !nodeDisponibilidad) {
+        console.log('Datos incompletos en localStorage. Intentando precargar datos...');
+
+        await new Promise<void>((resolve, reject) => {
+          this.consultarIdAuxiliar().subscribe({
+            next: (res) => {
+              // Guardar datos en localStorage
+              localStorage.setItem('rolAuxiliar', res['0']['roles_target_id'] || '');
+              localStorage.setItem('idAuxiliar', res['0']['uid'] || '');
+              localStorage.setItem('tipoVehiculo', res['0']['field_tipo_de_vehiculo'] || '');
+              localStorage.setItem('nodeDisponibilidad', res['0']['node_disponibilidad'] || '');
+              tipoVehiculo = localStorage.getItem('tipoVehiculo'); // Actualizar después de guardar
+              locacion = localStorage.getItem('locacion'); // Actualizar locacion
+              nodeDisponibilidad = localStorage.getItem('nodeDisponibilidad'); // Actualizar nodeDisponibilidad
+              resolve();
+            },
+            error: (err) => {
+              console.error('Error al precargar datos:', err);
+              reject();
+            }
+          });
+        });
+      }
+
+      // Si después de intentar precargar los datos siguen incompletos, cerrar sesión
+      if (!tipoVehiculo || !locacion || !nodeDisponibilidad) {
+        this.mostrarAlerta('Algo salió mal al cargar los datos. Cerrando sesión...');
+        this.logout2();
+        this.clearLocalStorage();
+        return;
+      }
+
+      // Crear el objeto sencilla con los datos validados
+      let sencilla = {
+        "title": [{ "value": 'Posicion auxiliar' }],
+        "type": [{ "target_id": 'disponibles' }],
+        "field_estado": [{ "value": this.estadoPedido }],
+        "field_longitud_actual": [{ "value": this.longitud }],
+        "field_latitud_actual": [{ "value": this.latitud }],
+        "field_tipo_vehiculo": [{ "value": tipoVehiculo }],
+        "field_location": [{ "value": locacion }]
+      };
+
+      this.resumen = sencilla;
+
+      const converSencilla = JSON.stringify(sencilla);
+      console.log(converSencilla);
+
+      // Validar si la latitud o longitud son undefined
+      if (sencilla.field_longitud_actual[0].value === undefined || sencilla.field_latitud_actual[0].value === undefined) {
+        this.geolocation.openSetting();
+      } else {
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic ' + this.b64,
+          'X-CSRF-Token': this.tokencsrf
+        });
+
+        let url = 'http://147.182.203.91/node/' + nodeDisponibilidad + '?_format=json';
+        console.log(url, 'patch act poscion');
+
+        this.http.patch(url, converSencilla, { headers: headers }).subscribe(async data2 => {
+          const alert = await this.alertControl.create({
+            header: 'Notificación Vapaesa',
+            message: 'Posición de auxiliar actualizada y enviada como disponible..!',
+            buttons: [
+              { text: 'Aceptar' }
+            ]
+          });
+
+          await alert.present();
+          console.log(data2, 'posicion actualizada');
+
+        }, async error2 => {
+          console.log(error2);
+          this.errorPosicion = error2;
+        });
+      }
+
+    } catch (error) {
+      console.error('Error en actualizarPosicionEnviadaAuxiliar:', error);
+      this.mostrarAlerta('Algo salió mal al cargar los datos. Cerrando sesión...');
+      this.logout2();
+      this.clearLocalStorage();
+    }
+  }
+
+  // Método para mostrar alertas
+  mostrarAlerta(mensaje: string): void {
+    alert(mensaje); // Cambiar por el servicio de alertas de tu preferencia si no usas `alert`
+  }
+
   //metodo para mandar posicion lat y long
   async getLocation() {
     try {
@@ -1530,76 +1624,107 @@ export class AuthService {
       throw (e);
     }
   }
-  //metodo para actualizar  la posicion a ocupado
-  actualizarPosicionEnviadaAuxiliarOcupado() {
+  async actualizarPosicionEnviadaAuxiliarOcupado() {
+    try {
+      // Verificar si los datos necesarios están en localStorage
+      let tipoVehiculo = localStorage.getItem('tipoVehiculo');
+      let locacion = localStorage.getItem('locacion');
+      let nodeDisponibilidad = localStorage.getItem('nodeDisponibilidad');
 
-    let sencilla = {
-      "title": [{ "value": 'Posicion auxiliar' }],
+      // Si alguno de los datos está vacío, null o undefined, intentar precargar
+      if (!tipoVehiculo || !locacion || !nodeDisponibilidad) {
+        console.log('Datos incompletos en localStorage. Intentando precargar datos...');
 
-      "type": [{ "target_id": 'disponibles' }],
-      "field_estado": [{ "value": this.estadoPedido }],
-      "field_longitud_actual": [{ "value": this.longitud }],
-      "field_latitud_actual": [{ "value": this.latitud }],
-      //"status":[{"value":"1"}],
-      "field_location": [{ "value": localStorage.getItem('locacion') }]
+        await new Promise<void>((resolve, reject) => {
+          this.consultarIdAuxiliar().subscribe({
+            next: (res) => {
+              // Guardar datos en localStorage
+              localStorage.setItem('rolAuxiliar', res['0']['roles_target_id'] || '');
+              localStorage.setItem('idAuxiliar', res['0']['uid'] || '');
+              localStorage.setItem('tipoVehiculo', res['0']['field_tipo_de_vehiculo'] || '');
+              localStorage.setItem('nodeDisponibilidad', res['0']['node_disponibilidad'] || '');
+              tipoVehiculo = localStorage.getItem('tipoVehiculo'); // Actualizar después de guardar
+              locacion = localStorage.getItem('locacion'); // Actualizar locacion
+              nodeDisponibilidad = localStorage.getItem('nodeDisponibilidad'); // Actualizar nodeDisponibilidad
+              resolve();
+            },
+            error: (err) => {
+              console.error('Error al precargar datos:', err);
+              reject();
+            }
+          });
+        });
+      }
 
+      // Si después de intentar precargar los datos siguen incompletos, cerrar sesión
+      if (!tipoVehiculo || !locacion || !nodeDisponibilidad) {
+        this.mostrarAlerta('Algo salió mal al cargar los datos. Cerrando sesión...');
+        this.logout2();
+        this.clearLocalStorage();
+        return;
+      }
 
+      // Crear el objeto sencilla con los datos validados
+      let sencilla = {
+        "title": [{ "value": 'Posicion auxiliar' }],
+        "type": [{ "target_id": 'disponibles' }],
+        "field_estado": [{ "value": this.estadoPedido }],
+        "field_longitud_actual": [{ "value": this.longitud }],
+        "field_latitud_actual": [{ "value": this.latitud }],
+        "field_location": [{ "value": locacion }],
+        "field_tipo_vehiculo": [{ "value": tipoVehiculo }]
+      };
 
-    }
+      this.resumen = sencilla;
 
-    this.resumen = sencilla;
+      const converSencilla = JSON.stringify(sencilla);
+      console.log(converSencilla);
 
-    const converSencilla = JSON.stringify(sencilla);
-    console.log(converSencilla);
-    console.log('lengnt',sencilla.field_longitud_actual.length,'sin lenght',sencilla.field_longitud_actual[0].value , 'aver lengt' ,sencilla.field_latitud_actual.length,'sin lengt',sencilla.field_latitud_actual[0].value);
-    if (sencilla.field_longitud_actual[0].value == undefined||sencilla.field_latitud_actual[0].value == undefined) {
-      this.geolocation.openSetting();
-
-    } else {
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json', 'Authorization': 'Basic ' + this.b64,
-        'X-CSRF-Token': this.tokencsrf
-      });
-      let url = 'http://147.182.203.91/node/' + localStorage.getItem('nodeDisponibilidad') + '?_format=json';
-      console.log(url, 'patch act poscion')
-      this.http.patch(url, converSencilla, { headers: headers }).subscribe(async data2 => {
-        const alert = await this.alertControl.create({
-
-          header: 'Notificación Vapaesa',
-
-          message: 'Posición de auxiliar actualizada y enviada como ocupado...! ',
-          // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-          buttons: [
-            {
-              text: 'aceptar',
-
-            }]
+      // Validar si la latitud o longitud son undefined
+      if (sencilla.field_longitud_actual[0].value === undefined || sencilla.field_latitud_actual[0].value === undefined) {
+        this.geolocation.openSetting();
+      } else {
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic ' + this.b64,
+          'X-CSRF-Token': this.tokencsrf
         });
 
-        await alert.present();
-        console.log(data2, 'posicion actualizada');
+        let url = 'http://147.182.203.91/node/' + nodeDisponibilidad + '?_format=json';
+        console.log(url, 'patch act poscion');
 
+        this.http.patch(url, converSencilla, { headers: headers }).subscribe(async data2 => {
+          const alert = await this.alertControl.create({
+            header: 'Notificación Vapaesa',
+            message: 'Posición de auxiliar actualizada y enviada como ocupado...!',
+            buttons: [
+              { text: 'Aceptar' }
+            ]
+          });
 
+          await alert.present();
+          console.log(data2, 'posicion actualizada');
 
-      }, error2 => {
-        console.log(error2);
-        if (error2.status == 0) {
-          alert('Error revise su conexion');
-          this.logout2();
+        }, async error2 => {
+          console.log(error2);
+          if (error2.status == 0) {
+            alert('Error, revise su conexión');
+            this.logout2();
+          } else if (error2.status == 422) {
+            alert('En estos momentos no podemos atender tu orden');
+            this.logout2();
+          }
+        });
+      }
 
-        } else if (error2.status == 422) {
-          alert('En estos momentos no podemos atender tu orden');
-          this.logout2();
-
-        }
-
-
-      });
-
+    } catch (error) {
+      console.error('Error en actualizarPosicionEnviadaAuxiliarOcupado:', error);
+      this.mostrarAlerta('Algo salió mal al cargar los datos. Cerrando sesión...');
+      this.logout2();
+      this.clearLocalStorage();
     }
-
-
   }
+
   //metodo para saber si tiene una disponibilidad activa
   getDisponibilidadPropia() {
     let auxB64 = localStorage.getItem('base64');
@@ -1786,6 +1911,7 @@ export class AuthService {
 
 
     };
+
     console.log(this.tokencsrf, 'aqui csrf');
 
     this.b64 = localStorage.getItem("base64").toString();
@@ -4054,6 +4180,7 @@ export class AuthService {
       "field_farmacia": [{ "value": user.field_farmacia }],
       "field_documentos_medicos": [{ "value": user.field_documentos_medicos }],
       // "field_valor_declarado":[{"value": user.field_valor_declarado}],
+      "field_ida_y_vuelta": [{ "value": user.field_ida_y_vuelta }],
       "field_prefijo_destino": [{ "value": user.field_prefijo_destino }],
       "field_prefijo_origen": [{ "value": user.field_prefijo_origen }],
       "field_respuesta_documentos": [{ "value": user.field_respuesta_documentos }],
@@ -4137,7 +4264,7 @@ export class AuthService {
       "type": [{ "target_id": 'sencilla' }],
       "field_direccion_entrega": [{ "value": user.field_direccion_entrega }],
 
-
+      "field_ida_y_vuelta": [{ "value": user.field_ida_y_vuelta }],
       "field_observaciones": [{ "value": user.field_observaciones }],
       "field_clase_de_pago": [{ "value": user.field_clase_de_pago }],
       "field_prefijo_origen": [{ "value": user.field_prefijo_origen }],
@@ -5773,6 +5900,18 @@ async enviarPushEnCompletado() {
 
     this.router.navigate(['/llaves']);
 
+  }
+
+ clearLocalStorage() {
+    const keysToRemove = [
+      'name', 'rol', 'rolAuxiliar', 'idAuxiliar',
+      'permitirPagoefectivo', 'tarifaDestino',
+      'tarifaDestino2', 'tarifaDestino3', 'tarifaDestino4',
+      'tarifaDestino5', 'tarifaDestino6', 'tarifaDestino7',
+      'tarifaOrigen', 'precioTarifa', 'precioTarifa2','mensajeria','ServicioEvaluado','tipoVehiculo','zona_destino','zona_origen','session_ends','EXPIRES_IN'
+    ];
+
+    keysToRemove.forEach(key => localStorage.removeItem(key));
   }
 
   consultarIdAuxiliar() {

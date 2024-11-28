@@ -26,7 +26,7 @@ export class ResumenPagosPage implements OnInit {
       field_direccion_destino:[""],
       field_regresar_por_wasap: [""],
       field_medio_de_transporte: [""],
-
+      field_ida_y_vuelta:[""],
 //field_documentos_pagos:[ ""],
 field_observaciones:[""],
 field_clase_de_pago:[""],
@@ -159,7 +159,7 @@ field_nombre_c_destino:[""]
 
 
       if (this.auth.resumenPagos.field_regresar_por_wasap['0']['value']==="Llevar recibo de vuelta") {
-
+        this.FormSend.controls.field_ida_y_vuelta.setValue(true);
         resultadoTotalCosto *= 2;
 
       }

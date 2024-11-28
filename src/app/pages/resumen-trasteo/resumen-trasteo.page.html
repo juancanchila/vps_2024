@@ -72,21 +72,16 @@
          </ion-buttons>
      </ion-item>
 
-
-      <ion-label > <b>Seleccione </b> </ion-label>
-      <div class="form-check">
-        <input disabled  id="checkbox1" formControlName="body" value="Carga pequeña"  class="form-check-input" type="radio" checked>
-        <label class="form-check-label" for="flexRadioDefault1">
-          Carga pequeña
-        </label>
-
-      </div>
-      <div>
-        <input disabled  id="checkbox2" formControlName="body" value="Carga grande" class="form-check-input" type="radio" checked>
-        <label class="form-check-label" for="flexRadioDefault2">
-          Carga grande
-        </label>
-      </div>
+     <ion-item>
+      <ion-label><b>Transporte Seleccionado</b></ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p *ngIf="FormSend.value.body === 'Carga pequeña'"><b>Carga pequeña</b></p>
+        <p *ngIf="FormSend.value.body === 'Carga grande'"> <b>Carga grande</b></p>
+        <p *ngIf="!FormSend.value.body">No se ha seleccionado ningún tipo de transporte.</p>
+      </ion-label>
+    </ion-item>
       <script>
          if(document.getElementById('field_contacto_destino').checked){
         alert('field_contacto_destino esta seleccionado');

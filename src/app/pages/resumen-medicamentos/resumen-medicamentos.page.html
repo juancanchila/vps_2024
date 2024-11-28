@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title>Resumen</ion-title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
-  
+
   </ion-toolbar>
 </ion-header>
 
@@ -134,8 +134,18 @@
        </ion-buttons>
 
       </ion-item>
-      <ion-label > <b>Seleccione* </b> </ion-label>
-      <div class="check">
+      <ion-label > <b>Documentos </b> </ion-label>
+      <!-- Condicionalmente mostrar el contenido según la selección -->
+      <ion-item *ngIf="FormSend.get('field_respuesta_documentos').value === 'Recoger Documentos'">
+        <p class="domicilio_class">El usuario ha seleccionado Recoger Documentos.</p>
+      </ion-item>
+
+      <ion-item *ngIf="FormSend.get('field_respuesta_documentos').value !== 'Recoger Documentos'">
+        <p class="domicilio_class">El usuario ha seleccionado Enviar Documentos por WhatSapp.</p>
+      </ion-item>
+
+
+      <!--div class="check">
         <input disabled="true" id="checkbox1" formControlName="field_respuesta_documentos" value="Recoger Documentos"  class="form-check-input" type="radio" checked>
         <label class="form-check-label" for="flexRadioDefault1">
           Recoger Documentos
@@ -147,7 +157,7 @@
         <label class="form-check-label" for="flexRadioDefault2">
           Enviar Documentos por WhatSapp
         </label>
-      </div>
+      </div-->
       <script>
          if(document.getElementById('field_respuesta_documentos').checked){
         alert('field_respuesta_documentos esta seleccionado');
