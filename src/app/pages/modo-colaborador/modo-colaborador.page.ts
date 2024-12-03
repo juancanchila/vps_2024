@@ -1,5 +1,5 @@
 import { Diagnostic } from '@awesome-cordova-plugins/diagnostic/ngx';
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
 import { AuthService } from 'src/app/services/auth.service';
@@ -12,7 +12,9 @@ import { AlertController } from '@ionic/angular';
   templateUrl: './modo-colaborador.page.html',
   styleUrls: ['./modo-colaborador.page.scss'],
 })
-export class ModoColaboradorPage implements OnInit {
+export class ModoColaboradorPage  {
+
+
   coordinate: any;
   watchCoordinate: any;
   watchId: any;
@@ -21,12 +23,11 @@ export class ModoColaboradorPage implements OnInit {
   longitud: number | any;
   allPedidos: any;
   character: any = [];
-  estadoAuxiliar: any;
+  estadoAuxiliar: any ;
   latitude: number;
   longitude: number;
   estadoDisponibilidad: any;
   posicionActivaAuxiliar: any;
-
 
   constructor(
     private alertControl: AlertController,
@@ -36,39 +37,31 @@ export class ModoColaboradorPage implements OnInit {
     private auth: AuthService,
     private router: Router
   ) {
-    this.getLocation();
+
+ this.getLocation();
     this.getGpsPermision();
     this.requestPermissions();
   }
 
-  ngOnInit() {
-    this.auth.consultarIdAuxiliar().subscribe(
-      async (res) => {
+
+  ionViewWillEnter() {
+    console.log('Modo colaborador - ionViewWillEnter');
+    this.iniciarModoColaborador();
+  }
+
+
+  iniciarModoColaborador() {
+
+    console.log('Cargando Modo Colaborador');
+
+
+    this.auth.consultarIdAuxiliar().subscribe((res) => {
       console.log(res, "Respuesta");
       console.log(res['0']['roles_target_id']);
 
       localStorage.setItem('rolAuxiliar', res['0']['roles_target_id']);
       localStorage.setItem('idAuxiliar', res['0']['uid']);
       localStorage.setItem('tipoVehiculo', res['0']['field_tipo_de_vehiculo']);
-
-      const rolesTargetId = res?.['0']?.roles_target_id || null;
-      const uid = res?.['0']?.uid || null;
-      const tipoVehiculo = res?.['0']?.field_tipo_de_vehiculo || null;
-
-      if (!rolesTargetId || !uid || !tipoVehiculo) {
-        console.error("Datos incompletos o nulos. Realizando logout...");
-        const alert = await this.alertControl.create({
-          header: 'Error',
-          message: 'Algo salió mal. Se cerrará la sesión.',
-          buttons: ['Aceptar'],
-        });
-        await alert.present();
-
-        this.auth.logout2();
-        this.auth.clearLocalStorage();
-        return;
-      }
-
     });
 
     this.getGpsPermision();
@@ -90,6 +83,7 @@ export class ModoColaboradorPage implements OnInit {
 
             localStorage.setItem('nodeDisponibilidad_estado', res['0']['field_estado']);
             localStorage.setItem('nodeDisponibilidad', res['0']['nid']);
+
           }
         } else {
           this.getLocation();
@@ -112,90 +106,17 @@ export class ModoColaboradorPage implements OnInit {
         this.getLocation();
         if (this.auth.longitud === "" || this.auth.latitud === "") {
           this.geo.openSetting();
-        } else {
+        }
           this.auth.EnviarPosicionAuxiliar();
           this.estadoAuxiliar = 'Auxiliar Ocupado';
           this.posicionActivaAuxiliar = '0';
           this.value = false;
           this.auth.actualizarDisponibleAuxiliar(false);
-        }
+
       }
     });
+
   }
-
-  doRefresh(event) {
-    this.ngOnInit();
-    console.log('Begin async operation');
-
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      event.target.complete();
-    }, 2000);
-  }
-
-  iraHistorialPedidos() {
-    this.router.navigate(['/historial-solicitudes']);
-  }
-
-  irAPedidosEnCurso() {
-    this.router.navigate(['/index-auxiliares']);
-  }
-
-  async checkcButon($event) {
-    if (this.value) {
-      console.log(this.value);
-      this.auth.getContenidoAsignado().subscribe(async (res) => {
-        console.log(res, 'respuesta contenido asignado');
-        if (res.length === 0) {
-          this.getLocation();
-          if (this.auth.longitud === "" || this.auth.latitud === "") {
-            this.geo.openSetting();
-          } else {
-            this.estadoAuxiliar = 'Auxiliar Disponible';
-            this.value = true;
-            this.auth.estadoPedido = true;
-            this.auth.actualizarPosicionEnviadaAuxiliar();
-            this.auth.actualizarDisponibleAuxiliar(true);
-          }
-        } else {
-          const alert = await this.alertControl.create({
-            header: 'Notificación Vapaesa',
-            message: 'Tienes pedido en curso pendiente, Por eso estaras en Modo Ocupado!',
-            buttons: [{ text: 'aceptar' }],
-          });
-          await alert.present();
-          this.value = false;
-          this.estadoAuxiliar = 'Auxiliar Ocupado';
-        }
-      });
-    } else {
-      console.log(this.value);
-      this.auth.getContenidoAsignado().subscribe(async (res) => {
-        console.log(res, 'respuesta');
-        if (res.length == 0) {
-          this.estadoAuxiliar = 'Auxiliar Ocupado';
-          this.getLocation();
-          if (this.auth.longitud === "" || this.auth.latitud === "") {
-            this.geo.openSetting();
-          } else {
-            this.auth.estadoPedido = false;
-            this.auth.actualizarPosicionEnviadaAuxiliarOcupado();
-            this.auth.actualizarDisponibleAuxiliar(false);
-          }
-        } else {
-          const alert = await this.alertControl.create({
-            header: 'Notificación Vapaesa',
-            message: 'Tienes pedido en curso pendiente, Por eso estaras en Modo Ocupado!',
-            buttons: [{ text: 'aceptar' }],
-          });
-          await alert.present();
-          this.value = false;
-          this.estadoAuxiliar = 'Auxiliar Ocupado';
-        }
-      });
-    }
-  }
-
   getGpsPermision() {
     this.diagnostic.getPermissionAuthorizationStatus(this.diagnostic.permission.ACCESS_FINE_LOCATION).then(
       (status) => {
@@ -288,5 +209,115 @@ export class ModoColaboradorPage implements OnInit {
 
   ngOnDestroy() {
     console.log("Modo colaborador - OnDestroy");
+    this.clearWatch();
   }
+
+  iraHistorialPedidos() {
+    this.router.navigate(['/historial-solicitudes']);
+  }
+
+  irAPedidosEnCurso() {
+    this.router.navigate(['/index-auxiliares']);
+  }
+
+
+  async checkcButon($event) {
+    if (this.value) {
+      console.log(this.value);
+      this.auth.getContenidoAsignado().subscribe(async (res) => {
+        console.log(res, 'respuesta contenido asignado');
+        if (res.length == 0) {
+          this.getLocation();
+          if (this.auth.longitud === "" || this.auth.latitud === "") {
+            this.geo.openSetting();
+          } else {
+            this.estadoAuxiliar = 'Auxiliar Disponible';
+            this.value = true;
+            this.auth.estadoPedido = true;
+            this.auth.actualizarPosicionEnviadaAuxiliar();
+            this.auth.actualizarDisponibleAuxiliar(true);
+          }
+        } else {
+          const alert = await this.alertControl.create({
+            header: 'Notificación Vapaesa',
+            message: 'Tienes pedido en curso pendiente, Por eso estaras en Modo Ocupado!',
+            buttons: [{ text: 'aceptar' }],
+          });
+          await alert.present();
+          this.value = false;
+          this.estadoAuxiliar = 'Auxiliar Ocupado';
+        }
+      });
+    } else {
+      console.log(this.value);
+      this.auth.getContenidoAsignado().subscribe(async (res) => {
+        console.log(res, 'respuesta');
+        if (res.length == 0) {
+          this.estadoAuxiliar = 'Auxiliar Ocupado';
+          this.getLocation();
+          if (this.auth.longitud === "" || this.auth.latitud === "") {
+            this.geo.openSetting();
+          } else {
+            this.auth.estadoPedido = false;
+            this.auth.actualizarPosicionEnviadaAuxiliarOcupado();
+            this.auth.actualizarDisponibleAuxiliar(false);
+          }
+        } else {
+          const alert = await this.alertControl.create({
+            header: 'Notificación Vapaesa',
+            message: 'Tienes pedido en curso pendiente, Por eso estaras en Modo Ocupado!',
+            buttons: [{ text: 'aceptar' }],
+          });
+          await alert.present();
+          this.value = false;
+          this.estadoAuxiliar = 'Auxiliar Ocupado';
+        }
+      });
+    }
+
+  }
+
+  doRefresh(event) {
+    this.iniciarModoColaborador();
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
+
+
 }
+  /*
+
+
+
+
+
+  async loadEstadoDisponibilidad() {
+    try {
+      // Esperar a que se obtenga la disponibilidad
+      const res = await this.auth.getDisponibilidadPropia().toPromise();
+
+      console.log(res, 'res');
+
+      if (res.length > 0) {
+        let estado_reciibido = res['0']['field_estado'];
+
+        if (estado_reciibido === 'Off') {
+          this.estadoAuxiliar = 'Auxiliar Ocupado';
+          this.value = false;
+        } else {
+          this.estadoAuxiliar = 'Auxiliar Disponible';
+          this.value = true;
+        }
+      }
+
+    } catch (error) {
+      console.error("Error al obtener la disponibilidad:", error);
+      // Manejar el error (por ejemplo, mostrar una alerta o mensaje)
+    }
+  }
+
+*/

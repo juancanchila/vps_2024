@@ -465,7 +465,7 @@ await alert.present();
                 text:'aceptar',
                 handler:()=>{
 
-                  this.auth.logout2();
+                  this.auth.logout();
                 }
               }],
 

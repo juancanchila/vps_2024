@@ -481,14 +481,10 @@ export class AuthService {
     /*
               const headers = new HttpHeaders({'Content-Type': 'application/json','Accept': 'application/json','X-CSRF-Token': 'n5iVI-HO9NKig9dn3yqQwdJzCxw50mYSbfjaNAKjI7U'});
     */
-    if (this.anonimustoken == 400) {
+    if (this.anonimustoken === 400) {
       alert('error!! verifique, intente nuevamente');
       this.router.navigateByUrl('/login');
-    } else {
-      alert('usuario creado con exito espere confirmacion al correo');
-
     }
-
 
     const headers = new HttpHeaders;
     headers.append('Content-Type', 'application/json');
@@ -517,11 +513,14 @@ export class AuthService {
 
     this.http.post<RegisterI>('http://147.182.203.91/user/register?_format=json', datoRegistro, { headers: headers }).subscribe(data2 => {
       console.log(data2);
+      alert('Datos enviados espere confirmación al correo registrado!');
+
     }, error2 => {
       this.anonimustoken = "" + error2.error.text;
       console.log(error2);
       console.log(error2.error.text);
       console.log(error2.status);
+      alert('error!! verifique los datos, intente nuevamente');
     });
     this.router.navigateByUrl('/login');
 
@@ -530,11 +529,12 @@ export class AuthService {
 
   //metodo para hacer login
   login(user: LoginI) {
+
+
+      localStorage.setItem('modoAuxiliar','modoCliente');
+
+
     this.base64 = btoa(user.name + ':' + user.pass);
-
-
-
-
 
 
 
@@ -556,6 +556,7 @@ export class AuthService {
                 localStorage.setItem('modoAuxiliar', 'modoCliente');
             }
 
+              //Evaluar si es igual al valor almacenado de este dispositivo
               if(res['0']['field_push_user'] == ""){
 
 
@@ -1415,7 +1416,7 @@ export class AuthService {
               localStorage.setItem('nodeDisponibilidad', res['0']['node_disponibilidad'] || '');
               tipoVehiculo = localStorage.getItem('tipoVehiculo'); // Actualizar después de guardar
               locacion = localStorage.getItem('locacion'); // Actualizar locacion
-              nodeDisponibilidad = localStorage.getItem('nodeDisponibilidad'); // Actualizar nodeDisponibilidad
+
               resolve();
             },
             error: (err) => {
@@ -1427,14 +1428,14 @@ export class AuthService {
       }
 
       // Si después de intentar precargar los datos siguen incompletos, cerrar sesión
-      if (!tipoVehiculo || !locacion || !nodeDisponibilidad) {
+      if (!tipoVehiculo) {
         this.mostrarAlerta('Algo salió mal al cargar los datos. Cerrando sesión...');
-        this.logout2();
+        this.logout();
         this.clearLocalStorage();
         return;
       }
 
-      // Crear el objeto sencilla con los datos validados
+      // Crear el objeto sencilla con los datos validados  this.estadoPedido
       let sencilla = {
         "title": [{ "value": 'Posicion auxiliar' }],
         "type": [{ "target_id": 'disponibles' }],
@@ -1460,10 +1461,10 @@ export class AuthService {
           'X-CSRF-Token': this.tokencsrf
         });
 
-        let url = 'http://147.182.203.91/node/' + nodeDisponibilidad + '?_format=json';
-        console.log(url, 'patch act poscion');
+        let url = 'http://147.182.203.91/node/?_format=json';
+        console.log(url, 'post act posicion');
 
-        this.http.patch(url, converSencilla, { headers: headers }).subscribe(async data2 => {
+        this.http.post(url, converSencilla, { headers: headers }).subscribe(async data2 => {
           const alert = await this.alertControl.create({
             header: 'Notificación Vapaesa',
             message: 'Posición de auxiliar actualizada y enviada como disponible..!',
@@ -1484,7 +1485,7 @@ export class AuthService {
     } catch (error) {
       console.error('Error en EnviarPosicionAuxiliar:', error);
       this.mostrarAlerta('Algo salió mal al cargar los datos. Cerrando sesión...');
-      this.logout2();
+      this.logout();
       this.clearLocalStorage();
     }
   }
@@ -1498,7 +1499,7 @@ export class AuthService {
       let nodeDisponibilidad = localStorage.getItem('nodeDisponibilidad');
 
       // Si alguno de los datos está vacío, null o undefined, intentar precargar
-      if (!tipoVehiculo || !locacion || !nodeDisponibilidad) {
+      if (!tipoVehiculo) {
         console.log('Datos incompletos en localStorage. Intentando precargar datos...');
 
         await new Promise<void>((resolve, reject) => {
@@ -1523,9 +1524,9 @@ export class AuthService {
       }
 
       // Si después de intentar precargar los datos siguen incompletos, cerrar sesión
-      if (!tipoVehiculo || !locacion || !nodeDisponibilidad) {
+      if (!tipoVehiculo) {
         this.mostrarAlerta('Algo salió mal al cargar los datos. Cerrando sesión...');
-        this.logout2();
+        this.logout();
         this.clearLocalStorage();
         return;
       }
@@ -1580,7 +1581,7 @@ export class AuthService {
     } catch (error) {
       console.error('Error en actualizarPosicionEnviadaAuxiliar:', error);
       this.mostrarAlerta('Algo salió mal al cargar los datos. Cerrando sesión...');
-      this.logout2();
+      this.logout();
       this.clearLocalStorage();
     }
   }
@@ -1632,7 +1633,7 @@ export class AuthService {
       let nodeDisponibilidad = localStorage.getItem('nodeDisponibilidad');
 
       // Si alguno de los datos está vacío, null o undefined, intentar precargar
-      if (!tipoVehiculo || !locacion || !nodeDisponibilidad) {
+      if (!tipoVehiculo) {
         console.log('Datos incompletos en localStorage. Intentando precargar datos...');
 
         await new Promise<void>((resolve, reject) => {
@@ -1657,9 +1658,9 @@ export class AuthService {
       }
 
       // Si después de intentar precargar los datos siguen incompletos, cerrar sesión
-      if (!tipoVehiculo || !locacion || !nodeDisponibilidad) {
+      if (!tipoVehiculo) {
         this.mostrarAlerta('Algo salió mal al cargar los datos. Cerrando sesión...');
-        this.logout2();
+        this.logout();
         this.clearLocalStorage();
         return;
       }
@@ -1709,10 +1710,10 @@ export class AuthService {
           console.log(error2);
           if (error2.status == 0) {
             alert('Error, revise su conexión');
-            this.logout2();
+            this.logout();
           } else if (error2.status == 422) {
             alert('En estos momentos no podemos atender tu orden');
-            this.logout2();
+            this.logout();
           }
         });
       }
@@ -1720,7 +1721,7 @@ export class AuthService {
     } catch (error) {
       console.error('Error en actualizarPosicionEnviadaAuxiliarOcupado:', error);
       this.mostrarAlerta('Algo salió mal al cargar los datos. Cerrando sesión...');
-      this.logout2();
+      this.logout();
       this.clearLocalStorage();
     }
   }
@@ -1787,7 +1788,7 @@ export class AuthService {
       console.log(error2);
       if (error2.status == 0) {
         alert('Error revise su conexion');
-        this.logout2();
+        this.logout();
 
       }
     });
@@ -1835,7 +1836,7 @@ export class AuthService {
       console.log(error2);
       if (error2.status == 0) {
         alert('Error revise su conexion');
-        this.logout2();
+        this.logout();
 
       }
     });
@@ -1881,7 +1882,7 @@ export class AuthService {
       console.log(error2);
       if (error2.status == 0) {
         alert('Error revise su conexion');
-        this.logout2();
+        this.logout();
 
       }
     });
@@ -1934,7 +1935,7 @@ export class AuthService {
       console.log(error2);
       if (error2.status == 0) {
         alert('Error revise su conexion');
-        this.logout2();
+        this.logout();
 
       }
     });
@@ -1984,7 +1985,7 @@ export class AuthService {
       console.log(error2);
       if (error2.status == 0) {
         alert('Error revise su conexion');
-        this.logout2();
+        this.logout();
 
       }
     });
@@ -2039,7 +2040,7 @@ export class AuthService {
           reject(error);  // Rechazamos la promesa en caso de error
           if (error.status === 0) {
             alert('Error, revise su conexión');
-            this.logout2();
+            this.logout();
           }
         }
       );
@@ -2526,11 +2527,11 @@ export class AuthService {
       console.log(error2);
       if (error2.status == 0) {
         alert('Error revise su conexion');
-        this.logout2();
+        this.logout();
 
       } else if (error2.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
 
@@ -2618,11 +2619,11 @@ export class AuthService {
       console.log(error2);
       if (error2.status == 0) {
         alert('Error revise su conexion');
-        this.logout2();
+        this.logout();
 
       } else if (error2.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
 
@@ -2702,11 +2703,11 @@ export class AuthService {
       console.log(error2);
       if (error2.status == 0) {
         alert('Error revise su conexion');
-        this.logout2();
+        this.logout();
 
       } else if (error2.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
 
@@ -2790,11 +2791,11 @@ export class AuthService {
       console.log(error2);
       if (error2.status == 0) {
         alert('Error revise su conexion');
-        this.logout2();
+        this.logout();
 
       } else if (error2.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
 
@@ -2867,11 +2868,11 @@ export class AuthService {
       console.log(error2);
       if (error2.status == 0) {
         alert('Error revise su conexion');
-        this.logout2();
+        this.logout();
 
       } else if (error2.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
 
@@ -2945,11 +2946,11 @@ export class AuthService {
       console.log(error2);
       if (error2.status == 0) {
         alert('Error revise su conexion');
-        this.logout2();
+        this.logout();
 
       } else if (error2.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
 
@@ -3032,11 +3033,11 @@ export class AuthService {
       console.log(error2);
       if (error2.status == 0) {
         alert('Error revise su conexion');
-        this.logout2();
+        this.logout();
 
       } else if (error2.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
 
@@ -3123,11 +3124,11 @@ export class AuthService {
       console.log(error2);
       if (error2.status == 0) {
         alert('revise su conexion');
-        this.logout2();
+        this.logout();
 
       } else if (error2.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
 
@@ -3216,11 +3217,11 @@ export class AuthService {
       console.log(error23);
       if (error23.status == 0) {
         alert('revise su conexion');
-        this.logout2();
+        this.logout();
 
       } else if (error23.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
 
@@ -3354,7 +3355,7 @@ export class AuthService {
 
         } else if (error21.status == 422) {
           alert('En estos momentos no podemos atender tu orden');
-          this.logout2();
+          this.logout();
 
         }
 
@@ -3376,7 +3377,7 @@ export class AuthService {
 
         } else if (error22.status == 422) {
           alert('En estos momentos no podemos atender tu orden');
-          this.logout2();
+          this.logout();
 
         }
       });
@@ -3484,7 +3485,7 @@ export class AuthService {
 
       } else if (error23.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
     }
@@ -3579,7 +3580,7 @@ export class AuthService {
 
       } else if (error24.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
     }
@@ -3675,7 +3676,7 @@ export class AuthService {
 
       } else if (error25.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
     });
@@ -3771,7 +3772,7 @@ export class AuthService {
 
       } else if (error26.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
     });
@@ -3867,7 +3868,7 @@ export class AuthService {
 
       } else if (error27.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
     });
@@ -3963,7 +3964,7 @@ export class AuthService {
 
       } else if (error28.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
     });
@@ -4059,7 +4060,7 @@ export class AuthService {
 
       } else if (error29.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
     });
@@ -4155,7 +4156,7 @@ export class AuthService {
 
       } else if (error30.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
     });
@@ -4244,7 +4245,7 @@ export class AuthService {
 
       } else if (error2.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
 
@@ -4336,7 +4337,7 @@ export class AuthService {
 
       } else if (error2.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
 
@@ -4429,7 +4430,7 @@ export class AuthService {
 
       } else if (error2.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
 
@@ -4524,7 +4525,7 @@ export class AuthService {
 
       } else if (error2.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
 
@@ -4622,7 +4623,7 @@ export class AuthService {
 
       } else if (error2.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
 
@@ -4720,7 +4721,7 @@ export class AuthService {
 
       } else if (error2.status == 422) {
         alert('En estos momentos no podemos atender tu orden');
-        this.logout2();
+        this.logout();
 
       }
 
@@ -4733,9 +4734,13 @@ export class AuthService {
   logout() {
     console.log("esto");
     this.token = "";
+    this.menucontrol.close();
+    this.clearLocalStorage();
     localStorage.removeItem("ACCES_TOKEN");
     localStorage.removeItem("var1['logout_token']");
     this.router.navigateByUrl("/login")
+
+
 
   }
 
@@ -5908,7 +5913,7 @@ async enviarPushEnCompletado() {
       'permitirPagoefectivo', 'tarifaDestino',
       'tarifaDestino2', 'tarifaDestino3', 'tarifaDestino4',
       'tarifaDestino5', 'tarifaDestino6', 'tarifaDestino7',
-      'tarifaOrigen', 'precioTarifa', 'precioTarifa2','mensajeria','ServicioEvaluado','tipoVehiculo','zona_destino','zona_origen','session_ends','EXPIRES_IN'
+      'tarifaOrigen', 'precioTarifa', 'precioTarifa2','mensajeria','ServicioEvaluado','tipoVehiculo','zona_destino','zona_origen','csrf_token','Ingresado','modoAuxiliar'
     ];
 
     keysToRemove.forEach(key => localStorage.removeItem(key));

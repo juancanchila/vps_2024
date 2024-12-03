@@ -38,8 +38,9 @@ urlBase:any;
 
     modal.onDidDismiss().then((data) => {
       if (data.role === 'confirmed') {
-        // Handle the account deletion here
-      }
+        this.auth.logout();
+        this.auth.clearLocalStorage();
+            }
     });
 
     return await modal.present();

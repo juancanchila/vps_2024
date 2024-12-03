@@ -23,7 +23,8 @@ tab3=PerfilPage;
 
   ngOnInit() {
     this.auth.setCalificationModalState(false);
-    if(localStorage.getItem('rolAuxiliar')=='Auxiliar'&& localStorage.getItem('modoAuxiliar')=='modoColaborador'){
+
+    if(localStorage.getItem('rolAuxiliar')==='Auxiliar'&& localStorage.getItem('modoAuxiliar')==='modoColaborador'){
       this.router.navigate(['/modo-colaborador']);
     }else{
       this.router.navigateByUrl('/tabs');

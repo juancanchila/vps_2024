@@ -36,7 +36,7 @@ export class ModoColaboradorGuard implements CanActivate {
     const loading = await this.loadingCtrl.create({
       message, // Mensaje personalizado
       spinner: 'crescent', // Tipo de animación (bolita giratoria)
-      duration: 1000, // Duración máxima (ajustable)
+      duration: 100, // Duración máxima (ajustable)
     });
     await loading.present();
     return loading;

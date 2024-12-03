@@ -17,7 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ifAuxiliar: any;
   public nombre: string;
   public contadorIngresoModoCliente = 0;
-  public textoPerfil: string;
+  public textoPerfil: string = ' IR A MODO COLABORADOR';
   modoColaborador: any;
 
   constructor(
@@ -43,6 +43,28 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+    console.log(localStorage.getItem('modoAuxiliar'),"Valor nodoauxiliar");
+    this.auth.consultarIdAuxiliar().subscribe(res => {
+      console.log(res,"perfil obtenido");
+      this.ifAuxiliar = res;
+
+      if (!this.ifAuxiliar.includes('Auxiliar')) {
+        console.log(res['0']['roles_target_id']);
+        localStorage.setItem('rolAuxiliar', res['0']['roles_target_id']);
+        localStorage.setItem('idAuxiliar', res['0']['uid']);
+        localStorage.setItem('tipoVehiculo', res['0']['field_tipo_de_vehiculo']);
+
+        if (res['0']['roles_target_id'].includes('Auxiliar') && localStorage.getItem('modoAuxiliar') === 'modoColaborador') {
+          this.textoPerfil = ' IR A MODO CLIENTE';
+          this.router.navigate(['/modo-colaborador']);
+        } else {
+          this.textoPerfil = ' IR A MODO COLABORADOR';
+          this.nombre = localStorage.getItem('name');
+          this.role = localStorage.getItem('rol');
+        }
+      }
+    });
 
     if (localStorage.getItem('modoAuxiliar') === 'modoColaborador') {
       this.textoPerfil = ' IR A MODO CLIENTE';
@@ -152,11 +174,12 @@ export class AppComponent implements OnInit, OnDestroy {
         {
           text: 'Aceptar',
           handler: () => {
-            this.auth.logout2();
-            this.clearLocalStorage();
+            this.auth.logout();
+            this.auth.clearLocalStorage();
             this.ifAuxiliar = null;
             this.textoPerfil = ' IR A MODO COLABORADOR';
             this.role = null;
+            this.menucontrol.close();
           }
         }
       ]
@@ -165,15 +188,5 @@ export class AppComponent implements OnInit, OnDestroy {
     await alertElement.present();
   }
 
-  private clearLocalStorage() {
-    const keysToRemove = [
-      'name', 'rol', 'rolAuxiliar', 'idAuxiliar',
-      'permitirPagoefectivo', 'tarifaDestino',
-      'tarifaDestino2', 'tarifaDestino3', 'tarifaDestino4',
-      'tarifaDestino5', 'tarifaDestino6', 'tarifaDestino7',
-      'tarifaOrigen', 'precioTarifa', 'precioTarifa2','mensajeria','ServicioEvaluado','tipoVehiculo','zona_destino','zona_origen','session_ends','EXPIRES_IN'
-    ];
 
-    keysToRemove.forEach(key => localStorage.removeItem(key));
-  }
 }

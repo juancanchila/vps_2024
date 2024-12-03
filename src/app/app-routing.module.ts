@@ -5,6 +5,7 @@ import { NoIngresadoGuard } from './no-ingresado.guard';
 import { AuxiliarGuard } from './guards/auxiliar.guard';
 import { ModoColaboradorGuard } from './guards/modo-colaborador-guard.guard';
 import { ModalCalificacionGuard } from './guards/modal-calificacion.guard';
+import { DisponibilidadGuard } from './guards/disponibilidad.guard';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
