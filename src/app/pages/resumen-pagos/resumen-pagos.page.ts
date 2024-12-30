@@ -11,29 +11,22 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ResumenPagosPage implements OnInit {
   FormSend: FormGroup;
-  precio_origen: any;
-  precio_destino: any;
-  precio_origen_externo: any;
-  precio_destino_externo:any;
   locaciones :any[];
   aux: string;
   estadoButton: boolean;
   constructor(private menucontrol:MenuController,private router: Router, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {
     this.menucontrol.enable(false);
     this.FormSend= this.fb.group({
-      field_prefijo_origen:[""],
-      field_direccion_entrega:[""],
-      field_direccion_destino:[""],
+      field_direccion_entrega: [""],
+      field_direccion_destino: [""],
       field_regresar_por_wasap: [""],
       field_medio_de_transporte: [""],
       field_ida_y_vuelta:[""],
-//field_documentos_pagos:[ ""],
 field_observaciones:[""],
 field_clase_de_pago:[""],
 field_respuesta_documentos:[""],
 field_metodo_de_pago:[""],
 field_barrio_origen:[""],
-field_prefijo_destino:[""],
 field_barrio_destino:[""],
 field_locacion_entrega:[""],
 field_locacion_destino:[""],
@@ -63,14 +56,14 @@ field_nombre_c_destino:[""]
 
     irAPagar(){
 
-      if(this.aux=='false'){
+      if(this.aux==='false'){
         this.presentAlert();
 
        }else{
 
       this.auth.getSesion();
 
-      if(this.estadoButton==true){
+      if(this.estadoButton===true){
         this.estadoButton=false;
         this.auth.CrearPagos(this.FormSend.value);
 
@@ -119,7 +112,7 @@ field_nombre_c_destino:[""]
           //si es igua igual a on, lpasas para la otra pagina
 
      //4
- if(this.aux=='false'){
+ if(this.aux==='false'){
   // le muestra que no marcho (primero)
   let estado='false';
   localStorage.setItem('actualizarContrato',estado);
@@ -148,20 +141,23 @@ field_nombre_c_destino:[""]
     console.log(localStorage.getItem('zona_destino'), 'zona_destino');
     console.log(localStorage.getItem('servicioEvaluado'), 'servicioEvaluado');
 
-   var resultadoTotalCosto = await this.auth.calcularPrecioTarifa(
+   let resultadoTotalCosto = await this.auth.calcularPrecioTarifa(
       localStorage.getItem('servicioEvaluado'),
       localStorage.getItem('zona_origen'),
       localStorage.getItem('zona_destino'),
       2
-    );
+      );
+
     resultadoTotalCosto = Number(resultadoTotalCosto);
       console.log(resultadoTotalCosto, 'resultadoTotalCosto');
 
 
       if (this.auth.resumenPagos.field_regresar_por_wasap['0']['value']==="Llevar recibo de vuelta") {
-        this.FormSend.controls.field_ida_y_vuelta.setValue(true);
+        this.FormSend.controls.field_ida_y_vuelta.setValue(1);
         resultadoTotalCosto *= 2;
 
+      } else {
+        this.FormSend.controls.field_ida_y_vuelta.setValue(0);
       }
 
       console.log(resultadoTotalCosto, 'Costo obtenido');
@@ -174,23 +170,23 @@ field_nombre_c_destino:[""]
 
             console.log(error);
 
-          });
-    this.precio_origen = Number(localStorage.getItem('tarifaOrigen'));
-    this.precio_destino = Number(localStorage.getItem('tarifaDestino'));
+    });
 
-
-    this.precio_origen_externo  = Number(localStorage.getItem('tarifaExternaOrigen'));
-    this.precio_destino_externo = Number(localStorage.getItem('tarifaExternaDestino'));
    this.presentAlert();
 
 
 
+      console.log(this.auth.resumenPagos);
 
-  console.log(this.auth.resumenPagos);
-  this.FormSend.controls.field_prefijo_origen.setValue(this.auth.resumenPagos.field_prefijo_origen['0']['value']);
-  this.FormSend.controls.field_direccion_entrega.setValue(this.auth.resumenPagos.field_direccion_entrega['0']['value']);
+
+      this.FormSend.controls.field_direccion_entrega.setValue(this.auth.resumenPagos.field_direccion_entrega['0']['value']);
+
+  console.log(this.FormSend.value);
 
   this.FormSend.controls.field_direccion_destino.setValue(this.auth.resumenPagos.field_direccion_destino['0']['value']);
+
+
+
 
   this.FormSend.controls.field_clase_de_pago.setValue(this.auth.resumenPagos.field_clase_de_pago['0']['value']);
 
@@ -198,28 +194,35 @@ field_nombre_c_destino:[""]
 
   this.FormSend.controls.field_regresar_por_wasap.setValue(this.auth.resumenPagos.field_regresar_por_wasap['0']['value']);
 
-  this.FormSend.controls.field_observaciones.setValue(this.auth.resumenPagos.field_observaciones['0']['value']);
+      this.FormSend.controls.field_observaciones.setValue(this.auth.resumenPagos.field_observaciones['0']['value']);
 
 
-  this.FormSend.controls.field_locacion_entrega.setValue(this.auth.resumenPagos.field_locacion_entrega['0']['value']);
-  this.FormSend.controls.field_locacion_destino.setValue(this.auth.resumenPagos.field_locacion_destino['0']['value']);
-  this.FormSend.controls.field_prefijo_destino.setValue(this.auth.resumenPagos.field_prefijo_destino['0']['value']);
-  this.FormSend.controls.field_barrio_origen.setValue(this.auth.resumenPagos.field_barrio_origen['0']['value']);
-  this.FormSend.controls.field_barrio_destino.setValue(this.auth.resumenPagos.field_barrio_destino['0']['value']);
-  //this.FormSend.controls.field_valor_declarado.setValue(this.auth.resumenPagos.field_valor_declarado['0']['value']);
+
+      this.FormSend.controls.field_locacion_entrega.setValue(this.auth.resumenPagos.field_locacion_entrega['0']['value']);
+
+      this.FormSend.controls.field_locacion_destino.setValue(this.auth.resumenPagos.field_locacion_destino['0']['value']);
+
+      this.FormSend.controls.field_barrio_origen.setValue(this.auth.resumenPagos.field_barrio_origen['0']['value']);
+
+      this.FormSend.controls.field_barrio_destino.setValue(this.auth.resumenPagos.field_barrio_destino['0']['value']);
+
   this.FormSend.controls.field_metodo_de_pago.setValue(this.auth.resumenPagos.field_metodo_de_pago['0']['value']);
 
-  this.FormSend.controls.field_contacto.setValue(this.auth.resumenPagos.field_contacto['0']['value']);
-
-  this.FormSend.controls.field_contacto_destino.setValue(this.auth.resumenPagos.field_contacto_destino['0']['value']);
-
-  this.FormSend.controls.field_nombre_c_origen.setValue(this.auth.resumenPagos.field_nombre_c_origen['0']['value']);
-  this.FormSend.controls.field_nombre_c_destino.setValue(this.auth.resumenPagos.field_nombre_c_destino['0']['value']);
-
-  this.FormSend.controls.field_medio_de_transporte.setValue(2);
+      this.FormSend.controls.field_contacto.setValue(this.auth.resumenPagos.field_contacto['0']['value']);
 
 
-    if(this.auth.resumenPagos.field_regresar_por_wasap['0']['value']=='Llevar recibo de vuelta'){
+      this.FormSend.controls.field_contacto_destino.setValue(this.auth.resumenPagos.field_contacto_destino['0']['value']);
+
+
+      this.FormSend.controls.field_nombre_c_origen.setValue(this.auth.resumenPagos.field_nombre_c_origen['0']['value']);
+
+      this.FormSend.controls.field_nombre_c_destino.setValue(this.auth.resumenPagos.field_nombre_c_destino['0']['value']);
+
+
+
+      this.FormSend.controls.field_medio_de_transporte.setValue(2);
+
+    if(this.auth.resumenPagos.field_regresar_por_wasap['0']['value']==='Llevar recibo de vuelta'){
       this.auth.respuestaDocumentoBoolean='Llevar recibo de vuelta';
     }else{
       this.auth.respuestaDocumentoBoolean='Enviar Comprobante de pago por watsap';
@@ -227,7 +230,8 @@ field_nombre_c_destino:[""]
 
 
 
-     this.FormSend.controls.field_precio_.setValue(resultadoTotalCosto);
+      this.FormSend.controls.field_precio_.setValue(resultadoTotalCosto);
+
      localStorage.setItem('precioTarifa', resultadoTotalCosto);
 
 

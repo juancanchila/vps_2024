@@ -119,10 +119,8 @@ export class RutasPage implements OnInit {
       field_barrio_destino2:[""],
 
       field_metodo_de_pago:[""],
-      field_prefijo_destino2:[""],
+
       field_direccion_destino:[""],
-      field_prefijo_origen:[""],
-      field_prefijo_destino:[""],
       field_locacion_destino_r:[""],
       field_locacion_entrega:[""],
       field_contacto_destino:[""],
@@ -136,12 +134,11 @@ field_nombre_c_destino2:[''],
       field_contacto:[""],
       field_direccion_entrega:[""],
       body:[""],
-      destinoF:[ ],
       body3:[""],
       destino3:[""],
       locacion3:[""],
       contacto3:[""],
-      field_prefijo_destino3:[""],
+
       field_barrio_destino3:[""],
       field_nombre_c_destino3:[''],
 
@@ -149,7 +146,7 @@ field_nombre_c_destino2:[''],
       destino4:[""],
       locacion4:[""],
       contacto4:[""],
-      field_prefijo_destino4:[""],
+
       field_barrio_destino4:[""],
       field_nombre_c_destino4:[''],
 
@@ -157,7 +154,7 @@ field_nombre_c_destino2:[''],
       destino5:[""],
       locacion5:[""],
       contacto5:[""],
-      field_prefijo_destino5:[""],
+
       field_barrio_destino5:[""],
       field_nombre_c_destino5:[''],
 
@@ -165,7 +162,7 @@ field_nombre_c_destino2:[''],
       destino6:[""],
       locacion6:[""],
       contacto6:[""],
-      field_prefijo_destino6:[""],
+
       field_barrio_destino6:[""],
       field_nombre_c_destino6:[''],
 
@@ -174,7 +171,7 @@ field_nombre_c_destino2:[''],
       destino7:[""],
       locacion7:[""],
       contacto7:[""],
-      field_prefijo_destino7:[""],
+
       field_barrio_destino7:[""],
       field_nombre_c_destino7:[''],
 
@@ -182,7 +179,7 @@ field_nombre_c_destino2:[''],
       destino8:[""],
       locacion8:[""],
       contacto8:[""],
-      field_prefijo_destino8:[""],
+
       field_barrio_destino8:[""],
       field_nombre_c_destino8:[''],
 
@@ -190,7 +187,7 @@ field_nombre_c_destino2:[''],
       destino9:[""],
       locacion9:[""],
       contacto9:[""],
-      field_prefijo_destino9:[""],
+
       field_barrio_destino9:[""],
       field_nombre_c_destino9:[''],
 
@@ -198,7 +195,7 @@ field_nombre_c_destino2:[''],
       destino10:[""],
       locacion10:[""],
       contacto10:[""],
-      field_prefijo_destino10:[""],
+
       field_barrio_destino10:[""],
       field_nombre_c_destino10:[''],
 
@@ -1476,13 +1473,67 @@ const alert = await this.alertController.create({
    this.FormSend.controls.field_barrio_destino10.setValue(item.name);
   }
 
+  imprimirErrores() {
+    Object.keys(this.FormSend.controls).forEach(key => {
+      const control = this.FormSend.get(key);
+      if (control?.errors) {
+        console.log(`Error en el campo "${key}":`, control.errors);
+      }
+    });
+  }
 
-   async sendFormRuta(){
+  adjustValidators(cantidadDestinos: number) {
+    // Remover 'required' de los campos destino9 y destino10 si cantidadDestinos es 8 o menos
+    if (cantidadDestinos <= 8) {
+      this.FormSend.get('body9')?.clearValidators();
+      this.FormSend.get('destino9')?.clearValidators();
+      this.FormSend.get('contacto9')?.clearValidators();
+      this.FormSend.get('field_nombre_c_destino9')?.clearValidators();
+
+      this.FormSend.get('body10')?.clearValidators();
+      this.FormSend.get('destino10')?.clearValidators();
+      this.FormSend.get('contacto10')?.clearValidators();
+      this.FormSend.get('field_nombre_c_destino10')?.clearValidators();
+    }
+
+    // Remover 'required' solo del campo destino10 si cantidadDestinos es 9
+    if (cantidadDestinos === 9) {
+      this.FormSend.get('body10')?.clearValidators();
+      this.FormSend.get('destino10')?.clearValidators();
+      this.FormSend.get('contacto10')?.clearValidators();
+      this.FormSend.get('field_nombre_c_destino10')?.clearValidators();
+    }
+
+    // Aplicar los cambios llamando a updateValueAndValidity
+    this.FormSend.get('body9')?.updateValueAndValidity();
+    this.FormSend.get('destino9')?.updateValueAndValidity();
+    this.FormSend.get('contacto9')?.updateValueAndValidity();
+    this.FormSend.get('field_nombre_c_destino9')?.updateValueAndValidity();
+
+    this.FormSend.get('body10')?.updateValueAndValidity();
+    this.FormSend.get('destino10')?.updateValueAndValidity();
+    this.FormSend.get('contacto10')?.updateValueAndValidity();
+    this.FormSend.get('field_nombre_c_destino10')?.updateValueAndValidity();
+  }
+
+
+  async sendFormRuta() {
+    this.adjustValidators(this.cantidadDestinos);
+
+    if (this.FormSend.invalid) {
+      this.imprimirErrores();
+      console.log('El formulario tiene errores. Por favor corrígelos.');
+    } else {
+      console.log('Formulario enviado exitosamente.');
+    }
+
     console.log('cantidad de destinos en local storage',localStorage.getItem('cantidadDestinosRutas'));
 
-    console.log('cantidad de destinos',this.cantidadDestinos);
+    console.log('cantidad de destinos', this.cantidadDestinos);
+
     this.validadorDeRuta= localStorage.getItem('ValidadorRuta');
-    console.log(this.validadorDeRuta,'validador');
+     console.log(this.validadorDeRuta, 'validador');
+
     console.log(this.destinos_orden,'en on init');
         if(this.validadorDeRuta ==1){
           this.validadorDeRuta=0;
@@ -1494,403 +1545,40 @@ const alert = await this.alertController.create({
 
 console.log(this.FormSend.value);
 
+console.log(this.auth.medioTransporte,'tipo de vehiucl');
+console.log(localStorage.getItem('modalidad'),'modalidad');
 
 //validar cuando sea moderada se necesita minimo un aux
 
 
-if(localStorage.getItem('modalidad')=='Moderada'){
-
-  if(this.FormSend.value['field_metodo_de_pago']==""){
-    const alert = await this.alertController.create({
-
-      header: 'Datos incompletos ',
-
-      message: 'llenar todos los datos.',
-      buttons: ['Aceptar']
-    });
-
-    await alert.present();
-    return;
-  }else{
-
-
-    for(let i=0;i<this.ciudades.length;i++){
-      if(this.ciudades[i]['name']==localStorage.getItem('locacion')){
-        console.log(this.auth.medioTransporte,'estoy en ciudad');
-
-        console.log(this.FormSend.value['field_valor_declarado'], 'valor declarado');
-        console.log(this.AuxCarrosDisponibles, 'this.AuxCarrosDisponibles');
-        console.log('city');
-        if(this.auth.medioTransporte == 2 && this.AuxCarrosDisponibles['length']>=1){
-          console.log('carro');
-          this.auth.sendFormularioRuta(this.FormSend.value);
-   localStorage.setItem('cantidadDestinosRutas',this.cantidadDestinos.toString());
-          if(this.cantidadDestinos==3){
-           this.router.navigate(['/resumen-ruta3']);
-          }else if(this.cantidadDestinos==4){
-           this.router.navigate(['/resumen-ruta4']);
-          } else
-          if(this.cantidadDestinos==5){
-           this.router.navigate(['/resumen-ruta5']);
-          }else
-          if(this.cantidadDestinos==6){
-           this.router.navigate(['/resumen-ruta6']);
-          }else
-          if(this.cantidadDestinos==7){
-           this.router.navigate(['/resumen-ruta7']);
-          }else
-          if(this.cantidadDestinos==8){
-           this.router.navigate(['/resumen-ruta8']);
-          }else
-          if(this.cantidadDestinos==9){
-           this.router.navigate(['/resumen-ruta9']);
-          }else
-          if(this.cantidadDestinos==10){
-           this.router.navigate(['/resumen-ruta10']);
-          }
-          else{
-           this.router.navigate(['/resumen-ruta']);
-          }
-
-
-
-
-          }else
-            if( this.auth.medioTransporte == 1 &&  this.AuxMotosDisponibles['length']>=1){
-              localStorage.setItem('cantidadDestinosRutas',this.cantidadDestinos.toString());
-              this.auth.sendFormularioRuta(this.FormSend.value);
-              if(this.cantidadDestinos==2){
-                this.router.navigate(['/resumen-ruta']);
-               }
-              if(this.cantidadDestinos==3){
-               this.router.navigate(['/resumen-ruta3']);
-              }else if(this.cantidadDestinos==4){
-               this.router.navigate(['/resumen-ruta4']);
-              } else
-              if(this.cantidadDestinos==5){
-               this.router.navigate(['/resumen-ruta5']);
-              }else
-              if(this.cantidadDestinos==6){
-               this.router.navigate(['/resumen-ruta6']);
-              }else
-              if(this.cantidadDestinos==7){
-               this.router.navigate(['/resumen-ruta7']);
-              }else
-              if(this.cantidadDestinos==8){
-               this.router.navigate(['/resumen-ruta8']);
-              }else
-              if(this.cantidadDestinos==9){
-               this.router.navigate(['/resumen-ruta9']);
-              }else
-              if(this.cantidadDestinos==10){
-               this.router.navigate(['/resumen-ruta10']);
-              }
-
-
-            }else{
-              const alert = await this.alertController.create({
-
-                header: 'Advertencia',
-
-                message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-                // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-                buttons: [
-
-                {
-                  text:'aceptar',
-                  handler:()=>{
-
-                this.router.navigate(['/tabs']);
-
-                  }
-                }
-              ]
-              });
-
-              await alert.present();
-
-          }
-
-
-
-
-          break;
-      }else{
-
-        //pueblo
-        console.log('publo');
-
-        if(this.AuxDisponiblesMunicipios['length']==0){
-
-          const alert = await this.alertController.create({
-
-            header: 'Advertencia',
-
-            message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-            // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-            buttons: [
-
-            {
-              text:'aceptar',
-              handler:()=>{
-
-            this.router.navigate(['/tabs']);
-
-              }
-            }
-          ]
-          });
-
-          await alert.present();
-
-
-
-
-
-        }else if(this.AuxDisponiblesMunicipios['length']>=1){
-          //
-          localStorage.setItem('cantidadDestinosRutas',this.cantidadDestinos.toString());
-          this.AuxDisponiblesMunicipios();
-          this.auth.sendFormularioRuta(this.FormSend.value);
-
-          if(this.cantidadDestinos==3){
-           this.router.navigate(['/resumen-ruta3']);
-          }else if(this.cantidadDestinos==4){
-           this.router.navigate(['/resumen-ruta4']);
-          } else
-          if(this.cantidadDestinos==5){
-           this.router.navigate(['/resumen-ruta5']);
-          }else
-          if(this.cantidadDestinos==6){
-           this.router.navigate(['/resumen-ruta6']);
-          }else
-          if(this.cantidadDestinos==7){
-           this.router.navigate(['/resumen-ruta7']);
-          }else
-          if(this.cantidadDestinos==8){
-           this.router.navigate(['/resumen-ruta8']);
-          }else
-          if(this.cantidadDestinos==9){
-           this.router.navigate(['/resumen-ruta9']);
-          }else
-          if(this.cantidadDestinos==10){
-           this.router.navigate(['/resumen-ruta10']);
-          }
-          else{
-           this.router.navigate(['/resumen-ruta']);
-          }
-          break;
-        }
-
-
-      }
-
-     };
-
-
-
-  }
-
-}else{
-  if(this.FormSend.value['field_metodo_de_pago']==""){
-    const alert = await this.alertController.create({
-
-      header: 'Datos incompletos ',
-
-      message: 'llenar todos los datos.',
-      buttons: ['Aceptar']
-    });
-
-    await alert.present();
-    return;
-  }else{
-
-
-    for(let i=0;i<this.ciudades.length;i++){
-      if(this.ciudades[i]['name']==localStorage.getItem('locacion')){
-        console.log(this.auth.medioTransporte,'estoy en ciudad');
-
-        console.log(this.FormSend.value['field_valor_declarado'], 'valor declarado');
-        console.log(this.AuxCarrosDisponibles, 'this.AuxCarrosDisponibles');
-        console.log('city');
-        if(this.auth.medioTransporte == 2 && this.AuxCarrosDisponibles>this.cantidadDestinos.toString()){
-          console.log('carro');
-          this.auth.sendFormularioRuta(this.FormSend.value);
-   localStorage.setItem('cantidadDestinosRutas',this.cantidadDestinos.toString());
-          if(this.cantidadDestinos==3){
-           this.router.navigate(['/resumen-ruta3']);
-          }else if(this.cantidadDestinos==4){
-           this.router.navigate(['/resumen-ruta4']);
-          } else
-          if(this.cantidadDestinos==5){
-           this.router.navigate(['/resumen-ruta5']);
-          }else
-          if(this.cantidadDestinos==6){
-           this.router.navigate(['/resumen-ruta6']);
-          }else
-          if(this.cantidadDestinos==7){
-           this.router.navigate(['/resumen-ruta7']);
-          }else
-          if(this.cantidadDestinos==8){
-           this.router.navigate(['/resumen-ruta8']);
-          }else
-          if(this.cantidadDestinos==9){
-           this.router.navigate(['/resumen-ruta9']);
-          }else
-          if(this.cantidadDestinos==10){
-           this.router.navigate(['/resumen-ruta10']);
-          }
-          else{
-           this.router.navigate(['/resumen-ruta']);
-          }
-
-
-
-
-          }else
-            if( this.auth.medioTransporte == 1 &&  this.AuxMotosDisponibles['length'] >= 1){
-              localStorage.setItem('cantidadDestinosRutas',this.cantidadDestinos.toString());
-              this.auth.sendFormularioRuta(this.FormSend.value);
-
-              if(this.cantidadDestinos==3){
-               this.router.navigate(['/resumen-ruta3']);
-              }else if(this.cantidadDestinos==4){
-               this.router.navigate(['/resumen-ruta4']);
-              } else
-              if(this.cantidadDestinos==5){
-               this.router.navigate(['/resumen-ruta5']);
-              }else
-              if(this.cantidadDestinos==6){
-               this.router.navigate(['/resumen-ruta6']);
-              }else
-              if(this.cantidadDestinos==7){
-               this.router.navigate(['/resumen-ruta7']);
-              }else
-              if(this.cantidadDestinos==8){
-               this.router.navigate(['/resumen-ruta8']);
-              }else
-              if(this.cantidadDestinos==9){
-               this.router.navigate(['/resumen-ruta9']);
-              }else
-              if(this.cantidadDestinos==10){
-               this.router.navigate(['/resumen-ruta10']);
-              }
-              else{
-               this.router.navigate(['/resumen-ruta']);
-              }
-
-            }else{
-              const alert = await this.alertController.create({
-
-                header: 'Advertencia',
-
-                message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-                // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-                buttons: [
-
-                {
-                  text:'aceptar',
-                  handler:()=>{
-
-                this.router.navigate(['/tabs']);
-
-                  }
-                }
-              ]
-              });
-
-              await alert.present();
-
-          }
-
-
-
-
-          break;
-      }else{
-
-        //pueblo
-        console.log('publo');
-
-        if(this.AuxDisponiblesMunicipios['length']==0){
-
-          const alert = await this.alertController.create({
-
-            header: 'Advertencia',
-
-            message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-            // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-            buttons: [
-
-            {
-              text:'aceptar',
-              handler:()=>{
-
-            this.router.navigate(['/tabs']);
-
-              }
-            }
-          ]
-          });
-
-          await alert.present();
-
-
-
-
-
-        }else if(this.AuxDisponiblesMunicipios>this.cantidadDestinos){
-          //
-          localStorage.setItem('cantidadDestinosRutas',this.cantidadDestinos.toString());
-          this.AuxDisponiblesMunicipios();
-          this.auth.sendFormularioRuta(this.FormSend.value);
-
-          if(this.cantidadDestinos==3){
-           this.router.navigate(['/resumen-ruta3']);
-          }else if(this.cantidadDestinos==4){
-           this.router.navigate(['/resumen-ruta4']);
-          } else
-          if(this.cantidadDestinos==5){
-           this.router.navigate(['/resumen-ruta5']);
-          }else
-          if(this.cantidadDestinos==6){
-           this.router.navigate(['/resumen-ruta6']);
-          }else
-          if(this.cantidadDestinos==7){
-           this.router.navigate(['/resumen-ruta7']);
-          }else
-          if(this.cantidadDestinos==8){
-           this.router.navigate(['/resumen-ruta8']);
-          }else
-          if(this.cantidadDestinos==9){
-           this.router.navigate(['/resumen-ruta9']);
-          }else
-          if(this.cantidadDestinos==10){
-           this.router.navigate(['/resumen-ruta10']);
-          }
-          else{
-           this.router.navigate(['/resumen-ruta']);
-          }
-          break;
-        }
-
-
-      }
-
-     };
-
-
-
-  }
+this.auth.sendFormularioRuta(this.FormSend.value);
+
+if(this.cantidadDestinos==2){
+  this.router.navigate(['/resumen-ruta']);
+ }
+if(this.cantidadDestinos==3){
+ this.router.navigate(['/resumen-ruta3']);
+}else if(this.cantidadDestinos==4){
+ this.router.navigate(['/resumen-ruta4']);
+} else
+if(this.cantidadDestinos==5){
+ this.router.navigate(['/resumen-ruta5']);
+}else
+if(this.cantidadDestinos==6){
+ this.router.navigate(['/resumen-ruta6']);
+}else
+if(this.cantidadDestinos==7){
+ this.router.navigate(['/resumen-ruta7']);
+}else
+if(this.cantidadDestinos==8){
+ this.router.navigate(['/resumen-ruta8']);
+}else
+if(this.cantidadDestinos==9){
+ this.router.navigate(['/resumen-ruta9']);
+}else
+if(this.cantidadDestinos==10){
+ this.router.navigate(['/resumen-ruta10']);
 }
-
-
-
-
-
-
-
-
 
 
    }
@@ -2121,10 +1809,10 @@ if( this.cantidadDestinos<this.limiteDisponibles){
       const data = await this.auth.getListBarriosSeleccion().toPromise();
       this.direccionDestino2 = data;
 
-      console.log(this.direccionDestino2[0]['name']);
-      console.log(this.direccionDestino2[0]['field_tarifa_externa']);
+      console.log(this.direccionDestino2[0]?.['name']);
+      console.log(this.direccionDestino2[0]?.['field_tarifa_externa']);
 
-      // Si barrios es 1, agregar por defecto y ocultar input barrio destino
+      // Si solo hay un barrio, seleccionar por defecto y ocultar el input
       if (this.direccionDestino2.length === 1) {
         this.FormSend.controls.field_barrio_destino2.setValue(this.direccionDestino2[0]['name']);
         console.log('selected----> destino', this.direccionDestino2[0]['field_zona_a']);
@@ -2138,6 +1826,7 @@ if( this.cantidadDestinos<this.limiteDisponibles){
         this.bloquearInputBarrioDestino2 = true;
         document.getElementById('itemDestino2').style.visibility = "hidden"; // hide
 
+      // Si el nombre del barrio es "San Andrés", seleccionar por defecto y ocultar el input
       } else if (this.direccionDestino2.length === 1 && this.direccionDestino2[0]['name'] === 'San Andrés') {
         this.FormSend.controls.field_barrio_destino2.setValue(this.direccionDestino2[0]['name']);
         localStorage.setItem('tarifaDestino2', this.direccionDestino2[0]['field_tarifa']);
@@ -2147,6 +1836,7 @@ if( this.cantidadDestinos<this.limiteDisponibles){
         this.bloquearInputBarrioDestino2 = true;
         document.getElementById('itemDestino2').style.visibility = "hidden"; // hide
 
+      // En cualquier otro caso, permitir elegir el barrio y mostrar el input
       } else {
         this.FormSend.controls.field_barrio_destino2.setValue('');
         this.ocultarInput2 = false;
@@ -2193,6 +1883,7 @@ if( this.cantidadDestinos<this.limiteDisponibles){
       // Si barrios es 1, agregar por defecto y ocultar input barrio destino
       if (this.direccionDestino3.length === 1) {
         this.FormSend.controls.field_barrio_destino3.setValue(this.direccionDestino3[0]['name']);
+        
         console.log('selected----> destino', this.direccionDestino3[0]['field_zona_a']);
 
         localStorage.setItem('zona_destino3', this.direccionDestino3[0]['field_zona_a']);

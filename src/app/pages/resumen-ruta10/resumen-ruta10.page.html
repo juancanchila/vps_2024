@@ -14,7 +14,10 @@
     <ion-img  src="../../assets/banners/ordenes_creadas.gif" alt=""></ion-img>
 
   </div>
-    <ion-card-content class="contain">
+  <div *ngIf="isLoading">
+    <app-circle-loading></app-circle-loading>
+  </div>
+    <ion-card-content *ngIf="!isLoading" class="contain">
       <ion-card>
     <form  [formGroup]="FormSend" (ngSubmit)="irAPagar()">
       <ion-label > <b>Origen*</b></ion-label>
@@ -35,7 +38,7 @@
         </ion-buttons>
       </ion-item>
       <ion-item>
-        <textarea [disabled]="disabledValue"  id="ip" formControlName="field_barrio_origen"  #input2 type="text"></textarea>
+        <textarea disabled="true"  id="ip" formControlName="field_barrio_origen"  #input2 type="text"></textarea>
 
         <ion-buttons>
          <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -84,7 +87,7 @@
     </ion-item>
 
     <ion-item>
-      <textarea [disabled]="disabledValue"  id="ip" formControlName="field_barrio_destino"  #input2 type="text"></textarea>
+      <textarea disabled="true"   id="ip" formControlName="field_barrio_destino"  #input2 type="text"></textarea>
 
       <ion-buttons>
        <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -146,7 +149,7 @@
     </ion-item>
 
     <ion-item>
-      <textarea [disabled]="disabledValue"  id="ip" formControlName="field_barrio_destino2"  #input2 type="text"></textarea>
+      <textarea disabled="true"   id="ip" formControlName="field_barrio_destino2"  #input2 type="text"></textarea>
 
       <ion-buttons>
        <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -210,7 +213,7 @@
       </ion-buttons>
     </ion-item>
     <ion-item>
-      <textarea [disabled]="disabledValue"  id="ip" formControlName="field_barrio_destino3"  #input2 type="text"></textarea>
+      <textarea disabled="true"  id="ip" formControlName="field_barrio_destino3"  #input2 type="text"></textarea>
 
       <ion-buttons>
        <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -272,7 +275,7 @@
       </ion-buttons>
     </ion-item>
     <ion-item>
-      <textarea [disabled]="disabledValue"  id="ip" formControlName="field_barrio_destino4"  #input2 type="text"></textarea>
+      <textarea disabled="true"  id="ip" formControlName="field_barrio_destino4"  #input2 type="text"></textarea>
 
       <ion-buttons>
        <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -335,7 +338,7 @@
     </ion-item>
 
     <ion-item>
-      <textarea [disabled]="disabledValue"  id="ip" formControlName="field_barrio_destino5"  #input2 type="text"></textarea>
+      <textarea disabled="true"  id="ip" formControlName="field_barrio_destino5"  #input2 type="text"></textarea>
 
       <ion-buttons>
        <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -400,7 +403,7 @@
     </ion-item>
 
     <ion-item>
-      <textarea [disabled]="disabledValue"  id="ip" formControlName="field_barrio_destino6"  #input2 type="text"></textarea>
+      <textarea disabled="true"   id="ip" formControlName="field_barrio_destino6"  #input2 type="text"></textarea>
 
       <ion-buttons>
        <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -466,7 +469,7 @@
     </ion-item>
 
     <ion-item>
-      <textarea [disabled]="disabledValue"  id="ip" formControlName="field_barrio_destino7"  #input2 type="text"></textarea>
+      <textarea disabled="true"  id="ip" formControlName="field_barrio_destino7"  #input2 type="text"></textarea>
 
       <ion-buttons>
        <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -528,7 +531,7 @@
     </ion-item>
 
     <ion-item>
-      <textarea [disabled]="disabledValue"  id="ip" formControlName="field_barrio_destino8"  #input2 type="text"></textarea>
+      <textarea disabled="true"   id="ip" formControlName="field_barrio_destino8"  #input2 type="text"></textarea>
 
       <ion-buttons>
        <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -592,7 +595,7 @@
     </ion-item>
 
     <ion-item>
-      <textarea [disabled]="disabledValue"  id="ip" formControlName="field_barrio_destino9"  #input2 type="text"></textarea>
+      <textarea disabled="true"   id="ip" formControlName="field_barrio_destino9"  #input2 type="text"></textarea>
 
       <ion-buttons>
        <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -655,7 +658,7 @@
     </ion-item>
 
     <ion-item>
-      <textarea [disabled]="disabledValue"  id="ip" formControlName="field_barrio_destino10"  #input2 type="text"></textarea>
+      <textarea disabled="true"  id="ip" formControlName="field_barrio_destino10"  #input2 type="text"></textarea>
 
       <ion-buttons>
        <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>

@@ -378,7 +378,7 @@ this.value = $event.target.value as string;
     }
 
     // Verificar disponibilidad según el medio de transporte
-    if (this.auth.medioTransporte === 1 && this.AuxMotosDisponibles.length <= 1) {
+    if (this.auth.medioTransporte === 1 && this.AuxMotosDisponibles.length === 0) {
       // Si el medio de transporte es moto y no hay motos disponibles
       const alert = await this.alertController.create({
         header: 'Advertencia',
@@ -389,7 +389,7 @@ this.value = $event.target.value as string;
       return; // No envía los datos si no hay motos
     }
 
-    if (this.auth.medioTransporte === 2 && this.AuxCarrosDisponibles.length <= 2) {
+    if (this.auth.medioTransporte === 2 && this.AuxCarrosDisponibles.length === 0) {
       // Si el medio de transporte es carro y no hay carros disponibles
       const alert = await this.alertController.create({
         header: 'Advertencia',

@@ -30,7 +30,7 @@
       <ion-item >
 
 
-        <textarea disabled="true" formControlName="field_direccion_entrega" type="text" siz required></textarea>
+        <textarea disabled formControlName="field_direccion_entrega" type="text" siz required></textarea>
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
@@ -157,7 +157,7 @@
       <ion-label> <b>Clase de Pagos</b> </ion-label>
       <ion-item >
 
-        <select  class="locacion" disabled="true"  formControlName="field_clase_de_pago">
+        <select  class="locacion" disabled formControlName="field_clase_de_pago">
           <option value="supergiros" selected >Supergiros</option>
           <option value="efecty">Efecty</option>
           <option value="factura1">Factura1</option>
@@ -171,7 +171,7 @@
       <ion-label > <b> Observaciones</b></ion-label>
       <ion-item >
 
-        <textarea disabled="true" formControlName="field_observaciones" class="descaera" type="text" required></textarea>
+        <textarea disabled formControlName="field_observaciones" class="descaera" type="text" required></textarea>
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
@@ -188,7 +188,7 @@
       <ion-label class="txt"> <b class="domicilio_class">Costo Domicilio </b> </ion-label>
       <ion-item >
 
-        <ion-input formControlName="field_precio_" [disabled]="true" type="text" required></ion-input>
+        <ion-input formControlName="field_precio_" disabled type="text" required></ion-input>
       </ion-item>
 
 

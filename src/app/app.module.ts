@@ -1,8 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { NgModule,NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {
+  NgModule,
+  NO_ERRORS_SCHEMA,
+  CUSTOM_ELEMENTS_SCHEMA,
+} from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -20,32 +24,30 @@ import { environment } from '../environments/environment';
 import { Diagnostic } from '@awesome-cordova-plugins/diagnostic/ngx';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 
-
-
-
-
-
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-  	BrowserModule,
-  	HttpClientModule,
-  	FormsModule,
-AutoCompleteModule,
-	ComponentsModule,
-  	BrowserModule,
-  	IonicModule.forRoot(),
-  	AppRoutingModule,
-  	IonicStorageModule.forRoot(),
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    AutoCompleteModule,
+    ComponentsModule,
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    IonicStorageModule.forRoot(),
+  ],
 
-],
-
-
-  providers: [Clipboard, Diagnostic,ProviderService,NotificationsService, AuthService, ReactiveFormsModule,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-  bootstrap: [AppComponent]
+  providers: [
+    Clipboard,
+    Diagnostic,
+    ProviderService,
+    NotificationsService,
+    AuthService,
+    ReactiveFormsModule,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-
-}
+export class AppModule {}

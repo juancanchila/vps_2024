@@ -174,12 +174,20 @@ export class AppComponent implements OnInit, OnDestroy {
         {
           text: 'Aceptar',
           handler: () => {
-            this.auth.logout();
-            this.auth.clearLocalStorage();
-            this.ifAuxiliar = null;
-            this.textoPerfil = ' IR A MODO COLABORADOR';
-            this.role = null;
-            this.menucontrol.close();
+
+
+            console.log(localStorage.getItem('rolAuxiliar'));
+
+            if (localStorage.getItem('rolAuxiliar') == "Auxiliar") {
+              this.auth.logoutaux();
+            } else {
+              this.auth.logout();
+              this.auth.clearLocalStorage();
+              this.ifAuxiliar = null;
+              this.textoPerfil = ' IR A MODO COLABORADOR';
+              this.role = null;
+              this.menucontrol.close();
+            }
           }
         }
       ]

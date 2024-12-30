@@ -53,7 +53,6 @@ export class PagosPage implements OnInit {
     this.menucontrol.enable(false);
     this.urlBase=environment.urlBase;
     this.FormSend= this.fb.group({
-      field_prefijo_origen:[""],
       field_direccion_entrega:[""],
       field_respuesta_documentos:[""],
       field_regresar_por_wasap:[""],
@@ -62,7 +61,6 @@ export class PagosPage implements OnInit {
 field_observaciones:[""],
 field_direccion_destino:[""],
 field_clase_de_pago:[""],
-field_prefijo_destino:[""],
 field_metodo_de_pago:[''],
 field_barrio_origen:[""],
 field_barrio_destino:[""],

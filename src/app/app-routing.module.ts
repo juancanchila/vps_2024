@@ -400,6 +400,16 @@ const routes: Routes = [
     ,
     canActivate: [IngresadoGuard]
   },
+  {
+    path: 'send-code/:source/:email',
+    loadChildren: () => import('./pages/send-code/send-code.module').then(m => m.SendCodePageModule)
+  },
+  {
+    path: 'new-pass/:source/:email',
+    loadChildren: () => import('./pages/new-pass/new-pass.module').then( m => m.NewPassPageModule)
+  },
+
+
 
 
 ];

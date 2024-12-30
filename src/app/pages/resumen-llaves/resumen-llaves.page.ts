@@ -187,27 +187,28 @@ field_barrio_origen:[""],
   console.log(this.auth.resumen);
 
 
-  this.FormSend.controls.field_contacto.setValue(this.auth.resumen.field_contacto['0']['value']);
- // this.FormSend.controls.field_observaciones.setValue(this.auth.resumen.field_observaciones['0']['value']);
-  //this.FormSend.controls.field_tema_de_interes.setValue(this.auth.resumen.field_tema_de_interes['0']['value']);
+      this.FormSend.controls.field_contacto.setValue(this.auth.resumen.field_contacto['0']['value']);
 
-  this.FormSend.controls.field_direccion_entrega.setValue(this.auth.resumen.field_direccion_entrega['0']['value']);
+      this.FormSend.controls.field_direccion_entrega.setValue(this.auth.resumen.field_direccion_entrega['0']['value']);
+
   this.FormSend.controls.field_direccion_destino.setValue(this.auth.resumen.field_direccion_destino['0']['value']);
 
-  this.FormSend.controls.field_locacion_entrega.setValue(this.auth.resumen.field_locacion_entrega['0']['value']);
+      this.FormSend.controls.field_locacion_entrega.setValue(this.auth.resumen.field_locacion_entrega['0']['value']);
+
   this.FormSend.controls.field_locacion_destino.setValue(this.auth.resumen.field_locacion_destino['0']['value']);
 
   this.FormSend.controls.field_ida_y_vuelta.setValue(this.auth.resumen.field_ida_y_vuelta['0']['value']);
-  //this.FormSend.controls.field_musica_preferida.setValue(this.auth.resumen.field_musica_preferida['0']['value']);
-
-  this.FormSend.controls.field_medio_de_transporte.setValue(this.auth.medioTransporte);
-  this.FormSend.controls.field_prefijo_destino.setValue(this.auth.resumen.field_prefijo_destino['0']['value']);
-  this.FormSend.controls.field_prefijo_origen.setValue(this.auth.resumen.field_prefijo_origen['0']['value']);
-
-  this.FormSend.controls.field_prefijo_origen.setValue(this.auth.resumen.field_prefijo_origen['0']['value']);
 
 
-  this.FormSend.controls.field_barrio_origen.setValue(this.auth.resumen.field_barrio_origen['0']['value']);
+      this.FormSend.controls.field_medio_de_transporte.setValue(this.auth.medioTransporte);
+
+
+
+
+
+
+      this.FormSend.controls.field_barrio_origen.setValue(this.auth.resumen.field_barrio_origen['0']['value']);
+
   this.FormSend.controls.field_barrio_destino.setValue(this.auth.resumen.field_barrio_destino['0']['value']);
 
   this.FormSend.controls.field_metodo_de_pago.setValue(this.auth.resumen.field_metodo_de_pago['0']['value']);

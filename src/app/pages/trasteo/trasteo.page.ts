@@ -100,14 +100,19 @@ field_prefijo_destino:[ ""],
 
     if (cargaPequena.checked) {
       this.selectedCargaType = cargaPequena.value; // "Carga pequeña"
+      this.auth.seleccionarTrasteo(7);
+
     } else if (cargaGrande.checked) {
       this.selectedCargaType = cargaGrande.value; // "Carga grande"
+      this.auth.seleccionarTrasteo(4);
+
     }
 
     // Guardar el tipo de carga en el localStorage
     localStorage.setItem('tipoCarga', this.selectedCargaType);
     console.log(this.selectedCargaType);
 
+    console.log(this.auth.medioTransporte,'Seleccionad');
     // Verificar si hay vehículos disponibles según el tipo de carga
     if (this.selectedCargaType === 'Carga pequeña' && this.AuxCarrosMedianosDisponibles['length'] === 0) {
       // No hay vehículos disponibles para carga pequeña
@@ -156,8 +161,10 @@ field_prefijo_destino:[ ""],
 
     if (value === 'Carga pequeña') {
       this.selectedCargaType = 'P';
+
     } else if (value === 'Carga grande') {
       this.selectedCargaType = 'G';
+
     }
 
     // Store in local storage
@@ -374,7 +381,7 @@ await alert.present();
 
           }else{
             console.log(this.AuxCarrosGrandesDisponibles['length'],'estoy en ciudad');
-            this.auth.seleccionarServicioCarroGrande();
+
             this.auth.sendFormularioTrasteo(this.FormSend.value);
             this.router.navigate(['/resumen-trasteo']);
 
@@ -429,6 +436,7 @@ await alert.present();
     this.auth.getCiudad().subscribe(res =>{
       console.log(res, ' ciudad');
       this.ciudades=res;
+
 
     });
 

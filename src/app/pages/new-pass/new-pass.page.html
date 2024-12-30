@@ -1,0 +1,54 @@
+<ion-header class="back">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="newPassForm" (ngSubmit)="enviar()" class="form-container">
+    <ion-label class="title"><b>Restablecer Contraseña</b></ion-label>
+
+    <!-- Campo para la nueva contraseña -->
+    <ion-item>
+      <ion-label class="correo" position="stacked">Nueva Contraseña</ion-label>
+      <ion-input
+        type="password"
+        formControlName="newPassword"
+        placeholder="Máximo 5 caracteres"
+        pattern="^[0-9]{0,5}$"
+       minlength="5"
+        maxlength="5"
+        required
+      ></ion-input>
+    </ion-item>
+
+    <!-- Campo para confirmar la nueva contraseña -->
+    <ion-item>
+      <ion-label class="correo" position="stacked">Confirmar Contraseña</ion-label>
+      <ion-input
+        type="password"
+        formControlName="confirmPassword"
+        placeholder="Máximo 5 caracteres"
+        pattern="^[0-9]{0,5}$"
+       minlength="5"
+        maxlength="5"
+        required
+      ></ion-input>
+    </ion-item>
+
+    <!-- Mostrar error si las contraseñas no coinciden -->
+    <ion-text  class="error" color="danger" *ngIf="newPassForm.get('confirmPassword')?.hasError('passwordsMismatch') && (newPassForm.get('confirmPassword')?.touched)">
+      <p>Las contraseñas no coinciden.</p>
+    </ion-text>
+
+    <!-- Botón para enviar el formulario -->
+    <ion-row>
+      <ion-col>
+
+        <ion-button type="submit" color="warning" expand="block" class="send">Enviar</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

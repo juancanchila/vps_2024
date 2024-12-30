@@ -13,8 +13,9 @@
 </ion-header>
 
 <ion-content class="background">
-  <ion-label class="title"><b>Formulario de Registro</b></ion-label>
+
   <ion-card-content class="contain">
+    <ion-label class="title"><b>Formulario de Registro</b></ion-label>
   <form [formGroup]="regisForm" (ngSubmit)="guardar()" >
 
 
@@ -60,11 +61,46 @@
       <ion-input class="corto" formControlName="field_direccion_registro"type="text" required></ion-input>
     </ion-item>
 
-    <div>
+    <ion-item>
+      <ion-label >Contraseña</ion-label>
+      <ion-input
+class="corto"
+        formControlName="password"
+        type="password"
+        placeholder="Contraseña"
+        required
+        pattern="^[0-9]{0,5}$"
+        minlength="5"
+        maxlength="5"
+      ></ion-input>
+    </ion-item>
 
+    <ion-item>
+      <ion-label >Confirmar</ion-label>
+      <ion-input
+class="corto"
+        formControlName="confirm_password"
+        type="password"
+        placeholder="Confirma Contraseña"
+        required
+        pattern="^[0-9]{0,5}$"
+        minlength="5"
+        maxlength="5"
+      ></ion-input>
+    </ion-item>
+
+    <div *ngIf="regisForm.get('confirm_password').hasError('passwordMismatch')">
+      <ion-text color="danger" class ="danger">Las contraseñas no coinciden.</ion-text>
+    </div>
+    <div *ngIf="regisForm.get('password').touched && regisForm.get('password').hasError('pattern')">
+      <ion-text color="danger" class="danger">
+        Solo se permiten 5 dígitos numéricos (0-9).
+      </ion-text>
+    </div>
+
+    <div>
        <small> <label class="switchBtn">
         <input class="corto1" id="field_acepta_terminos_registro" formControlName="field_acepta_terminos_registro" value="true" type="checkbox">
-
         </label>  Acepto que he leído y comprendido los siguientes   <a (click)="presentAlert()" style="color:yellow"> términos y Condiciones de Uso </a> y al hacer clic en el recuadro y seleccionar "Aceptar", Así como utilizar el presente servicio, dejo constancia expresa de que los acepto de manera libre y consciente habiendo de mi parte revisado satisfactoriamente la información la cual considero adecuada y suficiente</small>
 
     </div>
@@ -96,7 +132,7 @@ if( $('#checkbox1').prop('checked') ) {
     <ion-row>
       <ion-col>
         <ion-button type="submit" color="warning" expand="block"
-        class="send" ><b>Aceptar!</b></ion-button>
+        class="send" >Aceptar!</ion-button>
       </ion-col>
     </ion-row>
   </form>

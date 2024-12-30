@@ -28,9 +28,9 @@ export class CarroTallerPage implements OnInit {
 
   };
   permitirPagoEfectivo;
-  AuxCarrosDisponibles:any=[];
-  AuxMotosDisponibles:any=[];
-  AuxDisponiblesMunicipios:any=[];
+
+  AuxiliaresDisponiblesParaCarroTaller: any = [];
+
   ciudades:any[];
 
   slider:any=[];
@@ -73,9 +73,9 @@ field_latitud_origen_:['']
 
    async slideNext(){
 
+  // getAuxiliaresDisponiblesParaCarroTaller
 
-
-    if(this.AuxCarrosDisponibles['length']==0 && this.AuxMotosDisponibles['length']==0){
+    if(this.AuxiliaresDisponiblesParaCarroTaller === 0){
       const alert = await this.alertController.create({
 
         header: 'Advertencia',
@@ -198,7 +198,7 @@ field_latitud_origen_:['']
   selected(item, input): void {
     console.log('selected---->',item.name);
     localStorage.setItem('tarifaOrigen',item.field_tarifa);
-
+    localStorage.setItem('zona_origen', item.field_zona_a);
     localStorage.setItem('imgBarrioOrigen',item.field_imagen_barrio);
     localStorage.setItem('longitudOrigen',item.field_longitud);
     localStorage.setItem('latitudOrigen',item.field_latitud);
@@ -233,7 +233,7 @@ field_latitud_origen_:['']
     this.router.navigate(['/tabs']);
   }
    async sendForm(){
-    if(this.FormSend.invalid || this.FormSend.value['field_metodo_de_pago']==''){
+    if(this.FormSend.invalid || this.FormSend.value['field_metodo_de_pago']===''){
       const alert = await this.alertController.create({
 
         header: 'Datos incompletos ',
@@ -246,51 +246,8 @@ field_latitud_origen_:['']
       return;
     }else{
 
-      for(let i=0;i<this.ciudades.length;i++){
-        if(this.ciudades[i]['name']==localStorage.getItem('locacion')){
-          console.log(this.auth.medioTransporte,'estoy en ciudad');
-          if(this.AuxMotosDisponibles['length']==0){
-            if(this.AuxCarrosDisponibles['length']==0){
-              const alert = await this.alertController.create({
 
-                header: 'Advertencia',
-
-                message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-                // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-                buttons: [
-
-                {
-                  text:'aceptar',
-                  handler:()=>{
-
-                this.router.navigate(['/tabs']);
-
-                  }
-                }
-              ]
-              });
-
-              await alert.present();
-            }else{
-              console.log('carro');
-              this.auth.seleccionarServicioCarro();
-              this.auth.sendFormularioCarrotaller(this.FormSend.value);
-              this.router.navigate(['/resumen-carrotaller']);
-
-
-            }
-
-          }else{
-            this.auth.seleccionarServicioMoto();
-            this.auth.sendFormularioCarrotaller(this.FormSend.value);
-            this.router.navigate(['/resumen-carrotaller']);
-
-          }
-          break;
-        }else{
-          console.log('publo');
-
-          if(this.AuxDisponiblesMunicipios['length']==0){
+          if(this.AuxiliaresDisponiblesParaCarroTaller['length'] === 0){
 
             const alert = await this.alertController.create({
 
@@ -318,18 +275,11 @@ field_latitud_origen_:['']
             this.auth.sendFormularioCarrotaller(this.FormSend.value);
       this.router.navigate(['/resumen-carrotaller']);
              //this.router.navigate(['/resumen']);
-             break;
+
           }
         }
       }
 
-
-    }
-
-
-
-
-   }
 
   ngOnInit() {
     this.permitirPagoEfectivo=localStorage.getItem('permitirPagoefectivo');
@@ -339,22 +289,13 @@ field_latitud_origen_:['']
 
     });
 
-    this.auth.getAuxiliaresDisponiblesCarros().subscribe(res =>{
+    this.auth.getAuxiliaresDisponiblesParaCarroTaller().subscribe(res =>{
       console.log(res, ' aqui carro');
-      this.AuxCarrosDisponibles=res;
-
-    });
-    this.auth.getAuxiliaresDisponiblesMotos().subscribe(res =>{
-      console.log(res, ' aqui motos');
-      this.AuxMotosDisponibles=res;
+      this.AuxiliaresDisponiblesParaCarroTaller=res;
 
     });
 
-    this.auth.getAuxiliaresDisponiblesMunicipio().subscribe(res =>{
-      console.log(res, ' aqui aux municiipio');
-      this.AuxDisponiblesMunicipios=res;
 
-    });
     this.auth.seleccionarSliderCarroTaller().subscribe(res =>{
       console.log(res, ' aqui slider');
      this.slider=res[0]['field_imagen_taller_slider_1'];

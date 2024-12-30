@@ -12,9 +12,7 @@ import { AlertController } from '@ionic/angular';
   templateUrl: './modo-colaborador.page.html',
   styleUrls: ['./modo-colaborador.page.scss'],
 })
-export class ModoColaboradorPage  {
-
-
+export class ModoColaboradorPage {
   coordinate: any;
   watchCoordinate: any;
   watchId: any;
@@ -23,11 +21,13 @@ export class ModoColaboradorPage  {
   longitud: number | any;
   allPedidos: any;
   character: any = [];
-  estadoAuxiliar: any ;
+  estadoAuxiliar: any;
   latitude: number;
   longitude: number;
   estadoDisponibilidad: any;
   posicionActivaAuxiliar: any;
+  nid: any;
+  evaluado: any;
 
   constructor(
     private alertControl: AlertController,
@@ -37,26 +37,21 @@ export class ModoColaboradorPage  {
     private auth: AuthService,
     private router: Router
   ) {
-
- this.getLocation();
+    this.getLocation();
     this.getGpsPermision();
     this.requestPermissions();
   }
-
 
   ionViewWillEnter() {
     console.log('Modo colaborador - ionViewWillEnter');
     this.iniciarModoColaborador();
   }
 
-
   iniciarModoColaborador() {
-
     console.log('Cargando Modo Colaborador');
 
-
     this.auth.consultarIdAuxiliar().subscribe((res) => {
-      console.log(res, "Respuesta");
+      console.log(res, 'Respuesta');
       console.log(res['0']['roles_target_id']);
 
       localStorage.setItem('rolAuxiliar', res['0']['roles_target_id']);
@@ -66,78 +61,35 @@ export class ModoColaboradorPage  {
 
     this.getGpsPermision();
     this.getLocation();
-
-    this.auth.getDisponibilidadPropia().subscribe((res) => {
-      console.log(res, 'res');
-      if (res.length > 0) {
-        if (res['0']['field_estado'] === 'On') {
-          this.getLocation();
-          if (this.auth.longitud === "" || this.auth.latitud === "") {
-            this.geo.openSetting();
-          } else {
-            this.estadoAuxiliar = 'Auxiliar Disponible';
-            this.value = true;
-            this.auth.estadoPedido = true;
-            this.auth.actualizarPosicionEnviadaAuxiliar();
-            this.auth.actualizarDisponibleAuxiliar(true);
-
-            localStorage.setItem('nodeDisponibilidad_estado', res['0']['field_estado']);
-            localStorage.setItem('nodeDisponibilidad', res['0']['nid']);
-
-          }
-        } else {
-          this.getLocation();
-          if (this.auth.longitud === "" || this.auth.latitud === "") {
-            this.geo.openSetting();
-          } else {
-            this.estadoAuxiliar = 'Auxiliar Ocupado';
-            this.value = false;
-            this.auth.estadoPedido = false;
-            this.auth.actualizarDisponibleAuxiliar(false);
-            this.auth.actualizarPosicionEnviadaAuxiliarOcupado();
-
-            localStorage.setItem('nodeDisponibilidad_estado', res['0']['field_estado']);
-            localStorage.setItem('nodeDisponibilidad', res['0']['nid']);
-          }
-        }
-        this.posicionActivaAuxiliar = res.length;
-      } else {
-        this.auth.estadoPedido = false;
-        this.getLocation();
-        if (this.auth.longitud === "" || this.auth.latitud === "") {
-          this.geo.openSetting();
-        }
-          this.auth.EnviarPosicionAuxiliar();
-          this.estadoAuxiliar = 'Auxiliar Ocupado';
-          this.posicionActivaAuxiliar = '0';
-          this.value = false;
-          this.auth.actualizarDisponibleAuxiliar(false);
-
-      }
-    });
-
+    this.loadEstadoDisponibilidad();
   }
   getGpsPermision() {
-    this.diagnostic.getPermissionAuthorizationStatus(this.diagnostic.permission.ACCESS_FINE_LOCATION).then(
-      (status) => {
-        if (status !== this.diagnostic.permissionStatus.GRANTED) {
-          this.diagnostic.requestRuntimePermissions([
-            this.diagnostic.permission.ACCESS_FINE_LOCATION,
-            this.diagnostic.permission.ACCESS_COARSE_LOCATION,
-          ]).then((data) => {
-            console.log('getCameraAuthorizacionStatus');
-            console.log(data);
-          });
-        } else {
-          console.log('we have the permission');
-          this.getLocation();
+    this.diagnostic
+      .getPermissionAuthorizationStatus(
+        this.diagnostic.permission.ACCESS_FINE_LOCATION
+      )
+      .then(
+        (status) => {
+          if (status !== this.diagnostic.permissionStatus.GRANTED) {
+            this.diagnostic
+              .requestRuntimePermissions([
+                this.diagnostic.permission.ACCESS_FINE_LOCATION,
+                this.diagnostic.permission.ACCESS_COARSE_LOCATION,
+              ])
+              .then((data) => {
+                console.log('getCameraAuthorizacionStatus');
+                console.log(data);
+              });
+          } else {
+            console.log('we have the permission');
+            this.getLocation();
+          }
+        },
+        (statusError) => {
+          console.log('statusError');
+          console.log(statusError);
         }
-      },
-      (statusError) => {
-        console.log('statusError');
-        console.log(statusError);
-      }
-    );
+      );
   }
 
   async requestPermissions() {
@@ -151,12 +103,14 @@ export class ModoColaboradorPage  {
       return;
     }
 
-    Geolocation.getCurrentPosition().then((data) => {
-      this.latitude = data.coords.latitude;
-      this.longitude = data.coords.longitude;
-    }).catch((err) => {
-      console.error(err);
-    });
+    Geolocation.getCurrentPosition()
+      .then((data) => {
+        this.latitude = data.coords.latitude;
+        this.longitude = data.coords.longitude;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   async getLocation() {
@@ -176,10 +130,15 @@ export class ModoColaboradorPage  {
         enableHighAccuracy: true,
       };
       const position = Geolocation.getCurrentPosition(options);
-      console.log("Position obtenida", position);
+      console.log('Position obtenida', position);
       this.auth.latitud = (await position).coords.latitude;
       this.auth.longitud = (await position).coords.longitude;
-      console.log((await position).coords.latitude, 'poss lat', (await position).coords.longitude, 'poss long');
+      console.log(
+        (await position).coords.latitude,
+        'poss lat',
+        (await position).coords.longitude,
+        'poss long'
+      );
     } catch (e) {
       console.log(e);
       throw e;
@@ -208,7 +167,7 @@ export class ModoColaboradorPage  {
   }
 
   ngOnDestroy() {
-    console.log("Modo colaborador - OnDestroy");
+    console.log('Modo colaborador - OnDestroy');
     this.clearWatch();
   }
 
@@ -220,59 +179,13 @@ export class ModoColaboradorPage  {
     this.router.navigate(['/index-auxiliares']);
   }
 
-
   async checkcButon($event) {
-    if (this.value) {
-      console.log(this.value);
-      this.auth.getContenidoAsignado().subscribe(async (res) => {
-        console.log(res, 'respuesta contenido asignado');
-        if (res.length == 0) {
-          this.getLocation();
-          if (this.auth.longitud === "" || this.auth.latitud === "") {
-            this.geo.openSetting();
-          } else {
-            this.estadoAuxiliar = 'Auxiliar Disponible';
-            this.value = true;
-            this.auth.estadoPedido = true;
-            this.auth.actualizarPosicionEnviadaAuxiliar();
-            this.auth.actualizarDisponibleAuxiliar(true);
-          }
-        } else {
-          const alert = await this.alertControl.create({
-            header: 'Notificación Vapaesa',
-            message: 'Tienes pedido en curso pendiente, Por eso estaras en Modo Ocupado!',
-            buttons: [{ text: 'aceptar' }],
-          });
-          await alert.present();
-          this.value = false;
-          this.estadoAuxiliar = 'Auxiliar Ocupado';
-        }
-      });
+    console.log(this.value, 'Estado');
+    //  Desactivar
+    if (!this.evaluado) {
+      this.validarAsignaciones(this.value);
     } else {
-      console.log(this.value);
-      this.auth.getContenidoAsignado().subscribe(async (res) => {
-        console.log(res, 'respuesta');
-        if (res.length == 0) {
-          this.estadoAuxiliar = 'Auxiliar Ocupado';
-          this.getLocation();
-          if (this.auth.longitud === "" || this.auth.latitud === "") {
-            this.geo.openSetting();
-          } else {
-            this.auth.estadoPedido = false;
-            this.auth.actualizarPosicionEnviadaAuxiliarOcupado();
-            this.auth.actualizarDisponibleAuxiliar(false);
-          }
-        } else {
-          const alert = await this.alertControl.create({
-            header: 'Notificación Vapaesa',
-            message: 'Tienes pedido en curso pendiente, Por eso estaras en Modo Ocupado!',
-            buttons: [{ text: 'aceptar' }],
-          });
-          await alert.present();
-          this.value = false;
-          this.estadoAuxiliar = 'Auxiliar Ocupado';
-        }
-      });
+      this.evaluado = false;
     }
 
   }
@@ -287,13 +200,45 @@ export class ModoColaboradorPage  {
     }, 2000);
   }
 
+  validarAsignaciones(value) {
+    this.value = value;
+    this.auth.getContenidoAsignado().subscribe(async (res) => {
+      console.log(res, 'respuesta contenido asignado');
+      if (res.length === 0) {
 
-}
-  /*
+
+
+             this.estadoAuxiliar = this.value ? 'Auxiliar Disponible' : 'Auxiliar Ocupado';
+
+        console.log('Puede Cambiar estado');
+
+        let value_to_send = this.value ? true : false;
+        this.auth.actualizarDisponibleAuxiliar(value_to_send);
+        console.log( localStorage.getItem('nodeDisponibilidad'));
+
+        this.auth.actualizarPosicion(value);
+        //1. obtener el numero de la disponibiliad
+        //2. Actualizar
+      }
+
+      if (res.length > 0) {
+        console.log('No Puede Cambiar estado');
+        this.evaluado = true;
+        this.value = false;
+        this.estadoAuxiliar = 'Auxiliar Ocupado';
+        const alert = await this.alertControl.create({
+          header: 'Notificación Vapaesa',
+          message:
+            'Tienes pedido en curso pendiente, Por eso estaras en Modo Ocupado!',
+          buttons: [{ text: 'aceptar' }],
+        });
+        await alert.present();
 
 
 
-
+      }
+    });
+  }
 
   async loadEstadoDisponibilidad() {
     try {
@@ -303,21 +248,33 @@ export class ModoColaboradorPage  {
       console.log(res, 'res');
 
       if (res.length > 0) {
-        let estado_reciibido = res['0']['field_estado'];
+        localStorage.setItem('nodeDisponibilidad', res['0']['nid'] );
 
+        let estado_reciibido = res['0']['field_estado'];
+        this.nid = res['0']['nid'];
+        this.posicionActivaAuxiliar = res['0']['nid'];
         if (estado_reciibido === 'Off') {
           this.estadoAuxiliar = 'Auxiliar Ocupado';
           this.value = false;
         } else {
           this.estadoAuxiliar = 'Auxiliar Disponible';
           this.value = true;
-        }
-      }
 
+        }
+      } else {
+        //crear
+        console.log('Creando');
+        this.auth.EnviarPosicionAuxiliar();
+        this.estadoAuxiliar = 'Auxiliar Disponible';
+        this.value = true;
+      }
     } catch (error) {
-      console.error("Error al obtener la disponibilidad:", error);
-      // Manejar el error (por ejemplo, mostrar una alerta o mensaje)
+      console.error('Error al obtener la disponibilidad:', error);
     }
   }
 
-*/
+
+
+
+
+}

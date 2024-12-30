@@ -23,7 +23,6 @@ ion-back-button{
 }
 .title{
 
-  margin-left: 24%;
   --background: url(../../assets/botones/inicioSesion.png) 0 0/100% 100% no-repeat;
     color: white;
     text-align: center;
@@ -117,7 +116,11 @@ margin-bottom: 4%;
     display: inline-block;
    margin-left: 35%;
 }
-
+.danger{
+  font-family: 'Poppins', sans-serif;
+  color: red;
+  display: inline-block;
+}
 small{
    font-family: 'Montserrat', sans-serif;
   font-weight: 300; /* Asegura que se use la variante Light */

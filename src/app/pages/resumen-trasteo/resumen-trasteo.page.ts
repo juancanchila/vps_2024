@@ -187,6 +187,7 @@ localStorage.setItem('actualizarContrato',estado);
       console.log(localStorage.getItem('zona_destino'), 'zona_destino');
       console.log(localStorage.getItem('servicioEvaluado'), 'servicioEvaluado');
 
+      // se mana 1 porque no hay pareoetros de cobro para estos servicios
      var resultadoTotalCosto = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado')+" "+localStorage.getItem('tipoCarga'),
         localStorage.getItem('zona_origen'),

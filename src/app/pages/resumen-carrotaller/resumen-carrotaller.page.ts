@@ -146,7 +146,7 @@ field_nombre_c_origen:[""],
           //si es igua igual a on, lpasas para la otra pagina
 
 
- if(this.aux=='false'){
+ if(this.aux==='false'){
   // le muestra que no marcho (primero)
   let estado='false';
   localStorage.setItem('actualizarContrato',estado);
@@ -176,7 +176,7 @@ field_nombre_c_origen:[""],
       console.log(localStorage.getItem('zona_destino'), 'zona_destino');
       console.log(localStorage.getItem('servicioEvaluado'), 'servicioEvaluado');
 
-     var resultadoTotalCosto = await this.auth.calcularPrecioTarifa(
+     let resultadoTotalCosto = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino'),

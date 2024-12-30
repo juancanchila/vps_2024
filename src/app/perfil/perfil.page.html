@@ -26,13 +26,29 @@
     <h1 class="txtperfil" color="warning"> <b >Mi perfil</b> </h1>
    </div>
 
+
   <div class="box2">
-  <h1><b>Nombre:</b></h1>
+  <h1><b>Usuario:</b></h1>
   <h1 class=".boxh1">{{characte?.name}} </h1>
    <h1><b>Rol:  </b></h1>
   <h1 class=".boxh1">{{characte?.Role}}</h1>
-   <h1><b>Teléfono: </b>  </h1>
+
+
+
+
+  <h1  *ngIf="characte?.field_nombres_registro"><b>Nombre: </b>  </h1>
+
+  <h1 class=".boxh1"> {{characte?.field_nombres_registro}}</h1>
+
+  <h1  *ngIf="characte?.field_apellidos_registro"><b>Apellidos: </b>  </h1>
+
+  <h1 class=".boxh1"> {{characte?.field_apellidos_registro}}</h1>
+
+   <h1  *ngIf="characte?.field_telefono_auxuliar"><b>Teléfono: </b>  </h1>
+
    <h1 class=".boxh1"> {{characte?.field_telefono_auxuliar}}</h1>
+
+
    <h1  *ngIf="characte?.field_cuenta_nequi"><b>Cuenta Nequi: </b> </h1>
    <h1 class=".boxh1">{{characte?.field_cuenta_nequi}}</h1>
    <h1 *ngIf="characte?.field_cuenta_daviplata" ><b>Cuenta Daviplata: </b> </h1>

@@ -468,6 +468,8 @@ export class AuthService {
   }
   //metodo para hacer register
   register(user: RegisterI) {
+
+
     console.log(user.mail);
     this.http.get('http://147.182.203.91/session/token', {}).subscribe(data => {
       console.log(data);
@@ -478,18 +480,22 @@ export class AuthService {
       console.log(error.status);
       this.anonimustoken = error.status;
     });
+
     /*
               const headers = new HttpHeaders({'Content-Type': 'application/json','Accept': 'application/json','X-CSRF-Token': 'n5iVI-HO9NKig9dn3yqQwdJzCxw50mYSbfjaNAKjI7U'});
     */
+
     if (this.anonimustoken === 400) {
       alert('error!! verifique, intente nuevamente');
       this.router.navigateByUrl('/login');
     }
 
-    const headers = new HttpHeaders;
+    const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
     headers.append('X-CSRF-Token', this.anonimustoken);
+
+
 
     console.log(headers, 'headers');
 
@@ -498,6 +504,7 @@ export class AuthService {
     let datoRegistro = {
       "name": { "value": user.field_celular_registro }
       , "mail": { "value": user.mail },
+      "pass" : { "value": user.password},
       'field_nombres_registro': { "value": user.field_nombres_registro },
       'field_apellidos_registro': { "value": user.field_apellidos_registro },
       'field_celular_registro': { "value": user.field_celular_registro },
@@ -513,7 +520,15 @@ export class AuthService {
 
     this.http.post<RegisterI>('http://147.182.203.91/user/register?_format=json', datoRegistro, { headers: headers }).subscribe(data2 => {
       console.log(data2);
-      alert('Datos enviados espere confirmación al correo registrado!');
+      // alert('Datos enviados espere confirmación al correo registrado!');
+      //LLamar al metodo reset password para obtener el codigo de activacion enviando correo si sale bien navegas al send code que valida el codigo y si es correcto activa al ususario
+      /* Pendiente agregar el llamado al metodo para solicitar el codigo
+      */
+
+
+      this.resetPassword(user.mail,"registro");
+
+
 
     }, error2 => {
       this.anonimustoken = "" + error2.error.text;
@@ -522,6 +537,7 @@ export class AuthService {
       console.log(error2.status);
       alert('error!! verifique los datos, intente nuevamente');
     });
+
     this.router.navigateByUrl('/login');
 
   }
@@ -557,12 +573,12 @@ export class AuthService {
             }
 
               //Evaluar si es igual al valor almacenado de este dispositivo
-              if(res['0']['field_push_user'] == ""){
+              if(res['0']['field_push_user'] === ""){
 
 
                 localStorage.setItem('idAuxiliar', res['0']['uid']);
                 localStorage.setItem('rolAuxiliar', res['0']['roles_target_id']);
-                if (res['0']['roles_target_id'] == 'Auxiliar' && localStorage.getItem('modoAuxiliar') == 'modoColaborador') {
+                if (res['0']['roles_target_id'] === 'Auxiliar' && localStorage.getItem('modoAuxiliar') === 'modoColaborador') {
 
                   localStorage.setItem('modoAuxiliar','modoColaborador');
                   localStorage.setItem('Ingresado', 'true');
@@ -1100,24 +1116,19 @@ export class AuthService {
       "field_direccion_destino": [{ "value": user.field_direccion_destino }],
       "field_observaciones": [{ "value": user.field_observaciones }],
       "field_clase_de_pago": [{ "value": user.field_clase_de_pago }],
-      "field_prefijo_origen": [{ "value": user.field_prefijo_origen }],
       "field_respuesta_documentos": [{ "value": user.field_respuesta_documentos }],
       "field_regresar_por_wasap": [{ "value": user.field_regresar_por_wasap }],
       "field_locacion_destino": [{ "value": user.field_locacion_destino }],
       "field_locacion_entrega": [{ "value": user.field_locacion_entrega }],
-      // "field_medio_de_transporte":[{"value": this.medioTransporte}],
+      "field_medio_de_transporte":[{"value": 2}],
       "field_barrio_origen": [{ "value": user.field_barrio_origen }],
       "field_barrio_destino": [{ "value": user.field_barrio_destino }],
       "field_metodo_de_pago": [{ "value": user.field_metodo_de_pago }],
-
-      "field_prefijo_destino": [{ "value": user.field_prefijo_destino }],
-
       "field_contacto": [{ "value": user.field_contacto }],
       "field_contacto_destino": [{ "value": user.field_contacto_destino }],
       "field_nombre_c_origen": [{ "value": user.field_nombre_c_origen }],
-      "field_nombre_c_destino": [{ "value": user.field_nombre_c_destino }]
-
-
+      "field_nombre_c_destino": [{ "value": user.field_nombre_c_destino }],
+      "field_ida_y_vuelta": [{ "value": user.field_ida_y_vuelta }],
 
     }
 
@@ -1400,10 +1411,10 @@ export class AuthService {
       // Verificar si los datos necesarios están en localStorage
       let tipoVehiculo = localStorage.getItem('tipoVehiculo');
       let locacion = localStorage.getItem('locacion');
-      let nodeDisponibilidad = localStorage.getItem('nodeDisponibilidad');
+
 
       // Si alguno de los datos está vacío, null o undefined, intentar precargar
-      if (!tipoVehiculo || !locacion || !nodeDisponibilidad) {
+      if (!tipoVehiculo || !locacion ) {
         console.log('Datos incompletos en localStorage. Intentando precargar datos...');
 
         await new Promise<void>((resolve, reject) => {
@@ -1413,8 +1424,7 @@ export class AuthService {
               localStorage.setItem('rolAuxiliar', res['0']['roles_target_id'] || '');
               localStorage.setItem('idAuxiliar', res['0']['uid'] || '');
               localStorage.setItem('tipoVehiculo', res['0']['field_tipo_de_vehiculo'] || '');
-              localStorage.setItem('nodeDisponibilidad', res['0']['node_disponibilidad'] || '');
-              tipoVehiculo = localStorage.getItem('tipoVehiculo'); // Actualizar después de guardar
+                         tipoVehiculo = localStorage.getItem('tipoVehiculo'); // Actualizar después de guardar
               locacion = localStorage.getItem('locacion'); // Actualizar locacion
 
               resolve();
@@ -1446,6 +1456,7 @@ export class AuthService {
         "field_location": [{ "value": locacion }]
       };
 
+
       this.resumen = sencilla;
 
       const converSencilla = JSON.stringify(sencilla);
@@ -1465,6 +1476,9 @@ export class AuthService {
         console.log(url, 'post act posicion');
 
         this.http.post(url, converSencilla, { headers: headers }).subscribe(async data2 => {
+
+          localStorage.setItem('nodeDisponibilidad', data2['0']['vid'] );
+
           const alert = await this.alertControl.create({
             header: 'Notificación Vapaesa',
             message: 'Posición de auxiliar actualizada y enviada como disponible..!',
@@ -1491,6 +1505,104 @@ export class AuthService {
   }
 
 
+  async actualizarPosicion(estado) {
+    try {
+      // Verificar si los datos necesarios están en localStorage
+      let tipoVehiculo = localStorage.getItem('tipoVehiculo');
+      let locacion = localStorage.getItem('locacion');
+      let nodeDisponibilidad = localStorage.getItem('nodeDisponibilidad');
+
+      // Si alguno de los datos está vacío, null o undefined, intentar precargar
+      if (!tipoVehiculo) {
+        console.log('Datos incompletos en localStorage. Intentando precargar datos...');
+
+        await new Promise<void>((resolve, reject) => {
+          this.consultarIdAuxiliar().subscribe({
+            next: (res) => {
+              // Guardar datos en localStorage
+              localStorage.setItem('rolAuxiliar', res['0']['roles_target_id'] || '');
+              localStorage.setItem('idAuxiliar', res['0']['uid'] || '');
+              localStorage.setItem('tipoVehiculo', res['0']['field_tipo_de_vehiculo'] || '');
+
+              tipoVehiculo = localStorage.getItem('tipoVehiculo'); // Actualizar después de guardar
+              locacion = localStorage.getItem('locacion'); // Actualizar locacion
+              nodeDisponibilidad = localStorage.getItem('nodeDisponibilidad'); // Actualizar nodeDisponibilidad
+              resolve();
+            },
+            error: (err) => {
+              console.error('Error al precargar datos:', err);
+              reject();
+            }
+          });
+        });
+      }
+
+      // Si después de intentar precargar los datos siguen incompletos, cerrar sesión
+      if (!tipoVehiculo) {
+        this.mostrarAlerta('Algo salió mal al cargar los datos. Cerrando sesión...');
+        this.logout();
+        this.clearLocalStorage();
+        return;
+      }
+
+      // Crear el objeto sencilla con los datos validados
+      let sencilla = {
+        "title": [{ "value": 'Posicion auxiliar' }],
+        "type": [{ "target_id": 'disponibles' }],
+        "field_estado": [{ "value": estado }],
+        "field_longitud_actual": [{ "value": this.longitud }],
+        "field_latitud_actual": [{ "value": this.latitud }],
+        "field_tipo_vehiculo": [{ "value": tipoVehiculo }],
+        "field_location": [{ "value": locacion }]
+      };
+
+
+
+      this.resumen = sencilla;
+
+      const converSencilla = JSON.stringify(sencilla);
+      console.log(converSencilla);
+
+      // Validar si la latitud o longitud son undefined
+      if (sencilla.field_longitud_actual[0].value === undefined || sencilla.field_latitud_actual[0].value === undefined) {
+        this.geolocation.openSetting();
+      } else {
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic ' + this.b64,
+          'X-CSRF-Token': this.tokencsrf
+        });
+
+        let url = 'http://147.182.203.91/node/' + nodeDisponibilidad + '?_format=json';
+        console.log(url, 'patch act poscion');
+
+        this.http.patch(url, converSencilla, { headers: headers }).subscribe(async data2 => {
+          const alert = await this.alertControl.create({
+            header: 'Notificación Vapaesa',
+            message: 'Posición de auxiliar actualizada y enviada como disponible..!',
+            buttons: [
+              { text: 'Aceptar' }
+            ]
+          });
+
+          await alert.present();
+          console.log(data2, 'posicion actualizada');
+
+        }, async error2 => {
+          console.log(error2);
+          this.errorPosicion = error2;
+        });
+      }
+
+    } catch (error) {
+      console.error('Error en actualizarPosicionEnviadaAuxiliar:', error);
+      this.mostrarAlerta('Algo salió mal al cargar los datos. Cerrando sesión...');
+      this.logout();
+      this.clearLocalStorage();
+    }
+  }
+
+
   async actualizarPosicionEnviadaAuxiliar() {
     try {
       // Verificar si los datos necesarios están en localStorage
@@ -1509,7 +1621,7 @@ export class AuthService {
               localStorage.setItem('rolAuxiliar', res['0']['roles_target_id'] || '');
               localStorage.setItem('idAuxiliar', res['0']['uid'] || '');
               localStorage.setItem('tipoVehiculo', res['0']['field_tipo_de_vehiculo'] || '');
-              localStorage.setItem('nodeDisponibilidad', res['0']['node_disponibilidad'] || '');
+
               tipoVehiculo = localStorage.getItem('tipoVehiculo'); // Actualizar después de guardar
               locacion = localStorage.getItem('locacion'); // Actualizar locacion
               nodeDisponibilidad = localStorage.getItem('nodeDisponibilidad'); // Actualizar nodeDisponibilidad
@@ -1643,7 +1755,7 @@ export class AuthService {
               localStorage.setItem('rolAuxiliar', res['0']['roles_target_id'] || '');
               localStorage.setItem('idAuxiliar', res['0']['uid'] || '');
               localStorage.setItem('tipoVehiculo', res['0']['field_tipo_de_vehiculo'] || '');
-              localStorage.setItem('nodeDisponibilidad', res['0']['node_disponibilidad'] || '');
+
               tipoVehiculo = localStorage.getItem('tipoVehiculo'); // Actualizar después de guardar
               locacion = localStorage.getItem('locacion'); // Actualizar locacion
               nodeDisponibilidad = localStorage.getItem('nodeDisponibilidad'); // Actualizar nodeDisponibilidad
@@ -1725,6 +1837,108 @@ export class AuthService {
       this.clearLocalStorage();
     }
   }
+
+  async actualizarPosicionAuxiliar(estado) {
+    try {
+      // Verificar si los datos necesarios están en localStorage
+      let tipoVehiculo = localStorage.getItem('tipoVehiculo');
+      let locacion = localStorage.getItem('locacion');
+      let nodeDisponibilidad = localStorage.getItem('nodeDisponibilidad');
+
+      // Si alguno de los datos está vacío, null o undefined, intentar precargar
+      if (!tipoVehiculo) {
+        console.log('Datos incompletos en localStorage. Intentando precargar datos...');
+
+        await new Promise<void>((resolve, reject) => {
+          this.consultarIdAuxiliar().subscribe({
+            next: (res) => {
+              // Guardar datos en localStorage
+              localStorage.setItem('rolAuxiliar', res['0']['roles_target_id'] || '');
+              localStorage.setItem('idAuxiliar', res['0']['uid'] || '');
+              localStorage.setItem('tipoVehiculo', res['0']['field_tipo_de_vehiculo'] || '');
+
+              tipoVehiculo = localStorage.getItem('tipoVehiculo'); // Actualizar después de guardar
+              locacion = localStorage.getItem('locacion'); // Actualizar locacion
+              nodeDisponibilidad = localStorage.getItem('nodeDisponibilidad'); // Actualizar nodeDisponibilidad
+              resolve();
+            },
+            error: (err) => {
+              console.error('Error al precargar datos:', err);
+              reject();
+            }
+          });
+        });
+      }
+
+      // Si después de intentar precargar los datos siguen incompletos, cerrar sesión
+      if (!tipoVehiculo) {
+        this.mostrarAlerta('Algo salió mal al cargar los datos. Cerrando sesión...');
+        this.logout();
+        this.clearLocalStorage();
+        return;
+      }
+
+      // Crear el objeto sencilla con los datos validados
+      let sencilla = {
+        "title": [{ "value": 'Posicion auxiliar' }],
+        "type": [{ "target_id": 'disponibles' }],
+        "field_estado": [{ "value": estado}],
+        "field_longitud_actual": [{ "value": this.longitud }],
+        "field_latitud_actual": [{ "value": this.latitud }],
+        "field_location": [{ "value": locacion }],
+        "field_tipo_vehiculo": [{ "value": tipoVehiculo }]
+      };
+
+      this.resumen = sencilla;
+
+      const converSencilla = JSON.stringify(sencilla);
+      console.log(converSencilla);
+
+      // Validar si la latitud o longitud son undefined
+      if (sencilla.field_longitud_actual[0].value === undefined || sencilla.field_latitud_actual[0].value === undefined) {
+        this.geolocation.openSetting();
+      } else {
+        const headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic ' + this.b64,
+          'X-CSRF-Token': this.tokencsrf
+        });
+
+        let url = 'http://147.182.203.91/node/' + nodeDisponibilidad + '?_format=json';
+        console.log(url, 'patch act poscion');
+
+        this.http.patch(url, converSencilla, { headers: headers }).subscribe(async data2 => {
+          const alert = await this.alertControl.create({
+            header: 'Notificación Vapaesa',
+            message: 'Posición de auxiliar actualizada y enviada como ocupado...!',
+            buttons: [
+              { text: 'Aceptar' }
+            ]
+          });
+
+          await alert.present();
+          console.log(data2, 'posicion actualizada');
+
+        }, async error2 => {
+          console.log(error2);
+          if (error2.status == 0) {
+            alert('Error, revise su conexión');
+            this.logout();
+          } else if (error2.status == 422) {
+            alert('En estos momentos no podemos atender tu orden');
+            this.logout();
+          }
+        });
+      }
+
+    } catch (error) {
+      console.error('Error en actualizarPosicionEnviadaAuxiliarOcupado:', error);
+      this.mostrarAlerta('Algo salió mal al cargar los datos. Cerrando sesión...');
+      this.logout();
+      this.clearLocalStorage();
+    }
+  }
+
 
   //metodo para saber si tiene una disponibilidad activa
   getDisponibilidadPropia() {
@@ -2068,9 +2282,6 @@ export class AuthService {
 
 
 
-
-
-
     }
 
 
@@ -2195,8 +2406,15 @@ export class AuthService {
     console.log(this.medioTransporte);
     console.log(localStorage.getItem('modalidad'));
 
+
+    let canditdad_a_enviar = localStorage.getItem('cantidadDestinosRutas');
+
+    if (localStorage.getItem('modalidad') === "Moderada") {
+      canditdad_a_enviar = '1';
+    }
+
     let sencilla = {
-      "cantidadDisponiblesEsperados": localStorage.getItem('cantidadDestinosRutas'),
+      "cantidadDisponiblesEsperados":canditdad_a_enviar,
       "tipoDeRuta": this.medioTransporte,
       "field_modalidad": localStorage.getItem('modalidad'),
       "rutaPadre": localStorage.getItem('sencillaCreadaPadre'),
@@ -2210,11 +2428,6 @@ export class AuthService {
       "destino8": localStorage.getItem('sencillaCreadaDes8'),
       "destino9": localStorage.getItem('sencillaCreadaDes9'),
       "destino10": localStorage.getItem('sencillaCreadaDes10')
-
-
-
-
-
 
     }
 
@@ -2278,7 +2491,76 @@ export class AuthService {
       this.validarQuitarSecilla = true;
       if (this.validarQuitarSecilla == true) {
         this.router.navigate(['/tabs']);
-        this.quitarSencillaLista();
+
+
+        //quitar todo lo creado
+        if (localStorage.getItem('sencillaCreadaPadre')) {
+          setTimeout(() => {
+            this.quitarSencillaLista_node(localStorage.getItem('sencillaCreadaPadre'));
+          }, 5000);
+        }
+
+        if (localStorage.getItem('sencillaCreadaDes1')) {
+          setTimeout(() => {
+            this.quitarSencillaLista_node(localStorage.getItem('sencillaCreadaDes1'));
+          }, 5000);
+        }
+
+        if (localStorage.getItem('sencillaCreadaDes2')) {
+          setTimeout(() => {
+            this.quitarSencillaLista_node(localStorage.getItem('sencillaCreadaDes2'));
+          }, 5000);
+        }
+
+        if (localStorage.getItem('sencillaCreadaDes3')) {
+          setTimeout(() => {
+            this.quitarSencillaLista_node(localStorage.getItem('sencillaCreadaDes3'));
+          }, 5000);
+        }
+
+        if (localStorage.getItem('sencillaCreadaDes4')) {
+          setTimeout(() => {
+            this.quitarSencillaLista_node(localStorage.getItem('sencillaCreadaDes4'));
+          }, 5000);
+        }
+
+        if (localStorage.getItem('sencillaCreadaDes5')) {
+          setTimeout(() => {
+            this.quitarSencillaLista_node(localStorage.getItem('sencillaCreadaDes5'));
+          }, 5000);
+        }
+
+        if (localStorage.getItem('sencillaCreadaDes6')) {
+          setTimeout(() => {
+            this.quitarSencillaLista_node(localStorage.getItem('sencillaCreadaDes6'));
+          }, 5000);
+        }
+
+        if (localStorage.getItem('sencillaCreadaDes7')) {
+          setTimeout(() => {
+            this.quitarSencillaLista_node(localStorage.getItem('sencillaCreadaDes7'));
+          }, 5000);
+        }
+
+        if (localStorage.getItem('sencillaCreadaDes8')) {
+          setTimeout(() => {
+            this.quitarSencillaLista_node(localStorage.getItem('sencillaCreadaDes8'));
+          }, 5000);
+        }
+
+        if (localStorage.getItem('sencillaCreadaDes9')) {
+          setTimeout(() => {
+            this.quitarSencillaLista_node(localStorage.getItem('sencillaCreadaDes9'));
+          }, 5000);
+        }
+
+        if (localStorage.getItem('sencillaCreadaDes10')) {
+          setTimeout(() => {
+            this.quitarSencillaLista_node(localStorage.getItem('sencillaCreadaDes10'));
+          }, 5000);
+        }
+
+
         this.isTokenError = null;
 
       }
@@ -2313,15 +2595,192 @@ export class AuthService {
 
   }
 
+  sendCode(email, code ,action) {
+
+
+    //LLamar al enpoint con estos datos para activar o reset contraseña
+    console.log(`Enviando codigo para vlaidar si es correcto y reestablecer contraseña al correo ${email} , con el codigo ${code} : acciones a realizar ${action}` );
+    // si el codigo es de verificacion yla respuesta e exitosa, se habilita la pagina para sen new password
+
+
+    let sencilla = {
+      "email": email,
+       "resetCode":  code,
+       "action": action
+
+    }
+
+
+
+    const converSencilla = JSON.stringify(sencilla);
+    console.log(converSencilla);
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json', 'Accept': 'application/json'
+    });
+
+    this.http.post('http://147.182.203.91/api/demo_resourcecode?_format=json', converSencilla, { headers: headers }).subscribe(async data2 => {
+
+
+      console.log(data2);
+      console.log(data2['message']['Valor']);
+
+
+
+      const alert = await this.alertControl.create({
+
+        header: 'Notificacion Vapaesa',
+
+        message: data2['message'],
+        // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+        buttons: [
+
+          {
+            text: 'aceptar',
+            handler: () => {
+
+
+            }
+          }
+        ]
+      });
+
+      await alert.present();
+
+
+      // prueba para mandar a cambio de contraseña
+      if (action === "registro") {
+        console.log("Usuario Activado");
+        this.router.navigate(['/login']);
+      } else {
+        this.router.navigate(['/new-pass/'+action+"/"+email]);
+      }
+
+
+
+    }, async error2 => {
+      console.log(error2);
+
+
+      const alert = await this.alertControl.create({
+
+        header: 'Notificacion Vapaesa',
+
+        message: "Algo salio mal, comunicate con el administrador",
+        // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+        buttons: [
+
+          {
+            text: 'aceptar',
+            handler: () => {
+
+
+            }
+          }
+        ]
+      });
+
+      await alert.present();
+
+
+    });
+
+
+
+  }
+
+ newPassword(email,pass) {
+
+  let sencilla = {
+    "email": email,
+    "action": "newpass",
+    "pass": pass,
+
+  }
+
+
+
+  const converSencilla = JSON.stringify(sencilla);
+  console.log(converSencilla);
+
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json', 'Accept': 'application/json'
+  });
+
+  this.http.post('http://147.182.203.91/api/demo_resourcecode?_format=json', converSencilla, { headers: headers }).subscribe(async data2 => {
+
+
+    console.log(data2);
+    console.log(data2['message']['Valor']);
+
+
+
+    const alert = await this.alertControl.create({
+
+      header: 'Notificacion Vapaesa',
+
+      message: data2['message'],
+      // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+      buttons: [
+
+        {
+          text: 'aceptar',
+          handler: () => {
+
+
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+
+
+    // prueba para mandar a cambio de contraseña
+this.router.navigate(['/login']);
+
+
+  }, async error2 => {
+    console.log(error2);
+
+
+    const alert = await this.alertControl.create({
+
+      header: 'Notificacion Vapaesa',
+
+      message: "Algo salio mal, comunicate con el administrador",
+      // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+      buttons: [
+
+        {
+          text: 'aceptar',
+          handler: () => {
+
+
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+
+
+  });
+
+
+
+  }
+
+
   //metodo para recuperar contraseña
-  resetPassword(email) {
+  resetPassword(email, action) {
 
-
+    //Llamar a la api que asinga un codigo de verificiaon y lo envia al correo con ese codigo se ingresa a esta url y se llena el formulario si la respuesa es pisitiva se llega a la pagina que envia la nueva aonctraseña con un codigo de cambio
 
 
       let sencilla = {
         "email": email,
-
+        "action":action
       }
 
 
@@ -2334,7 +2793,6 @@ export class AuthService {
       });
 
       this.http.post('http://147.182.203.91/api/demo_resource3?_format=json', converSencilla, { headers: headers }).subscribe(async data2 => {
-
 
         console.log(data2);
         console.log(data2['message']['Valor']);
@@ -2362,25 +2820,33 @@ export class AuthService {
         await alert.present();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+        // prueba para mandar a cambio de contraseña
+    this.router.navigate(['/send-code', action,email]);
 
 
       }, async error2 => {
         console.log(error2);
 
 
+        const alert = await this.alertControl.create({
 
+          header: 'Notificacion Vapaesa',
+
+          message: "Algo salio mal, comunicate con el administrador",
+          // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+          buttons: [
+
+            {
+              text: 'aceptar',
+              handler: () => {
+
+
+              }
+            }
+          ]
+        });
+
+        await alert.present();
 
 
       });
@@ -2562,7 +3028,7 @@ export class AuthService {
       "field_prefijo_origen": [{ "value": user.field_prefijo_origen }],
       "field_valor_declarado": [{ "value": user.field_valor_declarado }],
       "field_observaciones": [{ "value": user.body }],
-      "field_medio_de_transporte": [{ "value": 4 }],
+       "field_medio_de_transporte": [{ "value": this.medioTransporte }],
       "field_metodo_de_pago": [{ "value": user.field_metodo_de_pago }],
       "field_barrio_origen": [{ "value": user.field_barrio_origen }],
       "field_barrio_destino": [{ "value": user.field_barrio_destino }],
@@ -3070,7 +3536,7 @@ export class AuthService {
       "field_barrio_origen": [{ "value": user.field_barrio_origen }],
       "field_barrio_destino": [{ "value": user.field_barrio_destino }],
       "field_metodo_de_pago": [{ "value": user.field_metodo_de_pago }],
-      "field_medio_de_transporte": [{ "value": 2 }],
+      "field_medio_de_transporte": [{ "value":  this.medioTransporte }],
       "field_push_token": [{ "value": localStorage.getItem('tokenFire') }],
       "field_contacto_destino": [{ "value": user.field_contacto_destino }],
       "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino') }],
@@ -3264,7 +3730,7 @@ export class AuthService {
       "field_valor_declarado": [{ "value": user.field_valor_declarado }],
       "field_metodo_de_pago": [{ "value": user.field_metodo_de_pago }],
       "field_medio_de_transporte": [{ "value": this.medioTransporte }],
-      "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino') }],
+      "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino1') }],
       "field_url_imagen_origen": [{ "value": localStorage.getItem('imgBarrioOrigen') }],
       "field_longitud_origen": [{ "value": localStorage.getItem('longitudOrigen') }],
       "field_latitud_origen_": [{ "value": localStorage.getItem('latitudOrigen') }],
@@ -3305,7 +3771,7 @@ export class AuthService {
       "field_valor_declarado": [{ "value": user.field_valor_declarado }],
       "field_metodo_de_pago": [{ "value": user.field_metodo_de_pago }],
       "field_medio_de_transporte": [{ "value": this.medioTransporte }],
-      "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino') }],
+      "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino2') }],
       "field_url_imagen_origen": [{ "value": localStorage.getItem('imgBarrioOrigen') }],
       "field_longitud_origen": [{ "value": localStorage.getItem('longitudOrigen') }],
       "field_latitud_origen_": [{ "value": localStorage.getItem('latitudOrigen') }],
@@ -3428,7 +3894,7 @@ export class AuthService {
       "field_valor_declarado": [{ "value": user.field_valor_declarado }],
       "field_metodo_de_pago": [{ "value": user.field_metodo_de_pago }],
       "field_medio_de_transporte": [{ "value": this.medioTransporte }],
-      "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino') }],
+      "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino3') }],
       "field_url_imagen_origen": [{ "value": localStorage.getItem('imgBarrioOrigen') }],
       "field_longitud_origen": [{ "value": localStorage.getItem('longitudOrigen') }],
       "field_latitud_origen_": [{ "value": localStorage.getItem('latitudOrigen') }],
@@ -3523,7 +3989,7 @@ export class AuthService {
       "field_valor_declarado": [{ "value": user.field_valor_declarado }],
       "field_metodo_de_pago": [{ "value": user.field_metodo_de_pago }],
       "field_medio_de_transporte": [{ "value": this.medioTransporte }],
-      "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino') }],
+      "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino4') }],
       "field_url_imagen_origen": [{ "value": localStorage.getItem('imgBarrioOrigen') }],
       "field_longitud_origen": [{ "value": localStorage.getItem('longitudOrigen') }],
       "field_latitud_origen_": [{ "value": localStorage.getItem('latitudOrigen') }],
@@ -3619,7 +4085,7 @@ export class AuthService {
       "field_valor_declarado": [{ "value": user.field_valor_declarado }],
       "field_metodo_de_pago": [{ "value": user.field_metodo_de_pago }],
       "field_medio_de_transporte": [{ "value": this.medioTransporte }],
-      "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino') }],
+      "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino5') }],
       "field_url_imagen_origen": [{ "value": localStorage.getItem('imgBarrioOrigen') }],
       "field_longitud_origen": [{ "value": localStorage.getItem('longitudOrigen') }],
       "field_latitud_origen_": [{ "value": localStorage.getItem('latitudOrigen') }],
@@ -3715,7 +4181,7 @@ export class AuthService {
       "field_valor_declarado": [{ "value": user.field_valor_declarado }],
       "field_metodo_de_pago": [{ "value": user.field_metodo_de_pago }],
       "field_medio_de_transporte": [{ "value": this.medioTransporte }],
-      "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino') }],
+      "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino6') }],
       "field_url_imagen_origen": [{ "value": localStorage.getItem('imgBarrioOrigen') }],
       "field_longitud_origen": [{ "value": localStorage.getItem('longitudOrigen') }],
       "field_latitud_origen_": [{ "value": localStorage.getItem('latitudOrigen') }],
@@ -3811,7 +4277,7 @@ export class AuthService {
       "field_valor_declarado": [{ "value": user.field_valor_declarado }],
       "field_metodo_de_pago": [{ "value": user.field_metodo_de_pago }],
       "field_medio_de_transporte": [{ "value": this.medioTransporte }],
-      "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino') }],
+      "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino7') }],
       "field_url_imagen_origen": [{ "value": localStorage.getItem('imgBarrioOrigen') }],
       "field_longitud_origen": [{ "value": localStorage.getItem('longitudOrigen') }],
       "field_latitud_origen_": [{ "value": localStorage.getItem('latitudOrigen') }],
@@ -3907,7 +4373,7 @@ export class AuthService {
       "field_valor_declarado": [{ "value": user.field_valor_declarado }],
       "field_metodo_de_pago": [{ "value": user.field_metodo_de_pago }],
       "field_medio_de_transporte": [{ "value": this.medioTransporte }],
-      "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino') }],
+      "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino8') }],
       "field_url_imagen_origen": [{ "value": localStorage.getItem('imgBarrioOrigen') }],
       "field_longitud_origen": [{ "value": localStorage.getItem('longitudOrigen') }],
       "field_latitud_origen_": [{ "value": localStorage.getItem('latitudOrigen') }],
@@ -4003,7 +4469,7 @@ export class AuthService {
       "field_valor_declarado": [{ "value": user.field_valor_declarado }],
       "field_metodo_de_pago": [{ "value": user.field_metodo_de_pago }],
       "field_medio_de_transporte": [{ "value": this.medioTransporte }],
-      "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino') }],
+      "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino9') }],
       "field_url_imagen_origen": [{ "value": localStorage.getItem('imgBarrioOrigen') }],
       "field_longitud_origen": [{ "value": localStorage.getItem('longitudOrigen') }],
       "field_latitud_origen_": [{ "value": localStorage.getItem('latitudOrigen') }],
@@ -4099,7 +4565,7 @@ export class AuthService {
       "field_valor_declarado": [{ "value": user.field_valor_declarado }],
       "field_metodo_de_pago": [{ "value": user.field_metodo_de_pago }],
       "field_medio_de_transporte": [{ "value": this.medioTransporte }],
-      "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino') }],
+      "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino10') }],
       "field_url_imagen_origen": [{ "value": localStorage.getItem('imgBarrioOrigen') }],
       "field_longitud_origen": [{ "value": localStorage.getItem('longitudOrigen') }],
       "field_latitud_origen_": [{ "value": localStorage.getItem('latitudOrigen') }],
@@ -4732,15 +5198,59 @@ export class AuthService {
 
 
   logout() {
-    console.log("esto");
-    this.token = "";
-    this.menucontrol.close();
-    this.clearLocalStorage();
-    localStorage.removeItem("ACCES_TOKEN");
-    localStorage.removeItem("var1['logout_token']");
-    this.router.navigateByUrl("/login")
 
 
+
+      this.token = "";
+      this.enviarPushNotificacionAuxiliarEnBlanco();
+      this.menucontrol.close();
+      this.clearLocalStorage();
+      localStorage.removeItem("ACCES_TOKEN");
+      localStorage.removeItem("var1['logout_token']");
+      this.router.navigateByUrl("/login")
+
+
+  }
+
+  logoutaux() {
+
+// validar si tiene contenido asiggnado antes de logout
+    this.getContenidoAsignado().subscribe(async (res) => {
+
+
+      if (res.length === 0) {
+        this.logout();
+
+      } else {
+
+        console.log(res, 'respuesta contenido asignado');
+        const alert = await this.alertControl.create({
+
+          header: 'Notificacion Vapaesa',
+
+          message:"Completa Todos tus servicios antes de Salir",
+          // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+          buttons: [
+
+          {
+            text:'aceptar',
+            handler:()=>{
+
+
+            }
+          }
+        ]
+        });
+
+        await alert.present();
+
+
+
+     }
+
+
+
+    });
 
   }
 
@@ -5016,6 +5526,74 @@ export class AuthService {
 
 
 
+  quitarSencillaLista_node(node) {
+
+    console.log('estamos aqui confirmado');
+    this.nodoCreado = localStorage.getItem('sencillaCreada');
+
+
+
+    console.log(localStorage.getItem('sencillaCreada'), 'aquinodo a eliminar');
+
+    this.getToken();
+    //console.log(sencilla);
+    this.tokencsrf = localStorage.getItem("csrf_token");
+
+
+    let body = {
+
+
+      "type": [{ "target_id": "sencilla" }],
+
+      "field_sacar_de_la_lista": [{ "value": true }]
+
+    };
+    console.log(this.tokencsrf, 'aqui csrf');
+
+    this.b64 = localStorage.getItem("base64").toString();
+    console.log(this.b64, 'aqui b64');
+
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json', 'Authorization': 'Basic ' + this.b64,
+      'X-CSRF-Token': this.tokencsrf
+    });
+    console.log(headers, 'aqui header en act met pago');
+    let url = 'http://147.182.203.91/node/' + node + '?_format=json';
+    console.log(url, 'antes de patch');
+
+
+    this.http.patch(url, body, { headers: headers }).subscribe(data2 => {
+      console.log(data2);
+      // localStorage.setItem('sencillaCreada',data2['nid']['0']);
+    }, async error2 => {
+      console.log(error2);
+      if (error2.status == 0) {
+        const alert = await this.alertControl.create({
+
+          header: 'Notificación Vapaesa',
+
+          message: 'No podemos atender tu solicitud en este momento',
+          // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+          buttons: [
+            {
+              text: 'aceptar',
+              handler: () => {
+                this.router.navigateByUrl("/tabs")
+
+              }
+
+            }]
+        });
+
+        await alert.present();
+
+        //this.logout2();
+
+      }
+    });
+
+  }
 
 
 
@@ -5895,6 +6473,11 @@ async enviarPushEnCompletado() {
 
   }
 
+  seleccionarTrasteo(selected) {
+    this.medioTransporte = selected;
+
+  }
+
   //carro llaves
   seleccionarCarroLlaves() {
     this.medioTransporte = 2;
@@ -5913,7 +6496,7 @@ async enviarPushEnCompletado() {
       'permitirPagoefectivo', 'tarifaDestino',
       'tarifaDestino2', 'tarifaDestino3', 'tarifaDestino4',
       'tarifaDestino5', 'tarifaDestino6', 'tarifaDestino7',
-      'tarifaOrigen', 'precioTarifa', 'precioTarifa2','mensajeria','ServicioEvaluado','tipoVehiculo','zona_destino','zona_origen','csrf_token','Ingresado','modoAuxiliar'
+      'tarifaOrigen', 'precioTarifa', 'precioTarifa2','mensajeria','ServicioEvaluado','tipoVehiculo','zona_destino','zona_origen','csrf_token','Ingresado','modoAuxiliar','tokenFire'
     ];
 
     keysToRemove.forEach(key => localStorage.removeItem(key));

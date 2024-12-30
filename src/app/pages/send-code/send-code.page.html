@@ -1,0 +1,45 @@
+<ion-header class="back">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="form-background">
+  <div class="form-wrapper">
+    <ion-card-content class="form-container">
+      <ion-label class="title">
+        <b>Código de Verificación</b>
+      </ion-label>
+
+      <form [formGroup]="SendCodeForm" (ngSubmit)="guardar()">
+        <ion-item class="form-item">
+          <ion-label position="floating">Correo Electrónico</ion-label>
+          <ion-input
+                   formControlName="mail"
+            type="email"
+            placeholder="Ingrese su correo"
+            required
+            inputmode="email">
+          </ion-input>
+        </ion-item>
+
+        <ion-item class="form-item">
+          <ion-label position="floating">Código</ion-label>
+          <ion-input
+            formControlName="field_code"
+            type="text"
+            placeholder="Ingrese el código"
+            required
+            inputmode="text">
+          </ion-input>
+        </ion-item>
+
+        <ion-button type="submit" color="warning" expand="block" class="submit-button">
+          <b>Enviar</b>
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </div>
+</ion-content>
