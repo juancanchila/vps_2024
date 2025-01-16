@@ -4,7 +4,6 @@ import { AuthService } from './services/auth.service';
 import { ProviderService } from './provider.service';
 import { Router } from '@angular/router';
 import { AlertController, MenuController, Platform } from '@ionic/angular';
-import { NotificationsService } from './services/notifications.service';
 import { GeolocationsService } from './services/geolocations.service';
 
 @Component({
@@ -21,8 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
   modoColaborador: any;
 
   constructor(
-    private notifications: NotificationsService,
-    private geolocacion: GeolocationsService,
+       private geolocacion: GeolocationsService,
     private platform: Platform,
     private menucontrol: MenuController,
     private router: Router,
@@ -39,6 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.auth.initwo();
       this.router.navigate(['/splashcreen']);
       this.geolocacion.getCurrentLocacion();
+
     });
   }
 

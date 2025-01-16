@@ -17,8 +17,9 @@
 
     <form  [formGroup]="FormSend" (ngSubmit)="irAPagar()">
       <ion-label > <b>origen :</b></ion-label>
+
       <ion-item >
-        <select formControlName="field_locacion_entrega" class="locacion">
+        <select formControlName="field_locacion_entrega" class="locacion" disabled >
           <option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</option>
 
         </select>
@@ -72,7 +73,7 @@
       <div class="linea"></div>
       <ion-label > <b>destino :</b></ion-label>
       <ion-item >
-        <select formControlName="field_locacion_destino" class="locacion">
+        <select disabled formControlName="field_locacion_destino" class="locacion">
           <option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</option>
         </select>
         <ion-buttons>
@@ -82,21 +83,22 @@
       <ion-item >
 
 
-        <textarea  [disabled]="disabledValue" formControlName="field_direccion_destino" type="text" required></textarea >
+        <textarea  [disabled]="disabledValue"
+        formControlName="field_direccion_destino" type="text" required></textarea >
           <ion-buttons>
             <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
           </ion-buttons>
       </ion-item>
-      <ion-item>
 
-         <ion-buttons>
-          <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
-        </ion-buttons>
+       <ion-item>
 
+        <textarea  id="ip" formControlName="field_barrio_destino"  #input2 type="text"></textarea>
 
-       </ion-item>
+        <ion-buttons>
+         <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
+       </ion-buttons>
 
-
+      </ion-item>
 
 
        <ion-label><b>Contacto Nombre :</b> </ion-label>

@@ -4,7 +4,7 @@ import { AlertController, MenuController, NavController, Platform, ToastControll
 import { LoginI } from 'modelos/login.interface';
 import { ResponseI } from 'modelos/response.interface';
 import { HttpClient, HttpHeaders, HttpHandler } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Notification, Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { map, tap } from 'rxjs/operators'
 import { Router } from '@angular/router';
@@ -18,6 +18,7 @@ import { AutoCompleteService } from 'ionic4-auto-complete';
 import { Capacitor } from '@capacitor/core';
 import { ActionPerformed, PushNotifications, PushNotificationSchema, Token } from '@capacitor/push-notifications';
 import { GeolocationsService } from './geolocations.service';
+import { NotificationsService } from './notifications.service';
 
 /**
  *
@@ -54,6 +55,7 @@ export class AuthService {
 
   private serverKey = 'AAAAAYm1OdQ:APA91bEEHCib2Hs7R6mkYtGus_xpxGt9w46mfNQZzg10DRgDioKBYPreCfRoXpbKLndJLUB2YR2wiOK78Rd6O6zIoLv9IMrifFqV96JF4D8DtP1yKO0uNTt85ld0WB77l8Cktmh4UVjM';
   private fcmUrl = 'https://fcm.googleapis.com/v1/projects/6605322708/messages:send';
+
 
 
   init() {
@@ -195,6 +197,7 @@ export class AuthService {
 
 
   constructor(
+    private  notifications: NotificationsService,
     private geolocation: GeolocationsService,
     private toastController: ToastController,
     private platform: Platform, private http: HttpClient,
@@ -553,45 +556,66 @@ export class AuthService {
     this.base64 = btoa(user.name + ':' + user.pass);
 
 
-
-
-
     const headers = new HttpHeaders().set('Content-Type', 'application/hal+json');
     this.http.post<ResponseI>(this.url, user, { headers: headers })
       .subscribe(data => {
+
+        this.notifications.inicializar();
+        this.csrf = data['csrf_token'];
+
+        this.nameuser = data['current_user']['name'];
+        this.id = data['current_user']['uid'];
+
+        localStorage.setItem('name', this.nameuser);
+        localStorage.setItem('id', this.id);
+        console.log(data);
+
+        console.log(this.csrf);
+        localStorage.setItem("csrf_token", this.csrf);
+        localStorage.setItem("base64", this.base64);
+
+        console.log(this.base64);
+        this.tokencsrf2 = localStorage.getItem("csrf_token");
+        localStorage.setItem('EXPIRES_IN', data['logout_token']);
+
+        localStorage.setItem('session_ends', data['access_token']);
+
+        console.log(this.tokencsrf2);
         setTimeout(() => {
 
           //metodo para para consultar rol de de usuario
           this.consultarIdAuxiliar().subscribe(res => {
             console.log(res);
-            console.log(  localStorage.getItem('modoAuxiliar'),"Antes de iniicar que modo es?");
+            console.log(localStorage.getItem('modoAuxiliar'), 'Antes de iniicar que modo es?');
 
-            if (res != null ) {
+            if (res != null) {
 
               if (localStorage.getItem('modoAuxiliar') === null || localStorage.getItem('modoAuxiliar') === '') {
                 localStorage.setItem('modoAuxiliar', 'modoCliente');
-            }
+              }
 
               //Evaluar si es igual al valor almacenado de este dispositivo
-              if(res['0']['field_push_user'] === ""){
+              if (res['0']['field_push_user'] === '') {
 
 
                 localStorage.setItem('idAuxiliar', res['0']['uid']);
                 localStorage.setItem('rolAuxiliar', res['0']['roles_target_id']);
+
                 if (res['0']['roles_target_id'] === 'Auxiliar' && localStorage.getItem('modoAuxiliar') === 'modoColaborador') {
 
-                  localStorage.setItem('modoAuxiliar','modoColaborador');
+                  localStorage.setItem('modoAuxiliar', 'modoColaborador');
                   localStorage.setItem('Ingresado', 'true');
                   this.router.navigateByUrl('/modo-colaborador');
                   this.geolocation.requestPermissions();
                   this.getLocation();
                 } else {
-                  localStorage.setItem('modoAuxiliar','modoCliente');
+                  localStorage.setItem('modoAuxiliar', 'modoCliente');
                   localStorage.setItem('Ingresado', 'true');
                   this.router.navigateByUrl('/tabs');
                   this.getLocation();
                   this.geolocation.requestPermissions();
                 }
+
                 this.enviarPushNotificacionAuxiliar();
               } else {
 
@@ -613,45 +637,25 @@ export class AuthService {
 
 
 
-        }, 2000)
+        }, 2000);
 
 
 
 
-        this.csrf = data['csrf_token'];
-
-        this.nameuser = data['current_user']['name'];
-        this.id = data['current_user']['uid'];
-
-        localStorage.setItem('name', this.nameuser);
-        localStorage.setItem('id', this.id);
-        console.log(data);
-
-        console.log(this.csrf);
-        localStorage.setItem("csrf_token", this.csrf);
-        localStorage.setItem("base64", this.base64);
-
-        console.log(this.base64);
-        this.tokencsrf2 = localStorage.getItem("csrf_token");
-        localStorage.setItem('EXPIRES_IN', data['logout_token']);
-
-        localStorage.setItem('session_ends', data['access_token']);
-
-        console.log(this.tokencsrf2);
 
 
       }, error => {
         console.log(error);
         console.log(error.status);
         this.statusError = error.status;
-        if (this.statusError == 400) {
-          alert('Usuario o contraseña incorrectos')
+        if (this.statusError === 400) {
+          alert('Usuario o contraseña incorrectos');
 
-        } else if (error.status == 0) {
-          alert('Error revise su conexion internet')
+        } else if (error.status === 0) {
+          alert('Error revise su conexion internet');
 
         }
-        else if (error.status == 200) {
+        else if (error.status === 200) {
 
 
         }
@@ -4651,7 +4655,7 @@ this.router.navigate(['/login']);
       "field_prefijo_destino": [{ "value": user.field_prefijo_destino }],
       "field_prefijo_origen": [{ "value": user.field_prefijo_origen }],
       "field_respuesta_documentos": [{ "value": user.field_respuesta_documentos }],
-      "field_medio_de_transporte": [{ "value": this.medioTransporte }],
+      "field_medio_de_transporte": [{ "value":1}],
       "field_locacion_destino": [{ "value": user.field_locacion_destino }],
       "field_locacion_entrega": [{ "value": user.field_locacion_entrega }],
       // "field_medio_de_transporte":[{"value": this.medioTransporte}],

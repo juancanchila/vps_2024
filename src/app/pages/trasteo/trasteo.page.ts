@@ -27,6 +27,7 @@ export class TrasteoPage implements OnInit {
     EffectFade:true
 
   };
+  selectedType;
   permitirPagoEfectivo;
   AuxCarrosDisponibles:any=[];
   AuxMotosDisponibles:any=[];
@@ -348,79 +349,38 @@ await alert.present();
     }else{
       if (this.FormSend.value.field_contacto_destino== "Carga pequeña"){
         this.FormSend.controls.field_contacto_destino.setValue('Carga pequeña');
-
+        this.selectedType =  this.AuxCarrosMedianosDisponibles.length;
       }else if (this.FormSend.value.field_contacto_destino == "Carga grande"){
         this.FormSend.controls.field_contacto_destino.setValue('Carga grande');
-
+        this.selectedType = this.AuxCarrosGrandesDisponibles.length;
       }
 
-      for(let i=0;i<this.ciudades.length;i++){
-        if(this.ciudades[i]['name']==localStorage.getItem('locacion')){
-          console.log(this.AuxCarrosGrandesDisponibles['length'],'carros grandes');
-          if(this.AuxCarrosGrandesDisponibles['length']==0){
-            const alert = await this.alertController.create({
+      if(this.selectedType === 0){
+        const alert = await this.alertController.create({
 
-              header: 'Advertencia',
+          header: 'Advertencia',
 
-              message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-              // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-              buttons: [
+          message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
+          // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+          buttons: [
 
-              {
-                text:'aceptar',
-                handler:()=>{
+          {
+            text:'aceptar',
+            handler:()=>{
 
-              this.router.navigate(['/tabs']);
+          this.router.navigate(['/tabs']);
 
-                }
-              }
-            ]
-            });
-
-            await alert.present();
-
-          }else{
-            console.log(this.AuxCarrosGrandesDisponibles['length'],'estoy en ciudad');
-
-            this.auth.sendFormularioTrasteo(this.FormSend.value);
-            this.router.navigate(['/resumen-trasteo']);
-
+            }
           }
-          break;
-        }else{
-          console.log('publo');
+        ]
+        });
 
-          if(this.AuxDisponiblesMunicipios['length']==0){
+        await alert.present();
 
-            const alert = await this.alertController.create({
+      }else{
+             this.auth.sendFormularioTrasteo(this.FormSend.value);
+        this.router.navigate(['/resumen-trasteo']);
 
-              header: 'Advertencia',
-
-              message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-              // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-              buttons: [
-
-              {
-                text:'aceptar',
-                handler:()=>{
-
-              this.router.navigate(['/tabs']);
-
-                }
-              }
-            ]
-            });
-
-            await alert.present();
-
-          }else{
-
-            this.auth.sendFormularioTrasteo(this.FormSend.value);
-            this.router.navigate(['/resumen-trasteo']);
-             //this.router.navigate(['/resumen']);
-             break;
-          }
-        }
       }
 
 

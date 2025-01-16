@@ -25,7 +25,6 @@ export class ResumenAlmacenPage implements OnInit {
     this.FormSend= this.fb.group({
 
       field_locacion_entrega:[""],
-      field_prefijo_destino:[""],
       field_locacion_destino:[""],
      field_contacto:[""],
       field_direccion_destino:[""],
@@ -39,7 +38,6 @@ field_quieres_comprar:[""],
 field_metodo_de_pago:[""],
 field_barrio_origen:[""],
 field_barrio_destino:[""],
-field_prefijo_origen:[""],
 field_precio_:[""],
 field_nombre_c_origen:[""],
 field_nombre_c_destino:[""]
@@ -218,7 +216,7 @@ field_nombre_c_destino:[""]
       this.que_quieres_comprar = this.auth.resumenAlmacen.field_quieres_comprar['0']['value'];
       this.costo_articulo = this.auth.resumenAlmacen.field_valor_declarado['0']['value'];
       this.FormSend.controls.field_locacion_entrega.setValue(this.auth.resumenAlmacen.field_locacion_entrega['0']['value']);
-      this.FormSend.controls.field_prefijo_destino.setValue(this.auth.resumenAlmacen.field_prefijo_destino['0']['value']);
+
 
       this.FormSend.controls.field_nombre_del_establecimiento.setValue(this.auth.resumenAlmacen.field_nombre_del_establecimiento['0']['value']);
 
@@ -240,8 +238,7 @@ field_nombre_c_destino:[""]
       this.FormSend.controls.field_contacto_destino.setValue(this.auth.resumenAlmacen.field_contacto_destino['0']['value']);
 
       this.FormSend.controls.field_valor_declarado.setValue(this.auth.resumenAlmacen.field_valor_declarado['0']['value']);
-      this.FormSend.controls.field_prefijo_origen.setValue(this.auth.resumenAlmacen.field_prefijo_origen['0']['value']);
-      this.FormSend.controls.field_barrio_origen.setValue(this.auth.resumenAlmacen.field_barrio_origen['0']['value']);
+         this.FormSend.controls.field_barrio_origen.setValue(this.auth.resumenAlmacen.field_barrio_origen['0']['value']);
       this.FormSend.controls.field_barrio_destino.setValue(this.auth.resumenAlmacen.field_barrio_destino['0']['value']);
 
       this.FormSend.controls.field_metodo_de_pago.setValue(this.auth.resumenAlmacen.field_metodo_de_pago['0']['value']);

@@ -40,8 +40,6 @@ export class ResumenMedicamentosPage implements OnInit {
       field_ida_y_vuelta:[""],
 costoDomicilio:[""],
 field_medio_de_transporte:[""],
-field_prefijo_destino:[""],
-field_prefijo_origen:[""],
 field_respuesta_documentos:[""],
 field_contacto_destino:[""],
 field_contacto:[""],
@@ -144,11 +142,11 @@ field_nombre_c_destino:[""]
      }else{
 
 
-    if(this.FormSend.invalid || this.FormSend.value['field_respuesta_documentos']==''){
+    if(this.FormSend.invalid ){
       const alertElement= await this.alertController.create({
 
-        header: '¡Su solicitud es mayor a 100000$ debe ser transportada en carro!',
-        message: '¿Desea ir a medio de transporte carro?',
+        header: 'Error en el formulario',
+        message: 'No podemos continuar',
 
         buttons: [
           {
@@ -159,7 +157,7 @@ field_nombre_c_destino:[""]
         {
           text:'aceptar',
           handler:()=>{
-            this.router.navigate(['/transportes']);
+            this.router.navigate(['/tabs']);
           }
         }
       ]
@@ -168,8 +166,6 @@ field_nombre_c_destino:[""]
       await alertElement.present();
     }else{
       this.auth.getSesion();
-
-
       if(this.estadoButton==true){
         this.estadoButton=false;
         this.auth.CrearMedicamentos(this.FormSend.value);
@@ -198,7 +194,7 @@ field_nombre_c_destino:[""]
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino'),
-        this.auth.medioTransporte
+        1
       );
       resultadoTotalCosto = Number(resultadoTotalCosto);
       console.log(resultadoTotalCosto, 'resultadoTotalCosto');
@@ -225,8 +221,15 @@ field_nombre_c_destino:[""]
 
       console.log(this.auth.resumenMedicamentos);
       this.FormSend.controls.field_direccion_entrega.setValue(this.auth.resumenMedicamentos.field_direccion_entrega['0']['value']);
+      if (this.auth.resumenMedicamentos.field_respuesta_documentos['0']['value'] === 'Recoger Documentos') {
+        this.FormSend.controls.field_respuesta_documentos.setValue(1);
+      } else {
 
-      this.FormSend.controls.field_respuesta_documentos.setValue(this.auth.resumenMedicamentos.field_respuesta_documentos['0']['value']);
+        this.FormSend.controls.field_respuesta_documentos.setValue(Number());
+    }
+
+
+
       // this.FormSend.controls.field_direccion_origen_farmacia.setValue(this.auth.resumenMedicamentos.field_direccion_origen_farmacia['0']['value']);
 
       this.FormSend.controls.field_direccion_destino.setValue(this.auth.resumenMedicamentos.field_direccion_destino['0']['value']);
@@ -237,8 +240,6 @@ field_nombre_c_destino:[""]
 
 /*
       this.FormSend.controls.field_ida_y_vuelta.setValue(this.auth.resumenMedicamentos.field_ida_y_vuelta['0']['value']);*/
-      this.FormSend.controls.field_prefijo_destino.setValue(this.auth.resumenMedicamentos.field_prefijo_destino['0']['value']);
-      this.FormSend.controls.field_prefijo_origen.setValue(this.auth.resumenMedicamentos.field_prefijo_origen['0']['value']);
 
       this.FormSend.controls.costoDomicilio.setValue("7.000");
       //this.FormSend.controls.field_medio_de_transporte.setValue(this.auth.medioTransporte);
@@ -263,6 +264,8 @@ field_nombre_c_destino:[""]
       if (this.FormSend.value['field_respuesta_documentos'] === 'Recoger Documentos') {
         this.FormSend.controls.field_ida_y_vuelta.setValue(true);
         resultadoTotalCosto *= 2;
+      } else {
+        this.FormSend.controls.field_ida_y_vuelta.setValue(false);
       }
 
 

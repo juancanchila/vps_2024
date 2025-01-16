@@ -7,7 +7,6 @@ import { LocalNotificationActionPerformed, LocalNotifications, LocalNotification
 import { ActionPerformed, PushNotification, PushNotifications, PushNotificationSchema, Token } from '@capacitor/push-notifications';
 
 import { AlertController, ModalController, Platform } from '@ionic/angular';
-import { AuthService } from './auth.service';
 //import { Firestore, collectionData, collection } from '@angular/fire/firestore';
 
 
@@ -19,7 +18,6 @@ export class NotificationsService {
   token: string;
 
   constructor(public platform: Platform,private alertController : AlertController,
-    public auth : AuthService,
 
     private router: Router,
     private http: HttpClient) {
@@ -39,6 +37,7 @@ this.inicializar();
 
 
   inicializar() {
+    console.log('INiclailziado notificacion chanel');
     const isPushNotificationsAvailable = Capacitor.isPluginAvailable('PushNotifications');
     if (isPushNotificationsAvailable) {
       PushNotifications.requestPermissions().then(result => {
@@ -50,6 +49,7 @@ this.inicializar();
           this.addListeners();
         } else {
           // Show some error
+          alert('permisos no concedidos');
         }
       });
 
@@ -137,7 +137,9 @@ PushNotifications.addListener('registration',
 
 
 
-}
+
+  }
+
 async guadarToken(token: any) {
 
 
@@ -148,6 +150,10 @@ guadarTokenFIrebase() {
 
 }
 
+getTokenFIrebase() {
+console.log("obteniendo");
+
+}
 
 createNotificationChannel() {
   if (Capacitor.getPlatform() === 'android') {

@@ -78,13 +78,15 @@ field_nombre_c_origen:[""],
 
           console.log(localStorage.getItem('zona_origen'), 'zona_origen');
       console.log(localStorage.getItem('zona_destino'), 'zona_destino');
-      console.log(localStorage.getItem('servicioEvaluado'), 'servicioEvaluado');
+     console.log(localStorage.getItem('servicioEvaluado'), 'servicioEvaluado');
+     const servicioEvaluado = localStorage.getItem('servicioEvaluado');
+      let tipo_de_vehiculo_seleccionado = servicioEvaluado === 'fruver' ? 1 : 2;
 
      var resultadoTotalCosto = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino'),
-        2
+        tipo_de_vehiculo_seleccionado
       );
       this.domicilioValor = resultadoTotalCosto;
       resultadoTotalCosto = Number(resultadoTotalCosto);
@@ -196,11 +198,15 @@ field_nombre_c_origen:[""],
   }
 
   selected2(item, input2): void {
-
+    console.log('selected---->',item);
     console.log('selected---->',item.name);
     localStorage.setItem('imgBarrioDestino',item.field_imagen_barrio);
     localStorage.setItem('tarifaDestino',item.field_tarifa);
-    localStorage.setItem('tarifaExternaDestino',item.field_tarifa_externa);
+    localStorage.setItem('tarifaExternaDestino', item.field_tarifa_externa);
+    // definir la zona destino
+
+    localStorage.setItem('zona_destino', item.field_zona_a);
+
     // mettre à jour le formuaire
     this.FormSend.patchValue({item});
     // cacher la liste d'items en vidant la liste
@@ -537,6 +543,7 @@ localStorage.setItem('actualizarContrato',estado);
 
           // Agregando la zona de destino
           console.log('selected----> destino', this.direccionDestino[0]['field_zona_a']);
+
           localStorage.setItem('zona_destino', this.direccionDestino[0]['field_zona_a']);
 
           this.ocultarInput = true;
