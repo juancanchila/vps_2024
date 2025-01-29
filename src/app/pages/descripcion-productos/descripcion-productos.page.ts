@@ -241,15 +241,19 @@ if(localStorage.getItem('tienda')=='undefined'){
   this.tienda =this.product.stores_target_id;
 // acctuaizar lavariable tienda en el local storage
   localStorage.setItem('tienda',this.tienda);
+  localStorage.setItem('zona_origen', this.product.field_zona_b);
 
   console.log("Definiendo ZOna");
 
 //this.product.cantidad = this.cantidades;
 //this.product.field_price_simple =this.originaPrice;
-this.product.cantidad = this.cantidadDestinos;
+  this.product.cantidad = this.cantidadDestinos;
+
+
 console.log(this.product.cantidad,'aqui cantidad')
 this.cs.set_cart(this.product).then((res)=>{
   console.log(res);
+
   this.product.observaciones =this.FormSend.value;
   //this.router.navigate(['/carrito-compras']);
 });

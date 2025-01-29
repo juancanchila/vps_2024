@@ -8,3 +8,7 @@ npx cap open android
 make shure
 
 npm install @capacitor/core @capacitor/cli
+
+
+key
+asdf1234**

@@ -134,7 +134,7 @@ field_observaciones10:[""],
 
 
 
-    if(this.AuxCarrosDisponibles['length']==0 && this.AuxMotosDisponibles['length']==0){
+    if( this.AuxMotosDisponibles['length']==0){
       const alert = await this.alertController.create({
 
         header: 'Advertencia',
@@ -430,107 +430,36 @@ await alert.present();
       await alert.present();
       return;
     }
-    for(let i=0;i<this.ciudades.length;i++){
-      if(this.ciudades[i]['name']==localStorage.getItem('locacion')){
-        console.log(this.auth.medioTransporte, 'estoy en ciudad');
-        console.log(this.AuxMotosDisponibles['length']);
-        if(this.AuxMotosDisponibles['length']==0){
-          const alert = await this.alertController.create({
 
-            header: 'Advertencia',
+    if(this.AuxMotosDisponibles.length != 0){
+      this.auth.seleccionarServicioMoto();
+this.auth.sendFormularioTecnologias(this.FormSend.value);
+this.router.navigate(['/resumen-tecnologia']);
 
-            message: 'En este momento no tenemos auxiliar disponible en moto, ¿desea medio de transporte carro?',
-            // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-            buttons: [
-              {
-              text:'cancel',
-              role:'cancel',
-              handler:async ()=>{
-              this.router.navigate(['/tabs']);
-              }
+    }else{
+      const alert = await this.alertController.create({
 
-            },
-            {
-              text:'aceptar',
-              handler:async ()=>{
-                if(this.AuxCarrosDisponibles.length!=0){
-                  this.auth.seleccionarServicioCarro();
-          this.auth.sendFormularioTecnologias(this.FormSend.value);
-          this.router.navigate(['/resumen-tecnologia']);
+        header: 'Oops!',
 
-                }else{
-                  const alert = await this.alertController.create({
+        message: '¡En este momento no tenemos auxiliar disponible!',
+        // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+        buttons: [
 
-                    header: 'Oops!',
-
-                    message: '¡En este momento no tenemos auxiliar disponible para otro medio de transporte, reduce tu valor declarado!',
-                    // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-                    buttons: [
-
-                    {
-                      text:'aceptar',
-                      handler:()=>{
-
-                        this.router.navigate(['/tabs']);
-
-                      }
-                    }
-                  ]
-                  });
-
-                  await alert.present();
-                }
-
-
-              }
-            }
-          ]
-          });
-
-        }else{
-          this.auth.seleccionarServicioMoto();
-          this.auth.sendFormularioTecnologias(this.FormSend.value);
-          this.router.navigate(['/resumen-tecnologia']);
-
-        }
-
-        console.log("Saliendo");
-        break;
-      }else{
-        console.log('publo');
-
-        if(this.AuxDisponiblesMunicipios['length']==0){
-
-          const alert = await this.alertController.create({
-
-            header: 'Advertencia',
-
-            message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-            // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-            buttons: [
-
-            {
-              text:'aceptar',
-              handler:()=>{
+        {
+          text:'aceptar',
+          handler:()=>{
 
             this.router.navigate(['/tabs']);
 
-              }
-            }
-          ]
-          });
-
-          await alert.present();
-
-        }else{
-
-          this.auth.sendFormularioTecnologias(this.FormSend.value);
-          this.router.navigate(['/resumen-tecnologia']);
-           //this.router.navigate(['/resumen']);
-           break;
+          }
         }
-      }
+      ]
+      });
+
+      await alert.present();
     }
+
+
 
    }
 

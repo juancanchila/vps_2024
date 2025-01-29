@@ -55,7 +55,6 @@ export class AlmacenPage implements OnInit {
     this.FormSend= this.fb.group({
 
       field_locacion_entrega:[""],
-      field_prefijo_destino:[""],
       field_locacion_destino:[""],
      field_contacto:[""],
       field_direccion_destino:[""],
@@ -69,7 +68,6 @@ field_nombre_del_establecimiento:[""],
 field_metodo_de_pago:[''],
 field_barrio_origen:[""],
 field_barrio_destino:[""],
-field_prefijo_origen:[""],
 field_nombre_c_origen:[''],
 field_nombre_c_destino:[''],
 
@@ -431,108 +429,37 @@ await alert.present();
 
       await alert.present();
       return;
+     }
+
+
+     if(this.AuxMotosDisponibles.length != 0){
+      this.auth.seleccionarServicioMoto();
+      this.auth.sendFormularioAlmacen(this.FormSend.value);
+      this.router.navigate(['/resumen-almacen']);
+
+
     }else{
-      for(let i=0;i<this.ciudades.length;i++){
-        if(this.ciudades[i]['name']==localStorage.getItem('locacion')){
-          console.log(this.auth.medioTransporte,'estoy en ciudad');
-          if(this.AuxMotosDisponibles['length']==0){
-            const alert = await this.alertController.create({
+      const alert = await this.alertController.create({
 
-              header: 'Advertencia',
+        header: 'Oops!',
 
-              message: 'En este momento no tenemos auxiliar disponible en moto, ¿desea medio de transporte carro?',
-              // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-              buttons: [
-                {
-                text:'cancel',
-                role:'cancel',
-                handler:async ()=>{
-                this.router.navigate(['/tabs']);
-                }
+        message: '¡En este momento no tenemos auxiliar disponible!',
+        // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+        buttons: [
 
-              },
-              {
-                text:'aceptar',
-                handler:async ()=>{
-                  if(this.AuxCarrosDisponibles.length!=0){
-                    this.auth.seleccionarServicioCarro();
-             this.auth.sendFormularioAlmacen(this.FormSend.value);
-              this.router.navigate(['/resumen-almacen']);
+        {
+          text:'aceptar',
+          handler:()=>{
 
-                  }else{
-                    const alert = await this.alertController.create({
+            this.router.navigate(['/tabs']);
 
-                      header: 'Oops!',
-
-                      message: '¡En este momento no tenemos auxiliar disponible para otro medio de transporte, reduce tu valor declarado!',
-                      // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-                      buttons: [
-
-                      {
-                        text:'aceptar',
-                        handler:()=>{
-
-                          this.router.navigate(['/tabs']);
-
-                        }
-                      }
-                    ]
-                    });
-
-                    await alert.present();
-                  }
-
-
-                }
-              }
-            ]
-            });
-
-          }else{
-            this.auth.seleccionarServicioMoto();
-            this.auth.sendFormularioAlmacen(this.FormSend.value);
-            this.router.navigate(['/resumen-almacen']);
-
-          }
-          break;
-        }else{
-          console.log('publo');
-
-          if(this.AuxDisponiblesMunicipios['length']==0){
-
-            const alert = await this.alertController.create({
-
-              header: 'Advertencia',
-
-              message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-              // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-              buttons: [
-
-              {
-                text:'aceptar',
-                handler:()=>{
-
-              this.router.navigate(['/tabs']);
-
-                }
-              }
-            ]
-            });
-
-            await alert.present();
-
-          }else{
-
-            this.auth.sendFormularioAlmacen(this.FormSend.value);
-            this.router.navigate(['/resumen-almacen']);
-            this.auth.seleccionarServicioMotoYcarroMunicipio();
-             //this.router.navigate(['/resumen']);
-             break;
           }
         }
-      }
-    }
+      ]
+      });
 
+      await alert.present();
+    }
 
    }
 

@@ -281,7 +281,7 @@ this.FormSend.value['field_quieres_comprar1'] +' : ' + this.FormSend.value['fiel
 
   // this.auth.sendFormulario(this.FormSend.value);
   // this.router.navigate(['/resumen']);
-return
+       return;
 
      }else{
       barrioExiste=false;
@@ -356,10 +356,10 @@ await alert.present();
       return; // stoper l'exection du script
     }
     // récupération de la liste de posibilités
-    console.log(this.direccionDestino,'antes de')
+    console.log(this.direccionDestino, 'antes de');
     const list = this.direccionDestino;
 
-    console.log(list,'list')
+    console.log(list, 'list');
     //console.log(this.auth._fakeDatas,'list fake')
     // filtrer la list pour extraire uniquement les element pertinants
     const items = list.filter(
@@ -426,105 +426,38 @@ await alert.present();
 
       await alert.present();
       return;
-    }
-    for(let i=0;i<this.ciudades.length;i++){
-      if(this.ciudades[i]['name']==localStorage.getItem('locacion')){
-        console.log(this.auth.medioTransporte,'estoy en ciudad');
-        if(this.AuxMotosDisponibles['length']==0){
-          const alert = await this.alertController.create({
-
-            header: 'Advertencia',
-
-            message: 'En este momento no tenemos auxiliar disponible en moto, ¿desea medio de transporte carro?',
-            // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-            buttons: [
-              {
-              text:'cancel',
-              role:'cancel',
-              handler:async ()=>{
-              this.router.navigate(['/tabs']);
-              }
-
-            },
-            {
-              text:'aceptar',
-              handler:async ()=>{
-                if(this.AuxCarrosDisponibles.length!=0){
-                  this.auth.seleccionarServicioCarro();
-                 this.auth.sendFormularioTextiles(this.FormSend.value);
-          this.router.navigate(['/resumen-textiles']);
-
-                }else{
-                  const alert = await this.alertController.create({
-
-                    header: 'Oops!',
-
-                    message: '¡En este momento no tenemos auxiliar disponible para otro medio de transporte, reduce tu valor declarado!',
-                    // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-                    buttons: [
-
-                    {
-                      text:'aceptar',
-                      handler:()=>{
-
-                        this.router.navigate(['/tabs']);
-
-                      }
-                    }
-                  ]
-                  });
-
-                  await alert.present();
-                }
+     }
 
 
-              }
-            }
-          ]
-          });
 
-        }else{
-          this.auth.seleccionarServicioMoto();
-          this.auth.sendFormularioTextiles(this.FormSend.value);
-     this.router.navigate(['/resumen-textiles']);
+    if(this.AuxMotosDisponibles.length != 0){
+      this.auth.seleccionarServicioMoto();
+      this.auth.sendFormularioTextiles(this.FormSend.value);
+      this.router.navigate(['/resumen-textiles']);
 
-        }
-        break;
-      }else{
-        console.log('publo');
+    }else{
+      const alert = await this.alertController.create({
 
-        if(this.AuxDisponiblesMunicipios['length']==0){
+        header: 'Oops!',
 
-          const alert = await this.alertController.create({
+        message: '¡En este momento no tenemos auxiliar disponible!',
+        // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+        buttons: [
 
-            header: 'Advertencia',
-
-            message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-            // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-            buttons: [
-
-            {
-              text:'aceptar',
-              handler:()=>{
+        {
+          text:'aceptar',
+          handler:()=>{
 
             this.router.navigate(['/tabs']);
 
-              }
-            }
-          ]
-          });
-
-          await alert.present();
-
-        }else{
-
-          this.auth.sendFormularioTextiles(this.FormSend.value);
-     this.router.navigate(['/resumen-textiles']);
-           //this.router.navigate(['/resumen']);
-           break;
+          }
         }
-      }
+      ]
+      });
+
+      await alert.present();
     }
+
 
    }
 

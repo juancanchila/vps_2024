@@ -96,7 +96,10 @@ field_nombre_c_origen:[""],
      this.domicilioValor = resultadoTotalCosto;
      this.total = Number(this.subtotal) + resultadoTotalCosto;
     //resultado  costo + total
-     localStorage.setItem('precioTarifa', String(this.total));
+     localStorage.setItem('precioTarifa', resultadoTotalCosto);
+
+     localStorage.setItem('precioTarifa_total', String(this.subtotal));
+
 
     if(this.AuxCarrosDisponibles['length']==0 && this.AuxMotosDisponibles['length']==0){
       const alert = await this.alertController.create({

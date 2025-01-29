@@ -3453,6 +3453,7 @@ this.router.navigate(['/login']);
       "field_push_token": [{ "value": localStorage.getItem('tokenFire') }],
       "field_nombre_c_destino": [{ "value": user.field_nombre_c_origen }],
       "field_precio_": [{ "value": localStorage.getItem('precioTarifa') }],
+      "field_precio_total": [{ "value": localStorage.getItem('precioTarifa_total') }],
       "field_medio_de_transporte": [{ "value": this.medioTransporte }],
       "field_url_imagen_destino": [{ "value": localStorage.getItem('imgBarrioDestino') }],
       "field_url_imagen_origen": [{ "value": localStorage.getItem('imgBarrioOrigenRestaurante') }],

@@ -313,104 +313,74 @@ await alert.present();
     this.router.navigate(['/tabs']);
   }
    async sendForm(){
-    if(this.FormSend.invalid || this.FormSend.value['field_respuesta_documentos']=='' || this.FormSend.value['field_regresar_por_wasap']==''){
-      const alert = await this.alertController.create({
+     if (this.FormSend.invalid || this.FormSend.value['field_respuesta_documentos'] == '' || this.FormSend.value['field_regresar_por_wasap'] == '') {
+       const alert = await this.alertController.create({
 
-        header: 'Datos incompletos ',
+         header: 'Datos incompletos ',
 
-        message: 'llenar todos los datos.',
-        buttons: ['Aceptar']
-      });
+         message: 'llenar todos los datos.',
+         buttons: ['Aceptar']
+       });
 
-      await alert.present();
-      return;
-    }else{
-      if (this.FormSend.value.field_respuesta_documentos== "Recoger Documentos"){
-        this.FormSend.controls.field_respuesta_documentos.setValue('Recoger Documentos');
+       await alert.present();
+       return;
+     } else {
+       if (this.FormSend.value.field_respuesta_documentos == "Recoger Documentos") {
+         this.FormSend.controls.field_respuesta_documentos.setValue('Recoger Documentos');
 
-      }if (this.FormSend.value.field_respuesta_documentos == "Enviar Documentos por WhatsApp"){
-        this.FormSend.controls.field_respuesta_documentos.setValue('Enviar Documentos por WhatsApp');
+       } if (this.FormSend.value.field_respuesta_documentos == "Enviar Documentos por WhatsApp") {
+         this.FormSend.controls.field_respuesta_documentos.setValue('Enviar Documentos por WhatsApp');
 
-      }
+       }
 
-      if (this.FormSend.value.field_regresar_por_wasap== "Enviar comprobante por whatsapp"){
-        this.FormSend.controls.field_regresar_por_wasap.setValue('Enviar comprobante por whatsapp');
+       if (this.FormSend.value.field_regresar_por_wasap == "Enviar comprobante por whatsapp") {
+         this.FormSend.controls.field_regresar_por_wasap.setValue('Enviar comprobante por whatsapp');
 
-      }if (this.FormSend.value.field_regresar_por_wasap == "Llevar recibo de vuelta"){
-        this.FormSend.controls.field_regresar_por_wasap.setValue('Llevar recibo de vuelta');
+       } if (this.FormSend.value.field_regresar_por_wasap == "Llevar recibo de vuelta") {
+         this.FormSend.controls.field_regresar_por_wasap.setValue('Llevar recibo de vuelta');
 
-      }
-      for(let i=0;i<this.ciudades.length;i++){
-        if(this.ciudades[i]['name']==localStorage.getItem('locacion')){
-          console.log(this.auth.medioTransporte,'estoy en ciudad');
-          if(this.AuxMotosDisponibles['length']==0){
+       }
+     }
 
-              const alert = await this.alertController.create({
+       console.log(this.AuxMotosDisponibles['length'], 'lengt de vector motos');
 
-                header: 'Advertencia',
+       if (this.AuxCarrosDisponibles.length === 0) {
 
-                message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-                // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-                buttons: [
+         const alert = await this.alertController.create({
 
-                {
-                  text:'aceptar',
-                  handler:()=>{
+           header: 'Advertencia',
 
-                this.router.navigate(['/tabs']);
+           message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
+           // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
+           buttons: [
 
-                  }
-                }
-              ]
-              });
+             {
+               text: 'aceptar',
+               handler: () => {
 
-              await alert.present();
+                 this.ngOnInit();
+
+               }
+             }
+           ]
+         });
+
+         await alert.present();
 
 
-          }else{
-            this.auth.seleccionarServicioMoto();
-            this.auth.sendFormularioPagos(this.FormSend.value);
-     this.router.navigate(['/resumen-pagos']);
 
-          }
-          break;
-        }else{
-          console.log('publo');
 
-          if(this.AuxCarrosDisponibles['length']==0){
 
-            const alert = await this.alertController.create({
+       } else {
+         this.auth.seleccionarServicioCarro();
+         this.auth.sendFormularioPagos(this.FormSend.value);
+         this.router.navigate(['/resumen-pagos']);
 
-              header: 'Advertencia',
 
-              message: 'En este momento no tenemos auxiliar disponible, no podemos crear tu orden',
-              // al hacer check, vamos a establecer una variable y al darle aceptar preguntamos si esa varibale esta definida si esta se continua
-              buttons: [
+       }
 
-              {
-                text:'aceptar',
-                handler:()=>{
 
-              this.router.navigate(['/tabs']);
 
-                }
-              }
-            ]
-            });
-
-            await alert.present();
-
-          }else{
-
-            this.auth.sendFormularioPagos(this.FormSend.value);
-            this.router.navigate(['/resumen-pagos']);
-             //this.router.navigate(['/resumen']);
-             break;
-          }
-        }
-      }
-
-    }
 
    }
 
