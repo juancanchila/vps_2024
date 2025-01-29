@@ -50,7 +50,7 @@
         <h1><b>{{characte.titulo}}  </b></h1>
          <p>
 
-          {{characte.field_descripcion_del_producto}}
+          {{characte.field_descripcion_del_producto| slice:0:60 }}...
           <br>
           <b>${{characte.field_price_simple}} </b>
          </p>

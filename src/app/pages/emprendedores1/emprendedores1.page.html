@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button ></ion-back-button>
-      
+
     </ion-buttons>
     <ion-title>Emprendedores</ion-title>
     <ion-buttons slot="end">
@@ -10,9 +10,9 @@
         <ion-icon name="cart-outline"></ion-icon>
 
       </ion-button>
-      
+
     </ion-buttons>
-    
+
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -21,7 +21,7 @@
 
     </ion-refresher-content>
   </ion-refresher>
-  
+
  <ion-grid>
   <ion-row class="rowEmpresa">
     <ion-col size="4" >
@@ -30,49 +30,49 @@
     <ion-col size="8">
       <h1><b>{{allPedidos.Titulo}}  </b></h1>
        <p>
-        
-        {{allPedidos.field_detalle_emprendedor}} 
+
+        {{allPedidos.field_detalle_emprendedor}}
         <br>
-    
+
        </p>
-      
+
     </ion-col>
   </ion-row>
 
-  
+
   <ion-row *ngFor="let characte of character" (click)="irPageProductos(characte)">
-    
+
     <ion-col size="4">
-     
+
         <img [src]="urlBase+characte.field_img_apk" class="img" >
-      
-     
+
+
     </ion-col>
     <ion-col size="8">
-      
-      
-        
+
+
+
       <h1 class="title"><b>{{characte.titulo}}  </b></h1>
        <p>
-        
-        {{characte.field_descripcion_del_producto}} 
+
+        {{characte.field_descripcion_del_producto| slice:0:60 }}...
         <br>
-        <b>${{characte.field_price_simple}} </b> 
+        <b>${{characte.field_price_simple}} </b>
        </p>
-         
-      
-       
-      
-    
-    
+
+
+
+
+
+
   </ion-col>
-     
-       
-    
-    
- 
-  
-  
+
+
+
+
+
+
+
   </ion-row>
 </ion-grid>
 
