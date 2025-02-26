@@ -36,7 +36,7 @@ import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    IonicStorageModule.forRoot(),
+    IonicStorageModule.forRoot()
   ],
 
   providers: [

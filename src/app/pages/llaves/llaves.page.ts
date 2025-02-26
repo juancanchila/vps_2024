@@ -417,7 +417,7 @@ this.value = $event.target.value as string;
     } else if (this.auth.medioTransporte === 2) {
       return "../../assets/banners/llaves_carros.gif";
     } else {
-      return "../../assets/banners/IMG_6453_gif.GIF"; // Default image
+      return "../../assets/banners/mensjeria_home.gif"; // Default image
     }
   }
 

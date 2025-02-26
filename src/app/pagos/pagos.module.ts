@@ -8,7 +8,7 @@ import { PagosPageRoutingModule } from './pagos-routing.module';
 
 import { PagosPage } from './pagos.page';
 import { SwiperModule } from 'swiper/angular';
-
+import { ComponentsModule } from 'src/app/components/components.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +16,8 @@ import { SwiperModule } from 'swiper/angular';
     SwiperModule,
     ReactiveFormsModule,
     IonicModule,
-    PagosPageRoutingModule
+    PagosPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [PagosPage]
 })

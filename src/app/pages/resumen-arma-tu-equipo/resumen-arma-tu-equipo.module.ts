@@ -7,14 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ResumenArmaTuEquipoPageRoutingModule } from './resumen-arma-tu-equipo-routing.module';
 
 import { ResumenArmaTuEquipoPage } from './resumen-arma-tu-equipo.page';
-
+import { ComponentsModule } from 'src/app/components/components.module';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    ResumenArmaTuEquipoPageRoutingModule
+    ResumenArmaTuEquipoPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [ResumenArmaTuEquipoPage]
 })

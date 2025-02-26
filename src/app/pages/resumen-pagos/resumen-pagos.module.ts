@@ -7,14 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ResumenPagosPageRoutingModule } from './resumen-pagos-routing.module';
 
 import { ResumenPagosPage } from './resumen-pagos.page';
-
+import { ComponentsModule } from 'src/app/components/components.module';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    ResumenPagosPageRoutingModule
+    ResumenPagosPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [ResumenPagosPage]
 })

@@ -8,7 +8,7 @@ import { ResumenDatosEnvioComprasPageRoutingModule } from './resumen-datos-envio
 
 import { ResumenDatosEnvioComprasPage } from './resumen-datos-envio-compras.page';
 import { SwiperModule } from 'swiper/angular';
-
+import { ComponentsModule } from 'src/app/components/components.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +16,8 @@ import { SwiperModule } from 'swiper/angular';
     SwiperModule,
     ReactiveFormsModule,
     IonicModule,
-    ResumenDatosEnvioComprasPageRoutingModule
+    ResumenDatosEnvioComprasPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [ResumenDatosEnvioComprasPage]
 })

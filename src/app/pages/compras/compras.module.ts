@@ -8,6 +8,7 @@ import { ComprasPageRoutingModule } from './compras-routing.module';
 
 import { ComprasPage } from './compras.page';
 import { SwiperModule } from 'swiper/angular';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { SwiperModule } from 'swiper/angular';
     FormsModule,
     SwiperModule,
     IonicModule,
-    ComprasPageRoutingModule
+    ComprasPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [ComprasPage]
 })

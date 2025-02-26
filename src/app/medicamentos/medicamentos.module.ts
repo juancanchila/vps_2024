@@ -9,6 +9,7 @@ import { MedicamentosPageRoutingModule } from './medicamentos-routing.module';
 
 import { MedicamentosPage } from './medicamentos.page';
 import { SwiperModule } from 'swiper/angular';
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { SwiperModule } from 'swiper/angular';
     SwiperModule,
     ReactiveFormsModule,
     IonicModule,
-    MedicamentosPageRoutingModule
+    MedicamentosPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [MedicamentosPage]
 })

@@ -106,7 +106,8 @@ export class RutasPage implements OnInit {
   bloquearInputBarrioDestino7: boolean=true;
   bloquearInputBarrioDestino8: boolean=true;
   bloquearInputBarrioDestino9: boolean=true;
-  bloquearInputBarrioDestino10: boolean=true;
+  bloquearInputBarrioDestino10: boolean = true;
+  imagenLista: boolean ;
 
   constructor(private menucontrol: MenuController, private router: Router, private auth: AuthService, public fb: FormBuilder, public alertController: AlertController) {
     localStorage.setItem('servicioEvaluado','rutas '+localStorage.getItem('modalidad'));
@@ -204,7 +205,12 @@ field_nombre_c_destino2:[''],
 
            });
 
-   }
+  }
+
+  imagenCargada(event: boolean) {
+    this.imagenLista = event;
+  }
+
    ngOnInit() {
 
 
@@ -1883,7 +1889,7 @@ if( this.cantidadDestinos<this.limiteDisponibles){
       // Si barrios es 1, agregar por defecto y ocultar input barrio destino
       if (this.direccionDestino3.length === 1) {
         this.FormSend.controls.field_barrio_destino3.setValue(this.direccionDestino3[0]['name']);
-        
+
         console.log('selected----> destino', this.direccionDestino3[0]['field_zona_a']);
 
         localStorage.setItem('zona_destino3', this.direccionDestino3[0]['field_zona_a']);

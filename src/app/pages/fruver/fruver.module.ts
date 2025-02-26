@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { FruverPageRoutingModule } from './fruver-routing.module';
 
 import { FruverPage } from './fruver.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FruverPageRoutingModule
+    FruverPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [FruverPage]
 })

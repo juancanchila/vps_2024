@@ -24,6 +24,7 @@ export class FruverPage implements OnInit {
   urlBase:any;
   precioSimple:any;
   message_fruver: any;
+  imagenLista: boolean;
   constructor(private auth: AuthService,private router: Router,public alertController:AlertController) {
 
     localStorage.setItem('servicioEvaluado','fruver');
@@ -126,6 +127,11 @@ export class FruverPage implements OnInit {
       event.target.complete();
     }, 2000);
   }
+
+  imagenCargada(event: boolean) {
+    this.imagenLista = event;
+  }
+
 
   irPageProductos(product:any){
 

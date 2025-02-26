@@ -51,6 +51,7 @@ export class ResumenDatosEnvioComprasPage implements OnInit {
   domicilio: string;
   private resultadoTotalCosto_general: number;
   servicioEvaluado: string;
+  imagenLista: boolean;
   constructor(private cs: CarritoService,private router: Router, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {
     this.urlBase=environment.urlBase;
     this.FormSend= this.fb.group({
@@ -414,7 +415,9 @@ localStorage.setItem('actualizarContrato',estado);
 
    }
 
-
+   imagenCargada(event: boolean) {
+    this.imagenLista = event;
+  }
 
   async ngOnInit() {
     this.servicioEvaluado = localStorage.getItem('servicioEvaluado');

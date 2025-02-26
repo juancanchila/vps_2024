@@ -10,7 +10,7 @@ import { SencillaPageRoutingModule } from './sencilla-routing.module';
 import { SencillaPage } from './sencilla.page';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
 import { SwiperModule } from 'swiper/angular';
-
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -20,7 +20,8 @@ AutoCompleteModule,
 SwiperModule,
     ReactiveFormsModule,
     IonicModule,
-    SencillaPageRoutingModule
+    SencillaPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [SencillaPage]
 })

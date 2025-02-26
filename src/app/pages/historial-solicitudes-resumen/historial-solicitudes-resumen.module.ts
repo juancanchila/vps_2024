@@ -7,13 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { HistorialSolicitudesResumenPageRoutingModule } from './historial-solicitudes-resumen-routing.module';
 
 import { HistorialSolicitudesResumenPage } from './historial-solicitudes-resumen.page';
-
+import { ComponentsModule } from 'src/app/components/components.module';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HistorialSolicitudesResumenPageRoutingModule
+    HistorialSolicitudesResumenPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [HistorialSolicitudesResumenPage]
 })

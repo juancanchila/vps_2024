@@ -14,7 +14,8 @@ import { ResumenMascotasPage } from './resumen-mascotas.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    ResumenMascotasPageRoutingModule
+    ResumenMascotasPageRoutingModule,
+    
   ],
   declarations: [ResumenMascotasPage]
 })

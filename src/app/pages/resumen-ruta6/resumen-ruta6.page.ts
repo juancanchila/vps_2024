@@ -24,7 +24,7 @@ export class ResumenRuta6Page implements OnInit {
   locaciones :any[];
   aux: string;
   estadoButton: boolean;
-
+  imagenLista: boolean ;
   constructor(private menucontrol:MenuController,private router: Router, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {
     this.menucontrol.enable(false);
     this.FormSend= this.fb.group({
@@ -103,7 +103,12 @@ export class ResumenRuta6Page implements OnInit {
    }
 
    status="completed";
-   disabledValue= true;
+  disabledValue = true;
+
+
+ imagenCargada(event: boolean) {
+  this.imagenLista = event;
+}
    enableInput(){
 
     if(this.status==="completed"){

@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./resumen-llaves.page.scss'],
 })
 export class ResumenLlavesPage implements OnInit {
-
+  imagenLista: boolean ;
   FormSend: FormGroup;
   precio_origen: any;
   precio_destino: any;
@@ -45,6 +45,10 @@ field_barrio_origen:[""],
 
    status="completed";
   disabledValue= true;
+
+  imagenCargada(event: boolean) {
+    this.imagenLista = event;
+  }
 
   enableInput(){
 

@@ -16,6 +16,7 @@ export const environment = {
   },
   production: false,
   urlBase: "http://147.182.203.91/",
+  folder:"sites/default/files/2025-02",
 
     apiKey: "AIzaSyAh6hwtbEwpxiawPQo0Aa1YoGbQmNxCplc",
     authDomain: "vapaesa-2faf7.firebaseapp.com",

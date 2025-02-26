@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ResumenAlmacenPageRoutingModule } from './resumen-almacen-routing.module';
 
 import { ResumenAlmacenPage } from './resumen-almacen.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { ResumenAlmacenPage } from './resumen-almacen.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    ResumenAlmacenPageRoutingModule
+    ResumenAlmacenPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [ResumenAlmacenPage]
 })

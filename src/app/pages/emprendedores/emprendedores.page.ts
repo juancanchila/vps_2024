@@ -11,6 +11,7 @@ import Swiper, { Autoplay, EffectFade, Pagination } from 'swiper';
   styleUrls: ['./emprendedores.page.scss'],
 })
 export class EmprendedoresPage implements OnInit {
+  imagenLista: boolean ;
   filtroEmprendedores: any[] = [];
   filtroSeleccionado;
   iconos: any[] = [];
@@ -42,6 +43,11 @@ export class EmprendedoresPage implements OnInit {
     }
 
   };
+
+  imagenCargada(event: boolean) {
+    this.imagenLista = event;
+  }
+
   ngOnInit() {
 
 

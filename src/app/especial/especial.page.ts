@@ -10,20 +10,24 @@ import { AuthService } from '../services/auth.service';
 export class EspecialPage implements OnInit {
   slider:any=[];
   urlBase:any;
-  constructor(private auth: AuthService ) { 
+  imagenLista: boolean;
+  constructor(private auth: AuthService ) {
     this.urlBase=environment.urlBase;
+  }
+  imagenCargada(event: boolean) {
+    this.imagenLista = event;
   }
 
   ngOnInit() {
     this.auth.seleccionarSliderEspecial().subscribe(res =>{
       console.log(res, ' aqui slider');
      this.slider=res[0]['field_imagen_especial'];
-     
+
       console.log(this.slider);
-      
-     
-      
-      
+
+
+
+
     });
   }
 

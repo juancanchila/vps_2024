@@ -15,9 +15,10 @@ import { ComponentsModule } from '../components/components.module';
     FormsModule,
     ComponentsModule,
     IonicModule,
-    MensajeriaPageRoutingModule
+    MensajeriaPageRoutingModule,
+    ComponentsModule
   ],
-  
+
   declarations: [MensajeriaPage],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

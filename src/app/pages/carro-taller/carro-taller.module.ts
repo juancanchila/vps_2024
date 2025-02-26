@@ -8,6 +8,7 @@ import { CarroTallerPageRoutingModule } from './carro-taller-routing.module';
 
 import { CarroTallerPage } from './carro-taller.page';
 import { SwiperModule } from 'swiper/angular';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { SwiperModule } from 'swiper/angular';
     SwiperModule,
     ReactiveFormsModule,
     IonicModule,
-    CarroTallerPageRoutingModule
+    CarroTallerPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [CarroTallerPage]
 })

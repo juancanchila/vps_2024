@@ -11,5 +11,6 @@ export const environment = {
     measurementId: 'G-5X77ZVR0CE',
   },
   production: true,
-  urlBase: "http://147.182.203.91/"
+  urlBase: 'http://147.182.203.91/',
+  folder:'sites/default/files/2025-02'
 };

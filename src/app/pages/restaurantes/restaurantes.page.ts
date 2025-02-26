@@ -29,6 +29,7 @@ criterio:any;
   sombra3 ="";
   sombra4 ="";
   message_restaurantes: any;
+  imagenLista: boolean;
 
 
   constructor(private http: HttpClient, private router: Router, private auth: AuthService, public alertController: AlertController) {
@@ -187,6 +188,9 @@ criterio:any;
     localStorage.setItem('zona_origen',allPedidos.zona_b);
     this.router.navigate(['/restaurante1',JSON.stringify(allPedidos)]);
 
+  }
+  imagenCargada(event: boolean) {
+    this.imagenLista = event;
   }
   searchRestaurantes(event){
     const text =event.target.value;

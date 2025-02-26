@@ -23,6 +23,7 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./index.page.scss'],
 })
 export class IndexPage implements OnInit {
+  imagenLista: boolean = false;
   //ifAuxiliar: any;
   urlBase:any;
   token:string;
@@ -37,7 +38,8 @@ export class IndexPage implements OnInit {
   AuxMotosDisponibles: any;
   AuxDisponiblesMunicipios: any;
 
-  constructor(private auth: AuthService , private router:Router,private cs: CarritoService,private alertCtrl: AlertController) { 
+
+  constructor(private auth: AuthService , private router:Router,private cs: CarritoService,private alertCtrl: AlertController) {
 
     this.urlBase=environment.urlBase;
   }
@@ -46,71 +48,71 @@ export class IndexPage implements OnInit {
     pagination:false,
     autoplay:{delay: 10000},
     EffectFade:true
-    
+
   };
- 
+
   ngOnInit() {
-   
+
     this.auth.isTokenError=null;
     this.auth.getUser().subscribe(res =>{
       console.log(res);
       console.log(res[0]['field_pago_efectivo'],'variable boolean para pago efectivo');
       localStorage.setItem('permitirPagoefectivo',res[0]['field_pago_efectivo']);
-     
+
       //this.ifAuxiliar=localStorage.getItem('rol');
-    
+
     });
-    
+
     localStorage.setItem('tienda',this.tienda);
     Swiper.use([Pagination,Autoplay,EffectFade]);
     this.auth.seleccionarSlider().subscribe(res =>{
       console.log(res, ' aqui slider');
      // this.slider=res[0]['field_img_banner'];
       this.slider=res;
-      
-     
-      
-      
+
+
+
+
     });
 
-    
-    
+
+
     this.auth.seleccionarFooter().subscribe(res =>{
       console.log(res[0]['field_footer_img']);
       this.character=res[0]['field_footer_img'];
-      
-     
-      
-      
+
+
+
+
     });
 
     this.auth.obtenerRoleUsuario().subscribe(res =>{
       console.log(res);
       localStorage.setItem('rol',res);
       //this.ifAuxiliar=localStorage.getItem('rol');
-    
+
     });
-    
+
     this.auth.getAuxiliaresDisponiblesCarros().subscribe(res =>{
       let vpda=[];
       console.log(res, ' aqui carro');
       this.AuxCarrosDisponibles=res;
-     
-     
- 
+
+
+
     });
     this.auth.getAuxiliaresDisponiblesMotos().subscribe(res =>{
       console.log(res, ' aqui motos');
       this.AuxMotosDisponibles=res;
-    
+
     });
 
     this.auth.getAuxiliaresDisponiblesMunicipio().subscribe(res =>{
       console.log(res, ' aqui aux municiipio');
       this.AuxDisponiblesMunicipios=res;
-    
+
     });
-    
+
   }
 
   reload(){
@@ -118,20 +120,20 @@ export class IndexPage implements OnInit {
       let vpda=[];
       console.log(res, ' aqui carro');
       this.AuxCarrosDisponibles=res;
-     
-     
- 
+
+
+
     });
     this.auth.getAuxiliaresDisponiblesMotos().subscribe(res =>{
       console.log(res, ' aqui motos');
       this.AuxMotosDisponibles=res;
-    
+
     });
 
     this.auth.getAuxiliaresDisponiblesMunicipio().subscribe(res =>{
       console.log(res, ' aqui aux municiipio');
       this.AuxDisponiblesMunicipios=res;
-    
+
     });
 
 
@@ -140,40 +142,40 @@ export class IndexPage implements OnInit {
   temporizador(){
     //setInterval(this.geo.watchPosition(), 2000);
     //this.geo.watchPosition();
-    
+
     //let timer = setInterval(() => this.watchPosition(), 30000);
   }
-  
+
   ngOnDestroy() {
-   
+
     console.log("Index - OnDestroy")
   }
   irPageMensajeria(){
     /** */
-  
-      this.router.navigate(['/mensajeria']);
-   
-    
-    
-  
 
-   
-    
+      this.router.navigate(['/mensajeria']);
+
+
+
+
+
+
+
 
   }
- 
+
   async irPageLlaves(){
     localStorage.setItem('mensajeria','llaves');
 
     this.router.navigate(['/transportes']);
-   
-   
-    
-  
 
-   
-   
-   
+
+
+
+
+
+
+
 
   }
   async irPageRestaurantes(){
@@ -183,37 +185,41 @@ export class IndexPage implements OnInit {
 
     this.router.navigate(['/restaurantes']);
 
-   
-    
+
+
 
   }
+  imagenCargada(event: boolean) {
+    this.imagenLista = event;
+  }
+
   irPageCompras(){
-    
+
       this.router.navigate(['/compras']);
-   
-   
+
+
 
   }
 
   ionViewWillEnter(){
     this.auth.obtenerRoleUsuario().subscribe(res =>{
       console.log(res);
-     
+
       this.ifAuxiliar=res;
       console.log(this.ifAuxiliar);
       if(this.ifAuxiliar=='Auxiliar'){
        // this.geo.watchPosition();
        // console.log('locacion',this.geo.watchCoordinate);
-        
+
       }else{
-       
-       
+
+
       }
-    
+
     });
-   
-  
-   
+
+
+
    this.reload();
 
   }
@@ -221,19 +227,19 @@ export class IndexPage implements OnInit {
 
 
     this.router.navigate(['/emprendedores']);
- 
-     
-   
-    
+
+
+
+
 
   }
   irPageTelotengo(){
-   
+
       this.router.navigate(['/telotengo']);
-   
-    
+
+
 
   }
-  
+
 
 }

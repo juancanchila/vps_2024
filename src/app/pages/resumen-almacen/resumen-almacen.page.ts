@@ -19,6 +19,7 @@ export class ResumenAlmacenPage implements OnInit {
   estadoButton: boolean;
   que_quieres_comprar: any;
   costo_articulo: any;
+  imagenLista: boolean;
 
   constructor(private menucontrol:MenuController,private router: Router, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {
     this.menucontrol.enable(false);
@@ -171,7 +172,9 @@ field_nombre_c_destino:[""]
    }
 
 
-
+   imagenCargada(event: boolean) {
+    this.imagenLista = event;
+  }
   async ngOnInit() {
     try {
 

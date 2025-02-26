@@ -54,6 +54,7 @@ export class MedicamentosPage implements OnInit {
   disabledValueOrigen: boolean;
   bloquearInputBarrio: boolean;
   bloquearInputBarrioDestino: boolean=true;
+  imagenLista: boolean;
   constructor(private menucontrol:MenuController,private sanitizer:DomSanitizer,private router: Router, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {
     this.menucontrol.enable(false);
     localStorage.setItem('servicioEvaluado','medicamentos');
@@ -468,6 +469,10 @@ await alert.present();
     Swiper.use([Pagination,Navigation,EffectFade,Virtual]);
 
 
+  }
+
+  imagenCargada(event: boolean) {
+    this.imagenLista = event;
   }
   regionOrigen(event){
     console.log('regionOrigen');

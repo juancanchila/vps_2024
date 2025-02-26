@@ -7,13 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { TelotengoPageRoutingModule } from './telotengo-routing.module';
 
 import { TelotengoPage } from './telotengo.page';
-
+import { ComponentsModule } from 'src/app/components/components.module';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TelotengoPageRoutingModule
+    TelotengoPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [TelotengoPage]
 })

@@ -13,6 +13,7 @@ export class MensajeriaPage implements OnInit {
   AuxCarrosDisponibles: any;
   AuxMotosDisponibles: any;
   AuxDisponiblesMunicipios: any;
+  imagenLista: boolean;
 
   constructor(private router: Router,private alertCtrl: AlertController,private auth: AuthService) { }
   irPageSencilla(){
@@ -114,6 +115,10 @@ export class MensajeriaPage implements OnInit {
 
 
   }
+  imagenCargada(event: boolean) {
+    this.imagenLista = event;
+  }
+
   async irAlertaSencilla(){
     const alert = await this.alertCtrl.create({
 

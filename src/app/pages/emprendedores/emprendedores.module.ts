@@ -8,6 +8,7 @@ import { EmprendedoresPageRoutingModule } from './emprendedores-routing.module';
 
 import { EmprendedoresPage } from './emprendedores.page';
 import { SwiperModule } from 'swiper/angular';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { SwiperModule } from 'swiper/angular';
     FormsModule,
     SwiperModule,
     IonicModule,
-    EmprendedoresPageRoutingModule
+    EmprendedoresPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [EmprendedoresPage]
 })

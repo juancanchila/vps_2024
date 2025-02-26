@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ResumenLlavesPageRoutingModule } from './resumen-llaves-routing.module';
 
 import { ResumenLlavesPage } from './resumen-llaves.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { ResumenLlavesPage } from './resumen-llaves.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    ResumenLlavesPageRoutingModule
+    ResumenLlavesPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [ResumenLlavesPage]
 })

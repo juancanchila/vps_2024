@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./resumen-medicamentos.page.scss'],
 })
 export class ResumenMedicamentosPage implements OnInit {
+  imagenLista: boolean ;
   locaciones :any[];
   FormSend: FormGroup;
   precio_origen: any;
@@ -54,6 +55,11 @@ field_nombre_c_destino:[""]
    }
    status="completed";
    disabledValue= true;
+
+   imagenCargada(event: boolean) {
+    this.imagenLista = event;
+  }
+
 
    enableInput(){
 

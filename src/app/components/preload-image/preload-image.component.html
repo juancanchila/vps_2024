@@ -1,0 +1,4 @@
+<div class="contentImg">
+  <ion-spinner *ngIf="!imagenCargada" name="crescent"></ion-spinner>
+  <ion-img *ngIf="imagenCargada" [src]="src" [alt]="alt" class="img-slider"></ion-img>
+</div>

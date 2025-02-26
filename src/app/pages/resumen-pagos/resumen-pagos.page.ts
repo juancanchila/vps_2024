@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./resumen-pagos.page.scss'],
 })
 export class ResumenPagosPage implements OnInit {
+  imagenLista: boolean ;
   FormSend: FormGroup;
   locaciones :any[];
   aux: string;
@@ -42,6 +43,10 @@ field_nombre_c_destino:[""]
 
    status="completed";
    disabledValue= true;
+
+   imagenCargada(event: boolean) {
+    this.imagenLista = event;
+  }
 
    enableInput(){
 

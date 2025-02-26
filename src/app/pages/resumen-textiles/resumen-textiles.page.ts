@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./resumen-textiles.page.scss'],
 })
 export class ResumenTextilesPage implements OnInit {
-
+  imagenLista: boolean ;
   FormSend: FormGroup;
   precio_origen: any;
   precio_destino: any;
@@ -47,7 +47,9 @@ field_nombre_c_destino:[""]
 
    status="completed";
    disabledValue= true;
-
+   imagenCargada(event: boolean) {
+    this.imagenLista = event;
+  }
    enableInput(){
 
      if(this.status==="completed"){

@@ -16,6 +16,7 @@ export class ResumenCarrotallerPage implements OnInit {
   locaciones :any[];
   aux: string;
   estadoButton: boolean;
+  imagenLista: boolean;
   constructor(private menucontrol:MenuController,private router: Router, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {
     this.menucontrol.enable(false);
     this.FormSend= this.fb.group({
@@ -54,6 +55,11 @@ field_nombre_c_origen:[""],
        this.disabledValue = true;
      }
    }
+
+
+   imagenCargada(event: boolean) {
+    this.imagenLista = event;
+  }
 
    async irAPagar(){
     if(this.aux=='false'){

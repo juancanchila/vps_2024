@@ -58,35 +58,39 @@ export class HistorialSolicitudesResumenPage implements OnInit {
   character44: any;
   urlBase: any;
   character43: any;
+  imagenLista: boolean;
 
-  constructor(private  alertController: AlertController,private auth: AuthService,private router: Router,private _route: ActivatedRoute) { 
+  constructor(private  alertController: AlertController,private auth: AuthService,private router: Router,private _route: ActivatedRoute) {
     this.urlBase=environment.urlBase;
     this._route.paramMap.subscribe((params: ParamMap) =>  {
-      
+
       this.allPedidos=JSON.parse(params.get('allPedidos'));
 
       //todas las variables las vas a obtener de llamar al nodo
 
       console.log(this.allPedidos);
 
-      
-     
-    
-      
+
+
+
+
     });
   }
 
-  
 
+
+  imagenCargada(event: boolean) {
+    this.imagenLista = event;
+  }
 
   ngOnInit() {
-    
-   
-  
+
+
+
     this.auth.getDetalleOrden().subscribe(res =>{
       console.log(res);
       console.log(res);
-    
+
       console.log(res['field_observaciones']['length']);
 
       if(res['field_observaciones']['length'] !=0){
@@ -108,7 +112,7 @@ export class HistorialSolicitudesResumenPage implements OnInit {
 
       }
 
-    
+
       if(res['field_asignado']['length'] !=0){
         this.character25=res['field_asignado']['0']['target_id'];
 
@@ -161,69 +165,69 @@ export class HistorialSolicitudesResumenPage implements OnInit {
       }
       if(res['field_metodo_de_pago']['length']!=0){
         this.character8=res['field_metodo_de_pago']['0'].value;
-  
+
       }
       if(res['field_ida_y_vuelta']['length']!=0){
         this.character9=res['field_ida_y_vuelta']['0'].value;
-  
+
       }
       if(this.character9=='true'){
         this.character21='Ida y vuelta';
-        
-  
+
+
       }else{
         this.character21=' Solo Ida';
       }
-      
-      
-     
-      
-      
-     
+
+
+
+
+
+
       if(res['created']['length']!=0){
         this.character12=res['created']['0'].value;
-  
+
       }
       if(res['body']['length']!=0){
         this.character14=res['body']['0'].value;
-  
+
       }
       if(res['field_body2']['length']!=0){
         this.character15=res['field_body2']['0'].value;
-  
+
       }
       if(res['field_quieres_comprar']['length']!=0){
         this.character16=res['field_quieres_comprar']['0'].value;
-  
+
       }
       if(res['field_farmacia']['length']!=0){
         this.character17=res['field_farmacia']['0'].value;
-  
+
       }
-      
+
       if(res['field_musica_preferida']['length']!=0){
         this.character18=res['field_musica_preferida']['0'].value;
-  
+
       }
       if(res['field_tema_de_interes']['length']!=0){
         this.character19=res['field_tema_de_interes']['0'].value;
-  
+
       }
       if(res['field_contacto']['length']!=0){
         this.character20=res['field_contacto']['0'].value;
-  
+
       }
       if(res['field_medio_de_transporte']['length']!=0){
         this.character22=res['field_medio_de_transporte']['0'].value;
-  
+
       }
       if(res['field_respuesta_documentos']['length']!=0){
         this.character32=res['field_respuesta_documentos']['0'].value;
-  
+
       }
       if(this.character22==1){
         this.character23='Moto';
-  
+
       }else if(this.character22==2){
         this.character23='Carro';
       }
@@ -279,9 +283,9 @@ console.log('aqui push token movil',this.character33);
 localStorage.setItem('tokenNotificacionRecibido',this.character33);
 
 
-   
 
-     
+
+
     })
   }
   ngOnDestroy(){

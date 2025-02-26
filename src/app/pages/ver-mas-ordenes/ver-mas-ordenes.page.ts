@@ -10,6 +10,7 @@ import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
   styleUrls: ['./ver-mas-ordenes.page.scss'],
 })
 export class VerMasOrdenesPage implements OnInit {
+  imagenLista: boolean ;
   @ViewChild(IonModal) modal: IonModal;
 
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
@@ -89,6 +90,11 @@ this.eliminarIdNode=this.allPedidos['nid'];
 
     });
   }
+
+  imagenCargada(event: boolean) {
+    this.imagenLista = event;
+  }
+
   doRefresh(event) {
     this.ngOnInit();
     console.log('Begin async operation');

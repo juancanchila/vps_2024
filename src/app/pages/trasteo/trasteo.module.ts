@@ -8,7 +8,7 @@ import { TrasteoPageRoutingModule } from './trasteo-routing.module';
 
 import { TrasteoPage } from './trasteo.page';
 import { SwiperModule } from 'swiper/angular';
-
+import { ComponentsModule } from 'src/app/components/components.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +16,8 @@ import { SwiperModule } from 'swiper/angular';
     SwiperModule,
     ReactiveFormsModule,
     IonicModule,
-    TrasteoPageRoutingModule
+    TrasteoPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [TrasteoPage]
 })

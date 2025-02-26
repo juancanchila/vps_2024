@@ -48,6 +48,7 @@ export class AlmacenPage implements OnInit {
   bloquearInputBarrio: boolean=true;
   bloquearInputBarrioDestino: boolean=true;
   message_almacen: any;
+  imagenLista: boolean;
   constructor(private menucontrol:MenuController,private router: Router, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {
     this.menucontrol.enable(false);
     localStorage.setItem('servicioEvaluado','compras');
@@ -414,6 +415,10 @@ await alert.present();
 
    input2.value = item.name;
    this.FormSend.controls.field_barrio_destino.setValue(item.name);
+  }
+
+  imagenCargada(event: boolean) {
+    this.imagenLista = event;
   }
 
    async sendForm(){

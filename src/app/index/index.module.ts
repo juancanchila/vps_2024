@@ -8,11 +8,10 @@ import { IndexPageRoutingModule } from './index-routing.module';
 
 import { IndexPage } from './index.page';
 import { AppComponent } from '../app.component';
-import {SwiperModule} from 'swiper/angular';
+import { SwiperModule } from 'swiper/angular';
 
 import { environment } from 'src/environments/environment';
-
-
+import { ComponentsModule } from '../components/components.module';
 
 @NgModule({
   imports: [
@@ -21,17 +20,12 @@ import { environment } from 'src/environments/environment';
     FormsModule,
     IonicModule,
 
-   
-    
-    IndexPageRoutingModule
-  ],
-  exports:[
-  
+    ComponentsModule,
 
+    IndexPageRoutingModule,
   ],
- 
-  declarations: [IndexPage]
+  exports: [],
+
+  declarations: [IndexPage],
 })
-export class IndexPageModule {
-  
-}
+export class IndexPageModule {}

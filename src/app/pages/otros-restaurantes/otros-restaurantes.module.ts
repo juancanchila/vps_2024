@@ -8,7 +8,7 @@ import { OtrosRestaurantesPageRoutingModule } from './otros-restaurantes-routing
 
 import { OtrosRestaurantesPage } from './otros-restaurantes.page';
 import { SwiperModule } from 'swiper/angular';
-
+import { ComponentsModule } from 'src/app/components/components.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +16,8 @@ import { SwiperModule } from 'swiper/angular';
     SwiperModule,
     ReactiveFormsModule,
     IonicModule,
-    OtrosRestaurantesPageRoutingModule
+    OtrosRestaurantesPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [OtrosRestaurantesPage]
 })

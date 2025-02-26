@@ -18,10 +18,14 @@ export class TelotengoPage implements OnInit {
   AuxCarrosGrandesDisponibles: any;
   AuxCarrosTallerDisponibles: any;
   AuxCarrosMedianosDisponibles: any;
+  disponibles: boolean;
+  imagenLista: boolean ;
   constructor(private router: Router,private auth:AuthService,private alertCtrl: AlertController) {
     this.urlBase=environment.urlBase;
    }
-
+   imagenCargada(event: boolean) {
+    this.imagenLista = event;
+  }
   ngOnInit() {
     this.auth.getUser().subscribe(res =>{
       console.log(res[0]['field_pago_efectivo'],'variable boolean para pago efectivo');
@@ -73,7 +77,7 @@ export class TelotengoPage implements OnInit {
   async irPageCarrotaller(){
 
 
-      if(this.AuxCarrosTallerDisponibles.length==0){
+      if(this.AuxCarrosTallerDisponibles.length === 0){
         const alert = await this.alertCtrl.create({
 
           header: 'Advertencia',
@@ -120,8 +124,15 @@ async irPageTrasteo() {
   console.log(this.AuxCarrosGrandesDisponibles['length'], 'carros grandes');
   console.log(this.AuxCarrosMedianosDisponibles['length'], 'carros medianos');
 
+  if (this.AuxCarrosGrandesDisponibles['length'] === 0) {
+    this.disponibles = true;
+  }
+
+  if (this.AuxCarrosMedianosDisponibles['length'] === 0) {
+    this.disponibles = true;
+  }
   // Verificamos si no hay carros grandes ni medianos disponibles
-  if (this.AuxCarrosGrandesDisponibles['length'] == 0 && this.AuxCarrosMedianosDisponibles['length'] == 0) {
+  if (this.disponibles) {
     const alert = await this.alertCtrl.create({
       header: 'Advertencia',
       message: 'En este momento no tenemos auxiliares disponibles, no podemos crear tu orden.',

@@ -45,6 +45,7 @@ export class CarroTallerPage implements OnInit {
   disabledValueOrigen: boolean;
   bloquearInputBarrio: boolean=true;
   locacion: any;
+  imagenLista: boolean;
   constructor(private menucontrol: MenuController, private router: Router, private auth: AuthService, public fb: FormBuilder, public alertController: AlertController) {
     localStorage.setItem('servicioEvaluado','carrotaller');
     this.menucontrol.enable(false);
@@ -69,6 +70,10 @@ field_latitud_origen_:['']
      });
 
    }
+
+   imagenCargada(event: boolean) {
+    this.imagenLista = event;
+  }
 
 
    async slideNext(){

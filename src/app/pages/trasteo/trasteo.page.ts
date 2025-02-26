@@ -51,6 +51,7 @@ export class TrasteoPage implements OnInit {
   bloquearInputBarrioDestino: boolean=true;
   AuxCarrosMedianosDisponibles: any;
   selectedCargaType: string;
+  imagenLista: boolean ;
   constructor(private menucontrol: MenuController, private router: Router, private auth: AuthService, public fb: FormBuilder, public alertController: AlertController) {
     localStorage.setItem('servicioEvaluado','trasteo');
     this.menucontrol.enable(false);
@@ -93,7 +94,9 @@ field_prefijo_destino:[ ""],
 
    }
 
-
+   imagenCargada(event: boolean) {
+    this.imagenLista = event;
+  }
    async slideNext() {
     // Obtener el valor del radio button seleccionado usando el ID
     const cargaPequena = (document.getElementById('checkbox1') as HTMLInputElement);

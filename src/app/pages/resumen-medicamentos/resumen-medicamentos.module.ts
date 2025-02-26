@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { ResumenMedicamentosPageRoutingModule } from './resumen-medicamentos-routing.module';
-
+import { ComponentsModule } from 'src/app/components/components.module';
 import { ResumenMedicamentosPage } from './resumen-medicamentos.page';
 
 @NgModule({
@@ -14,7 +14,8 @@ import { ResumenMedicamentosPage } from './resumen-medicamentos.page';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    ResumenMedicamentosPageRoutingModule
+    ResumenMedicamentosPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [ResumenMedicamentosPage]
 })

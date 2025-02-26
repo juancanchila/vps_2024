@@ -8,7 +8,7 @@ import { RutasPageRoutingModule } from './rutas-routing.module';
 
 import { RutasPage } from './rutas.page';
 import { SwiperModule } from 'swiper/angular';
-
+import { ComponentsModule } from 'src/app/components/components.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +16,8 @@ import { SwiperModule } from 'swiper/angular';
     SwiperModule,
     ReactiveFormsModule,
     IonicModule,
-    RutasPageRoutingModule
+    RutasPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [RutasPage]
 })

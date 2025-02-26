@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./resumen-ruta3.page.scss'],
 })
 export class ResumenRuta3Page implements OnInit {
-
+  imagenLista: boolean ;
   FormSend: FormGroup;
   precio_origen: any;
   precio_destino: any;
@@ -73,7 +73,11 @@ export class ResumenRuta3Page implements OnInit {
    }
 
    status="completed";
-   disabledValue= true;
+  disabledValue = true;
+
+  imagenCargada(event: boolean) {
+    this.imagenLista = event;
+  }
    enableInput(){
 
     if(this.status==="completed"){

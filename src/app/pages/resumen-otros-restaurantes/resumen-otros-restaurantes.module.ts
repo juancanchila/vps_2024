@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ResumenOtrosRestaurantesPageRoutingModule } from './resumen-otros-restaurantes-routing.module';
 
 import { ResumenOtrosRestaurantesPage } from './resumen-otros-restaurantes.page';
-
+import { ComponentsModule } from 'src/app/components/components.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -15,7 +15,8 @@ import { ResumenOtrosRestaurantesPage } from './resumen-otros-restaurantes.page'
     ReactiveFormsModule,
     IonicModule,
     IonicModule,
-    ResumenOtrosRestaurantesPageRoutingModule
+    ResumenOtrosRestaurantesPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [ResumenOtrosRestaurantesPage]
 })

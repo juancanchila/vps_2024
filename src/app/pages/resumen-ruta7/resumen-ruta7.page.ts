@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./resumen-ruta7.page.scss'],
 })
 export class ResumenRuta7Page implements OnInit {
+  imagenLista: boolean ;
   locaciones :any[];
   validadorDeRuta:any;
   FormSend: FormGroup;
@@ -113,7 +114,10 @@ export class ResumenRuta7Page implements OnInit {
    }
 
    status="completed";
-   disabledValue= true;
+  disabledValue = true;
+  imagenCargada(event: boolean) {
+    this.imagenLista = event;
+  }
    enableInput(){
 
     if(this.status==="completed"){

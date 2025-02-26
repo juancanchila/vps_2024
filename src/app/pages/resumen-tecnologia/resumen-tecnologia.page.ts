@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ResumenTecnologiaPage implements OnInit {
 
-
+  imagenLista: boolean ;
   FormSend: FormGroup;
   precio_origen: any;
   precio_destino: any;
@@ -46,7 +46,9 @@ field_nombre_c_destino:[""]
    }
    status="completed";
   disabledValue= true;
-
+  imagenCargada(event: boolean) {
+    this.imagenLista = event;
+  }
   enableInput(){
 
     if(this.status==="completed"){

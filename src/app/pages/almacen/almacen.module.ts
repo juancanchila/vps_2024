@@ -8,6 +8,7 @@ import { AlmacenPageRoutingModule } from './almacen-routing.module';
 
 import { AlmacenPage } from './almacen.page';
 import { SwiperModule } from 'swiper/angular';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { SwiperModule } from 'swiper/angular';
     SwiperModule,
     ReactiveFormsModule,
     IonicModule,
-    AlmacenPageRoutingModule
+    AlmacenPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [AlmacenPage]
 })
