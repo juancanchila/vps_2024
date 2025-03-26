@@ -152,9 +152,7 @@ async irPageTrasteo() {
     // Si hay al menos un carro grande o uno mediano disponible, continuamos
     this.auth.seleccionarServicioCarroGrande(); // Puedes ajustar esto si necesitas seleccionar otro servicio
 
-    setTimeout(async () => {
-      this.router.navigate(['/trasteo']);
-    }, 1000);
+    this.router.navigate(['/trasteo']);
   }
 }
 

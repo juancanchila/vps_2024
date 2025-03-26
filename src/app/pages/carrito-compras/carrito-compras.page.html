@@ -23,7 +23,7 @@
     <table class="margin-top-20">
       <thead>
         <tr col="3">
-         
+
           <td style="width:20%"> <b>Cantidad.</b> </td>
           <td > <b> Producto</b></td>
           <td > <b>Valor</b> </td>
@@ -31,41 +31,41 @@
       </thead>
       <tbody>
         <tr >
-          
+
           <td  class="has-text-centered">
             <span>{{item.cantidad}}</span>
           </td>
           <td>{{item.titulo}}</td>
           <td>${{item.originaPrice*item.cantidad}}</td>
           <td><ion-icon name="trash" (click)="deleteProducto(item.product_id)"></ion-icon></td>
-        </tr>      
+        </tr>
       </tbody>
       <tfoot>
           <tr class="carrito-total">
             <td colspan="2"></td>
             <td>
-              
+
             </td>
           </tr>
       </tfoot>
     </table>
-  
+
   </ion-item>
   <div>
     <b>Subtotal:</b> <div class="sub">${{subtotal}}</div>
   </div>
-  
- 
+
+
   <ion-row>
     <ion-col>
       <ion-button replaceUrl="true" (click)="irASeguirComprando()" type="submit" color="warning" expand="block"><br><small>  <b class="button1">Seguir Comprando</b> </small></ion-button>
     </ion-col>
 
   </ion-row>
-  
+
   <ion-row>
     <ion-col>
-     
+
       <ion-button replaceUrl="true" (click)="irPagePagar()" type="submit" color="warning" expand="block"><br><small> <b class="button1">Completar Orden</b> </small></ion-button>
     </ion-col>
 
@@ -73,12 +73,12 @@
 
   <ion-row>
     <ion-col>
-     
+
       <ion-button  replaceUrl="true" (click)="limpiarCarrito()" type="submit" color="warning" expand="block"><br><small> <b class="button1">Limpiar carrito</b> </small></ion-button>
     </ion-col>
 
   </ion-row>
-  
+
 </ion-content>
 
 <ng-template color="warning" #carritovaciotmpl>
@@ -88,7 +88,7 @@
     </div>
   <ion-row>
     <ion-col>
-      <ion-button replaceUrl="true" (click)="irASeguirComprando()" type="submit" color="warning" expand="block"><br><small>  <b class="button1">Regresar</b> </small></ion-button>
+      <ion-button replaceUrl="true" (click)="regresar()" type="submit" color="warning" expand="block"><br><small>  <b class="button1">Regresar</b> </small></ion-button>
     </ion-col>
 
   </ion-row>

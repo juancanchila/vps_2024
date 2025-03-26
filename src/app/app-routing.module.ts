@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { IngresadoGuard } from './ingresado.guard';
 import { NoIngresadoGuard } from './no-ingresado.guard';
 import { AuxiliarGuard } from './guards/auxiliar.guard';
+import { CartGuard } from './guards/cart.guard';
 import { ModoColaboradorGuard } from './guards/modo-colaborador-guard.guard';
 import { ModalCalificacionGuard } from './guards/modal-calificacion.guard';
 import { DisponibilidadGuard } from './guards/disponibilidad.guard';
@@ -248,7 +249,7 @@ const routes: Routes = [
   {
     path: 'resumen-datos-envio-compras',
     loadChildren: () => import('./pages/resumen-datos-envio-compras/resumen-datos-envio-compras.module').then( m => m.ResumenDatosEnvioComprasPageModule),
-    canActivate: [IngresadoGuard]
+    canActivate: [IngresadoGuard, CartGuard]
   },
   {
     path: 'fruver1/:allPedidos',

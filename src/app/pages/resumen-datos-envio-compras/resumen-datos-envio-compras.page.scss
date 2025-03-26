@@ -27,9 +27,9 @@ ion-toolbar{
     --ion-color-base: #FFF200  !important;
 }
 b{
-
+    color: #262262;
      font-family: 'Montserrat', sans-serif;
-  font-weight: 300; /* Asegura que se use la variante Light */
+font-weight: bold;/* Asegura que se use la variante Light */
 }
 ion-card{
     border-radius: 20px;
@@ -80,12 +80,12 @@ small{
     font-size:18px;
     border: 1px solid #333;
 }
+
 ion-label{
     display: flex;
     margin-left: 15.5px;
-   color: #262262;
-     font-family: 'Montserrat', sans-serif;
-  font-weight: 300; /* Asegura que se use la variante Light */
+    color: #262262;
+    font-family: "Montserrat Light ", sans-serif;
     text-transform: uppercase;
 
 }
@@ -154,7 +154,7 @@ b{
     line-height: 2.5;
     color: #262262;
      font-family: 'Montserrat', sans-serif;
-  font-weight: 300; /* Asegura que se use la variante Light */
+  font-weight: bold; /* Asegura que se use la variante Light */
 }
 .botonSig{
     color: white;
@@ -209,4 +209,7 @@ strong{
     font-weight: bold;
     font-family: 'Montserrat', sans-serif;
     text-align: right;
+}
+div{
+    margin: auto;
 }

@@ -1,13 +1,11 @@
-
 ion-title{
-    margin-left: -17%;
     text-align: center;
     text-transform: uppercase;
     color:white;
     font-family: 'Montserrat', sans-serif;
   font-weight: 300; /* Asegura que se use la variante Light */
 }
- 
+
 form{
 	margin: auto;
 	width: 95%;
@@ -90,7 +88,7 @@ ion-tab-bar{
 }
 ion-icon,ion-label{
     display: flex;
-
+    margin-left: 15.5px;
     color: yellow;
 }
 ion-row{
@@ -199,3 +197,6 @@ span {
     max-width: 80%;
 }
 
+div {
+    margin: auto;
+  }

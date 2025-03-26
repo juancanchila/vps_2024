@@ -1,3 +1,5 @@
+SI NO EXISTE LA CARPETA androidnpx
+cap add android
 how to generate the app or apk
 ionic build -p
 ionic cap copy android
