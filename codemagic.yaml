@@ -1,0 +1,32 @@
+workflows:
+  ios-workflow:
+    name: Build iOS
+    instance_type: mac_mini_m1
+    environment:
+      vars:
+        BUNDLE_ID: "com.vapaesa"    # ⚡ Ya lo puse según tu aplicación
+        APP_NAME: "VapaesaApp"
+      node: 20.0.0
+      xcode: latest
+    scripts:
+      - name: Install Ionic CLI
+        script: |
+          npm install -g @ionic/cli
+      - name: Install dependencies
+        script: |
+          npm ci
+      - name: Build Ionic web assets
+        script: |
+          ionic build --prod
+      - name: Sync Capacitor for iOS
+        script: |
+          ionic cap sync ios
+      - name: Prepare iOS
+        script: |
+          cd ios/App
+          pod install
+      - name: Build iOS project
+        script: |
+          xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -sdk iphoneos
+    artifacts:
+      - ios/App/build/**/*.ipa
