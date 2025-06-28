@@ -51,6 +51,7 @@ export class ResumenDatosEnvioComprasPage implements OnInit {
   private resultadoTotalCosto_general: number;
   servicioEvaluado: string;
   imagenLista: boolean;
+  aditional_value: string;
   constructor(
     private cs: CarritoService,
     private router: Router,
@@ -90,8 +91,10 @@ export class ResumenDatosEnvioComprasPage implements OnInit {
       localStorage.getItem('zona_destino'),
       tipo_de_vehiculo_seleccionado
     );
-    this.domicilioValor = resultadoTotalCosto;
-    resultadoTotalCosto = Number(resultadoTotalCosto);
+
+
+    this.domicilioValor = resultadoTotalCosto    ;
+    resultadoTotalCosto = Number(resultadoTotalCosto)+ Number(this.aditional_value) ;
     console.log(resultadoTotalCosto, 'resultadoTotalCosto');
 
     this.resultadoTotalCosto_general = Number(resultadoTotalCosto);
@@ -398,6 +401,19 @@ export class ResumenDatosEnvioComprasPage implements OnInit {
 
   async ngOnInit() {
     this.servicioEvaluado = localStorage.getItem('servicioEvaluado');
+
+const data = await this.auth.getaditional_values().toPromise();
+      if( this.servicioEvaluado === 'fruver' ){
+      this.aditional_value = data[0].field_fruver;
+
+      }else{
+ this.aditional_value = '0';
+}
+
+
+
+
+
     console.log(this.servicioEvaluado,"Evaluando gif");
     try {
       this.estadoButton = true;

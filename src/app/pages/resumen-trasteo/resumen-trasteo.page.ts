@@ -17,6 +17,9 @@ export class ResumenTrasteoPage implements OnInit {
   precio_destino: any;
   aux: string;
   estadoButton: boolean;
+  servicioEvaluado: string;
+  aditional_value: any;
+  tipo: string;
 
   constructor(private menucontrol:MenuController,private router: Router, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {
     this.menucontrol.enable(false);
@@ -190,14 +193,31 @@ localStorage.setItem('actualizarContrato',estado);
       console.log(localStorage.getItem('zona_origen'), 'zona_origen');
       console.log(localStorage.getItem('zona_destino'), 'zona_destino');
       console.log(localStorage.getItem('servicioEvaluado'), 'servicioEvaluado');
-
+      this.tipo = localStorage.getItem('tipoCarga');
       // se mana 1 porque no hay pareoetros de cobro para estos servicios
      var resultadoTotalCosto = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado')+" "+localStorage.getItem('tipoCarga'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino'),
-        1
+      this.auth.medioTransporte
       );
+
+this.servicioEvaluado =localStorage.getItem('servicioEvaluado');
+ const data = await this.auth.getaditional_values().toPromise();
+ console.log(data);
+
+
+ if ( this.tipo === 'Carga grande'){
+
+ this.aditional_value = data[0].field_trasteo;
+ }else{
+   this.aditional_value = data[0].field_trasteo_carga_small;
+}
+
+
+
+
+
       resultadoTotalCosto = Number(resultadoTotalCosto);
 
       console.log(resultadoTotalCosto, 'resultadoTotalCosto');
@@ -245,6 +265,8 @@ localStorage.setItem('actualizarContrato',estado);
       this.FormSend.controls.field_nombre_c_destino.setValue(this.auth.resumen.field_nombre_c_destino['0']['value']);
 
   console.log('resultadoTotalCosto antes de asignar:', resultadoTotalCosto);
+   console.log('resultadoTotalCosto antes de asignar:',this.aditional_value);
+ resultadoTotalCosto += Number(this.aditional_value);
 
   this.FormSend.controls.field_precio_.setValue(resultadoTotalCosto);
   localStorage.setItem('precioTarifa', resultadoTotalCosto);

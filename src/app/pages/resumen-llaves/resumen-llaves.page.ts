@@ -17,6 +17,8 @@ export class ResumenLlavesPage implements OnInit {
   locaciones :any[];
   aux: string;
   estadoButton: boolean;
+  aditional_value: any;
+  servicioEvaluado: string;
   constructor(private menucontrol:MenuController,private router: Router, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {
     this.menucontrol.enable(false);
     this.FormSend= this.fb.group({
@@ -145,6 +147,8 @@ field_barrio_origen:[""],
     console.log(localStorage.getItem('zona_origen'), 'zona_origen');
     console.log(localStorage.getItem('zona_destino'), 'zona_destino');
     console.log(localStorage.getItem('servicioEvaluado'), 'servicioEvaluado');
+this.servicioEvaluado =localStorage.getItem('servicioEvaluado');
+console.log(this.servicioEvaluado);
 
    var resultadoTotalCosto = await this.auth.calcularPrecioTarifa(
       localStorage.getItem('servicioEvaluado'),
@@ -152,7 +156,19 @@ field_barrio_origen:[""],
       localStorage.getItem('zona_destino'),
       this.auth.medioTransporte
     );
-      this.FormSend.controls.field_precio_.setValue(resultadoTotalCosto);
+
+
+ const data = await this.auth.getaditional_values().toPromise();
+if (this.servicioEvaluado === 'llaves1') {
+  this.aditional_value = data[0].field_llaves_motos;
+} else if (this.servicioEvaluado === 'llaves2') {
+  this.aditional_value = data[0].field_llaves_carros;
+} else {
+  this.aditional_value = '0';
+}
+
+
+
       this.FormSend.controls.field_metodo_de_pago.setValue(this.auth.resumen.field_metodo_de_pago['0']['value']);
 
 
@@ -219,6 +235,10 @@ field_barrio_origen:[""],
 
   this.FormSend.controls.field_nombre_c_origen.setValue(this.auth.resumen.field_nombre_c_origen['0']['value']);
 
+
+  console.log(resultadoTotalCosto);
+  console.log(this.aditional_value, 'valores');
+  resultadoTotalCosto = Number(this.aditional_value) + Number(resultadoTotalCosto);
   this.FormSend.controls.field_precio_.setValue(resultadoTotalCosto);
 
   localStorage.setItem('precioTarifa', resultadoTotalCosto);

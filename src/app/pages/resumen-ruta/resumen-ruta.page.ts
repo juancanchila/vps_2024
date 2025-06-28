@@ -19,6 +19,8 @@ export class ResumenRutaPage implements OnInit {
   locaciones :any[];
   aux: string;
   estadoButton: boolean;
+  servicioEvaluado: string;
+  aditional_value: any;
 
   constructor(private menucontrol:MenuController,private router: Router, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {
     this.menucontrol.enable(false);
@@ -210,15 +212,27 @@ field_nombre_c_destino2:[""],
     console.log(localStorage.getItem('zona_destino2'), 'zona_destino2');
     console.log(localStorage.getItem('servicioEvaluado'), 'servicioEvaluado');
 
-       //
 
+
+this.servicioEvaluado =localStorage.getItem('servicioEvaluado');
+console.log(this.servicioEvaluado);
+
+ const data = await this.auth.getaditional_values().toPromise();
+
+if (this.servicioEvaluado === 'rutas Agil') {
+  this.aditional_value = data[0].field_agil;
+} else if (this.servicioEvaluado === 'rutas Moderada') {
+  this.aditional_value = data[0].field_moderada	;
+} else {
+  this.aditional_value = '0';
+}
       var resultadoTotalCostoDestino1 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino'),
         this.auth.medioTransporte
       );
-      resultadoTotalCostoDestino1 = Number(resultadoTotalCostoDestino1);
+      resultadoTotalCostoDestino1 = Number(resultadoTotalCostoDestino1) + Number(this.aditional_value);
 
      var resultadoTotalCostoDestino2 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
@@ -226,7 +240,7 @@ field_nombre_c_destino2:[""],
         localStorage.getItem('zona_destino2'),
         this.auth.medioTransporte
       );
-      resultadoTotalCostoDestino2 = Number(resultadoTotalCostoDestino2);
+      resultadoTotalCostoDestino2 = Number(resultadoTotalCostoDestino2)+ Number(this.aditional_value);
 
 
     this.precio_origen = Number(localStorage.getItem('tarifaOrigen'));

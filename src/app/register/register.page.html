@@ -5,9 +5,6 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <img class="imgtoolbar" src="../../assets/botones/LOGOUPERIOR-92.png"  alt="">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
-
-
 
   </ion-toolbar>
 </ion-header>
@@ -15,7 +12,7 @@
 <ion-content class="background">
 
   <ion-card-content class="contain">
-    <ion-label class="title"><b>Formulario de Registro</b></ion-label>
+    <ion-label class="title">Formulario de Registro</ion-label>
   <form [formGroup]="regisForm" (ngSubmit)="guardar()" >
 
 
@@ -29,13 +26,10 @@
 
 
     <ion-item >
-      <ion-label >Apellidos</ion-label>
+      <ion-label >Apellido</ion-label>
       <ion-input class="corto" formControlName="field_apellidos_registro" type="text" required></ion-input>
     </ion-item>
-    <ion-item >
-      <ion-label >Documento</ion-label>
-      <ion-input class="corto" formControlName="field_id_registro" type="number" required></ion-input>
-    </ion-item>
+
     <ion-item >
       <ion-label >Email</ion-label>
       <ion-input class="corto"  pattern="[A-Za-z0-9._%+-]{2,}@[a-zA-Z-_.]{2,}[.]{1}[a-zA-Z]{2,}" formControlName="mail" type="email" required></ion-input>
@@ -44,22 +38,7 @@
       <ion-label >Celular</ion-label>
       <ion-input class="corto" formControlName="field_celular_registro" type="number" required></ion-input>
     </ion-item>
-    <ion-item >
-      <ion-label >País</ion-label>
-      <ion-input class="corto" formControlName="field_pais_registro" type="text" required></ion-input>
-    </ion-item>
-    <ion-item >
-      <ion-label >Ciudad</ion-label>
-      <ion-input class="corto" formControlName="field_ciudad_registro" type="text" required></ion-input>
-    </ion-item>
-    <ion-item >
-      <ion-label >Sector</ion-label>
-      <ion-input class="corto" formControlName="field_sector_registro" type="text" required></ion-input>
-    </ion-item>
-    <ion-item >
-      <ion-label >Dirección</ion-label>
-      <ion-input class="corto" formControlName="field_direccion_registro"type="text" required></ion-input>
-    </ion-item>
+
 
     <ion-item>
       <ion-label >Contraseña</ion-label>
@@ -67,12 +46,13 @@
 class="corto"
         formControlName="password"
         type="password"
-        placeholder="Contraseña"
+        placeholder="Contraseña de 5 dígitos"
         required
         pattern="^[0-9]{0,5}$"
         minlength="5"
         maxlength="5"
       ></ion-input>
+
     </ion-item>
 
     <ion-item>
@@ -87,7 +67,10 @@ class="corto"
         minlength="5"
         maxlength="5"
       ></ion-input>
+      <small></small>
     </ion-item>
+
+
 
     <div *ngIf="regisForm.get('confirm_password').hasError('passwordMismatch')">
       <ion-text color="danger" class ="danger">Las contraseñas no coinciden.</ion-text>

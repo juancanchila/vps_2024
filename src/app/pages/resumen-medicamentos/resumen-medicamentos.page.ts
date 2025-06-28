@@ -19,6 +19,7 @@ export class ResumenMedicamentosPage implements OnInit {
   precio_destino_externo:any;
   aux: string;
   estadoButton: boolean;
+  aditional_value: any;
 
   constructor(private menucontrol:MenuController,private router: Router,private alertCtrl:AlertController, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {
     this.menucontrol.enable(false);
@@ -196,13 +197,23 @@ field_nombre_c_destino:[""]
       console.log(localStorage.getItem('zona_destino'), 'zona_destino');
       console.log(localStorage.getItem('servicioEvaluado'), 'servicioEvaluado');
 
+      this.aditional_value = this.auth.getaditional_values().subscribe(async data => {
+        this.aditional_value = data[0].field_medicamentos;
+        console.log(this.aditional_value,'valores');
+
+      });
+
+
+
+
+
      var resultadoTotalCosto = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
         localStorage.getItem('zona_destino'),
         1
       );
-      resultadoTotalCosto = Number(resultadoTotalCosto);
+      resultadoTotalCosto = Number(resultadoTotalCosto) ;
       console.log(resultadoTotalCosto, 'resultadoTotalCosto');
 
 
@@ -227,13 +238,15 @@ field_nombre_c_destino:[""]
 
       console.log(this.auth.resumenMedicamentos);
       this.FormSend.controls.field_direccion_entrega.setValue(this.auth.resumenMedicamentos.field_direccion_entrega['0']['value']);
+      this.FormSend.controls.field_respuesta_documentos.setValue(this.auth.resumenMedicamentos.field_respuesta_documentos['0']['value']);
+     /*
       if (this.auth.resumenMedicamentos.field_respuesta_documentos['0']['value'] === 'Recoger Documentos') {
         this.FormSend.controls.field_respuesta_documentos.setValue(1);
       } else {
 
         this.FormSend.controls.field_respuesta_documentos.setValue(Number());
     }
-
+*/
 
 
       // this.FormSend.controls.field_direccion_origen_farmacia.setValue(this.auth.resumenMedicamentos.field_direccion_origen_farmacia['0']['value']);
@@ -274,6 +287,8 @@ field_nombre_c_destino:[""]
         this.FormSend.controls.field_ida_y_vuelta.setValue(false);
       }
 
+
+      resultadoTotalCosto +=   Number(this.aditional_value);
 
       this.FormSend.controls.field_precio_.setValue(resultadoTotalCosto);
 

@@ -62,6 +62,7 @@ character42:any;
 character43:any;
 character44:any;
 character45:any;
+character46:any;
 urlBase: any;
 eliminarIdNode:any;
 notificarPushParaCancelar:any;
@@ -376,6 +377,10 @@ this.eliminarIdNode=this.allPedidos['nid'];
 
     }
 
+    if(this.allPedidos['field_cuenta_daviplata']!= ""){
+      this.character46=this.allPedidos['field_cuenta_daviplata'];
+
+    }
     if(this.allPedidos['field_regresar_por_wasap']!= ""){
       this.character38=this.allPedidos['field_regresar_por_wasap'];
 

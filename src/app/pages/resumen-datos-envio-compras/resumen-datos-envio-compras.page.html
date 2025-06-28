@@ -143,20 +143,22 @@
 
                 </ion-item>
 
-          <div class="totals">
-    <div class="total-item">
-        <b class="label">Subtotal:</b>
-        <div class="value">${{subtotal}}</div>
-    </div>
-    <div class="total-item">
-        <b class="label">Domicilio:</b>
-        <div class="value">${{domicilioValor}}</div>
-    </div>
-    <div class="total-item">
-        <b class="label">Total:</b>
-        <div class="value">${{total}}</div>
-    </div>
-</div>
+                <div class="totals">
+                  <ion-row class="total-item">
+                      <ion-col size="6" class="label">Subtotal:</ion-col>
+                      <ion-col size="6" class="value">${{subtotal}}</ion-col>
+                  </ion-row>
+
+                  <ion-row class="total-item">
+                      <ion-col size="6" class="label">Domicilio:</ion-col>
+                      <ion-col size="6" class="value">${{domicilioValor}}</ion-col>
+                  </ion-row>
+
+                  <ion-row class="total-item total-final">
+                      <ion-col size="6" class="label total-label">Total:</ion-col>
+                      <ion-col size="6" class="value total-value">${{total}}</ion-col>
+                  </ion-row>
+              </div>
 
 
 

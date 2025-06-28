@@ -21,6 +21,12 @@ ion-label{
 ion-back-button{
     color: white;
 }
+
+
+ion-label  .title{
+  font-weight: bold;
+}
+
 .title{
 
   --background: url(../../assets/botones/inicioSesion.png) 0 0/100% 100% no-repeat;
@@ -32,6 +38,17 @@ ion-back-button{
     font-size: 100%;
 
 }
+.title {
+  display: block;
+  text-align: center;
+  font-size: 28px; /* Más grande */
+  font-weight: bold; /* Negrita */
+  text-transform: uppercase;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  margin: 20px 0;
+}
+
 .imgtoolbar {
   margin-left: 21%;
 

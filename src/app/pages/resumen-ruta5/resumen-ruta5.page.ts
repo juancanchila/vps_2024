@@ -22,6 +22,8 @@ export class ResumenRuta5Page implements OnInit {
   precio_destino5: any;
   aux: string;
   estadoButton: boolean;
+  servicioEvaluado: string;
+  aditional_value: any;
 
   constructor(private menucontrol:MenuController,private router: Router, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {
     this.menucontrol.enable(false);
@@ -266,7 +268,21 @@ export class ResumenRuta5Page implements OnInit {
     console.log(localStorage.getItem('zona_destino5'), 'zona_destino5');
      console.log(localStorage.getItem('servicioEvaluado'), 'servicioEvaluado');
 
-      //
+
+     this.servicioEvaluado =localStorage.getItem('servicioEvaluado');
+console.log(this.servicioEvaluado);
+
+ const data = await this.auth.getaditional_values().toPromise();
+
+if (this.servicioEvaluado === 'rutas Agil') {
+  this.aditional_value = data[0].field_agil;
+} else if (this.servicioEvaluado === 'rutas Moderada') {
+  this.aditional_value = data[0].field_moderada	;
+} else {
+  this.aditional_value = '0';
+}
+
+
 
 
 
@@ -276,7 +292,7 @@ export class ResumenRuta5Page implements OnInit {
         localStorage.getItem('zona_destino'),
         this.auth.medioTransporte
       );
-      resultadoTotalCostoDestino1 = Number(resultadoTotalCostoDestino1);
+      resultadoTotalCostoDestino1 = Number(resultadoTotalCostoDestino1)+ Number(this.aditional_value);
 
      var resultadoTotalCostoDestino2 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
@@ -284,7 +300,7 @@ export class ResumenRuta5Page implements OnInit {
         localStorage.getItem('zona_destino2'),
         this.auth.medioTransporte
       );
-      resultadoTotalCostoDestino2 = Number(resultadoTotalCostoDestino2);
+      resultadoTotalCostoDestino2 = Number(resultadoTotalCostoDestino2)+ Number(this.aditional_value);
      var resultadoTotalCostoDestino3 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
         localStorage.getItem('zona_origen'),
@@ -292,7 +308,7 @@ export class ResumenRuta5Page implements OnInit {
         this.auth.medioTransporte
       );
 
-      resultadoTotalCostoDestino3 = Number(resultadoTotalCostoDestino3);
+      resultadoTotalCostoDestino3 = Number(resultadoTotalCostoDestino3)+ Number(this.aditional_value);
 
      var resultadoTotalCostoDestino4 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
@@ -301,7 +317,7 @@ export class ResumenRuta5Page implements OnInit {
         this.auth.medioTransporte
       );
 
-      resultadoTotalCostoDestino4 = Number(resultadoTotalCostoDestino4);
+      resultadoTotalCostoDestino4 = Number(resultadoTotalCostoDestino4)+ Number(this.aditional_value);
 
      var resultadoTotalCostoDestino5 = await this.auth.calcularPrecioTarifa(
         localStorage.getItem('servicioEvaluado'),
@@ -310,7 +326,7 @@ export class ResumenRuta5Page implements OnInit {
         this.auth.medioTransporte
       );
 
-      resultadoTotalCostoDestino5 = Number(resultadoTotalCostoDestino5);
+      resultadoTotalCostoDestino5 = Number(resultadoTotalCostoDestino5)+ Number(this.aditional_value);
 
     this.precio_origen = Number(localStorage.getItem('tarifaOrigen'));
     this.precio_destino = Number(localStorage.getItem('tarifaDestino'));

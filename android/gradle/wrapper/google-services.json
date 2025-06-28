@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "6605322708",
+    "project_id": "vapaesa-dd4b6",
+    "storage_bucket": "vapaesa-dd4b6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:6605322708:android:c37c22b1b89733cb29be41",
+        "android_client_info": {
+          "package_name": "com.vapaesa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCu2SsJPW4kvOFv9TmgghJpeBVFl8ah2_4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:6605322708:android:90eb63aa2d28b4ad29be41",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCu2SsJPW4kvOFv9TmgghJpeBVFl8ah2_4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

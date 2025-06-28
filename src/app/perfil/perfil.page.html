@@ -40,7 +40,7 @@
 
   <h1 class=".boxh1"> {{characte?.field_nombres_registro}}</h1>
 
-  <h1  *ngIf="characte?.field_apellidos_registro"><b>Apellidos: </b>  </h1>
+  <h1  *ngIf="characte?.field_apellidos_registro"><b>Apellido: </b>  </h1>
 
   <h1 class=".boxh1"> {{characte?.field_apellidos_registro}}</h1>
 
@@ -54,6 +54,8 @@
    <h1 *ngIf="characte?.field_cuenta_daviplata" ><b>Cuenta Daviplata: </b> </h1>
    <h1 class=".boxh1">{{characte?.field_cuenta_daviplata}}</h1>
 
+   <h1 *ngIf="characte?.field_cuenta_bancolombia" ><b>Cuenta Bancolombia: </b> </h1>
+   <h1 class=".boxh1">{{characte?.field_cuenta_bancolombia}}</h1>
   </div>
 
  </ion-card>

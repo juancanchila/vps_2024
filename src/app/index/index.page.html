@@ -14,7 +14,19 @@
 </ion-header>
 
 <ion-content>
-  <ion-img class="img-slider" src="http://147.182.203.91/sites/default/files/2025-02/banner%20inicial%20%281%29.gif" alt=""></ion-img>
+  <swiper  [config]="swiperConfig">
+
+    <ng-template swiperSlide *ngFor="let slide of slider" >
+      <div class="slider" >
+
+         <ion-img class="contentImg" [src]="urlBase+slide.field_img_banner" alt=""></ion-img>
+
+
+
+      </div>
+    </ng-template>
+
+  </swiper>
 
 <ion-grid >
 
@@ -56,12 +68,12 @@
 
 
   </ion-row>
-  <ion-row (click)="irPageEmprendedores()">
+  <!--ion-row (click)="irPageEmprendedores()">
     <img src="../../assets/botones/BOTONES-90.jpg" alt="">
     <p>Emprendedores</p>
 
 
-   </ion-row>
+   </ion-row-->
 
 </ion-grid>
 

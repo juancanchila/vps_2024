@@ -415,7 +415,7 @@ this.value = $event.target.value as string;
     if (this.auth.medioTransporte === 1) {
       return "../../assets/banners/llaves_motos.gif";
     } else if (this.auth.medioTransporte === 2) {
-      return "../../assets/banners/llaves_carros.gif";
+      return "../../assets/banners/llaves_carro.gif";
     } else {
       return "../../assets/banners/mensjeria_home.gif"; // Default image
     }
@@ -460,7 +460,7 @@ async ngOnInit() {
     });
 
 
-    this.auth.getAuxiliaresDisponiblesCarros().subscribe(res =>{
+    this.auth.getAuxiliaresDisponiblesCarrosLlaves().subscribe(res =>{
       let vpda=[];
       console.log(res, ' aqui carro');
       this.AuxCarrosDisponibles=res;
@@ -468,7 +468,7 @@ async ngOnInit() {
 
 
     });
-    this.auth.getAuxiliaresDisponiblesMotos().subscribe(res =>{
+    this.auth.getAuxiliaresDisponiblesMotosLlaves().subscribe(res =>{
       console.log(res, ' aqui motos');
       this.AuxMotosDisponibles=res;
 

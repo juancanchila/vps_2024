@@ -26,6 +26,7 @@ export class IndexPage implements OnInit {
   imagenLista: boolean = false;
   //ifAuxiliar: any;
   urlBase:any;
+  urlGif:any;
   token:string;
   expireIn:string;
   name:string;
@@ -52,6 +53,13 @@ export class IndexPage implements OnInit {
   };
 
   ngOnInit() {
+
+
+
+this.auth.getIndexgif().subscribe(res =>{
+  console.log(res[0].field_movil);
+  this.urlGif = res[0].field_movil;
+});
 
     this.auth.isTokenError=null;
     this.auth.getUser().subscribe(res =>{
@@ -240,6 +248,7 @@ export class IndexPage implements OnInit {
 
 
   }
+
 
 
 }

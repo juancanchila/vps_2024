@@ -13,31 +13,34 @@ character:any=[];
 
   ngOnInit() {
     this.auth.getContenidoHistoricoCliente();
-    if(localStorage.getItem('rol')=='cliente'){
-      this.auth.getContenidoHistoricoCliente();
+    console.log(localStorage.getItem('rol'));
 
-    }else if(localStorage.getItem('rolAuxiliar')=='Auxiliar'){
-      this.auth.getContenidoHistorico().subscribe(res =>{
-        console.log(res);
-       this.character=res;
-      });
+  const rol = localStorage.getItem('rol') || '';
+const rolAuxiliar = localStorage.getItem('rolAuxiliar') || '';
 
-    }
-   
+if (rol.includes('cliente')) {
+  this.auth.getContenidoHistoricoCliente();
+} else if (rolAuxiliar.includes('Auxiliar')) {
+  this.auth.getContenidoHistorico().subscribe(res => {
+    console.log(res);
+    this.character = res;
+  });
+}
 
-    
+
+
 }
 irPageProductos(allPedidos:any){
 
   var pedido={
-   
+
     Id:allPedidos.Id,
-   
-    
-  
+
+
+
   };
   console.log(JSON.stringify(pedido)) ;
-  
+
       this.router.navigate(['/historial-solicitudes-resumen',allPedidos.Id]);
       localStorage.setItem('idPedido',allPedidos.Id);
     }

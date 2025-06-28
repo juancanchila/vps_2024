@@ -20,6 +20,8 @@ export class ResumenAlmacenPage implements OnInit {
   que_quieres_comprar: any;
   costo_articulo: any;
   imagenLista: boolean;
+  servicioEvaluado: string;
+  aditional_value: string;
 
   constructor(private menucontrol:MenuController,private router: Router, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {
     this.menucontrol.enable(false);
@@ -188,6 +190,18 @@ field_nombre_c_destino:[""]
         localStorage.getItem('zona_destino'),
         1
       );
+
+this.servicioEvaluado =localStorage.getItem('servicioEvaluado')
+ const data = await this.auth.getaditional_values().toPromise();
+
+
+ if (this.servicioEvaluado === 'compras') {
+  this.aditional_value = data[0].field_generales;
+} else{
+
+ this.aditional_value = '0';
+}
+
       resultadoTotalCosto = Number(resultadoTotalCosto);
 
       console.log(resultadoTotalCosto, 'resultadoTotalCosto');
@@ -251,7 +265,7 @@ field_nombre_c_destino:[""]
       this.FormSend.controls.field_nombre_c_destino.setValue(this.auth.resumenAlmacen.field_nombre_c_destino['0']['value']);
 
 
-
+  resultadoTotalCosto += Number(this.aditional_value);
       this.FormSend.controls.field_precio_.setValue(resultadoTotalCosto);
       localStorage.setItem('precioTarifa',resultadoTotalCosto);
     } catch (error) {

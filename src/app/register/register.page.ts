@@ -32,12 +32,10 @@ export class RegisterPage implements OnInit {
         field_nombres_registro: ["", Validators.required],
         field_apellidos_registro: ["", Validators.required],
         field_celular_registro: ["", Validators.required],
-        field_ciudad_registro: ["", Validators.required],
-        field_pais_registro: ["", Validators.required],
-        field_sector_registro: ["", Validators.required],
-        field_direccion_registro: ["", Validators.required],
+
+
         field_acepta_terminos_registro: ["", Validators.required],
-        field_id_registro: ["", Validators.required],
+
         password: [
           "",
           Validators.compose([
@@ -96,6 +94,19 @@ console.log(this.regisForm.value || this.regisForm.value['field_acepta_terminos_
 
 
      }else{
+
+
+   const alert = await this.alertController.create({
+
+        header: 'Alerta',
+
+message: 'Si el correo es válido, recibirá un código de activación',
+        buttons: ['Aceptar']
+      });
+
+      await alert.present();
+
+
       this.auth.register(this.regisForm.value);
 
      }

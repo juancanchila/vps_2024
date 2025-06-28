@@ -184,10 +184,19 @@ export class HistorialSolicitudesResumenPage implements OnInit {
 
 
 
-      if(res['created']['length']!=0){
-        this.character12=res['created']['0'].value;
+      if (res['created'] && res['created'].length > 0) {
+        const fechaIso = res['created'][0].value;
+        const fecha = new Date(fechaIso);
 
+        this.character12 = fecha.toLocaleString('es-ES', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
       }
+
       if(res['body']['length']!=0){
         this.character14=res['body']['0'].value;
 

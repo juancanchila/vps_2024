@@ -4,7 +4,9 @@
       <ion-back-button defaultHref="tabs"></ion-back-button>
 
     </ion-buttons>
-    <ion-title>Especial</ion-title>
+    <ion-title>
+      {{ servicio_evaluado === 'carro_taller' ? 'Carro taller' : 'Especial' }}
+    </ion-title>
 
 
   </ion-toolbar>
@@ -12,7 +14,7 @@
 <ion-content>
 
   <div class="contentImg">
-    <ion-img class="img-slider" src="../../assets/banners/especial.gif" alt=""></ion-img>
+    <ion-img class="img-slider" [src]="gifUrl" alt=""></ion-img>
 
   </div>
 

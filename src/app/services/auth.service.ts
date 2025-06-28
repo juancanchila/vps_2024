@@ -390,6 +390,35 @@ export class AuthService {
 
   }
 
+  getaditional_values(): Observable<any> {
+    return this.http.get('http://147.182.203.91/aditional_values').pipe(
+      map((res: any) => {
+
+        return res;
+
+
+
+      })
+    )
+
+  }
+
+
+  getIndexgif(): Observable<any> {
+    return this.http.get('http://147.182.203.91/gif_home').pipe(
+      map((res: any) => {
+
+        return res;
+
+
+
+      })
+    )
+
+  }
+
+
+
   getMessageTextiles(): Observable<any> {
     return this.http.get('http://147.182.203.91//textiles_message').pipe(
       map((res: any) => {
@@ -6030,6 +6059,43 @@ async enviarPushEnCompletado() {
     });
     console.log(headers);
     this.urlAuxName = 'http://147.182.203.91/auxiliares_disponibles_motos';
+
+    return this.http.get(this.urlAuxName, { headers: headers })
+      .pipe(
+        map((res: any) => {
+          return res;
+          // console.log(res['0']['Role'],'estoy en data');
+        })
+      )
+
+  }
+  getAuxiliaresDisponiblesMotosLlaves() {
+    let auxB64 = localStorage.getItem('base64');
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json', 'Authorization': 'Basic ' + auxB64,
+    });
+    console.log(headers);
+    this.urlAuxName = 'http://147.182.203.91/auxiliares_disponibles_motos_llaves';
+
+    return this.http.get(this.urlAuxName, { headers: headers })
+      .pipe(
+        map((res: any) => {
+          return res;
+          // console.log(res['0']['Role'],'estoy en data');
+        })
+      )
+
+  }
+
+  getAuxiliaresDisponiblesCarrosLlaves() {
+    let auxB64 = localStorage.getItem('base64');
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json', 'Authorization': 'Basic ' + auxB64,
+    });
+    console.log(headers);
+    this.urlAuxName = 'http://147.182.203.91/auxiliares_disponibles_carro_llaves';
 
     return this.http.get(this.urlAuxName, { headers: headers })
       .pipe(

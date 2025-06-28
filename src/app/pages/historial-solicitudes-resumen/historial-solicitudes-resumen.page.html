@@ -11,16 +11,18 @@
 
 
 
-<ion-content scrollY="true" >
+<ion-content >
 
   <div class="contentImg">
     <ion-img class="img-slider-top" src="../../assets/banners/ordenes_creadas.gif" alt=""></ion-img>
 
   </div>
-<div  id="scroll-list">
 
+  <div class="ticket-background">
 
-      <ion-card  >
+    <div class="ticket_fom">
+      <!--ion-card -->
+      <div class="ticket-header"></div>
         <ion-grid>
           <ion-row>
             <ion-col>
@@ -60,8 +62,8 @@
 
           <h1 *ngIf="character2 != undefined"> <b>Locacion:</b>  </h1>
           <h1 *ngIf="character2 != undefined"> {{character2}}  </h1>
-          <h1 *ngIf="character39 != undefined"><b>Nombre de contacto: </b>  </h1>
-          <h1 *ngIf="character39 != undefined">{{character39}}  </h1>
+          <h1 *ngIf="character39 != undefined && character31!='Completado'"><b>Nombre de contacto: </b>  </h1>
+          <h1 *ngIf="character39 != undefined && character31!='Completado'">{{character39}}  </h1>
 
           <h1 *ngIf="character20 != undefined && character31!='Completado'"><b>Número de Contacto:</b>   </h1>
           <h1 *ngIf="character20 != undefined && character31!='Completado'"> {{character20}}  </h1>
@@ -91,8 +93,9 @@
 
           <h1 *ngIf="character40 != undefined && character31!='Completado'"><b>Nombre de contacto: </b>  </h1>
           <h1 *ngIf="character40 != undefined && character31!='Completado'">{{character40}}  </h1>
-        <h1 *ngIf="character5 != undefined"> <b>Contacto:  </b> </h1>
-        <h1 *ngIf="character5 != undefined"> {{character5}}  </h1>
+
+        <!--h1 *ngIf="character5 != undefined"> <b>Contacto:  </b> </h1>
+        <h1 *ngIf="character5 != undefined"> {{character5}}  </h1-->
 
 
 
@@ -341,10 +344,12 @@
    <img class="cdbarra" src="assets/botones/cdgBarra.PNG" alt="">
 
 
+        <div class="ticket-footer"></div>
+        <!--/ion-card-->
+  </div>
 
-        </ion-card>
 
-      </div>
+  </div>
 </ion-content>
 
 

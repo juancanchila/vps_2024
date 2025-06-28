@@ -1,189 +1,187 @@
-
-ion-title{
+ion-title {
     margin-left: -17%;
     text-align: center;
     text-transform: uppercase;
-    color:white;
+    color: white;
     font-family: 'Montserrat', sans-serif;
-  font-weight: 300; /* Asegura que se use la variante Light */
+    font-weight: 300;
 }
 
-form{
-	margin: auto;
-	width: 95%;
+form {
+    margin: auto;
+    width: 95%;
 }
+
 .slider {
     padding-top: 20px;
 }
-ion-content{
-    --background:#ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat;
+
+ion-content {
+    --background: #ecf0f1 url("/assets/botones/FONDOENVIO2.png.jpg") 0 0/100% 100% repeat;
 }
-ion-toolbar{
+
+ion-toolbar {
     color: white;
     text-align: center;
     --ion-background-color: #262262;
 }
+
 .ion-color-warning {
-    --ion-color-base: #FFF200  !important;
+    --ion-color-base: #FFF200 !important;
 }
-b{
+
+b {
+    line-height: 2.5;
     color: #262262;
-     font-family: 'Montserrat', sans-serif;
-font-weight: bold;/* Asegura que se use la variante Light */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
 }
-ion-card{
+
+ion-card {
     border-radius: 20px;
-    padding: 20px 0 20px 0;
+    padding: 20px 0;
 }
 
-.precio{
-
+.precio {
     float: right;
 }
 
-.locacion{
+.locacion {
     color: #262262;
     background-color: #ecf0f1;
     border: unset;
-    width:100%
+    width: 100%;
 }
-ion-card-content{
-    margin-top: 0;
 
-    /* border: 1px solid gray; */
+ion-card-content {
+    margin-top: 0;
 }
-ion-row{
+
+ion-row {
     border-bottom: 2px solid;
 }
-.form-check {
 
+.form-check {
     margin-left: 70%;
 }
-.rowBorder{
+
+.rowBorder {
     border: none !important;
 }
-small{
+
+small {
     font-size: 15px;
     color: white;
     font-family: 'Poppins', sans-serif;
-
 }
 
-.corto{
-    //margin-left: 29%;
+.corto {
     height: 38px;
-   // position: absolute;
-   width: 100%;
+    width: 100%;
     display: block;
     background-color: #ecf0f1;
     color: #262262;
-    font-size:18px;
+    font-size: 18px;
     border: 1px solid #333;
 }
 
-ion-label{
+ion-label {
     display: flex;
     margin-left: 15.5px;
     color: #262262;
-    font-family: "Montserrat Light ", sans-serif;
+    font-family: "Montserrat Light", sans-serif;
     text-transform: uppercase;
-
 }
-.item-interactive-disabled.sc-ion-label-md-h:not(.item-multiple-inputs), .item-interactive-disabled:not(.item-multiple-inputs) .sc-ion-label-md-h {
+
+.item-interactive-disabled.sc-ion-label-md-h:not(.item-multiple-inputs),
+.item-interactive-disabled:not(.item-multiple-inputs) .sc-ion-label-md-h {
     cursor: default;
     opacity: unset !important;
     pointer-events: none;
 }
+
 ion-input.ng-untouched.ng-pristine.ng-valid.sc-ion-input-md-h.sc-ion-input-md-s.md.has-value.hydrated.ion-untouched.ion-pristine.ion-valid
 .native-input[disabled].sc-ion-input-md {
     opacity: unset;
 }
-.descaera{
+
+.descaera {
     color: #262262;
     width: 100%;
     background-color: #ecf0f1;
     height: 100px;
 }
 
-select{
+select {
     color: #262262;
-     font-family: 'Montserrat', sans-serif;
-  font-weight: 300; /* Asegura que se use la variante Light */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
     width: 100px;
     height: 38px;
     background-color: #ecf0f1;
 }
-ion-item{
-    --ion-background-color: transparent !important;
 
+ion-item {
+    --ion-background-color: transparent !important;
 }
-ion-button{
+
+ion-button {
     color: #262262;
     font-family: 'Poppins', sans-serif;
-
 }
-ion-col{
+
+ion-col {
     text-align: center;
-}
-
-
-td{
-    color: #262262;
-     font-family: 'Montserrat', sans-serif;
-  font-weight: 300; /* Asegura que se use la variante Light */
-}
-.title{
-    text-align: center;
-    background-color: #262262;
-
-}
-h2{
-     font-family: 'Montserrat', sans-serif;
-  font-weight: 300; /* Asegura que se use la variante Light */
-    color: white;
-}
-.button1{
-    color: #262262 !important;
-    font-family: 'Poppins', sans-serif !important;
-
-}
-.bearer{
-    margin-left: 4%;
-}
-b{
-    line-height: 2.5;
-    color: #262262;
-     font-family: 'Montserrat', sans-serif;
-  font-weight: bold; /* Asegura que se use la variante Light */
-}
-.botonSig{
-    color: white;
-     font-family: 'Montserrat', sans-serif;
-  font-weight: 300; /* Asegura que se use la variante Light */
-
 }
 
 td, th {
     padding-right: 13px;
     border: none;
 }
-.sub{
+
+.title {
+    text-align: center;
+    background-color: #262262;
+}
+
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    color: white;
+}
+
+.button1 {
+    color: #262262 !important;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.bearer {
+    margin-left: 4%;
+}
+
+.botonSig {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+}
+
+.sub {
     color: #262262;
     margin-left: 44% !important;
-    text-align: justify ;
+    text-align: justify;
     margin-top: -10% !important;
     margin-right: 4%;
     border: 1px solid;
     text-align: right;
     height: 29px;
     padding: 6px;
-
-
 }
-strong{
+
+strong {
     margin-left: -11%;
 }
-.div1{
+
+.div1 {
     margin-top: 20px;
 }
 
@@ -210,6 +208,32 @@ strong{
     font-family: 'Montserrat', sans-serif;
     text-align: right;
 }
-div{
+
+/* Ajuste específico para subtotal, domicilio y total */
+.subtotales {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    padding: 5px 0;
+}
+
+.subtotales .label {
+    color: #262262;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.subtotales .value {
+    color: #262262;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    text-align: right;
+}
+
+div {
     margin: auto;
 }
+
+
+
+

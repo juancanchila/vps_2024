@@ -12,13 +12,33 @@ export class TransportesPage implements OnInit {
 locacion:any;
   AuxCarrosDisponibles: any;
   AuxMotosDisponibles: any;
+  LlavesCarrosDisponibles: any;
+  LLavesMotosDisponibles: any;
   AuxDisponiblesMunicipios: any;
+  servicio: string;
   constructor(private auth: AuthService, private router: Router, private alertController: AlertController) {
 
 
   }
 
   ngOnInit() {
+
+
+    this.auth.getAuxiliaresDisponiblesCarrosLlaves().subscribe(res =>{
+      let vpda=[];
+      console.log(res, ' aqui carro');
+      this.LlavesCarrosDisponibles=res;
+
+
+
+    });
+    this.auth.getAuxiliaresDisponiblesMotosLlaves().subscribe(res =>{
+      let vpda=[];
+      console.log(res, ' aqui carro');
+      this.LLavesMotosDisponibles=res;
+
+
+    });
 
     this.auth.getAuxiliaresDisponiblesCarros().subscribe(res =>{
       let vpda=[];
@@ -84,6 +104,7 @@ locacion:any;
     console.log("Trasnportes- OnDestroy")
   }
   async selectMoto(){
+  this.servicio= localStorage.getItem("mensajeria");
 
     if(localStorage.getItem('mensajeria')=='sencilla'){
       if(this.AuxMotosDisponibles.length==0){
@@ -119,7 +140,7 @@ locacion:any;
 
     }else  if(localStorage.getItem('mensajeria')=='llaves'){
 
-      if(this.AuxMotosDisponibles.length==0){
+      if(this.LLavesMotosDisponibles.length==0){
 
 
         const alert = await this.alertController.create({
@@ -152,6 +173,8 @@ locacion:any;
 
   }
   async selectCarro(){
+
+
     if(localStorage.getItem('mensajeria')=='sencilla'){
       if(this.AuxCarrosDisponibles.length==0){
 
@@ -184,7 +207,7 @@ locacion:any;
     }else if(localStorage.getItem('mensajeria')=='llaves'){
 
 
-      if(this.AuxCarrosDisponibles.length==0){
+      if(this.LlavesCarrosDisponibles.length==0){
 
 
         const alert = await this.alertController.create({

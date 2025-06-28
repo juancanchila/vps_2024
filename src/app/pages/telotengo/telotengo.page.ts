@@ -76,7 +76,10 @@ export class TelotengoPage implements OnInit {
 
   async irPageCarrotaller(){
 
+    localStorage.setItem('servicioEvaluado','carro_taller');
+    this.router.navigate(['/especial']);
 
+/*
       if(this.AuxCarrosTallerDisponibles.length === 0){
         const alert = await this.alertCtrl.create({
 
@@ -113,7 +116,7 @@ export class TelotengoPage implements OnInit {
       }
 
 
-
+*/
 
   }
 
