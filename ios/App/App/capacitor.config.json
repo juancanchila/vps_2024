@@ -1,6 +1,6 @@
 {
 	"appId": "com.vapaesa",
-	"appName": "vapaesaapp",
+	"appName": "vapaesa",
 	"webDir": "www",
 	"bundledWebRuntime": false,
 	"plugins": {

@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.vapaesa',
-  appName: 'vapaesaapp', // ✅ CAMBIADO para evitar conflicto
+  appName: 'vapaesa',
   webDir: 'www',
   bundledWebRuntime: false,
   plugins: {
