@@ -637,8 +637,8 @@ break;
 
     switch (this.cantidadDestinos) {
       case 2:
-        this.$respuesta_barrio_existe1 = this.BarrioExiste(this.FormSend.value['field_barrio_destino']);
-         this.$respuesta_barrio_existe2 = this.BarrioExiste2(this.FormSend.value['field_barrio_destino2']);
+        this.$respuesta_barrio_existe1 =  await  await this.BarrioExiste(this.FormSend.value['field_barrio_destino']);
+         this.$respuesta_barrio_existe2 =  await  await this.BarrioExiste2(this.FormSend.value['field_barrio_destino2']);
 
         console.log( this.$respuesta_barrio_existe1);
         console.log( this.$respuesta_barrio_existe2);
@@ -677,9 +677,9 @@ const alert = await this.alertController.create({
         break;
       case 3:
 
-     this.$respuesta_barrio_existe1 = this.BarrioExiste(this.FormSend.value['field_barrio_destino']);
-     this.$respuesta_barrio_existe2 = this.BarrioExiste2(this.FormSend.value['field_barrio_destino2']);
-     this.$respuesta_barrio_existe3 = this.BarrioExiste3(this.FormSend.value['field_barrio_destino3']);
+     this.$respuesta_barrio_existe1 =  await this.BarrioExiste(this.FormSend.value['field_barrio_destino']);
+     this.$respuesta_barrio_existe2 =  await this.BarrioExiste2(this.FormSend.value['field_barrio_destino2']);
+     this.$respuesta_barrio_existe3 =  await this.BarrioExiste3(this.FormSend.value['field_barrio_destino3']);
 
 
 
@@ -713,10 +713,10 @@ const alert = await this.alertController.create({
         //Declaraciones ejecutadas cuando el resultado de expresión coincide con el valor1
         break;
       case 4:
-        this.$respuesta_barrio_existe1 = this.BarrioExiste(this.FormSend.value['field_barrio_destino']);
-        this.$respuesta_barrio_existe2 = this.BarrioExiste2(this.FormSend.value['field_barrio_destino2']);
-        this.$respuesta_barrio_existe3 = this.BarrioExiste3(this.FormSend.value['field_barrio_destino3']);
-        this.$respuesta_barrio_existe4 = this.BarrioExiste4(this.FormSend.value['field_barrio_destino4']);
+        this.$respuesta_barrio_existe1 =  await this.BarrioExiste(this.FormSend.value['field_barrio_destino']);
+        this.$respuesta_barrio_existe2 =  await this.BarrioExiste2(this.FormSend.value['field_barrio_destino2']);
+        this.$respuesta_barrio_existe3 =  await this.BarrioExiste3(this.FormSend.value['field_barrio_destino3']);
+        this.$respuesta_barrio_existe4 =  await this.BarrioExiste4(this.FormSend.value['field_barrio_destino4']);
 
 
 
@@ -749,11 +749,11 @@ const alert = await this.alertController.create({
         break;
       case 5:
 
-        this.$respuesta_barrio_existe1 = this.BarrioExiste(this.FormSend.value['field_barrio_destino']);
-        this.$respuesta_barrio_existe2 = this.BarrioExiste2(this.FormSend.value['field_barrio_destino2']);
-        this.$respuesta_barrio_existe3 = this.BarrioExiste3(this.FormSend.value['field_barrio_destino3']);
-        this.$respuesta_barrio_existe4 = this.BarrioExiste4(this.FormSend.value['field_barrio_destino4']);
-        this.$respuesta_barrio_existe5 = this.BarrioExiste5(this.FormSend.value['field_barrio_destino5']);
+        this.$respuesta_barrio_existe1 =  await this.BarrioExiste(this.FormSend.value['field_barrio_destino']);
+        this.$respuesta_barrio_existe2 =  await this.BarrioExiste2(this.FormSend.value['field_barrio_destino2']);
+        this.$respuesta_barrio_existe3 =  await this.BarrioExiste3(this.FormSend.value['field_barrio_destino3']);
+        this.$respuesta_barrio_existe4 =  await this.BarrioExiste4(this.FormSend.value['field_barrio_destino4']);
+        this.$respuesta_barrio_existe5 =  await this.BarrioExiste5(this.FormSend.value['field_barrio_destino5']);
 
 
 
@@ -788,12 +788,12 @@ const alert = await this.alertController.create({
           //Declaraciones ejecutadas cuando el resultado de expresión coincide con el valor2
         break;
       case 6:
-        this.$respuesta_barrio_existe1 = this.BarrioExiste(this.FormSend.value['field_barrio_destino']);
-        this.$respuesta_barrio_existe2 = this.BarrioExiste2(this.FormSend.value['field_barrio_destino2']);
-        this.$respuesta_barrio_existe3 = this.BarrioExiste3(this.FormSend.value['field_barrio_destino3']);
-        this.$respuesta_barrio_existe4 = this.BarrioExiste4(this.FormSend.value['field_barrio_destino4']);
-        this.$respuesta_barrio_existe5 = this.BarrioExiste5(this.FormSend.value['field_barrio_destino5']);
-        this.$respuesta_barrio_existe6 = this.BarrioExiste6(this.FormSend.value['field_barrio_destino6']);
+        this.$respuesta_barrio_existe1 =  await this.BarrioExiste(this.FormSend.value['field_barrio_destino']);
+        this.$respuesta_barrio_existe2 =  await this.BarrioExiste2(this.FormSend.value['field_barrio_destino2']);
+        this.$respuesta_barrio_existe3 =  await this.BarrioExiste3(this.FormSend.value['field_barrio_destino3']);
+        this.$respuesta_barrio_existe4 =  await this.BarrioExiste4(this.FormSend.value['field_barrio_destino4']);
+        this.$respuesta_barrio_existe5 =  await this.BarrioExiste5(this.FormSend.value['field_barrio_destino5']);
+        this.$respuesta_barrio_existe6 =  await this.BarrioExiste6(this.FormSend.value['field_barrio_destino6']);
 
 
 
@@ -826,13 +826,13 @@ const alert = await this.alertController.create({
           //Declaraciones ejecutadas cuando el resultado de expresión coincide con el valor2
         break;
       case 7:
-        this.$respuesta_barrio_existe1 = this.BarrioExiste(this.FormSend.value['field_barrio_destino']);
-        this.$respuesta_barrio_existe2 = this.BarrioExiste2(this.FormSend.value['field_barrio_destino2']);
-        this.$respuesta_barrio_existe3 = this.BarrioExiste3(this.FormSend.value['field_barrio_destino3']);
-        this.$respuesta_barrio_existe4 = this.BarrioExiste4(this.FormSend.value['field_barrio_destino4']);
-        this.$respuesta_barrio_existe5 = this.BarrioExiste5(this.FormSend.value['field_barrio_destino5']);
-        this.$respuesta_barrio_existe6 = this.BarrioExiste6(this.FormSend.value['field_barrio_destino6']);
-        this.$respuesta_barrio_existe7 = this.BarrioExiste7(this.FormSend.value['field_barrio_destino7']);
+        this.$respuesta_barrio_existe1 =  await this.BarrioExiste(this.FormSend.value['field_barrio_destino']);
+        this.$respuesta_barrio_existe2 =  await this.BarrioExiste2(this.FormSend.value['field_barrio_destino2']);
+        this.$respuesta_barrio_existe3 =  await this.BarrioExiste3(this.FormSend.value['field_barrio_destino3']);
+        this.$respuesta_barrio_existe4 =  await this.BarrioExiste4(this.FormSend.value['field_barrio_destino4']);
+        this.$respuesta_barrio_existe5 =  await this.BarrioExiste5(this.FormSend.value['field_barrio_destino5']);
+        this.$respuesta_barrio_existe6 =  await this.BarrioExiste6(this.FormSend.value['field_barrio_destino6']);
+        this.$respuesta_barrio_existe7 =  await this.BarrioExiste7(this.FormSend.value['field_barrio_destino7']);
 
 
 
@@ -866,14 +866,14 @@ const alert = await this.alertController.create({
 
 
       case 8:
-        this.$respuesta_barrio_existe1 = this.BarrioExiste(this.FormSend.value['field_barrio_destino']);
-        this.$respuesta_barrio_existe2 = this.BarrioExiste2(this.FormSend.value['field_barrio_destino2']);
-        this.$respuesta_barrio_existe3 = this.BarrioExiste3(this.FormSend.value['field_barrio_destino3']);
-        this.$respuesta_barrio_existe4 = this.BarrioExiste4(this.FormSend.value['field_barrio_destino4']);
-        this.$respuesta_barrio_existe5 = this.BarrioExiste5(this.FormSend.value['field_barrio_destino5']);
-        this.$respuesta_barrio_existe6 = this.BarrioExiste6(this.FormSend.value['field_barrio_destino6']);
-        this.$respuesta_barrio_existe7 = this.BarrioExiste7(this.FormSend.value['field_barrio_destino7']);
-        this.$respuesta_barrio_existe8 = this.BarrioExiste8(this.FormSend.value['field_barrio_destino8']);
+        this.$respuesta_barrio_existe1 =  await this.BarrioExiste(this.FormSend.value['field_barrio_destino']);
+        this.$respuesta_barrio_existe2 =  await this.BarrioExiste2(this.FormSend.value['field_barrio_destino2']);
+        this.$respuesta_barrio_existe3 =  await this.BarrioExiste3(this.FormSend.value['field_barrio_destino3']);
+        this.$respuesta_barrio_existe4 =  await this.BarrioExiste4(this.FormSend.value['field_barrio_destino4']);
+        this.$respuesta_barrio_existe5 =  await this.BarrioExiste5(this.FormSend.value['field_barrio_destino5']);
+        this.$respuesta_barrio_existe6 =  await this.BarrioExiste6(this.FormSend.value['field_barrio_destino6']);
+        this.$respuesta_barrio_existe7 =  await this.BarrioExiste7(this.FormSend.value['field_barrio_destino7']);
+        this.$respuesta_barrio_existe8 =  await this.BarrioExiste8(this.FormSend.value['field_barrio_destino8']);
 
 
 
@@ -906,15 +906,15 @@ const alert = await this.alertController.create({
         break;
 
       case 9:
-        this.$respuesta_barrio_existe1 = this.BarrioExiste(this.FormSend.value['field_barrio_destino']);
-        this.$respuesta_barrio_existe2 = this.BarrioExiste2(this.FormSend.value['field_barrio_destino2']);
-        this.$respuesta_barrio_existe3 = this.BarrioExiste3(this.FormSend.value['field_barrio_destino3']);
-        this.$respuesta_barrio_existe4 = this.BarrioExiste4(this.FormSend.value['field_barrio_destino4']);
-        this.$respuesta_barrio_existe5 = this.BarrioExiste5(this.FormSend.value['field_barrio_destino5']);
-        this.$respuesta_barrio_existe6 = this.BarrioExiste6(this.FormSend.value['field_barrio_destino6']);
-        this.$respuesta_barrio_existe7 = this.BarrioExiste7(this.FormSend.value['field_barrio_destino7']);
-        this.$respuesta_barrio_existe8 = this.BarrioExiste8(this.FormSend.value['field_barrio_destino8']);
-        this.$respuesta_barrio_existe9 = this.BarrioExiste9(this.FormSend.value['field_barrio_destino9']);
+        this.$respuesta_barrio_existe1 =  await this.BarrioExiste(this.FormSend.value['field_barrio_destino']);
+        this.$respuesta_barrio_existe2 =  await this.BarrioExiste2(this.FormSend.value['field_barrio_destino2']);
+        this.$respuesta_barrio_existe3 =  await this.BarrioExiste3(this.FormSend.value['field_barrio_destino3']);
+        this.$respuesta_barrio_existe4 =  await this.BarrioExiste4(this.FormSend.value['field_barrio_destino4']);
+        this.$respuesta_barrio_existe5 =  await this.BarrioExiste5(this.FormSend.value['field_barrio_destino5']);
+        this.$respuesta_barrio_existe6 =  await this.BarrioExiste6(this.FormSend.value['field_barrio_destino6']);
+        this.$respuesta_barrio_existe7 =  await this.BarrioExiste7(this.FormSend.value['field_barrio_destino7']);
+        this.$respuesta_barrio_existe8 =  await this.BarrioExiste8(this.FormSend.value['field_barrio_destino8']);
+        this.$respuesta_barrio_existe9 =  await this.BarrioExiste9(this.FormSend.value['field_barrio_destino9']);
 
 
 
@@ -948,16 +948,16 @@ const alert = await this.alertController.create({
         break;
 
       case 10:
-        this.$respuesta_barrio_existe1 = this.BarrioExiste(this.FormSend.value['field_barrio_destino']);
-        this.$respuesta_barrio_existe2 = this.BarrioExiste2(this.FormSend.value['field_barrio_destino2']);
-        this.$respuesta_barrio_existe3 = this.BarrioExiste3(this.FormSend.value['field_barrio_destino3']);
-        this.$respuesta_barrio_existe4 = this.BarrioExiste4(this.FormSend.value['field_barrio_destino4']);
-        this.$respuesta_barrio_existe5 = this.BarrioExiste5(this.FormSend.value['field_barrio_destino5']);
-        this.$respuesta_barrio_existe6 = this.BarrioExiste6(this.FormSend.value['field_barrio_destino6']);
-        this.$respuesta_barrio_existe7 = this.BarrioExiste7(this.FormSend.value['field_barrio_destino7']);
-        this.$respuesta_barrio_existe8 = this.BarrioExiste8(this.FormSend.value['field_barrio_destino8']);
-        this.$respuesta_barrio_existe9 = this.BarrioExiste9(this.FormSend.value['field_barrio_destino9']);
-      this.$respuesta_barrio_existe10 = this.BarrioExiste10(this.FormSend.value['field_barrio_destino10']);
+        this.$respuesta_barrio_existe1 =  await this.BarrioExiste(this.FormSend.value['field_barrio_destino']);
+        this.$respuesta_barrio_existe2 =  await this.BarrioExiste2(this.FormSend.value['field_barrio_destino2']);
+        this.$respuesta_barrio_existe3 =  await this.BarrioExiste3(this.FormSend.value['field_barrio_destino3']);
+        this.$respuesta_barrio_existe4 =  await this.BarrioExiste4(this.FormSend.value['field_barrio_destino4']);
+        this.$respuesta_barrio_existe5 =  await this.BarrioExiste5(this.FormSend.value['field_barrio_destino5']);
+        this.$respuesta_barrio_existe6 =  await this.BarrioExiste6(this.FormSend.value['field_barrio_destino6']);
+        this.$respuesta_barrio_existe7 =  await this.BarrioExiste7(this.FormSend.value['field_barrio_destino7']);
+        this.$respuesta_barrio_existe8 =  await this.BarrioExiste8(this.FormSend.value['field_barrio_destino8']);
+        this.$respuesta_barrio_existe9 =  await this.BarrioExiste9(this.FormSend.value['field_barrio_destino9']);
+      this.$respuesta_barrio_existe10 =  await this.BarrioExiste10(this.FormSend.value['field_barrio_destino10']);
 
 
 
@@ -1641,11 +1641,11 @@ if( this.cantidadDestinos<this.limiteDisponibles){
 }
 
   }
-  regionOrigen(event){
+  regionOrigen(event: any) {
     console.log('regionOrigen');
     this.FormSend.controls.field_locacion_destino_r.setValue('');
-    this.locacion= event;
-    console.log(event);
+      this.locacion = event.detail.value;
+
     if(event!=''){
       this.auth.locacion=event;
       localStorage.setItem('locacionOrigenSeleccionada',event);
@@ -1734,8 +1734,8 @@ if( this.cantidadDestinos<this.limiteDisponibles){
   }
 
 
-  region(event){
-    this.locacion= event;
+  region(event: any) {
+      this.locacion = event.detail.value;
     console.log(this.locacion);
     if(event!=''){
       localStorage.setItem('locacionDestinoSeleccionada',event);
@@ -1798,8 +1798,8 @@ if( this.cantidadDestinos<this.limiteDisponibles){
     }
   }
 
-  region2(event){
-    this.locacion= event;
+  region2(event: any) {
+      this.locacion = event.detail.value;
     console.log(this.locacion);
     if(event!=''){
       localStorage.setItem('locacionDestinoSeleccionada2',event);
@@ -1865,8 +1865,8 @@ if( this.cantidadDestinos<this.limiteDisponibles){
   }
 
 
-  region3(event){
-    this.locacion= event;
+  region3(event: any) {
+      this.locacion = event.detail.value;
     console.log(this.locacion);
     if(event!=''){
       localStorage.setItem('locacionDestinoSeleccionada3',event);
@@ -1933,8 +1933,8 @@ if( this.cantidadDestinos<this.limiteDisponibles){
 
 
 
-  region4(event){
-    this.locacion= event;
+  region4(event: any) {
+      this.locacion = event.detail.value;
     console.log(this.locacion);
     if(event!=''){
       localStorage.setItem('locacionDestinoSeleccionada4',event);
@@ -2000,8 +2000,8 @@ if( this.cantidadDestinos<this.limiteDisponibles){
 
 
 
-  region5(event){
-    this.locacion= event;
+  region5(event: any) {
+      this.locacion = event.detail.value;
     console.log(this.locacion);
     if(event!=''){
       localStorage.setItem('locacionDestinoSeleccionada5',event);
@@ -2066,8 +2066,8 @@ if( this.cantidadDestinos<this.limiteDisponibles){
   }
 
 
-  region6(event){
-    this.locacion= event;
+  region6(event: any) {
+      this.locacion = event.detail.value;
     console.log(this.locacion);
     if(event!=''){
       localStorage.setItem('locacionDestinoSeleccionada6',event);
@@ -2133,8 +2133,8 @@ if( this.cantidadDestinos<this.limiteDisponibles){
 
 
 
-  region7(event){
-    this.locacion= event;
+  region7(event: any) {
+      this.locacion = event.detail.value;
     console.log(this.locacion);
     if(event!=''){
       localStorage.setItem('locacionDestinoSeleccionada7',event);
@@ -2200,8 +2200,8 @@ if( this.cantidadDestinos<this.limiteDisponibles){
 
 
 
-  region8(event){
-    this.locacion= event;
+  region8(event: any) {
+      this.locacion = event.detail.value;
     console.log(this.locacion);
     if(event!=''){
       localStorage.setItem('locacionDestinoSeleccionada8',event);
@@ -2266,8 +2266,8 @@ if( this.cantidadDestinos<this.limiteDisponibles){
   }
 
 
-  region9(event){
-    this.locacion= event;
+  region9(event: any) {
+      this.locacion = event.detail.value;
     console.log(this.locacion);
     if(event!=''){
       localStorage.setItem('locacionDestinoSeleccionada9',event);
@@ -2332,8 +2332,8 @@ if( this.cantidadDestinos<this.limiteDisponibles){
   }
 
 
-  region10(event){
-    this.locacion= event;
+  region10(event : any){
+      this.locacion = event.detail.value;
     console.log(this.locacion);
     if(event!=''){
       localStorage.setItem('locacionDestinoSeleccionada10',event);
