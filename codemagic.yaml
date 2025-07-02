@@ -28,6 +28,6 @@ workflows:
       - name: Build iOS project
         script: |
           cd ios/App
-          xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -sdk iphoneos
+          xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -sdk iphoneos DEVELOPMENT_TEAM=$DEVELOPMENT_TEAM
     artifacts:
       - ios/App/build/**/*.ipa
