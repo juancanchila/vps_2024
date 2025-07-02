@@ -25,7 +25,7 @@
 
       <ion-item >
 
-        <select disabled="true" formControlName="field_prefijo_origen" class="locacion">
+        <select [disabled]="true" formControlName="field_prefijo_origen" class="locacion">
           <option value="fútbol" selected >fútbol</option>
           <option value="ciclismo">ciclismo</option>
           <option value="tenis">tenis</option>
@@ -34,7 +34,7 @@
       </ion-item>
       <ion-label > <b>Posicion </b></ion-label>
       <ion-item>
-        <select disabled="true" formControlName="field_direccion_entrega" class="locacion">
+        <select [disabled]="true" formControlName="field_direccion_entrega" class="locacion">
           <option value="item1" selected >item1</option>
           <option value="item2">item2</option>
           <option value="item3">item3</option>
@@ -57,7 +57,7 @@
       </ion-item>
       <ion-label > <b>Punto de encuentro </b> </ion-label>
       <ion-item >
-        <textarea disabled="true" formControlName="field_locacion_entrega" type="text" required></textarea>
+        <textarea [disabled]="true" formControlName="field_locacion_entrega" type="text" required></textarea>
 
 
 
@@ -68,7 +68,7 @@
 
       <ion-label > <b>Locación Destino</b> </ion-label>
       <ion-item >
-        <select disabled="true" formControlName="field_locacion_destino" class="locacion">
+        <select [disabled]="true" formControlName="field_locacion_destino" class="locacion">
           <option>Barranquilla</option>
           <option>Soledad</option>
           <option>Puerto Colombia</option>
@@ -86,7 +86,7 @@
       <ion-label > <b>Contacto</b> </ion-label>
       <ion-item >
 
-        <textarea disabled="true" formControlName="field_contacto_destino" type="text" required></textarea>
+        <textarea [disabled]="true" formControlName="field_contacto_destino" type="text" required></textarea>
       </ion-item>
 
 

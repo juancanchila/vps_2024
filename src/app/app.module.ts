@@ -23,6 +23,7 @@ import { NotificationsService } from './services/notifications.service';
 import { environment } from '../environments/environment';
 import { Diagnostic } from '@awesome-cordova-plugins/diagnostic/ngx';
 import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
+import { ConfirmationModalModule } from './confirmation-modal/confirmation-modal.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,7 +37,8 @@ import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+     ConfirmationModalModule
   ],
 
   providers: [

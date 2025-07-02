@@ -19,7 +19,7 @@
       <ion-label > <b>origen :</b></ion-label>
 
       <ion-item >
-        <select formControlName="field_locacion_entrega" class="locacion" disabled >
+        <select formControlName="field_locacion_entrega" class="locacion"   [disabled]="true"   >
           <option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</option>
 
         </select>
@@ -40,7 +40,7 @@
       </ion-item>
 
       <ion-item>
-         <textarea  id="ip" formControlName="field_barrio_origen"  #input2 type="text"></textarea>
+         <textarea  id="ip" formControlName="field_barrio_origen"  #input2 type="text"  [disabled]="true" ></textarea>
 
          <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -73,7 +73,7 @@
       <div class="linea"></div>
       <ion-label > <b>destino :</b></ion-label>
       <ion-item >
-        <select disabled formControlName="field_locacion_destino" class="locacion">
+        <select   [disabled]="true"   formControlName="field_locacion_destino" class="locacion">
           <option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</option>
         </select>
         <ion-buttons>
@@ -92,7 +92,7 @@
 
        <ion-item>
 
-        <textarea  id="ip" formControlName="field_barrio_destino"  #input2 type="text"></textarea>
+        <textarea  id="ip" formControlName="field_barrio_destino"  #input2 type="text"  [disabled]="true" ></textarea>
 
         <ion-buttons>
          <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -161,14 +161,14 @@ if( $('#checkbox1').prop('checked') ) {
       <!-- ion-label *ngIf="quienPaga != undefined" > <b>¿Quien paga?* </b> </ion-label>
 
   <div *ngIf="quienPaga != undefined" class="check">
-    <input id="checkbox1" disabled="true" class="recogerInput" formControlName="field_quien_paga_" value="Cobrar en destino"  class="form-check-input" type="radio" checked>
+    <input id="checkbox1"  [disabled]="true"  class="recogerInput" formControlName="field_quien_paga_" value="Cobrar en destino"  class="form-check-input" type="radio" checked>
     <label class="form-check-label" for="flexRadioDefault1">
       Cobrar en destino
     </label>
 
   </div>
   <div *ngIf="quienPaga != undefined" class="check2">
-    <input id="checkbox2" disabled="true"  class="recogerInput" formControlName="field_quien_paga_" value="Cobrar en Origen" class="form-check-input" type="radio" checked>
+    <input id="checkbox2"  [disabled]="true"   class="recogerInput" formControlName="field_quien_paga_" value="Cobrar en Origen" class="form-check-input" type="radio" checked>
     <label class="form-check-label" for="flexRadioDefault2">
      Cobrar en Origen
     </label>
@@ -191,7 +191,7 @@ if( $('#checkbox1').prop('checked') ) {
       <ion-label class="txt">Medio de pago</ion-label>
       <ion-item >
 
-        <ion-input  disabled formControlName="field_metodo_de_pago"   required></ion-input>
+        <ion-input   [disabled]="true"  formControlName="field_metodo_de_pago"   required></ion-input>
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>

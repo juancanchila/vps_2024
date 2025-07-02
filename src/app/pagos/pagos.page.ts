@@ -220,7 +220,7 @@ await alert.present();
   }
 
 
-  async inputChanged($event): Promise<void> {
+  async inputChanged($event: any): Promise<void> {
     // récupération de la valeur saisie
     const value = $event.target.value as string;
     // vider la list si le champ de saisie est vide
@@ -239,7 +239,7 @@ await alert.present();
     // cela va aussi afficher la liste de propositions dans le HTML
     this.items = items;
   }
-  async inputChanged2($event): Promise<void> {
+  async inputChanged2($event: any): Promise<void> {
     // récupération de la valeur saisie
     const value = $event.target.value as string;
     // vider la list si le champ de saisie est vide
@@ -250,7 +250,7 @@ await alert.present();
     // récupération de la liste de posibilités
     console.log(this.direccionDestino,'antes de')
     const list = this.direccionDestino;
-    console.log(list,'list')
+    console.log(list,'list');
     //console.log(this.auth._fakeDatas,'list fake')
     // filtrer la list pour extraire uniquement les element pertinants
     const items = list.filter(
@@ -452,11 +452,11 @@ await alert.present();
 
 
   }
-  regionOrigen(event) {
+  regionOrigen(event: any) {
     //reset - destino
     console.log('regionOrigen');
     this.FormSend.controls.field_locacion_destino.setValue('');
-    this.locacion= event;
+ this.locacion = event.detail.value;
     console.log(event);
     if(event!=''){
       this.auth.locacion=event;
@@ -552,8 +552,8 @@ await alert.present();
     }
   }
 
-  region(event){
-    this.locacion= event;
+  region(event: any){
+this.locacion = event.detail.value;
     console.log(this.locacion);
     if(event!=''){
       localStorage.setItem('locacionDestinoSeleccionada',event);

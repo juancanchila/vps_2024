@@ -28,7 +28,7 @@
 
       <ion-label > <b>Destino*</b> </ion-label>
       <ion-item >
-        <ion-select  (ionChange)="region($event.target.value)"   formControlName="field_locacion_destino" class="locacion">
+        <ion-select  (ionChange)="region($event)"   formControlName="field_locacion_destino" class="locacion">
 
           <ion-select-option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</ion-select-option>
 
@@ -74,7 +74,7 @@
       <ion-label > <b> Descripción:    {{body}}</b></ion-label>
       <ion-item >
 
-        <textarea size="25" formControlName="field_observaciones" disabled="true" class="descaera" type="textarea" required>
+        <textarea size="25" formControlName="field_observaciones" [disabled]="true" class="descaera" type="textarea" required>
 
 
         </textarea>

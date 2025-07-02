@@ -16,6 +16,7 @@ export class ResumenTextilesPage implements OnInit {
   precio_destino: any;
   locaciones :any[];
   aux: string;
+  barrio:any;
   estadoButton: boolean;
   que_quieres_comprar: any;
   costo_articulo: any;

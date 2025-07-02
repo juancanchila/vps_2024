@@ -22,7 +22,7 @@
 
       <ion-label > <b>¿Dónde te encuentras ?*</b></ion-label>
       <ion-item >
-        <select  disabled formControlName="field_locacion_entrega" class="locacion">
+        <select  [disabled]="true" formControlName="field_locacion_entrega" class="locacion">
           <option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</option>
         </select>
 
@@ -41,7 +41,7 @@
       </ion-item>
 
       <ion-item>
-         <textarea disabled  id="ip" formControlName="field_barrio_origen"  #input2 type="text"></textarea>
+         <textarea [disabled]="true"  id="ip" formControlName="field_barrio_origen"  #input2 type="text"></textarea>
 
          <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -97,7 +97,7 @@
       <ion-label class="txt">Medio de pago</ion-label>
       <ion-item >
 
-        <ion-input  disabled formControlName="field_metodo_de_pago"   required></ion-input>
+        <ion-input  [disabled]="true" formControlName="field_metodo_de_pago"   required></ion-input>
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>

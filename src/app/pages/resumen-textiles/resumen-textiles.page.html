@@ -20,7 +20,7 @@
           <ion-label > <b>¿Dónde Quieres Comprar?</b></ion-label>
 
           <ion-item >
-            <select  disabled formControlName="field_locacion_entrega" class="locacion">
+            <select  [disabled]="true" formControlName="field_locacion_entrega" class="locacion">
               <option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</option>
             </select>
 
@@ -39,7 +39,7 @@
           </ion-item>
 
           <ion-item>
-             <textarea disabled  id="ip" formControlName="field_barrio_origen"  #input2 type="text"></textarea>
+             <textarea [disabled]="true"  id="ip" formControlName="field_barrio_origen"  #input2 type="text"></textarea>
 
              <ion-buttons>
               <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -52,7 +52,7 @@
            <ion-label > <b>Nombre del Establecimiento*</b></ion-label>
            <ion-item >
 
-             <textarea disabled formControlName="field_nombre_del_establecimiento"  type="text" siz required></textarea>
+             <textarea [disabled]="true" formControlName="field_nombre_del_establecimiento"  type="text" siz required></textarea>
 
              <ion-buttons>
               <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
@@ -105,7 +105,7 @@
 
           <ion-label > <b>¿A dónde lo llevo?</b> </ion-label>
           <ion-item >
-            <select disabled formControlName="field_locacion_destino" class="locacion">
+            <select [disabled]="true"formControlName="field_locacion_destino" class="locacion">
               <option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</option>
             </select>
             <ion-buttons>
@@ -121,7 +121,7 @@
               </ion-buttons>
           </ion-item>
           <ion-item>
-             <textarea disabled id="ip" formControlName="field_barrio_destino" (input)="inputChanged2($event)" #input2 type="text">{{barrio}}</textarea>
+             <textarea [disabled]="true" id="ip" formControlName="field_barrio_destino" #input2 type="text">{{barrio}}</textarea>
              <ion-buttons>
               <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
             </ion-buttons>
@@ -157,7 +157,7 @@
           <ion-label > <b> Lista de articulos</b></ion-label>
           <ion-item >
 
-            <textarea disabled="true" formControlName="field_observaciones" class="descaera" type="text" required></textarea>
+            <textarea [disabled]="true" formControlName="field_observaciones" class="descaera" type="text" required></textarea>
             <ion-buttons>
               <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
             </ion-buttons>

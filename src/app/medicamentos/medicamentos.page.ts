@@ -256,7 +256,7 @@ await alert.present();
     // récupération de la liste de posibilités
 
     const list =  this.direccionDestino;
-    console.log(list,'list')
+    console.log(list,'list');
     //console.log(this.auth._fakeDatas,'list fake')
     // filtrer la list pour extraire uniquement les element pertinants
     const items = list.filter(
@@ -474,9 +474,9 @@ await alert.present();
   imagenCargada(event: boolean) {
     this.imagenLista = event;
   }
-  regionOrigen(event){
+  regionOrigen(event: any){
     console.log('regionOrigen');
-    this.locacion= event;
+   this.locacion = event.detail.value;
     console.log(event);
     if(event!=''){
       this.auth.locacion=event;
@@ -572,8 +572,8 @@ await alert.present();
     }
   }
 
-  region(event){
-    this.locacion= event;
+  region(event: any){
+   this.locacion = event.detail.value;
     console.log(this.locacion);
     if(event!=''){
       localStorage.setItem('locacionDestinoSeleccionada',event);

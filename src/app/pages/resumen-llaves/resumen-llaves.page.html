@@ -20,7 +20,7 @@
     <form  [formGroup]="FormSend" (ngSubmit)="irAPagar()">
       <ion-label > <b>Donde te Encuentras</b></ion-label>
       <ion-item >
-        <select  disabled formControlName="field_locacion_entrega" class="locacion">
+        <select [disabled]="true" formControlName="field_locacion_entrega" class="locacion">
           <option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</option>
         </select>
 
@@ -39,7 +39,7 @@
       </ion-item>
 
       <ion-item *ngIf="FormSend.get('field_barrio_origen').value">
-        <textarea disabled id="ip" formControlName="field_barrio_origen" #input2></textarea>
+        <textarea [disabled]="true"id="ip" formControlName="field_barrio_origen" #input2></textarea>
         <ion-buttons>
           <ion-icon (click)="enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
@@ -73,7 +73,7 @@
 <ion-label>Necesitas Que me quede?</ion-label>
 <label class="switchBtn">
       <ion-item>
-        <input type="checkbox" formControlName="field_ida_y_vuelta" [checked]="FormSend.get('field_ida_y_vuelta').value" disabled>
+        <input type="checkbox" formControlName="field_ida_y_vuelta" [checked]="FormSend.get('field_ida_y_vuelta').value" [disabled]="true">
         <ion-label>{{ FormSend.get('field_ida_y_vuelta').value ? 'Sí' : 'No' }}</ion-label>
       </ion-item>
 
@@ -81,14 +81,14 @@
       <ion-label>Necesitas Que me quede?</ion-label>
 
 
-      <input disabled  formControlName="field_ida_y_vuelta" type="checkbox">
+      <input [disabled]="true" formControlName="field_ida_y_vuelta" type="checkbox">
 
       <br>
      -->
       <!--
   <ion-label > <b>De Que Quieres Hablar</b> </ion-label>
       <ion-item >
-        <select disabled="true"   formControlName="field_tema_de_interes" class="locacion">
+        <select [disabled]="true"   formControlName="field_tema_de_interes" class="locacion">
           <option>N/A</option>
           <option>Vivencias</option>
           <option>Educación</option>
@@ -105,7 +105,7 @@
       <ion-label class="txt">Musica Popular Preferida</ion-label>
       <ion-item >
 
-        <select disabled="true"  formControlName="field_musica_preferida" class="locacion">
+        <select [disabled]="true"  formControlName="field_musica_preferida" class="locacion">
           <option>N/A</option>
           <option>Pop</option>
           <option>Balada</option>
@@ -132,7 +132,7 @@
 
       <ion-label > <b>A donde te Acompaño?</b> </ion-label>
       <ion-item >
-        <select disabled formControlName="field_locacion_destino" class="locacion">
+        <select [disabled]="true"formControlName="field_locacion_destino" class="locacion">
           <option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</option>
         </select>
         <ion-buttons>
@@ -148,7 +148,7 @@
           </ion-buttons>
       </ion-item>
       <ion-item *ngIf="FormSend.get('field_barrio_destino').value">
-         <textarea disabled id="ip" formControlName="field_barrio_destino" (input)="inputChanged2($event)" #input2 type="text">{{barrio}}</textarea>
+         <textarea [disabled]="true"id="ip" formControlName="field_barrio_destino" (input)="inputChanged2($event)" #input2 type="text">{{barrio}}</textarea>
          <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
@@ -172,7 +172,7 @@
       <ion-label class="txt">Medio de pago</ion-label>
       <ion-item >
 
-        <ion-input  disabled formControlName="field_metodo_de_pago"   required></ion-input>
+        <ion-input  [disabled]="true"formControlName="field_metodo_de_pago"   required></ion-input>
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>

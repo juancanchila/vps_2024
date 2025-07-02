@@ -524,7 +524,7 @@ async ngOnInit() {
 
   regionOrigen(event){
     console.log('regionOrigen');
-    this.locacion= event;
+   this.locacion = event.detail.value;
     console.log(event);
     if(event!=''){
       this.auth.locacion=event;
@@ -626,7 +626,7 @@ async ngOnInit() {
   }
 
   regionDestino(event){
-    this.locacion= event;
+   this.locacion = event.detail.value;
     console.log(event);
     if(event!=''){
       this.auth.locacion=event;

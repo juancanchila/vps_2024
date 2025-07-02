@@ -15,7 +15,7 @@ export class Combo1Page implements OnInit {
 
   private producto: any;
   private subscription: Subscription;
-  private productos: Array<any> = [];
+ public productos: Array<any> = [];
 
   constructor( private router:Router, private auth: AuthService, private productosService: ProductosService) { }
 
@@ -23,7 +23,7 @@ export class Combo1Page implements OnInit {
     this.getCatalogo();
   }
   ngOnDestroy() {
-   
+
     console.log("combo- OnDestroy")
   }
 
@@ -33,7 +33,7 @@ export class Combo1Page implements OnInit {
   getCatalogo() {
     this.productosService.getProductos()
       .then(data => {
-     
+
       })
       .catch(error => alert(error));
   }

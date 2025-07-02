@@ -24,23 +24,23 @@
 
       <ion-item >
 
-        <select disabled="true" formControlName="field_prefijo_origen">
+        <select [disabled]="true" formControlName="field_prefijo_origen">
           <option value="cra" selected >CRA</option>
           <option value="cll">Cll</option>
           <option value="diagonal">DIAGONAL</option>
           <option value="transversal">TRANSVERSAL</option>
         </select>
 
-        <textarea   disabled="true" formControlName="field_direccion_entrega" class="corto" type="text" siz required></textarea >
+        <textarea   [disabled]="true" formControlName="field_direccion_entrega" class="corto" type="text" siz required></textarea >
       </ion-item>
       <ion-label > <b>Contacto</b> </ion-label>
       <ion-item >
 
-        <textarea   disabled="true" formControlName="field_contacto" type="text" required></textarea >
+        <textarea   [disabled]="true" formControlName="field_contacto" type="text" required></textarea >
       </ion-item>
       <ion-label > <b>Locación</b> </ion-label>
       <ion-item >
-        <select disabled="true"  formControlName="field_locacion_entrega" class="locacion">
+        <select [disabled]="true"  formControlName="field_locacion_entrega" class="locacion">
           <option>Barranquilla</option>
           <option>Soledad</option>
           <option>Puerto Colombia</option>
@@ -59,7 +59,7 @@
 
       <ion-label > <b>Tamaño </b> </ion-label>
       <ion-item >
-        <select disabled="true" formControlName="field_locacion_destino" class="locacion">
+        <select [disabled]="true" formControlName="field_locacion_destino" class="locacion">
           <option value="Pequeño" >Pequeño</option>
           <option value="Mediano">Mediano</option>
           <option value="Grande">Grande</option>
@@ -71,7 +71,7 @@
       </ion-item>
       <ion-label > <b>Raza</b> </ion-label>
       <ion-item >
-        <select disabled="true" formControlName="field_contacto_destino" class="locacion">
+        <select [disabled]="true" formControlName="field_contacto_destino" class="locacion">
           <option value="Pitbull">Pitbull</option>
           <option value="Bulldog">Bulldog</option>
           <option value="Boxer">Boxer</option>
@@ -90,7 +90,7 @@
       <ion-label > <b>Observaciones</b></ion-label>
       <ion-item >
 
-        <textarea disabled="true" formControlName="field_observaciones" class="descaera" type="text" rows="10" cols="50" required></textarea>
+        <textarea [disabled]="true" formControlName="field_observaciones" class="descaera" type="text" rows="10" cols="50" required></textarea>
       </ion-item>
 
 

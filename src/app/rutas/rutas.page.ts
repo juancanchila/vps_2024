@@ -27,6 +27,7 @@ export class RutasPage implements OnInit {
 
   };
  currentIndex = 0;
+ barrio: any;
   public items: {name: string}[] = [];
   public items2: {name: string}[] = [];
   public items3: {name: string}[] = [];
@@ -637,8 +638,8 @@ break;
 
     switch (this.cantidadDestinos) {
       case 2:
-        this.$respuesta_barrio_existe1 =  await  await this.BarrioExiste(this.FormSend.value['field_barrio_destino']);
-         this.$respuesta_barrio_existe2 =  await  await this.BarrioExiste2(this.FormSend.value['field_barrio_destino2']);
+        this.$respuesta_barrio_existe1 =   await this.BarrioExiste(this.FormSend.value['field_barrio_destino']);
+         this.$respuesta_barrio_existe2 =   await this.BarrioExiste2(this.FormSend.value['field_barrio_destino2']);
 
         console.log( this.$respuesta_barrio_existe1);
         console.log( this.$respuesta_barrio_existe2);
@@ -2421,26 +2422,26 @@ if( this.cantidadDestinos<this.limiteDisponibles){
     return this.FormSend.get('destinos') as FormArray;
   }
 
-  public deleteNUm(cantidadDestinos : number){
+  public deleteNUm(){
 console.log('hay que quitar');
 console.log(this.cantidadDestinos);
 
 this.aux =""+this.cantidadDestinos;
      console.log(this.aux);
+
      if(localStorage.getItem('modalidad')=='Moderada'){
 
 
       if(this.cantidadDestinos>8){
-        cantidadDestinos = this.cantidadDestinos= this.cantidadDestinos- 1;
+       this.cantidadDestinos= this.cantidadDestinos- 1;
 
-       //document.getElementById(this.aux).remove();
+
 
       }
     }else{
       if(this.cantidadDestinos>2){
-        cantidadDestinos = this.cantidadDestinos= this.cantidadDestinos- 1;
+        this.cantidadDestinos= this.cantidadDestinos- 1;
 
-       //document.getElementById(this.aux).remove();
 
       }
     }

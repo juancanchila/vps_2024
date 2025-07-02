@@ -326,7 +326,7 @@ field_latitud_origen_:['']
   }
   regionOrigen(event){
     console.log('regionOrigen');
-    this.locacion= event;
+   this.locacion = event.detail.value;
     console.log(event);
     if(event!=''){
       this.auth.locacion=event;

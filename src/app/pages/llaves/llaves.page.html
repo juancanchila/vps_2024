@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title>Llaves</ion-title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
-  
+
   </ion-toolbar>
 </ion-header>
 
@@ -21,7 +21,7 @@
     <form  [formGroup]="FormSend" (ngSubmit)="sendForm()">
       <ion-label > <b>Donde te Encuentras</b></ion-label>
       <ion-item id="locacionOrigen" [disabled]="disabledValue" >
-        <ion-select  (ionChange)="regionOrigen($event.target.value)"   formControlName="field_locacion_entrega" class="locacion">
+        <ion-select  (ionChange)="regionOrigen($event)"   formControlName="field_locacion_entrega" class="locacion">
 
           <ion-select-option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</ion-select-option>
 
@@ -131,7 +131,7 @@
           <ion-label > <b>¿A Dónde te acompaño?</b> </ion-label>
 
           <ion-item  >
-            <ion-select  (ionChange)="regionDestino($event.target.value)"   formControlName="field_locacion_destino" class="locacion">
+            <ion-select  (ionChange)="regionDestino($event)"   formControlName="field_locacion_destino" class="locacion">
 
               <ion-select-option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</ion-select-option>
 

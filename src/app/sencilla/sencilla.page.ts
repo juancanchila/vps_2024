@@ -262,7 +262,7 @@ await alert.present();
   slidePrev(){
     this.swiper.swiperRef.slidePrev(1000);
   }
-   async inputChanged($event): Promise<void> {
+   async inputChanged($event: any): Promise<void> {
     //this.bloquearInputBarrio=true;
     // récupération de la valeur saisie
 this.value = $event.target.value as string;
@@ -274,7 +274,7 @@ this.value = $event.target.value as string;
 
     // récupération de la liste de posibilités
     const list = this.direccion;
-    console.log(list,'list b1')
+    console.log(list,'list b1');
     // filtrer la list pour extraire uniquement les element pertinants
     const items = list.filter(
       item => item.name.toLocaleLowerCase().includes(this.value.toLocaleLowerCase())
@@ -283,7 +283,7 @@ this.value = $event.target.value as string;
     // cela va aussi afficher la liste de propositions dans le HTML
     this.items = items;
   }
-  async inputChanged2($event): Promise<void> {
+  async inputChanged2($event: any): Promise<void> {
     // récupération de la valeur saisie
     const value = $event.target.value as string;
     // vider la list si le champ de saisie est vide
@@ -294,7 +294,7 @@ this.value = $event.target.value as string;
     // récupération de la liste de posibilités
 
     const list = this.direccionDestino;
-    console.log(list,'list b2')
+    console.log(list,'list b2');
     //console.log(this.auth._fakeDatas,'list fake')
     // filtrer la list pour extraire uniquement les element pertinants
     const items = list.filter(
@@ -670,10 +670,10 @@ getValoresDeterminantesAuxiliar(){
   ionViewWillEnter(){
     //this.auth.medioTransporte=1;
   }
-  regionOrigen(event){
+  regionOrigen(event: any){
     console.log('regionOrigen');
     this.FormSend.controls.field_locacion_destino.setValue('');
-    this.locacion= event;
+    this.locacion=  event.detail.value;
     console.log(event);
     if(event!=''){
       this.auth.locacion=event;
@@ -780,9 +780,9 @@ getValoresDeterminantesAuxiliar(){
     }
   }
 
-  regionDestino(event){
-    this.locacion= event;
-    console.log(event);
+  regionDestino(event : any){
+    this.locacion=  event.detail.value;
+
     if(event!=''){
       this.auth.locacion=event;
       localStorage.setItem('locacionDestinoSeleccionada',event);

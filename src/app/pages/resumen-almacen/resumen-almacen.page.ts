@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./resumen-almacen.page.scss'],
 })
 export class ResumenAlmacenPage implements OnInit {
-
+barrio: any;
   FormSend: FormGroup;
   precio_origen: any;
   precio_destino: any;
@@ -22,6 +22,8 @@ export class ResumenAlmacenPage implements OnInit {
   imagenLista: boolean;
   servicioEvaluado: string;
   aditional_value: string;
+  items2: any;
+  direccionDestino: any;
 
   constructor(private menucontrol:MenuController,private router: Router, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {
     this.menucontrol.enable(false);
@@ -278,6 +280,28 @@ this.servicioEvaluado =localStorage.getItem('servicioEvaluado')
 
     console.log("Resumen- OnDestroy")
   }
+async inputChanged2($event: any): Promise<void> {
+  // Recuperar el valor
+  const value = $event.target.value as string;
+
+  // Vaciar lista si está vacío
+  if (value.length <= 0) {
+    this.items2 = [];
+    return;
+  }
+
+  // Obtener lista (usa tu variable de barrios)
+  const list = this.direccionDestino;
+  console.log(list, 'list b2');
+
+  // Filtrar lista
+  const items = list.filter(
+    item => item.name.toLowerCase().includes(value.toLowerCase())
+  );
+
+  // Asignar a items2
+  this.items2 = items;
+}
 
 
 }

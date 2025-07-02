@@ -16,6 +16,7 @@ export class ResumenTrasteoPage implements OnInit {
   precio_origen: any;
   precio_destino: any;
   aux: string;
+  barrio:any;
   estadoButton: boolean;
   servicioEvaluado: string;
   aditional_value: any;

@@ -26,7 +26,7 @@
     <form  [formGroup]="FormSend" (ngSubmit)="sendForm()">
       <ion-label > <b>Origen*</b></ion-label>
       <ion-item id="locacionOrigen" [disabled]="disabledValue"   >
-        <ion-select  (ionChange)="regionOrigen($event.target.value)"   formControlName="field_locacion_entrega" class="locacion">
+        <ion-select  (ionChange)="regionOrigen($event)"   formControlName="field_locacion_entrega" class="locacion">
 
           <ion-select-option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</ion-select-option>
 
@@ -147,7 +147,7 @@
 
         <ion-label > <b>Destino*</b> </ion-label>
         <ion-item  >
-          <ion-select  (ionChange)="region($event.target.value)"   formControlName="field_locacion_destino" class="locacion">
+          <ion-select  (ionChange)="region($event)"   formControlName="field_locacion_destino" class="locacion">
 
             <ion-select-option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</ion-select-option>
 

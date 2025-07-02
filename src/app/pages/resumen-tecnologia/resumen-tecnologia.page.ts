@@ -10,12 +10,13 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./resumen-tecnologia.page.scss'],
 })
 export class ResumenTecnologiaPage implements OnInit {
-
+barrio:any;
   imagenLista: boolean ;
   FormSend: FormGroup;
   precio_origen: any;
   precio_destino: any;
   locaciones :any[];
+  barri:any;
   aux: string;
   estadoButton: boolean;
   que_quieres_comprar: any;

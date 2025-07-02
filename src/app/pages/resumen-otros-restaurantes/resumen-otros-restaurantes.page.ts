@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ResumenOtrosRestaurantesPage implements OnInit {
   imagenLista: boolean ;
-
+ barrio: any;
   FormSend: FormGroup;
   precio_origen: any;
   precio_destino: any;
@@ -311,5 +311,52 @@ field_nombre_c_destino:[""]
     console.log("Resumen- OnDestroy")
   }
 
+inputChanged2(event: any) {
+  console.log('Evento inputChanged2:', event.target.value);
+
+  // Actualizamos el valor del barrio en la variable local (opcional)
+  this.barrio = event.target.value;
+
+  // Lógica para calcular el precio de tarifa
+  if (localStorage.getItem('locacionDestinoSeleccionada') !== localStorage.getItem('locacionOrigenSeleccionada')) {
+    if (Number(localStorage.getItem('tarifaExternaOrigen')) > Number(localStorage.getItem('tarifaExternaDestino'))) {
+      this.FormSend.controls.field_precio_.setValue(localStorage.getItem('tarifaExternaOrigen'));
+      localStorage.setItem('precioTarifa', localStorage.getItem('tarifaExternaOrigen'));
+    } else if (Number(localStorage.getItem('tarifaExternaDestino')) > Number(localStorage.getItem('tarifaExternaOrigen'))) {
+      this.FormSend.controls.field_precio_.setValue(localStorage.getItem('tarifaExternaDestino'));
+      localStorage.setItem('precioTarifa', localStorage.getItem('tarifaExternaDestino'));
+    } else if (Number(localStorage.getItem('tarifaExternaDestino')) === Number(localStorage.getItem('tarifaExternaOrigen'))) {
+      this.FormSend.controls.field_precio_.setValue(localStorage.getItem('tarifaExternaDestino'));
+      localStorage.setItem('precioTarifa', localStorage.getItem('tarifaExternaDestino'));
+    }
+  } else {
+    if (this.precio_origen > this.precio_destino) {
+      this.FormSend.controls.field_precio_.setValue(this.precio_origen);
+      localStorage.setItem('precioTarifa', String(this.precio_origen));
+    } else if (this.precio_destino > this.precio_origen) {
+      this.FormSend.controls.field_precio_.setValue(this.precio_destino);
+      localStorage.setItem('precioTarifa', String(this.precio_destino));
+    } else {
+      this.FormSend.controls.field_precio_.setValue(localStorage.getItem('tarifaOrigen'));
+      localStorage.setItem('precioTarifa', String(this.precio_destino));
+    }
+  }
+
+  // Sumar valor agregado si es vehículo
+  const valorAgregado = parseFloat(localStorage.getItem('valorAgregado') || '0');
+  const resultadoTotalCosto = Number(this.FormSend.controls.field_precio_.value);
+  const porcentaje = (resultadoTotalCosto * valorAgregado) / 100;
+  const TotalDefinitivoParaVehiculos = resultadoTotalCosto + porcentaje;
+
+  console.log("Resultado Total de Costo:", resultadoTotalCosto);
+  console.log("Valor Agregado:", valorAgregado);
+  console.log("Porcentaje de Valor Agregado:", porcentaje);
+  console.log("Resultado Total de Costo + porcentaje:", TotalDefinitivoParaVehiculos);
+
+  if (this.auth.medioTransporte == 2) {
+    this.FormSend.controls.field_precio_.setValue(TotalDefinitivoParaVehiculos);
+    localStorage.setItem('precioTarifa', String(TotalDefinitivoParaVehiculos));
+  }
+}
 
 }

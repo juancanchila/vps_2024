@@ -12,7 +12,7 @@ import { Clipboard } from '@awesome-cordova-plugins/clipboard/ngx';
 export class VerMasOrdenesPage implements OnInit {
   imagenLista: boolean ;
   @ViewChild(IonModal) modal: IonModal;
-
+ estadoButton: boolean;
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name: string;
 allPedidos:any;

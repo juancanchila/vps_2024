@@ -17,9 +17,11 @@ export class ResumenDatosEnvioComprasPage implements OnInit {
   @ViewChild('swiper', { static: false }) swiper?: SwiperComponent;
   data = [];
   public total: number;
+  barrio: any;
+  body : any;
   domicilioValor: number;
   itemsCarrito = '';
-  private subtotal: number = 0;
+   public subtotal: number = 0;
   public swiperConfig = {
     Virtual: true,
     //slidesPerView: 2,

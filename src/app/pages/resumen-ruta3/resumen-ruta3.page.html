@@ -21,7 +21,7 @@
     <form  [formGroup]="FormSend" (ngSubmit)="irAPagar()">
       <ion-label > <b>Origen*</b></ion-label>
       <ion-item >
-        <select disabled formControlName="field_locacion_entrega" class="locacion">
+        <select  [disabled]="true"  formControlName="field_locacion_entrega" class="locacion">
           <option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</option>
         </select>
 
@@ -31,7 +31,7 @@
       </ion-item>
       <ion-item >
 
-        <textarea formControlName="field_direccion_entrega" disabled="true"  type="text" siz required></textarea>
+        <textarea formControlName="field_direccion_entrega"  [disabled]="true"  type="text" siz required></textarea>
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
@@ -56,7 +56,7 @@
       <ion-label > <b>Contacto :</b> </ion-label>
       <ion-item >
 
-        <textarea formControlName="field_contacto" disabled="true" type="text" required></textarea>
+        <textarea formControlName="field_contacto"  [disabled]="true" type="text" required></textarea>
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
@@ -66,7 +66,7 @@
 
       <ion-label > <b>Destino 1</b> </ion-label>
       <ion-item >
-        <select disabled formControlName="field_locacion_destino_r" class="locacion">
+        <select  [disabled]="true"  formControlName="field_locacion_destino_r" class="locacion">
           <option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</option>
         </select>
         <ion-buttons>
@@ -79,7 +79,7 @@
       <ion-item >
 
 
-      <textarea formControlName="field_direccion_destino" disabled="true"  type="text" siz required></textarea>
+      <textarea formControlName="field_direccion_destino"  [disabled]="true"  type="text" siz required></textarea>
       <ion-buttons>
         <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
       </ion-buttons>
@@ -106,7 +106,7 @@
       <ion-label > <b>Contacto Teléfono</b> </ion-label>
       <ion-item >
 
-        <textarea formControlName="field_contacto_destino" disabled="true" type="text" required></textarea>
+        <textarea formControlName="field_contacto_destino"  [disabled]="true" type="text" required></textarea>
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
@@ -115,7 +115,7 @@
       <ion-label > <b> Observacion </b></ion-label>
       <ion-item >
 
-        <textarea formControlName="body" disabled="true" class="descaera" type="text" required></textarea>
+        <textarea formControlName="body"  [disabled]="true" class="descaera" type="text" required></textarea>
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
@@ -131,7 +131,7 @@
       <div class="linea"></div>
       <ion-label > <b>Destino 2</b> </ion-label>
       <ion-item >
-        <select formControlName="field_locacion_destino_r2" disabled class="locacion">
+        <select formControlName="field_locacion_destino_r2"  [disabled]="true"  class="locacion">
           <option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</option>
         </select>
         <ion-buttons>
@@ -144,7 +144,7 @@
       <ion-item >
 
 
-      <textarea formControlName="field_direccion_destino_r2" disabled="true"  type="text" siz required></textarea>
+      <textarea formControlName="field_direccion_destino_r2"  [disabled]="true"  type="text" siz required></textarea>
       <ion-buttons>
         <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
       </ion-buttons>
@@ -172,7 +172,7 @@
       <ion-label > <b>Contacto 2</b> </ion-label>
       <ion-item >
 
-        <textarea formControlName="field_contacto_destino_r2" disabled="true" type="text" required></textarea>
+        <textarea formControlName="field_contacto_destino_r2"  [disabled]="true" type="text" required></textarea>
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
@@ -181,7 +181,7 @@
       <ion-label > <b> Observacion 2</b></ion-label>
       <ion-item >
 
-        <textarea formControlName="body2" class="descaera" disabled="true" type="text" required></textarea>
+        <textarea formControlName="body2" class="descaera"  [disabled]="true" type="text" required></textarea>
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
@@ -196,7 +196,7 @@
 
       <ion-label > <b>Destino 3</b> </ion-label>
       <ion-item >
-        <select formControlName="locacion3" disabled class="locacion">
+        <select formControlName="locacion3"  [disabled]="true"  class="locacion">
           <option *ngFor="let locacion of locaciones"   value="{{locacion.name}}">{{locacion.name}}</option>
         </select>
 
@@ -209,7 +209,7 @@
       <ion-item >
 
 
-      <textarea formControlName="destino3" disabled="true"  type="text" siz required></textarea>
+      <textarea formControlName="destino3"  [disabled]="true"  type="text" siz required></textarea>
       <ion-buttons>
         <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
       </ion-buttons>
@@ -236,7 +236,7 @@
       <ion-label > <b>Contacto </b> </ion-label>
       <ion-item >
 
-        <textarea formControlName="contacto3" disabled="true" type="text" required></textarea>
+        <textarea formControlName="contacto3"  [disabled]="true" type="text" required></textarea>
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
@@ -245,7 +245,7 @@
       <ion-label > <b> Observacion </b></ion-label>
       <ion-item >
 
-        <textarea formControlName="body3" class="descaera" disabled="true" type="text" required></textarea>
+        <textarea formControlName="body3" class="descaera"  [disabled]="true" type="text" required></textarea>
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>
@@ -260,7 +260,7 @@
       <ion-label class="txt">Medio de pago</ion-label>
       <ion-item >
 
-        <ion-input  disabled formControlName="field_metodo_de_pago"   required></ion-input>
+        <ion-input   [disabled]="true"  formControlName="field_metodo_de_pago"   required></ion-input>
         <ion-buttons>
           <ion-icon (click)=" enableInput()" slot="primary" name="pencil-outline"></ion-icon>
         </ion-buttons>

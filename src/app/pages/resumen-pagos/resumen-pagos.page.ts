@@ -14,6 +14,7 @@ export class ResumenPagosPage implements OnInit {
   FormSend: FormGroup;
   locaciones :any[];
   aux: string;
+  barrio:any;
   estadoButton: boolean;
   aditional_value: any;
   constructor(private menucontrol:MenuController,private router: Router, private auth: AuthService, public fb: FormBuilder,public alertController:AlertController) {

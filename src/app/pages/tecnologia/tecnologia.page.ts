@@ -536,7 +536,7 @@ this.router.navigate(['/resumen-tecnologia']);
 
   regionOrigen(event){
     console.log('regionOrigen');
-    this.locacion= event;
+   this.locacion = event.detail.value;
     console.log(event);
     if(event!=''){
       this.auth.locacion=event;
@@ -638,7 +638,7 @@ this.router.navigate(['/resumen-tecnologia']);
 
 
   region(event){
-    this.locacion= event;
+   this.locacion = event.detail.value;
     console.log(this.locacion);
     if(event!=''){
       localStorage.setItem('locacionDestinoSeleccionada',event);
@@ -724,15 +724,13 @@ async WillEnter() {
 
   }
 
-  public deleteNUm(cantidadArticulos : number){
-    console.log('hay que quitar');
-    console.log(cantidadArticulos);
+  public deleteNUm(){
 
 
 
         if(this.cantidadArticulos>1){
-          cantidadArticulos = this.cantidadArticulos= this.cantidadArticulos- 1;
-          if(cantidadArticulos==9){
+        this.cantidadArticulos= this.cantidadArticulos- 1;
+          if(this.cantidadArticulos==9){
 
             this.FormSend.controls.field_observaciones10.setValue('');
             this.FormSend.controls.field_valor_declarado10.setValue(0);
@@ -741,51 +739,51 @@ async WillEnter() {
 
 
 
-          }else if(cantidadArticulos==8){
+          }else if(this.cantidadArticulos==8){
             this.FormSend.controls.field_observaciones9.setValue('');
             this.FormSend.controls.field_valor_declarado9.setValue(0);
             this.FormSend.controls.field_quieres_comprar9.setValue('');
 
           }
-          else if(cantidadArticulos==7){
+          else if(this.cantidadArticulos==7){
             this.FormSend.controls.field_observaciones8.setValue('');
             this.FormSend.controls.field_valor_declarado8.setValue(0);
             this.FormSend.controls.field_quieres_comprar8.setValue('');
 
           }
-          else if(cantidadArticulos==6){
+          else if(this.cantidadArticulos==6){
             this.FormSend.controls.field_observaciones7.setValue('');
             this.FormSend.controls.field_valor_declarado7.setValue(0);
             this.FormSend.controls.field_quieres_comprar7.setValue('');
 
           }
-          else if(cantidadArticulos==5){
+          else if(this.cantidadArticulos==5){
             this.FormSend.controls.field_observaciones6.setValue('');
             this.FormSend.controls.field_valor_declarado6.setValue(0);
             this.FormSend.controls.field_quieres_comprar6.setValue('');
 
           }
-          else if(cantidadArticulos==4){
+          else if(this.cantidadArticulos==4){
             this.FormSend.controls.field_observaciones5.setValue('');
             this.FormSend.controls.field_valor_declarado5.setValue(0);
             this.FormSend.controls.field_quieres_comprar5.setValue('');
 
           }
-          else if(cantidadArticulos==3){
+          else if(this.cantidadArticulos==3){
             console.log(this.cantidadArticulos);
             this.FormSend.controls.field_observaciones4.setValue('');
             this.FormSend.controls.field_valor_declarado4.setValue(0);
             this.FormSend.controls.field_quieres_comprar4.setValue('');
 
           }
-          else if(cantidadArticulos==2){
+          else if(this.cantidadArticulos==2){
             console.log(this.cantidadArticulos);
             this.FormSend.controls.field_observaciones3.setValue('');
             this.FormSend.controls.field_valor_declarado3.setValue(0);
             this.FormSend.controls.field_quieres_comprar3.setValue('');
 
           }
-          else if(cantidadArticulos==1){
+          else if(this.cantidadArticulos==1){
             console.log(this.cantidadArticulos);
             this.FormSend.controls.field_observaciones2.setValue('');
             this.FormSend.controls.field_valor_declarado2.setValue(0);

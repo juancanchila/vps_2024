@@ -29,7 +29,7 @@ export class CarritoComprasPage implements OnInit {
 tituloRestaurante:any;
   private carrito: Array<ProductosI> = [];
   private subscription: Subscription;
-  private subtotal: number = 0;
+ public subtotal: number = 0;
   observacion: any;
   total:number;
   product:any = {};

@@ -569,7 +569,7 @@ await alert.present();
   }
   regionOrigen(event){
     console.log('regionOrigen');
-    this.locacion= event;
+   this.locacion = event.detail.value;
     console.log(event);
     if(event!=''){
       this.auth.locacion=event;
@@ -690,7 +690,7 @@ WillEnterOrigen(){
 
   }
   region(event){
-    this.locacion= event;
+   this.locacion = event.detail.value;
     console.log(this.locacion);
     if(event!=''){
       localStorage.setItem('locacionDestinoSeleccionada',event);
