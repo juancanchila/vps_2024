@@ -34,7 +34,6 @@ workflows:
                      -sdk iphoneos \
                      -allowProvisioningUpdates \
                      -allowProvisioningDeviceRegistration \
-                     DEVELOPMENT_TEAM=X693B2FAZ3 \
-                     PROVISIONING_PROFILE_SPECIFIER="Vapaesa Dev Profile"
+                     DEVELOPMENT_TEAM=X693B2FAZ3
     artifacts:
       - ios/App/build/**/*.ipa
