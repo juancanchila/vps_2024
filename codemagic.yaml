@@ -35,6 +35,6 @@ workflows:
                      -allowProvisioningUpdates \
                      -allowProvisioningDeviceRegistration \
                      DEVELOPMENT_TEAM=X693B2FAZ3 \
-                     PROVISIONING_PROFILE_SPECIFIER="Vapaesa Dev Profile"
+                     CODE_SIGN_STYLE=Automatic
     artifacts:
       - ios/App/build/**/*.ipa
