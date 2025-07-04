@@ -1,40 +1,53 @@
 workflows:
   ios-workflow:
-    name: Build iOS
+    name: Build iOS 100% automático
     instance_type: mac_mini_m1
+
     environment:
+      groups:
+        - app_store_credentials    # Solo tu API Key de App Store Connect
+
       vars:
-        BUNDLE_ID: "com.vapaesa"
-        APP_NAME: "VapaesaApp"
-        DEVELOPMENT_TEAM: "X693B2FAZ3" # <- tu equipo
-      node: 20.0.0
-      xcode: latest
+        BUNDLE_ID:        "com.vapaesa"
+        DEVELOPMENT_TEAM: "X693B2FAZ3"
+        WORKSPACE_PATH:   "ios/App/App.xcworkspace"
+        SCHEME:           "App"
+
+      node:      20.11.1
+      xcode:     latest
+      cocoapods: default
+
     scripts:
-      - name: Install Ionic CLI
+      - name: Initialize keychain
         script: |
-          npm install -g @ionic/cli
-      - name: Install dependencies
+          keychain initialize
+
+      - name: Fetch signing files (auto .p12 + .mobileprovision)
+        script: |
+          app-store-connect fetch-signing-files \
+            "$BUNDLE_ID" \
+            --type IOS_APP_STORE \
+            --create
+
+      - name: Install deps & build web
         script: |
           npm ci
-      - name: Build Ionic web assets
-        script: |
+          npm install -g @ionic/cli
           ionic build --prod
-      - name: Sync Capacitor for iOS
-        script: |
           ionic cap sync ios
-      - name: Prepare iOS
+
+      - name: CocoaPods
         script: |
           cd ios/App
-          pod install
-      - name: Build iOS project
+          pod install --repo-update
+
+      - name: Build signed .ipa (sin plist en repo)
         script: |
           cd ios/App
-          xcodebuild -workspace App.xcworkspace \
-                     -scheme App \
-                     -configuration Release \
-                     -sdk iphoneos \
-                     -allowProvisioningUpdates \
-                     DEVELOPMENT_TEAM=$DEVELOPMENT_TEAM \
-                     CODE_SIGN_STYLE=Automatic
+          xcode-project use-profiles
+          xcode-project build-ipa \
+            --workspace "$WORKSPACE_PATH" \
+            --scheme "$SCHEME"
+
     artifacts:
-      - ios/App/build/**/*.ipa
+      - ios/App/build/ios/ipa/*.ipa
