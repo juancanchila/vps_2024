@@ -1,6 +1,6 @@
 workflows:
   ios-workflow:
-    name: Build iOS
+    name: Build iOS for App Store
     instance_type: mac_mini_m1
     environment:
       vars:
@@ -33,9 +33,8 @@ workflows:
                      -configuration Release \
                      -sdk iphoneos \
                      -allowProvisioningUpdates \
-                     -allowProvisioningDeviceRegistration \
                      DEVELOPMENT_TEAM=X693B2FAZ3 \
-                     CODE_SIGN_STYLE=Automatic \
+                     CODE_SIGN_STYLE=Manual \
                      PRODUCT_BUNDLE_IDENTIFIER=com.vapaesa
     artifacts:
       - build/ios/ipa/*.ipa
