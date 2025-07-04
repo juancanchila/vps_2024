@@ -1,52 +1,58 @@
 workflows:
   ios-workflow:
-    name: Build iOS 100% automático
+    name: Build iOS (Development)
     instance_type: mac_mini_m1
+    max_build_duration: 60
 
     environment:
+      # Grupo donde subiste tu .p12 y tu .mobileprovision
       groups:
-        - app_store_credentials    # Solo tu API Key de App Store Connect
+        - manual_cert_credentials
 
       vars:
         BUNDLE_ID:        "com.vapaesa"
         DEVELOPMENT_TEAM: "X693B2FAZ3"
-        WORKSPACE_PATH:   "ios/App/App.xcworkspace"
+        WORKSPACE:        "ios/App/App.xcworkspace"
         SCHEME:           "App"
 
-      node:      20.11.1
-      xcode:     latest
-      cocoapods: default
+      node:      "20.11.1"
+      xcode:     "latest"
+      cocoapods: "default"
 
     scripts:
       - name: Initialize keychain
         script: |
           keychain initialize
 
-      - name: Fetch signing files (auto .p12 + .mobileprovision)
+      - name: Install provisioning profile
         script: |
-          app-store-connect fetch-signing-files \
-            "$BUNDLE_ID" \
-            --type IOS_APP_STORE \
-            --create
+          PROFILES_HOME="$HOME/Library/MobileDevice/Provisioning Profiles"
+          mkdir -p "$PROFILES_HOME"
+          echo "$CM_PROVISIONING_PROFILE" \
+            | base64 --decode \
+            > "$PROFILES_HOME/$BUNDLE_ID.mobileprovision"
 
-      - name: Install deps & build web
+      - name: Add certificate to keychain
+        script: |
+          keychain add-certificates \
+            --certificate "$CM_CERTIFICATE" \
+            --certificate-password "$CM_CERTIFICATE_PASSWORD"
+
+      - name: Install deps, build web assets & sync iOS
         script: |
           npm ci
           npm install -g @ionic/cli
           ionic build --prod
           ionic cap sync ios
-
-      - name: CocoaPods
-        script: |
           cd ios/App
           pod install --repo-update
 
-      - name: Build signed .ipa (sin plist en repo)
+      - name: Build signed .ipa
         script: |
           cd ios/App
           xcode-project use-profiles
           xcode-project build-ipa \
-            --workspace "$WORKSPACE_PATH" \
+            --workspace "$WORKSPACE" \
             --scheme "$SCHEME"
 
     artifacts:
