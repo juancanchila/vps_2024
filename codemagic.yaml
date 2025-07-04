@@ -36,5 +36,3 @@ workflows:
                      -allowProvisioningDeviceRegistration
     artifacts:
       - ios/App/build/**/*.ipa
-    signing:
-      xcode: automatic
