@@ -6,15 +6,9 @@ workflows:
       vars:
         BUNDLE_ID: "com.vapaesa"
         APP_NAME: "VapaesaApp"
-        DEVELOPMENT_TEAM: "X693B2FAZ3"
+        DEVELOPMENT_TEAM: "X693B2FAZ3" # <- tu equipo
       node: 20.0.0
       xcode: latest
-    signing:
-      certificates:
-        - certificate_url: Enlace de tu .p12
-          certificate_password: $CERTIFICATE_PASSWORD
-      provisioning_profiles:
-        - Enlace de tu .mobileprovision
     scripts:
       - name: Install Ionic CLI
         script: |
@@ -40,7 +34,6 @@ workflows:
                      -configuration Release \
                      -sdk iphoneos \
                      -allowProvisioningUpdates \
-                     -allowProvisioningDeviceRegistration \
                      DEVELOPMENT_TEAM=$DEVELOPMENT_TEAM \
                      CODE_SIGN_STYLE=Automatic
     artifacts:
