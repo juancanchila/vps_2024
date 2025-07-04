@@ -21,7 +21,7 @@ workflows:
       - name: Sync Capacitor for iOS
         script: |
           ionic cap sync ios
-      - name: Prepare iOS
+      - name: Install CocoaPods
         script: |
           cd ios/App
           pod install
@@ -33,8 +33,8 @@ workflows:
                      -configuration Release \
                      -sdk iphoneos \
                      -allowProvisioningUpdates \
-                     -allowProvisioningDeviceRegistration \
-                     DEVELOPMENT_TEAM=X693B2FAZ3 \
-                     CODE_SIGN_STYLE=Automatic
+                     -allowProvisioningDeviceRegistration
     artifacts:
       - ios/App/build/**/*.ipa
+    signing:
+      xcode: automatic
