@@ -1,59 +1,41 @@
 workflows:
   ios-workflow:
-    name: Build iOS (Development)
+    name: Build iOS
     instance_type: mac_mini_m1
-    max_build_duration: 60
-
     environment:
-      # Grupo donde subiste tu .p12 y tu .mobileprovision
-      groups:
-        - manual_cert_credentials
-
       vars:
-        BUNDLE_ID:        "com.vapaesa"
-        DEVELOPMENT_TEAM: "X693B2FAZ3"
-        WORKSPACE:        "ios/App/App.xcworkspace"
-        SCHEME:           "App"
-
-      node:      "20.11.1"
-      xcode:     "latest"
-      cocoapods: "default"
-
+        BUNDLE_ID: "com.vapaesa"
+        APP_NAME: "VapaesaApp"
+      node: 20.0.0
+      xcode: latest
     scripts:
-      - name: Initialize keychain
+      - name: Install Ionic CLI
         script: |
-          keychain initialize
-
-      - name: Install provisioning profile
-        script: |
-          PROFILES_HOME="$HOME/Library/MobileDevice/Provisioning Profiles"
-          mkdir -p "$PROFILES_HOME"
-          echo "$CM_PROVISIONING_PROFILE" \
-            | base64 --decode \
-            > "$PROFILES_HOME/$BUNDLE_ID.mobileprovision"
-
-      - name: Add certificate to keychain
-        script: |
-          keychain add-certificates \
-            --certificate "$CM_CERTIFICATE" \
-            --certificate-password "$CM_CERTIFICATE_PASSWORD"
-
-      - name: Install deps, build web assets & sync iOS
+          npm install -g @ionic/cli
+      - name: Install dependencies
         script: |
           npm ci
-          npm install -g @ionic/cli
+      - name: Build Ionic web assets
+        script: |
           ionic build --prod
+      - name: Sync Capacitor for iOS
+        script: |
           ionic cap sync ios
-          cd ios/App
-          pod install --repo-update
-
-      - name: Build signed .ipa
+      - name: Install CocoaPods
         script: |
           cd ios/App
-          xcode-project use-profiles
-          xcode-project build-ipa \
-            --workspace "$WORKSPACE" \
-            --scheme "$SCHEME"
-
+          pod install
+      - name: Build iOS project
+        script: |
+          cd ios/App
+          xcodebuild -workspace App.xcworkspace \
+                     -scheme App \
+                     -configuration Release \
+                     -sdk iphoneos \
+                     -allowProvisioningUpdates \
+                     -allowProvisioningDeviceRegistration \
+                     DEVELOPMENT_TEAM=X693B2FAZ3 \
+                     CODE_SIGN_STYLE=Automatic \
+                     PRODUCT_BUNDLE_IDENTIFIER=com.vapaesa
     artifacts:
-      - ios/App/build/ios/ipa/*.ipa
+      - build/ios/ipa/*.ipa
