@@ -6,9 +6,15 @@ workflows:
       vars:
         BUNDLE_ID: "com.vapaesa"
         APP_NAME: "VapaesaApp"
-        DEVELOPMENT_TEAM: "X693B2FAZ3"  # <- ESTO YA QUEDA
+        DEVELOPMENT_TEAM: "X693B2FAZ3"
       node: 20.0.0
       xcode: latest
+    signing:
+      certificates:
+        - certificate_url: Enlace de tu .p12
+          certificate_password: $CERTIFICATE_PASSWORD
+      provisioning_profiles:
+        - Enlace de tu .mobileprovision
     scripts:
       - name: Install Ionic CLI
         script: |
@@ -22,7 +28,7 @@ workflows:
       - name: Sync Capacitor for iOS
         script: |
           ionic cap sync ios
-      - name: Install CocoaPods
+      - name: Prepare iOS
         script: |
           cd ios/App
           pod install
