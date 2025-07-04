@@ -6,6 +6,7 @@ workflows:
       vars:
         BUNDLE_ID: "com.vapaesa"
         APP_NAME: "VapaesaApp"
+        DEVELOPMENT_TEAM: "X693B2FAZ3"  # <- ESTO YA QUEDA
       node: 20.0.0
       xcode: latest
     scripts:
@@ -33,6 +34,8 @@ workflows:
                      -configuration Release \
                      -sdk iphoneos \
                      -allowProvisioningUpdates \
-                     -allowProvisioningDeviceRegistration
+                     -allowProvisioningDeviceRegistration \
+                     DEVELOPMENT_TEAM=$DEVELOPMENT_TEAM \
+                     CODE_SIGN_STYLE=Automatic
     artifacts:
       - ios/App/build/**/*.ipa
