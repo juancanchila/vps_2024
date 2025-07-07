@@ -25,16 +25,24 @@ workflows:
         script: |
           cd ios/App
           pod install
-      - name: Build iOS project
+      - name: Archive and export IPA
         script: |
           cd ios/App
           xcodebuild -workspace App.xcworkspace \
                      -scheme App \
                      -configuration Release \
                      -sdk iphoneos \
+                     -archivePath $CM_BUILD_DIR/App.xcarchive \
                      -allowProvisioningUpdates \
                      DEVELOPMENT_TEAM=X693B2FAZ3 \
                      CODE_SIGN_STYLE=Manual \
-                     PRODUCT_BUNDLE_IDENTIFIER=com.vapaesa
+                     PRODUCT_BUNDLE_IDENTIFIER=com.vapaesa \
+                     archive
+
+          xcodebuild -exportArchive \
+                     -archivePath $CM_BUILD_DIR/App.xcarchive \
+                     -exportOptionsPlist ExportOptions.plist \
+                     -exportPath $CM_BUILD_DIR/ExportedIPA \
+                     -allowProvisioningUpdates
     artifacts:
-      - build/ios/ipa/*.ipa
+      - $CM_BUILD_DIR/ExportedIPA/*.ipa
