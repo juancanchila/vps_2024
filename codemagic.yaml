@@ -35,10 +35,8 @@ workflows:
                      -archivePath $CM_BUILD_DIR/App.xcarchive \
                      -allowProvisioningUpdates \
                      DEVELOPMENT_TEAM=X693B2FAZ3 \
-                     CODE_SIGN_STYLE=Manual \
+                     CODE_SIGN_STYLE=Automatic \
                      PRODUCT_BUNDLE_IDENTIFIER=com.vapaesa \
-                     PROVISIONING_PROFILE_SPECIFIER="ProfileDis" \
-                     CODE_SIGN_IDENTITY="Apple Distribution" \
                      archive
 
           xcodebuild -exportArchive \
