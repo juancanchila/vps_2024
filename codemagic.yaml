@@ -37,6 +37,8 @@ workflows:
                      DEVELOPMENT_TEAM=X693B2FAZ3 \
                      CODE_SIGN_STYLE=Manual \
                      PRODUCT_BUNDLE_IDENTIFIER=com.vapaesa \
+                     PROVISIONING_PROFILE_SPECIFIER="ProfileDis" \
+                     CODE_SIGN_IDENTITY="Apple Distribution" \
                      archive
 
           xcodebuild -exportArchive \
