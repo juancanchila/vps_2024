@@ -45,10 +45,9 @@ workflows:
                      -scheme App \
                      -configuration Release \
                      -sdk iphoneos \
-                     -allowProvisioningUpdates \
-                     -allowProvisioningDeviceRegistration \
                      DEVELOPMENT_TEAM=X693B2FAZ3 \
-                     CODE_SIGN_STYLE=Automatic \
+                     CODE_SIGN_STYLE=Manual \
+                     PROVISIONING_PROFILE_SPECIFIER="CodeMagicProvProfileVapaesa" \
                      -archivePath ./build/App.xcarchive \
                      archive
       - name: Export IPA
@@ -62,9 +61,14 @@ workflows:
             <key>method</key>
             <string>app-store</string>
             <key>signingStyle</key>
-            <string>automatic</string>
+            <string>manual</string>
             <key>teamID</key>
             <string>X693B2FAZ3</string>
+            <key>provisioningProfiles</key>
+            <dict>
+              <key>com.vapaesa</key>
+              <string>CodeMagicProvProfileVapaesa</string>
+            </dict>
             <key>destination</key>
             <string>export</string>
             <key>compileBitcode</key>
