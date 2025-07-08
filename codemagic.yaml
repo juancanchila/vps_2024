@@ -1,11 +1,12 @@
 workflows:
   ios-workflow:
-    name: Build iOS for App Store
+    name: Build iOS
     instance_type: mac_mini_m1
     environment:
       vars:
         BUNDLE_ID: "com.vapaesa"
         APP_NAME: "VapaesaApp"
+        CERTIFICATE_PASSWORD: "Uh1dtx0*"
       node: 20.0.0
       xcode: latest
     scripts:
@@ -21,28 +22,62 @@ workflows:
       - name: Sync Capacitor for iOS
         script: |
           ionic cap sync ios
-      - name: Install CocoaPods
+      - name: Prepare iOS
         script: |
           cd ios/App
           pod install
-      - name: Archive and export IPA
+      - name: Import provisioning profile
+        script: |
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp CodeMagicProvProfileVapaesa.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+      - name: Import signing certificate
+        script: |
+          security delete-keychain build.keychain || true
+          security create-keychain -p "" build.keychain
+          security default-keychain -s build.keychain
+          security unlock-keychain -p "" build.keychain
+          security import CodeMagicCertVapaesa.p12 -k build.keychain -P "$CERTIFICATE_PASSWORD" -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple: -s -k "" build.keychain
+      - name: Build iOS project
         script: |
           cd ios/App
           xcodebuild -workspace App.xcworkspace \
                      -scheme App \
                      -configuration Release \
                      -sdk iphoneos \
-                     -archivePath $CM_BUILD_DIR/App.xcarchive \
                      -allowProvisioningUpdates \
+                     -allowProvisioningDeviceRegistration \
                      DEVELOPMENT_TEAM=X693B2FAZ3 \
                      CODE_SIGN_STYLE=Automatic \
-                     PRODUCT_BUNDLE_IDENTIFIER=com.vapaesa \
+                     -archivePath ./build/App.xcarchive \
                      archive
+      - name: Export IPA
+        script: |
+          cd ios/App
+          cat > ExportOptions.plist <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>method</key>
+            <string>app-store</string>
+            <key>signingStyle</key>
+            <string>automatic</string>
+            <key>teamID</key>
+            <string>X693B2FAZ3</string>
+            <key>destination</key>
+            <string>export</string>
+            <key>compileBitcode</key>
+            <true/>
+            <key>stripSwiftSymbols</key>
+            <true/>
+          </dict>
+          </plist>
+          EOF
 
           xcodebuild -exportArchive \
-                     -archivePath $CM_BUILD_DIR/App.xcarchive \
+                     -archivePath ./build/App.xcarchive \
                      -exportOptionsPlist ExportOptions.plist \
-                     -exportPath $CM_BUILD_DIR/ExportedIPA \
-                     -allowProvisioningUpdates
+                     -exportPath ./build
     artifacts:
-      - $CM_BUILD_DIR/ExportedIPA/*.ipa
+      - ios/App/build/**/*.ipa
