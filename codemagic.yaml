@@ -29,7 +29,7 @@ workflows:
       - name: Import provisioning profile
         script: |
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
-          cp certs/CodeMagicProvProfileVapaesa.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+          cp certs/Vapaesa app.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
       - name: Import signing certificate
         script: |
           security delete-keychain build.keychain || true
@@ -45,9 +45,11 @@ workflows:
                      -scheme App \
                      -configuration Release \
                      -sdk iphoneos \
+                     -allowProvisioningUpdates \
+                     -allowProvisioningDeviceRegistration \
                      DEVELOPMENT_TEAM=X693B2FAZ3 \
                      CODE_SIGN_STYLE=Manual \
-                     PROVISIONING_PROFILE_SPECIFIER="CodeMagicProvProfileVapaesa" \
+                     PROVISIONING_PROFILE_SPECIFIER="Vapaesa app" \
                      -archivePath ./build/App.xcarchive \
                      archive
       - name: Export IPA
@@ -67,7 +69,7 @@ workflows:
             <key>provisioningProfiles</key>
             <dict>
               <key>com.vapaesa</key>
-              <string>CodeMagicProvProfileVapaesa</string>
+              <string>Vapaesa app</string>
             </dict>
             <key>destination</key>
             <string>export</string>
