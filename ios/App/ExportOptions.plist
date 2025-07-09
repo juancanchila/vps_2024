@@ -4,6 +4,7 @@
 <dict>
     <key>method</key>
     <string>app-store</string>
+<<<<<<< HEAD
     <key>signingStyle</key>
     <string>automatic</string>
     <key>compileBitcode</key>
@@ -14,5 +15,15 @@
     <true/>
     <key>teamID</key>
     <string>X693B2FAZ3</string>
+=======
+    <key>uploadBitcode</key>
+    <true/>
+    <key>uploadSymbols</key>
+    <true/>
+    <key>compileBitcode</key>
+    <true/>
+    <key>stripSwiftSymbols</key>
+    <true/>
+>>>>>>> e56f6f3112b2f551303dc1c059e59b47bc9aaf77
 </dict>
 </plist>

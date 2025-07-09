@@ -1,4 +1,5 @@
 workflows:
+<<<<<<< HEAD
   ios-appstore:
     name: iOS App Store Build
     environment:
@@ -21,3 +22,48 @@ workflows:
             --export-options-plist "$EXPORT_OPTIONS"
     artifacts:
       - build/ios/ipa/*.ipa
+=======
+  ios-ionic-release:
+    name: iOS Ionic Release
+    environment:
+      xcode: latest
+      cocoapods: default
+      node: 18.16.0
+
+    scripts:
+      - name: Install npm dependencies
+        script: |
+          npm ci
+
+      - name: Build Ionic project
+        script: |
+          npm run build
+          npx cap sync ios
+
+      - name: Install CocoaPods dependencies
+        script: |
+          cd ios/App
+          pod install
+
+      - name: Build iOS app
+        script: |
+          cd ios/App
+          xcodebuild clean archive \
+            -workspace "App.xcworkspace" \
+            -scheme "App" \
+            -configuration Release \
+            -archivePath $CM_BUILD_DIR/ios_archive \
+            -destination 'generic/platform=iOS' \
+            DEVELOPMENT_TEAM=X693B2FAZ3
+
+      - name: Export .ipa
+        script: |
+          cd ios/App
+          xcodebuild -exportArchive \
+            -archivePath $CM_BUILD_DIR/ios_archive \
+            -exportOptionsPlist ExportOptions.plist \
+            -exportPath $CM_BUILD_DIR/ios_export
+
+    artifacts:
+      - ios_export/*.ipa
+>>>>>>> e56f6f3112b2f551303dc1c059e59b47bc9aaf77
