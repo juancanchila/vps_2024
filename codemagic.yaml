@@ -1,48 +1,23 @@
 workflows:
-  ios-workflow:
-    name: Build iOS for App Store
-    instance_type: mac_mini_m1
+  ios-appstore:
+    name: iOS App Store Build
     environment:
       vars:
-        BUNDLE_ID: "com.vapaesa"
-        APP_NAME: "VapaesaApp"
-      node: 20.0.0
-      xcode: latest
+        XCODE_PROJECT: "App.xcworkspace"
+        XCODE_SCHEME: "App"
+        EXPORT_OPTIONS: "ios/ExportOptions.plist"
     scripts:
-      - name: Install Ionic CLI
+      - name: Set up keychain
         script: |
-          npm install -g @ionic/cli
-      - name: Install dependencies
+          keychain initialize
+      - name: Build archive
         script: |
-          npm ci
-      - name: Build Ionic web assets
+          xcode-project build-archive \
+            --workspace "$XCODE_PROJECT" \
+            --scheme "$XCODE_SCHEME"
+      - name: Export IPA
         script: |
-          ionic build --prod
-      - name: Sync Capacitor for iOS
-        script: |
-          ionic cap sync ios
-      - name: Install CocoaPods
-        script: |
-          cd ios/App
-          pod install
-      - name: Archive and export IPA
-        script: |
-          cd ios/App
-          xcodebuild -workspace App.xcworkspace \
-                     -scheme App \
-                     -configuration Release \
-                     -sdk iphoneos \
-                     -archivePath $CM_BUILD_DIR/App.xcarchive \
-                     -allowProvisioningUpdates \
-                     DEVELOPMENT_TEAM=X693B2FAZ3 \
-                     CODE_SIGN_STYLE=Automatic \
-                     PRODUCT_BUNDLE_IDENTIFIER=com.vapaesa \
-                     archive
-
-          xcodebuild -exportArchive \
-                     -archivePath $CM_BUILD_DIR/App.xcarchive \
-                     -exportOptionsPlist ExportOptions.plist \
-                     -exportPath $CM_BUILD_DIR/ExportedIPA \
-                     -allowProvisioningUpdates
+          xcode-project export-archive \
+            --export-options-plist "$EXPORT_OPTIONS"
     artifacts:
-      - $CM_BUILD_DIR/ExportedIPA/*.ipa
+      - build/ios/ipa/*.ipa
