@@ -3,12 +3,10 @@ workflows:
     name: iOS Ionic Release
     environment:
       ios_signing:
-        distribution_type: app_store
-        bundle_identifier: com.vapaesa
         provisioning_profiles:
           - ProfileVPS.mobileprovision
         certificate_url: CertVPS.p12
-        certificate_password: YOUR_CERT_PASSWORD
+        certificate_password: Uh1dtx0*
       vars:
         XCODE_WORKSPACE: "App.xcworkspace"
         XCODE_SCHEME: "App"
