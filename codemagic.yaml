@@ -1,20 +1,48 @@
 workflows:
-  ios-appstore:
-    name: iOS App Store Build
+  ios-workflow:
+    name: Build iOS for App Store
+    instance_type: mac_mini_m1
     environment:
       vars:
-        XCODE_WORKSPACE: "ios/App/App.xcworkspace"
-        XCODE_SCHEME: "App"
-        EXPORT_OPTIONS: "ios/App/ExportOptions.plist"
+        BUNDLE_ID: "com.vapaesa"
+        APP_NAME: "VapaesaApp"
+      node: 20.0.0
+      xcode: latest
     scripts:
-      - name: Set up keychain
+      - name: Install Ionic CLI
         script: |
-          keychain initialize
-      - name: Build and export IPA
+          npm install -g @ionic/cli
+      - name: Install dependencies
         script: |
-          xcode-project build-ipa \
-            --workspace "$XCODE_WORKSPACE" \
-            --scheme "$XCODE_SCHEME" \
-            --export-options-plist "$EXPORT_OPTIONS"
+          npm ci
+      - name: Build Ionic web assets
+        script: |
+          ionic build --prod
+      - name: Sync Capacitor for iOS
+        script: |
+          ionic cap sync ios
+      - name: Install CocoaPods
+        script: |
+          cd ios/App
+          pod install
+      - name: Archive and export IPA
+        script: |
+          cd ios/App
+          xcodebuild -workspace App.xcworkspace \
+                     -scheme App \
+                     -configuration Release \
+                     -sdk iphoneos \
+                     -archivePath $CM_BUILD_DIR/App.xcarchive \
+                     -allowProvisioningUpdates \
+                     DEVELOPMENT_TEAM=X693B2FAZ3 \
+                     CODE_SIGN_STYLE=Automatic \
+                     PRODUCT_BUNDLE_IDENTIFIER=com.vapaesa \
+                     archive
+
+          xcodebuild -exportArchive \
+                     -archivePath $CM_BUILD_DIR/App.xcarchive \
+                     -exportOptionsPlist ExportOptions.plist \
+                     -exportPath $CM_BUILD_DIR/ExportedIPA \
+                     -allowProvisioningUpdates
     artifacts:
-      - build/ios/ipa/*.ipa
+      - $CM_BUILD_DIR/ExportedIPA/*.ipa
