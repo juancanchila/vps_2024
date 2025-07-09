@@ -8,11 +8,6 @@ workflows:
         APP_NAME: "VapaesaApp"
       node: 20.0.0
       xcode: latest
-      signing:
-        certificates:
-          - CertVPS
-        provisioning_profiles:
-          - ProfileVPS
     scripts:
       - name: Install Ionic CLI
         script: |
@@ -38,6 +33,7 @@ workflows:
                      -configuration Release \
                      -sdk iphoneos \
                      -archivePath $CM_BUILD_DIR/App.xcarchive \
+                     -allowProvisioningUpdates \
                      DEVELOPMENT_TEAM=X693B2FAZ3 \
                      CODE_SIGN_STYLE=Manual \
                      PRODUCT_BUNDLE_IDENTIFIER=com.vapaesa \
