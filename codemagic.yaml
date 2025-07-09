@@ -38,19 +38,6 @@ workflows:
           security unlock-keychain -p "" build.keychain
           security import certs/CodeMagicCertVapaesa.p12 -k build.keychain -P "$CERTIFICATE_PASSWORD" -T /usr/bin/codesign
           security set-key-partition-list -S apple-tool:,apple: -s -k "" build.keychain
-
-      - name: Fix code signing in Pods (disable manual signing)
-        script: |
-          echo "🔧 Desactivando firma manual en los Pods..."
-          find ./ios/App/Pods -name '*.xcodeproj' | while read project; do
-            echo "   ➤ Corrigiendo $project"
-            sed -i '' 's/CODE_SIGN_STYLE = Manual;/CODE_SIGN_STYLE = Automatic;/g' "$project/project.pbxproj"
-            sed -i '' '/PROVISIONING_PROFILE/d' "$project/project.pbxproj"
-            sed -i '' '/PROVISIONING_PROFILE_SPECIFIER/d' "$project/project.pbxproj"
-            sed -i '' '/DEVELOPMENT_TEAM/d' "$project/project.pbxproj"
-            sed -i '' '/CODE_SIGN_IDENTITY/d' "$project/project.pbxproj"
-          done
-
       - name: Build iOS project
         script: |
           cd ios/App
@@ -63,7 +50,6 @@ workflows:
                      DEVELOPMENT_TEAM=X693B2FAZ3 \
                      CODE_SIGN_STYLE=Manual \
                      CODE_SIGN_IDENTITY="Apple Distribution" \
-                     PROVISIONING_PROFILE_SPECIFIER="ProvProfileVPSDis" \
                      -archivePath ./build/App.xcarchive \
                      archive
       - name: Export IPA
