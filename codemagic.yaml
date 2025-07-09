@@ -5,6 +5,7 @@ workflows:
       xcode: latest
       cocoapods: default
       node: 18.16.0
+
     scripts:
       - name: Install npm dependencies
         script: |
@@ -22,6 +23,7 @@ workflows:
 
       - name: Build iOS app
         script: |
+          cd ios/App
           xcodebuild clean archive \
             -workspace "App.xcworkspace" \
             -scheme "App" \
@@ -35,9 +37,10 @@ workflows:
 
       - name: Export .ipa
         script: |
+          cd ios/App
           xcodebuild -exportArchive \
             -archivePath $CM_BUILD_DIR/ios_archive \
-            -exportOptionsPlist ios/App/exportOptions.plist \
+            -exportOptionsPlist ExportOptions.plist \
             -exportPath $CM_BUILD_DIR/ios_export
 
     artifacts:
