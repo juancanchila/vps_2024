@@ -5,19 +5,16 @@ workflows:
       vars:
         XCODE_WORKSPACE: "App.xcworkspace"
         XCODE_SCHEME: "App"
-        EXPORT_OPTIONS: "ios/ExportOptions.plist"
+        EXPORT_OPTIONS: "ExportOptions.plist"
     scripts:
       - name: Set up keychain
         script: |
           keychain initialize
-      - name: Build archive
+      - name: Build and export IPA
         script: |
-          xcode-project build-archive \
+          xcode-project build-ipa \
             --workspace "$XCODE_WORKSPACE" \
-            --scheme "$XCODE_SCHEME"
-      - name: Export IPA
-        script: |
-          xcode-project export-archive \
+            --scheme "$XCODE_SCHEME" \
             --export-options-plist "$EXPORT_OPTIONS"
     artifacts:
       - build/ios/ipa/*.ipa
