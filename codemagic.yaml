@@ -7,22 +7,25 @@ workflows:
       node: 18.16.0
       ios_signing:
         certificates:
-          - certificate_url: file://./certs/CertVPS.p12
+          - certificate: CertVPS
             certificate_password: Uh1dtx0*
         provisioning_profiles:
-          - file://./certs/ProfileVPS.mobileprovision
+          - ProfileVPS
     scripts:
       - name: Install npm dependencies
         script: |
           npm ci
+
       - name: Build Ionic project
         script: |
           npm run build
           npx cap sync ios
+
       - name: Install CocoaPods dependencies
         script: |
           cd ios/App
           pod install
+
       - name: Build iOS app
         script: |
           xcodebuild clean archive \
@@ -35,11 +38,13 @@ workflows:
             DEVELOPMENT_TEAM=X693B2FAZ3 \
             PROVISIONING_PROFILE_SPECIFIER=ProfileVPS \
             PRODUCT_BUNDLE_IDENTIFIER=com.vapaesa
+
       - name: Export .ipa
         script: |
           xcodebuild -exportArchive \
             -archivePath $CM_BUILD_DIR/ios_archive \
             -exportOptionsPlist ios/App/exportOptions.plist \
             -exportPath $CM_BUILD_DIR/ios_export
+
     artifacts:
       - ios_export/*.ipa
