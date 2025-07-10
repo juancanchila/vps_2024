@@ -1,47 +1,46 @@
 workflows:
-  ios-workflow:
-    name: Build iOS for App Store
-    instance_type: mac_mini_m1
+  ios-ionic-release:
+    name: iOS Ionic Release
     environment:
-      vars:
-        BUNDLE_ID: "com.vapaesa"
-        APP_NAME: "VapaesaApp"
-      node: 20.0.0
       xcode: latest
+      cocoapods: default
+      node: 18.16.0
+      signing:
+        provisioning_profiles:
+          - match AppStore com.vapaesa
     scripts:
-      - name: Install Ionic CLI
-        script: |
-          npm install -g @ionic/cli
-      - name: Install dependencies
+      - name: Install npm dependencies
         script: |
           npm ci
-      - name: Build Ionic web assets
+      - name: Build Ionic Web Assets
         script: |
-          ionic build --prod
-      - name: Sync Capacitor for iOS
-        script: |
-          ionic cap sync ios
+          npm run build
+          npx cap sync ios
       - name: Install CocoaPods
         script: |
           cd ios/App
           pod install
-      - name: Archive and export IPA
+      - name: Build iOS App with Automatic Signing
         script: |
-          cd ios/App
-          xcodebuild -workspace App.xcworkspace \
-                     -scheme App \
-                     -configuration Release \
-                     -sdk iphoneos \
-                     -archivePath $CM_BUILD_DIR/App.xcarchive \
-                     -allowProvisioningUpdates \
-                     DEVELOPMENT_TEAM=X693B2FAZ3 \
-                     CODE_SIGN_STYLE=Manual \
-                     PRODUCT_BUNDLE_IDENTIFIER=com.vapaesa \
-                     archive
-
+          xcodebuild clean archive \
+            -workspace App.xcworkspace \
+            -scheme App \
+            -configuration Release \
+            -archivePath $CM_BUILD_DIR/ios_archive \
+            -allowProvisioningUpdates
+      - name: Export .ipa
+        script: |
           xcodebuild -exportArchive \
-                     -archivePath $CM_BUILD_DIR/App.xcarchive \
-                     -exportOptionsPlist ExportOptions.plist \
-                     -exportPath $CM_BUILD_DIR/ExportedIPA
+            -archivePath $CM_BUILD_DIR/ios_archive \
+            -exportOptionsPlist ios/App/exportOptions.plist \
+            -exportPath $CM_BUILD_DIR/ios_export \
+            -allowProvisioningUpdates
     artifacts:
-      - $CM_BUILD_DIR/ExportedIPA/*.ipa
+      - ios_export/*.ipa
+    publishing:
+      email:
+        recipients:
+          - tu-correo@example.com
+        notify:
+          success: true
+          failure: true
